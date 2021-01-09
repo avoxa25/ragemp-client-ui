@@ -7,15 +7,15 @@ let components = [
   './src/Speedometer/speedometer'
 ];
 
+var entryPoints = {};
+components.forEach((component) => entryPoints[component.replace('./src/', '')] = `${component}.ts`);
+
 let plugins = [new CleanWebpackPlugin()];
 let htmlWebpackPlugins = components.map((component) => new HtmlWebpackPlugin({ filename: component.replace('./src/', '').concat('.html'), template: `${component}.html` }));
 plugins = plugins.concat(htmlWebpackPlugins);
 
 module.exports = {
-  entry: {
-    'Chat/chat': './src/Chat/chat.ts',
-    'Speedometer/speedometer': './src/Speedometer/speedometer.ts'
-  },
+  entry: entryPoints,
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
