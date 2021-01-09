@@ -9,13 +9,13 @@ let components = [
 
 var entryPoints = {};
 components
-  .map((c) => ({ module: path.resolve(__dirname, 'src', c, c.toLocaleLowerCase()), outputFile: `${c.toLocaleLowerCase()}.ts` }))
-  .forEach((ep) => entryPoints[ep.module] = ep.outputFile);
+  .map((c) => ({ module: `${c}/${c.toLocaleLowerCase()}`, filename: path.resolve(__dirname, 'src', c, `${c.toLocaleLowerCase()}.ts`) }))
+  .forEach((ep) => entryPoints[ep.module] = ep.filename);
 
 let plugins = [new CleanWebpackPlugin()];
 let htmlWebpackPlugins = components
-  .map((c) => ({ filename: path.resolve(__dirname, 'src', c, `${c.toLocaleLowerCase()}.html`), template: `${c}.html` }))
-  .map((c) => new HtmlWebpackPlugin({ filename: c.filename, template: c.template }));
+  .map((c) => ({ input: path.resolve(__dirname, 'src', c, `${c.toLocaleLowerCase()}.html`), output: path.resolve(__dirname, 'dist', c, `${c.toLocaleLowerCase()}.html`) }))
+  .map((c) => new HtmlWebpackPlugin({ template: c.input, filename: c.output }));
 plugins = plugins.concat(htmlWebpackPlugins);
 
 module.exports = {
