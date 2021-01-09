@@ -1,9 +1,6 @@
-//Disables default RageMP Chat
-mp.gui.chat.show(false); //Disables default RageMP Chat
-// mp.gui.chat.activate(false);
+mp.gui.chat.show(false);
 
-let chatbox = null;
-chatbox = mp.browsers.new('package://chat/chat.html');
+let chatbox = mp.browsers.new('package://chat/chat.html');
 chatbox.markAsChat();
 
 mp.events.add('ChatEnable', (toggle) => {
