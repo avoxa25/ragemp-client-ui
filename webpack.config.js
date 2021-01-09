@@ -3,15 +3,19 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 let components = [
-  './src/Chat/chat',
-  './src/Speedometer/speedometer'
+  'Chat',
+  'Speedometer'
 ];
 
 var entryPoints = {};
-components.forEach((component) => entryPoints[component.replace('./src/', '')] = `${component}.ts`);
+components
+  .map((c) => ({ module: path.resolve(__dirname, 'src', c, c.toLocaleLowerCase()), outputFile: `${c.toLocaleLowerCase()}.ts` }))
+  .forEach((ep) => entryPoints[ep.module] = ep.outputFile);
 
 let plugins = [new CleanWebpackPlugin()];
-let htmlWebpackPlugins = components.map((component) => new HtmlWebpackPlugin({ filename: component.replace('./src/', '').concat('.html'), template: `${component}.html` }));
+let htmlWebpackPlugins = components
+  .map((c) => ({ filename: path.resolve(__dirname, 'src', c, `${c.toLocaleLowerCase()}.html`), template: `${c}.html` }))
+  .map((c) => new HtmlWebpackPlugin({ filename: c.filename, template: c.template }));
 plugins = plugins.concat(htmlWebpackPlugins);
 
 module.exports = {
