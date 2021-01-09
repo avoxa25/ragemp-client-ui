@@ -1,10 +1,20 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+let components = [
+  './src/Chat/chat',
+  './src/Speedometer/speedometer'
+];
+
+let plugins = [new CleanWebpackPlugin()];
+let htmlWebpackPlugins = components.map((component) => new HtmlWebpackPlugin({ filename: component.replace('./src/', '').concat('.html'), template: `${component}.html` }));
+plugins = plugins.concat(htmlWebpackPlugins);
 
 module.exports = {
   entry: {
-    'src/Chat/chat': '/src/Chat/chat.ts',
-    'src/Speedometer/speedometer': '/src/Speedometer/speedometer.ts',
+    'Chat/chat': './src/Chat/chat.ts',
+    'Speedometer/speedometer': './src/Speedometer/speedometer.ts'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -13,9 +23,7 @@ module.exports = {
   resolve: {
     extensions: ['.ts']
   },
-  plugins: [
-    new CleanWebpackPlugin()
-  ],
+  plugins: plugins,
   module: {
     rules: [
       { test: /\.ts$/, loader: 'ts-loader' }
