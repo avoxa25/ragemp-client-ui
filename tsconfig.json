@@ -1,20 +1,21 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
-    "target": "es5",
+    "strict": true,
+    "baseUrl": "./",
+    "target": "es2015",
     "module": "commonjs",
-    "lib": [
-      "esnext",
-      "dom"
-    ],
-    "declaration": false,
-    "sourceMap": false,
-    "outDir": "dist",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "removeComments": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "types": [
+      "ragemp-c"
+    ]
   },
   "include": [
-    "app"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
+    "src"
   ]
 }

@@ -2,12 +2,10 @@
   "name": "sweet-life-rp",
   "version": "1.0.0",
   "description": "RageMP SweetLifeRP Server UI",
+  "main": "index.js",
   "scripts": {
-    "build": "tsc --outDir dist/app",
-    "copy": "",
-    "copy:html": "copyfiles app/**/*.html dist/",
-    "copy:css": "copyfiles app/**/*.css dist/",
-    "copy:image": "copyfiles app/**/*.{png,svg} dist/"
+    "build": "tsc --watch",
+    "start": "http-server src"
   },
   "repository": {
     "type": "git",
@@ -21,7 +19,6 @@
   "homepage": "https://github.com/SweetLifeRP/server-ui",
   "devDependencies": {
     "@types/ragemp-c": "https://github.com/CocaColaBear/types-ragemp-c/tarball/master",
-    "copyfiles": "^2.4.1",
     "typescript": "^4.1.3"
   }
 }
