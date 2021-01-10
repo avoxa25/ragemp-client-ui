@@ -1,3 +1,4 @@
 export enum LocalEvents {
-  ChatCursorToggle = 'ChatCursorToggle'
+  ChatCursorToggle = 'ChatCursorToggle',
+  ChatMessageSend = 'ChatMessageSend'
 };

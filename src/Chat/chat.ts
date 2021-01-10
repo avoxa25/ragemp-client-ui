@@ -1,91 +1,94 @@
 import { LocalEvents } from '../Constants/localEvents';
-import { RemoteEvents } from '../Constants/remoteEvents';
-import { ServerEvents } from '../Constants/serverEvents';
 
 abstract class Chat {
   private static hidden: boolean;
 
   private static messages: string[];
-
   private static messagesDiv: HTMLElement;
-  private static newMessageForm: HTMLFormElement;
+
+  private static messageForm: HTMLFormElement;
+  private static messageFormHidden: boolean;
 
   public static Start() {
-    Chat.hidden = true;
+    Chat.hidden = false;
     Chat.messages = [];
+    Chat.messageFormHidden = true;
 
     // To prevent player control freeze/cursor visibility interruption from system menus
     setInterval(() => Chat.sendChatToggleEvent(), 250);
 
-    mp.events.add(ServerEvents.PlayerChat, (m: string) => Chat.onPlayerChat(m));
+    mp.events.add('chat:push', (message: string) => Chat.displayMessage(message));
+    mp.events.add('chat:activate', (visible: boolean) => Chat.toggleChat(visible));
+    mp.events.add('chat:show', () => Chat.toggleMessageInput());
 
     Chat.messagesDiv = document.getElementById('messagesDiv') as HTMLElement;
 
-    Chat.newMessageForm = document.querySelector('form') as HTMLFormElement;
-    Chat.newMessageForm.hidden = Chat.hidden;
-    Chat.newMessageForm.addEventListener('submit', () => Chat.onNewMessageFormSubmit());
+    Chat.messageForm = document.querySelector('form') as HTMLFormElement;
+    Chat.messageForm.hidden = Chat.messageFormHidden;
+    Chat.messageForm.addEventListener('submit', (e) => Chat.onNewMessageFormSubmit(e));
 
-    document.body.addEventListener('keydown', (e: KeyboardEvent) => Chat.onKeydown(e));
+    document.body.addEventListener('keydown', (e) => Chat.onKeydown(e));
   }
 
-  private static onPlayerChat(message: string): void {
+  private static displayMessage(message: string): void {
     Chat.messages.push(message);
 
-    let messageElement = document.createElement('p');
-    messageElement.innerText = message;
+    const messageElement = document.createElement('p');
+    messageElement.innerHTML = message;
     Chat.messagesDiv.appendChild(messageElement);
   }
 
-  private static onKeydown(event: KeyboardEvent): void {
-    let testNode = document.createElement('p');
-    testNode.innerText = `${event.key} | ${event.which} | ${event.code} | ${LocalEvents.ChatCursorToggle}`;
-    Chat.messagesDiv.appendChild(testNode);
-
-    let isToggleChatKey = event.which === 84;
-    let isEscapeKey = event.which === 27;
-
-    let newMessageFormData = new FormData(Chat.newMessageForm);
-    let message = newMessageFormData.get('message') as string;
-    let isNewMessageEmpty = message.length === 0;
-
-    let isChatToggleEvent = isToggleChatKey && isNewMessageEmpty;
-    let isChatForceCloseEvent = !Chat.hidden && isEscapeKey;
-    if (isChatToggleEvent || isChatForceCloseEvent) {
-      Chat.toggleChat();
-      return;
-    }
+  private static toggleChat(visible: boolean): void {
+    Chat.hidden = !visible;
+    document.body.hidden = Chat.hidden;
   }
 
-  private static toggleChat(): void {
-    Chat.hidden = !Chat.hidden;
+  private static toggleMessageInput(): void {
+    Chat.messageFormHidden = !Chat.messageFormHidden;
 
-    Chat.newMessageForm.reset();
-    Chat.newMessageForm.hidden = Chat.hidden;
+    Chat.messageForm.reset();
+    Chat.messageForm.hidden = Chat.messageFormHidden;
 
-    if (!Chat.newMessageForm.hidden) {
+    if (!Chat.messageForm.hidden) {
       const messageInput = document.querySelector('input[type=text]') as HTMLInputElement;
       messageInput.focus();
     }
 
-    mp.events.call(LocalEvents.ChatCursorToggle, Chat.hidden);
+    setTimeout(() => mp.events.call(LocalEvents.ChatCursorToggle, Chat.messageFormHidden), 250);
+  }
+
+  private static onKeydown(event: KeyboardEvent): void {
+    const isToggleChatKey = event.which === 84;
+    const isEscapeKey = event.which === 27;
+
+    const newMessageFormData = new FormData(Chat.messageForm);
+    const message = newMessageFormData.get('message') as string;
+    const isNewMessageEmpty = message.length === 0;
+
+    const isChatToggleEvent = isToggleChatKey && isNewMessageEmpty;
+    const isChatForceCloseEvent = !Chat.messageFormHidden && isEscapeKey;
+    if (isChatToggleEvent || isChatForceCloseEvent) {
+      event.preventDefault();
+      Chat.toggleMessageInput();
+      return;
+    }
   }
 
   private static sendChatToggleEvent(): void {
-    mp.events.call(LocalEvents.ChatCursorToggle, Chat.hidden);
+    mp.events.call(LocalEvents.ChatCursorToggle, Chat.messageFormHidden);
   }
 
-  private static onNewMessageFormSubmit(): void {
-    let newMessageFormData = new FormData(Chat.newMessageForm);
+  private static onNewMessageFormSubmit(event: Event): void {
+    event.preventDefault();
 
-    let message = newMessageFormData.get('message') as string;
-    let channel = newMessageFormData.get('channel') as string;
-    message == channel;
+    const newMessageFormData = new FormData(Chat.messageForm);
 
-    mp.events.callRemote(RemoteEvents.ChatMessage, message, channel);
+    const message = newMessageFormData.get('message') as string;
+    const channel = newMessageFormData.get('channel') as string;
 
-    Chat.newMessageForm.reset();
+    setTimeout(() => mp.events.call(LocalEvents.ChatMessageSend, message, channel), 250);
 
-    Chat.toggleChat();
+    Chat.toggleMessageInput();
   }
 }
 

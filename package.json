@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/SweetLifeRP/server-ui",
   "devDependencies": {
-    "@types/ragemp-c": "https://github.com/CocaColaBear/types-ragemp-c/tarball/master",
+    "@types/ragemp-c": "https://github.com/CocaColaBear/types-ragemp-c/tarball/v1.0",
     "browser-sync": "^2.26.13",
     "browser-sync-webpack-plugin": "^2.3.0",
     "ts-loader": "^8.0.14",
