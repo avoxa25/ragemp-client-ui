@@ -1,0 +1,3 @@
+enum RemoveEvents {
+  ChatMessage = 'ChatMessage'
+};

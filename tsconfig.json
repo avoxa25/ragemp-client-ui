@@ -2,15 +2,15 @@
   "compileOnSave": true,
   "compilerOptions": {
     "strict": true,
-    "baseUrl": "./",
-    "target": "es2015",
-    "module": "commonjs",
-    "allowJs": true,
+    "baseUrl": "./src/",
+    "target": "ES2015",
+    "module": "CommonJS",
+    "allowJs": false,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "removeComments": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "types": [
       "ragemp-c"
     ]

@@ -1,5 +1,6 @@
 abstract class Chat {
   private static hidden: boolean;
+
   private static messages: string[];
 
   private static messagesDiv: HTMLElement;
@@ -9,22 +10,23 @@ abstract class Chat {
     Chat.hidden = true;
     Chat.messages = [];
 
-    mp.events.add('playerChat', (m: string) => Chat.onPlayerChat(m));
+    // To prevent player control freeze/cursor visibility interruption from system menus
+    setInterval(() => Chat.sendChatToggleEvent(), 250);
+
+    //mp.events.add(ServerEvents.PlayerChat, (m: string) => Chat.onPlayerChat(m));
 
     Chat.messagesDiv = document.getElementById('messagesDiv') as HTMLElement;
 
     Chat.newMessageForm = document.querySelector('form') as HTMLFormElement;
     Chat.newMessageForm.hidden = Chat.hidden;
-    Chat.newMessageForm.addEventListener('submit', (e: Event) => Chat.onNewMessageFormSubmit(e));
+    Chat.newMessageForm.addEventListener('submit', () => Chat.onNewMessageFormSubmit());
 
     document.body.addEventListener('keydown', (e: KeyboardEvent) => Chat.onKeydown(e));
-
-    // To prevent player control freeze/cursor visibility interruption from system menus
-    setTimeout(() => mp.events.call('ToggleChat', Chat.hidden), 1000);
   }
 
   private static onPlayerChat(message: string): void {
     Chat.messages.push(message);
+    //mp.events.callRemote('ChatMessage', message);
 
     let messageElement = document.createElement('p');
     messageElement.innerText = message;
@@ -58,22 +60,29 @@ abstract class Chat {
     Chat.newMessageForm.hidden = Chat.hidden;
 
     if (!Chat.newMessageForm.hidden) {
-      Chat.newMessageForm.focus();
+      const messageInput = document.querySelector('input[type=text]') as HTMLInputElement;
+      messageInput.focus();
     }
+
+    //mp.events.call(LocalEvents.ChatCursorToggle, Chat.hidden);
   }
 
-  private static onNewMessageFormSubmit(event: Event): void {
+  private static sendChatToggleEvent(): void {
+    //mp.events.call(LocalEvents.ChatCursorToggle, Chat.hidden);
+  }
+
+  private static onNewMessageFormSubmit(): void {
     let newMessageFormData = new FormData(Chat.newMessageForm);
 
     let message = newMessageFormData.get('message') as string;
     let channel = newMessageFormData.get('channel') as string;
+    message == channel;
 
-    mp.game.invoke('ChatMessage', message, channel);
+    //mp.events.callRemote(RemoveEvents.ChatMessage, message, channel);
 
     Chat.newMessageForm.reset();
 
     Chat.toggleChat();
-    event.preventDefault();
   }
 }
 

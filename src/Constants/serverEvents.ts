@@ -1,0 +1,3 @@
+enum ServerEvents {
+  PlayerChat = 'playerChat'
+};
