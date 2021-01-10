@@ -1,4 +1,4 @@
-import { LocalEvents } from 'Constants/localEvents';
+import { LocalEvents } from '../Constants/localEvents';
 
 mp.gui.chat.show(false);
 

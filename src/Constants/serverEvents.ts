@@ -1,3 +1,3 @@
-enum ServerEvents {
+export enum ServerEvents {
   PlayerChat = 'playerChat'
 };

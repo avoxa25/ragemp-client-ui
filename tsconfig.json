@@ -2,7 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "strict": true,
-    "baseUrl": "./src/",
+    "baseUrl": "./",
     "target": "ES2015",
     "module": "CommonJS",
     "allowJs": false,

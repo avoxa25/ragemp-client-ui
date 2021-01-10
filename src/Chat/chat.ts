@@ -1,3 +1,7 @@
+import { LocalEvents } from '../Constants/localEvents';
+import { RemoteEvents } from '../Constants/remoteEvents';
+import { ServerEvents } from '../Constants/serverEvents';
+
 abstract class Chat {
   private static hidden: boolean;
 
@@ -13,7 +17,7 @@ abstract class Chat {
     // To prevent player control freeze/cursor visibility interruption from system menus
     setInterval(() => Chat.sendChatToggleEvent(), 250);
 
-    //mp.events.add(ServerEvents.PlayerChat, (m: string) => Chat.onPlayerChat(m));
+    mp.events.add(ServerEvents.PlayerChat, (m: string) => Chat.onPlayerChat(m));
 
     Chat.messagesDiv = document.getElementById('messagesDiv') as HTMLElement;
 
@@ -26,7 +30,6 @@ abstract class Chat {
 
   private static onPlayerChat(message: string): void {
     Chat.messages.push(message);
-    //mp.events.callRemote('ChatMessage', message);
 
     let messageElement = document.createElement('p');
     messageElement.innerText = message;
@@ -35,7 +38,7 @@ abstract class Chat {
 
   private static onKeydown(event: KeyboardEvent): void {
     let testNode = document.createElement('p');
-    testNode.innerText = `${event.key} | ${event.which} | ${event.code}`;
+    testNode.innerText = `${event.key} | ${event.which} | ${event.code} | ${LocalEvents.ChatCursorToggle}`;
     Chat.messagesDiv.appendChild(testNode);
 
     let isToggleChatKey = event.which === 84;
@@ -64,11 +67,11 @@ abstract class Chat {
       messageInput.focus();
     }
 
-    //mp.events.call(LocalEvents.ChatCursorToggle, Chat.hidden);
+    mp.events.call(LocalEvents.ChatCursorToggle, Chat.hidden);
   }
 
   private static sendChatToggleEvent(): void {
-    //mp.events.call(LocalEvents.ChatCursorToggle, Chat.hidden);
+    mp.events.call(LocalEvents.ChatCursorToggle, Chat.hidden);
   }
 
   private static onNewMessageFormSubmit(): void {
@@ -78,7 +81,7 @@ abstract class Chat {
     let channel = newMessageFormData.get('channel') as string;
     message == channel;
 
-    //mp.events.callRemote(RemoveEvents.ChatMessage, message, channel);
+    mp.events.callRemote(RemoteEvents.ChatMessage, message, channel);
 
     Chat.newMessageForm.reset();
 

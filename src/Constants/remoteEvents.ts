@@ -1,3 +1,3 @@
-enum RemoveEvents {
+export enum RemoteEvents {
   ChatMessage = 'ChatMessage'
 };
