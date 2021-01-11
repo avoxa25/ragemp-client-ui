@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="characterCreator.css">
+  <script src="characterCreator.js"></script>
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans" />
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul class="navigation">
+        <li>
+          <button class="main" id="linkMain" onclick="openTab(event, 'tab_main', 'linkMain')"></button>
+        </li>
+        <li>
+          <button class="clothes" id="linkClothes" onclick="openTab(event, 'tab_clothes', 'linkClothes')"></button>
+        </li>
+        <li>
+          <button class="face" id="linkFace" onclick="openTab(event, 'tab_face', 'linkFace')"></button>
+        </li>
+        <li>
+          <button class="hair" id="linkHair" onclick="openTab(event, 'tab_hair', 'linkHair')"></button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="parametrs" id="tab_main" style="display: block;">
+      <div class="body main">
+        <input type="text" id="char_name" placeholder="Имя">
+        <input type="text" id="char_lastname" placeholder="Фамилия">
+        <ul>
+          <li>
+            <p>Пол:</p>
+            <p>
+              <button onclick="changeGender();"></button>
+              <input type="text" id="char_gender" value="женский" disabled>
+              <button onclick="changeGender();"></button>
+            </p>
+          </li>
+          <li>
+            <p>Отец:</p>
+            <p>
+              <button onclick="change(char_father, minus);"></button>
+              <input type="text" id="char_father" value="Иван" disabled>
+              <button onclick="change(char_father, plus);"></button>
+            </p>
+          </li>
+          <li>
+            <p>Мать:</p>
+            <p>
+              <button onclick="change(char_mother, minus);"></button>
+              <input type="text" id="char_mother" value="Мария" disabled>
+              <button onclick="change(char_mother, plus);"></button>
+            </p>
+          </li>
+          <li>
+            <p>Наследственность:</p>
+            <p>
+              Отец
+              <input type="range" class="slider" id="char_heredity" min="1" max="100" value="50">
+              Мать
+            </p>
+          </li>
+          <li>
+            <p>Тон кожи:</p>
+            <p>
+              Отец
+              <input type="range" class="slider" id="char_skinTone" min="1" max="100" value="50">
+              Мать
+            </p>
+          </li>
+        </ul>
+        <p>
+          <button onclick="randomCharParam();">СЛУЧАЙНО</button>
+          <button onclick="resetCharParam();">СБРОСИТЬ</button>
+        </p>
+        <button onclick="createChar();">СОЗДАТЬ</button>
+      </div>
+    </section>
+
+    <section class="parametrs" id="tab_clothes">
+      <div class="body clothes">
+        <ul>
+          <li>
+            <p>Торс:</p>
+            <p>
+              <button onclick=""></button>
+              <input type="text" id="" value="" disabled>
+              <button onclick=""></button>
+            </p>
+          </li>
+          <li>
+            <p>Стиль:</p>
+            <p>
+              <button onclick=""></button>
+              <input type="text" id="" value="" disabled>
+              <button onclick=""></button>
+            </p>
+          </li>
+          <li>
+            <p>Ноги:</p>
+            <p>
+              <button onclick=""></button>
+              <input type="text" id="" value="" disabled>
+              <button onclick=""></button>
+            </p>
+          </li>
+          <li>
+            <p>Стиль:</p>
+            <p>
+              <button onclick=""></button>
+              <input type="text" id="" value="" disabled>
+              <button onclick=""></button>
+            </p>
+          </li>
+          <li>
+            <p>Обувь:</p>
+            <p>
+              <button onclick=""></button>
+              <input type="text" id="" value="" disabled>
+              <button onclick=""></button>
+            </p>
+          </li>
+        </ul>
+        <p>
+          <button onclick="randomCharParam();">СЛУЧАЙНО</button>
+          <button onclick="resetCharParam();">СБРОСИТЬ</button>
+        </p>
+        <button onclick="createChar();">СОЗДАТЬ</button>
+      </div>
+    </section>
+
+    <section class="parametrs" id="tab_face">
+      <div class="body face">
+        <ul class="face">
+          <li>
+            <p>Высота бровей:</p>
+            <p><input type="range" class="slider" id="" min="1" max="100" value="1">
+              <span id="eyebrowHeight_value">0.0</span>
+            </p>
+          </li>
+          <li>
+            <p>Глубина бровей:</p>
+            <p><input type="range" class="slider" id="" min="1" max="100" value="1">
+              <span id="eyebrowDepth_value">0.0</span>
+            </p>
+          </li>
+          <li>
+            <p>Брови:</p>
+            <p>
+              <button onclick=""></button>
+              <input type="text" id="" value="" disabled>
+              <button onclick=""></button>
+            </p>
+          </li>
+          <li>
+            <p>Размер глаз:</p>
+            <p><input type="range" class="slider" id="" min="1" max="100" value="1"><span id="eyesSize_value">0.0</span>
+            </p>
+          </li>
+          <li>
+            <p>Глаза:</p>
+            <p>
+              <button onclick=""></button>
+              <input type="text" id="" value="" disabled>
+              <button onclick=""></button>
+            </p>
+          </li>
+        </ul>
+        <p>
+          <button onclick="randomCharParam();">СЛУЧАЙНО</button>
+          <button onclick="resetCharParam();">СБРОСИТЬ</button>
+        </p>
+        <button onclick="createChar();">СОЗДАТЬ</button>
+    </section>
+
+    <section class="parametrs" id="tab_hair">
+      <div class="body clothes">
+        <ul>
+          <li>
+            <p>Прическа:</p>
+            <p>
+              <button onclick=""></button>
+              <input type="text" id="" value="" disabled>
+              <button onclick=""></button>
+            </p>
+          </li>
+          <li>
+            <p>Цвет:</p>
+            <p>
+              <button onclick=""></button>
+              <input type="text" id="" value="" disabled>
+              <button onclick=""></button>
+            </p>
+          </li>
+          <li>
+            <p>Оттенок:</p>
+            <p>
+              <button onclick=""></button>
+              <input type="text" id="" value="" disabled>
+              <button onclick=""></button>
+            </p>
+          </li>
+          <li>
+            <p>На груди:</p>
+            <p>
+              <button onclick=""></button>
+              <input type="text" id="" value="" disabled>
+              <button onclick=""></button>
+            </p>
+          </li>
+          <li>
+            <p>Цвет:</p>
+            <p>
+              <button onclick=""></button>
+              <input type="text" id="" value="" disabled>
+              <button onclick=""></button>
+            </p>
+          </li>
+        </ul>
+        <p>
+          <button onclick="randomCharParam();">СЛУЧАЙНО</button>
+          <button onclick="resetCharParam();">СБРОСИТЬ</button>
+        </p>
+        <button onclick="createChar();">СОЗДАТЬ</button>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
