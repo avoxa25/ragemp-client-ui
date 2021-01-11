@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="speedometer.ts"></script>
+  <link rel="stylesheet" href="speedometer.css">
+</head>
+<svg>
+  <defs>
+    <linearGradient id="turnedOn_gradient" x1="21" y1="2" x2="2.90476" y2="2" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EE0C89" />
+      <stop offset="1" stop-color="#FD6F67" />
+    </linearGradient>
+  </defs>
+</svg>
+
+<body>
+  <main>
+    <section>
+      <p><span id="current_speed">120</span> КМ/Ч</p>
+      <ul>
+        <li><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="19" height="23"
+            viewBox="0 0 19 23">
+            <defs>
+              <style>
+                .arrow-left {
+                  fill: url(#turnedOn_gradient);
+                  fill-rule: evenodd;
+                  filter: url(#filter_arrowLeft);
+                }
+              </style>
+              <filter id="filter_arrowLeft" x="1666" y="975" width="19" height="23" filterUnits="userSpaceOnUse">
+                <feOffset result="offset" in="SourceAlpha" />
+                <feGaussianBlur result="blur" stdDeviation="1.732" />
+                <feFlood result="flood" flood-opacity="0.4" />
+                <feComposite result="composite" operator="in" in2="blur" />
+                <feBlend result="blend" in="SourceGraphic" />
+              </filter>
+            </defs>
+            <path id="arrow-left" data-name="arrow-left" class="arrow-left nonActive"
+              d="M1680.14,994.007a1.475,1.475,0,0,1-.79-0.231l-10.24-6.411a1.6,1.6,0,0,1,0-2.682l10.24-6.411a1.475,1.475,0,0,1,.79-0.231,1.547,1.547,0,0,1,1.52,1.573v12.821a1.566,1.566,0,0,1-.46,1.13,1.532,1.532,0,0,1-1.06.442h0Zm0-15.878a1.467,1.467,0,0,1,1.44,1.485v12.821a1.467,1.467,0,0,1-1.44,1.484,1.389,1.389,0,0,1-.75-0.218l-10.24-6.411a1.506,1.506,0,0,1,0-2.532l10.24-6.41a1.381,1.381,0,0,1,.75-0.219m0-.176a1.583,1.583,0,0,0-.84.244l-10.24,6.41a1.686,1.686,0,0,0,0,2.834l10.24,6.41a1.585,1.585,0,0,0,.84.245,1.634,1.634,0,0,0,1.61-1.661V979.614a1.633,1.633,0,0,0-1.61-1.661h0Z"
+              transform="translate(-1666 -975)" />
+          </svg>
+        </li>
+        <li><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="27.691"
+            height="19.999" viewBox="0 0 36 26">
+            <defs>
+              <style>
+                .lights {
+                  fill: url(#turnedOn_gradient);
+                  fill-rule: evenodd;
+                  filter: url(#filter_lights);
+                }
+              </style>
+              <filter id="filter_lights" x="873" y="919" width="36" height="26" filterUnits="userSpaceOnUse">
+                <feOffset result="offset" in="SourceAlpha" />
+                <feGaussianBlur result="blur" stdDeviation="1.732" />
+                <feFlood result="flood" flood-opacity="0.4" />
+                <feComposite result="composite" operator="in" in2="blur" />
+                <feBlend result="blend" in="SourceGraphic" />
+              </filter>
+            </defs>
+            <path id="lights" data-name="lights" class="lights nonActive"
+              d="M894.243,941.957a7.711,7.711,0,0,1-7.669-7.722v-4.587a7.64,7.64,0,0,1,3.835-6.677,7.555,7.555,0,0,1,7.669,0l3.951,2.293a7.731,7.731,0,0,1,0,13.354l-3.951,2.294A7.632,7.632,0,0,1,894.243,941.957Zm0-16.686a4.372,4.372,0,0,0-4.346,4.377v4.587a4.329,4.329,0,0,0,2.173,3.784,4.281,4.281,0,0,0,4.346,0l3.951-2.293a4.381,4.381,0,0,0,0-7.569l-3.951-2.293A4.316,4.316,0,0,0,894.243,925.271Zm-10.555-.039h-6.883a0.92,0.92,0,0,1-.918-0.922h0a0.92,0.92,0,0,1,.918-0.923h6.883a0.92,0.92,0,0,1,.918.923h0A0.92,0.92,0,0,1,883.688,925.232Zm0,3.383h-6.883a0.92,0.92,0,0,1-.918-0.922h0a0.92,0.92,0,0,1,.918-0.923h6.883a0.92,0.92,0,0,1,.918.923h0A0.92,0.92,0,0,1,883.688,928.615Zm0,3.384h-6.883a0.92,0.92,0,0,1-.918-0.923h0a0.92,0.92,0,0,1,.918-0.923h6.883a0.92,0.92,0,0,1,.918.923h0A0.92,0.92,0,0,1,883.688,932Zm0,3.383h-6.883a0.92,0.92,0,0,1-.918-0.923h0a0.92,0.92,0,0,1,.918-0.922h6.883a0.92,0.92,0,0,1,.918.922h0A0.92,0.92,0,0,1,883.688,935.382Zm0,3.383h-6.883a0.92,0.92,0,0,1-.918-0.923h0a0.92,0.92,0,0,1,.918-0.922h6.883a0.92,0.92,0,0,1,.918.922h0A0.92,0.92,0,0,1,883.688,938.765Z"
+              transform="translate(-873 -919)" />
+          </svg>
+        </li>
+        <li><svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <path id="doorLock" class="door-lock nonActive"
+                d="M20.0476 2H10.5238L2.90476 9.6V10.55H4.33333C7.19048 10.55 9.57143 13.3145 9.57143 16.725V19.1H21V2.95C21 2.69804 20.8997 2.45641 20.7211 2.27825C20.5424 2.10009 20.3002 2 20.0476 2V2ZM18.1429 14.35H15.2857V12.45H18.1429V14.35ZM19.0952 9.6H5.6L11.3143 3.9H19.0952V9.6ZM6.71429 15.3V14.825C6.71429 14.1951 6.46344 13.591 6.01692 13.1456C5.57041 12.7002 4.9648 12.45 4.33333 12.45C3.70187 12.45 3.09626 12.7002 2.64975 13.1456C2.20323 13.591 1.95238 14.1951 1.95238 14.825V15.3C1.69979 15.3 1.45755 15.4001 1.27895 15.5782C1.10034 15.7564 1 15.998 1 16.25V20.05C1 20.302 1.10034 20.5436 1.27895 20.7218C1.45755 20.8999 1.69979 21 1.95238 21H6.71429C6.96687 21 7.20911 20.8999 7.38772 20.7218C7.56633 20.5436 7.66667 20.302 7.66667 20.05V16.25C7.66667 15.998 7.56633 15.7564 7.38772 15.5782C7.20911 15.4001 6.96687 15.3 6.71429 15.3ZM5.95238 15.3H2.71429V14.825C2.71429 14.3967 2.88486 13.9859 3.18849 13.683C3.49212 13.3802 3.90394 13.21 4.33333 13.21C4.76273 13.21 5.17454 13.3802 5.47817 13.683C5.7818 13.9859 5.95238 14.3967 5.95238 14.825V15.3Z" />
+            </g>
+            <defs>
+              <style>
+                .door-lock {
+                  fill: url(#turnedOn_gradient);
+                  fill-rule: evenodd;
+                  filter: url(#filter_doorLock);
+                }
+              </style>
+              <filter id="filter_doorLock" x="-1" y="0" width="24" height="23" filterUnits="userSpaceOnUse"
+                color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                <feOffset />
+                <feGaussianBlur stdDeviation="1" />
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0" />
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+              </filter>
+            </defs>
+          </svg></li>
+        <li><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="23"
+            viewBox="0 0 20 23">
+            <defs>
+              <style>
+                .arrow-right {
+                  fill: url(#turnedOn_gradient);
+                  fill-rule: evenodd;
+                  filter: url(#filter_arrowRight);
+                }
+              </style>
+              <filter id="filter_arrowRight" x="1856" y="975" width="20" height="23" filterUnits="userSpaceOnUse">
+                <feOffset result="offset" in="SourceAlpha" />
+                <feGaussianBlur result="blur" stdDeviation="1.732" />
+                <feFlood result="flood" flood-opacity="0.4" />
+                <feComposite result="composite" operator="in" in2="blur" />
+                <feBlend result="blend" in="SourceGraphic" />
+              </filter>
+            </defs>
+            <path id="arrowRight" data-name="arrowRight" class="arrow-right nonActive"
+              d="M1860.31,978.039a1.468,1.468,0,0,1,.79.232l10.26,6.41a1.6,1.6,0,0,1,0,2.683l-10.26,6.411a1.475,1.475,0,0,1-.79.231,1.556,1.556,0,0,1-1.53-1.573V979.612a1.575,1.575,0,0,1,.47-1.13,1.515,1.515,0,0,1,1.06-.443h0Zm0,15.879a1.467,1.467,0,0,1-1.44-1.485V979.612a1.466,1.466,0,0,1,1.44-1.484,1.405,1.405,0,0,1,.75.218l10.25,6.411a1.506,1.506,0,0,1,0,2.532l-10.25,6.41a1.406,1.406,0,0,1-.75.219m0,0.176a1.583,1.583,0,0,0,.84-0.244l10.25-6.41a1.686,1.686,0,0,0,0-2.834l-10.25-6.411a1.592,1.592,0,0,0-.84-0.244,1.641,1.641,0,0,0-1.62,1.661v12.821a1.641,1.641,0,0,0,1.62,1.661h0Z"
+              transform="translate(-1856 -975)" />
+          </svg>
+        </li>
+        <li id="fuel_value"></li>
+      </ul>
+    </section>
+  </main>
+</body>
+
+</html>
