@@ -1,3 +1,3 @@
 export enum RemoteEvents {
-  ChatMessage = 'ChatMessage'
+  ChatSendMessage = 'Remote:Chat:SendMessage'
 };
