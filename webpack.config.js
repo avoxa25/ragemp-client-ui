@@ -9,7 +9,8 @@ let htmlComponents = [
 var entryPoints = {};
 entryPoints['index'] = path.resolve(__dirname, 'src', 'index.ts');
 htmlComponents
-  .map((c) => ({ module: `${c}/${c.toLocaleLowerCase()}`, filename: path.resolve(__dirname, 'src', c, `${c.toLocaleLowerCase()}.ts`) }))
+  .map((c) => ({ folder: c, file: c.replace(/([A-Z]{1})/g, '-$1').toLocaleLowerCase().slice(1) }))
+  .map((ep) => ({ module: `${ep.folder}/${ep.file}`, filename: path.resolve(__dirname, 'src', ep.folder, `${ep.file}.ts`) }))
   .forEach((ep) => entryPoints[ep.module] = ep.filename);
 
 module.exports = {
