@@ -1,17 +1,12 @@
 import { LocalEvents } from '../Constants/localEvents';
 
-abstract class Speedometer {
+abstract class SpeedometerUi {
   public static Start(): void {
-    mp.events.add(LocalEvents.SpeedometerShow, () => Speedometer.OnShow());
-    mp.events.add(LocalEvents.SpeedometerHide, () => Speedometer.OnHide());
-    mp.events.add(LocalEvents.SpeedometerUpdate, (speed: number, lightsOn: boolean, highbeamsOn: boolean, locked: number, fuel: number) => {
-      Speedometer.UpdateSpeed(speed);
-      Speedometer.UpdateLights(lightsOn, highbeamsOn);
-
-      // TODO add fuel, lock
-      fuel;
-      locked;
-    });
+    mp.events.add(LocalEvents.SpeedometerShow, () => SpeedometerUi.OnShow());
+    mp.events.add(LocalEvents.SpeedometerHide, () => SpeedometerUi.OnHide());
+    mp.events.add(
+      LocalEvents.SpeedometerUpdate,
+      (s: number, lt: boolean, lb: boolean, hb: boolean, l: boolean, rt: boolean, f: number, ft: number) => SpeedometerUi.Update(s, lt, lb, hb, l, rt, f, ft));
   }
 
   private static OnShow(): void {
@@ -22,24 +17,42 @@ abstract class Speedometer {
     document.body.hidden = true;
   }
 
+  private static Update(
+    speed: number,
+    leftTurn: boolean,
+    lowBeam: boolean,
+    highBeam: boolean,
+    locked: boolean,
+    rightTurn: boolean,
+    fuel: number,
+    fuelTank: number) {
+    SpeedometerUi.UpdateSpeed(speed);
+    SpeedometerUi.UpdateLights(lowBeam, highBeam);
+
+    // TODO: Implement leftTurn, rightTurn, locked, fuel, fuelTank
+    leftTurn; rightTurn;
+    locked;
+    fuel; fuelTank;
+  }
+
   private static UpdateSpeed(speedInMpS: number): void {
     const speedInKmH = Math.ceil(speedInMpS * 3.6);
-    const speedometer = document.getElementById('current_speed') as HTMLElement;
-    speedometer.innerText = speedInKmH.toString();
+    const SpeedometerUi = document.getElementById('current_speed') as HTMLElement;
+    SpeedometerUi.innerText = speedInKmH.toString();
   }
 
-  private static UpdateLights(lightsOn: boolean, highbeamsOn: boolean): void {
-    const lowBeam = document.getElementById('lights') as HTMLElement;
-    if (lightsOn) {
-      lowBeam.classList.remove('nonActive');
+  private static UpdateLights(lowBeam: boolean, highBeam: boolean): void {
+    const lowBeamElement = document.getElementById('lights') as HTMLElement;
+    if (lowBeam) {
+      lowBeamElement.classList.remove('nonActive');
     } else {
-      lowBeam.classList.add('nonActive');
+      lowBeamElement.classList.add('nonActive');
     }
 
-    // TODO: add highbeam
-    highbeamsOn;
+    // TODO: Implement highBeam
+    highBeam;
   }
-  
+
 };
 
-Speedometer.Start();
+SpeedometerUi.Start();

@@ -1,25 +1,48 @@
 import { LocalEvents } from '../Constants/localEvents';
 
-mp.browsers.new('package://Speedometer/speedometer.html');
+abstract class Speedometer {
+  private static vehicle: VehicleMp;
+  private static updaterIntervalId: number;
 
-let speedometerUpdaterIntervalId: number;
+  public static Start(): void {
+    mp.browsers.new('package://Speedometer/speedometer.html');
 
-mp.events.add(RageEnums.EventKey.PLAYER_ENTER_VEHICLE, (vehicle: VehicleMp, seat: number) => {
-  const isDriver = seat !== 0;
-  if (isDriver) return;
+    mp.events.add(RageEnums.EventKey.PLAYER_ENTER_VEHICLE, (v: VehicleMp, s: number) => Speedometer.OnPlayerEnterVehicle(v, s));
+    mp.events.add(RageEnums.EventKey.PLAYER_LEAVE_VEHICLE, () => Speedometer.OnPlayerExitVehicle());
+  }
 
-  mp.events.call(LocalEvents.SpeedometerShow);
+  private static OnPlayerEnterVehicle(vehicle: VehicleMp, seat: number): void {
+    const isDriver = seat !== 0;
+    if (isDriver) return;
 
-  speedometerUpdaterIntervalId = setInterval(() => {
-    const speed = vehicle.getSpeed();
-    const lights = vehicle.getLightsState(true, true);
-    const fuel = Number.parseFloat(vehicle.getVariable('fuel'));
-    const locked = vehicle.getDoorLockStatus();
-    mp.events.call(LocalEvents.SpeedometerUpdate, speed, lights.lightsOn, lights.highbeamsOn, locked, fuel)
-  }, 250);
-});
+    Speedometer.vehicle = vehicle;
+    Speedometer.updaterIntervalId = setInterval(() => Speedometer.UpdateSpeedometer(), 250);
 
-mp.events.add(RageEnums.EventKey.PLAYER_LEAVE_VEHICLE, () => {
-  mp.events.call(LocalEvents.SpeedometerHide);
-  clearInterval(speedometerUpdaterIntervalId);
-});
+    mp.events.call(LocalEvents.SpeedometerShow);
+  }
+
+  private static OnPlayerExitVehicle(): void {
+    mp.events.call(LocalEvents.SpeedometerHide);
+    clearInterval(Speedometer.updaterIntervalId);
+  }
+
+  private static UpdateSpeedometer(): void {
+    // TODO: Implement leftTurn & rightTurn
+    const leftTurn = false;
+    const rightTurn = false;
+
+    const speed = Speedometer.vehicle.getSpeed();
+    const lights = Speedometer.vehicle.getLightsState(true, true);
+    const locked = Speedometer.vehicle.getDoorLockStatus();
+
+    const rawFuel = Speedometer.vehicle.getVariable('fuel');
+    const fuel = Number.parseFloat(rawFuel);
+
+    const rawFuelTank = Speedometer.vehicle.getVariable('fuelTank');
+    const fuelTank = Number.parseFloat(rawFuelTank);
+
+    mp.events.call(LocalEvents.SpeedometerUpdate, speed, leftTurn, lights.lightsOn, lights.highbeamsOn, locked, rightTurn, fuel, fuelTank);
+  }
+};
+
+Speedometer.Start();
