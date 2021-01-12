@@ -1,0 +1,163 @@
+* {
+  box-sizing: border-box;
+
+  font-family: 'PT Sans', sans-serif;
+
+  user-select: none;
+}
+
+body {
+  background: gray;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, .33);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 6px;
+  border-radius: 3px;
+  background: linear-gradient(to top, #ee0b89, #fd6f67 75%);
+}
+
+section {
+  width: 315px;
+  height: 315px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: none;
+
+  margin-top: -157px;
+  margin-left: -157px;
+
+  background-color: rgba(0, 0, 0, .33);
+
+  border-radius: 157px;
+}
+
+section.active {
+  display: block;
+}
+
+.text-disc {
+  width: 80px;
+  height: 80px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: -40px;
+  margin-left: -40px;
+
+  background-color: rgba(0, 0, 0, .33);
+
+  border: 2px solid palevioletred;
+  border-radius: 40px;
+
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.menu-item {
+  width: 218px;
+  height: 127px;
+
+  position: absolute;
+  left: 50%;
+  z-index: 1;
+
+  margin-left: -109px;
+
+
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+
+  clip-path: url("#mask");
+  cursor: pointer;
+  transition: background-color .12s ease-in;
+}
+
+.menu-item:hover {
+  background-color: rgba(0, 0, 0, .33);
+}
+
+.menu-item.up {
+  top: 0;
+}
+
+.menu-item.down {
+  bottom: 0;
+
+  transform: rotate(180deg);
+}
+
+.menu-item.left {
+  top: 50%;
+  left: 63px;
+
+  margin-top: -63px;
+
+  transform: rotate(-90deg);
+}
+
+.menu-item.right {
+  top: 50%;
+
+  margin: -63px 0 0 -15px;
+
+  transform: rotate(90deg);
+}
+
+#action-carLock {
+  background-image: url("assets/car_lock.svg");
+}
+
+#action-carBaggage {
+  background-image: url("assets/car_baggage.png");
+}
+
+#action-charMeet {
+  background-image: url("assets/char_hello.svg");
+}
+
+#action-charShowDocument {
+  background-image: url("assets/char_doc.svg");
+}
+
+#action-charInviteHome {
+  background-image: url("assets/char_home.svg");
+}
+
+#action-charTrade {
+  background-image: url("assets/char_cash.svg");
+}

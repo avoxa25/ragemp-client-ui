@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="interaction-menu-main.js"></script>
+  <link rel="stylesheet" href="interaction-menu-main.css">
+  <!-- @AnnoyingBork put here URL to font, please -->
+</head>
+
+<body>
+  <svg width="218" height="128" viewBox="0 0 218 128" fill="none" xmlns="http://www.w3.org/2000/svg"
+    class="visually-hidden">
+    <clipPath id="mask">
+      <path
+        d="M107 118.5C101 118.5 92.4999 120.5 83.4999 127.5C76.6999 116.3 24.9999 67.1665 -6.10352e-05 43.9999C36 7.49987 81.5 0.208887 107 0.208984C139 0.209106 180 8 217.5 43.9999C191 70.4999 134.5 127.5 134.5 127.5C123 118.5 113 118.5 107 118.5H107Z"
+        fill="#C4C4C4" />
+    </clipPath>
+  </svg>
+
+  <section id="menu-car">
+    <div class="text-disc">
+      <p id="car_prompt">
+        Открыть/закрыть ТС
+      </p>
+    </div>
+    <!-- If you will change ids, you will need to change them in CSS too -->
+    <div class="menu-item up" id="action-carLock"></div>
+    <div class="menu-item down" id="action-carBaggage"></div>
+  </section>
+
+  <section id="menu-char" class="active">
+    <div class="text-disc">
+      <p id="action-prompt">Познакомиться</p>
+    </div>
+    <div class="menu-item up" id="action-charMeet"></div>
+    <div class="menu-item down" id="action-charShowDocument"></div>
+    <div class="menu-item left" id="action-charInviteHome"></div>
+    <div class="menu-item right" id="action-charTrade"></div>
+  </section>
+</body>
+
+</html>
