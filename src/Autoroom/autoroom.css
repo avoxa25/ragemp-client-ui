@@ -211,35 +211,36 @@ ul.colors>li>button {
   cursor: pointer;
 }
 
-#green {
+.green {
   background-color: #6fb352;
+  color: #6fb352;
 }
 
-#cyan {
+.cyan {
   background-color: #5fa79c;
 }
 
-#blue {
+.blue {
   background-color: #65a9de;
 }
 
-#black {
+.black {
   background-color: #000;
 }
 
-#red {
+.red {
   background-color: #cb2228;
 }
 
-#orange {
+.orange {
   background-color: #e79523;
 }
 
-#white {
+.white {
   background-color: #fff;
 }
 
-#darkblue {
+.darkblue {
   background-color: #0000fa;
 }
 
@@ -248,11 +249,7 @@ main>p {
   text-align: center;
 }
 
-#car_price {
-  color: #6fb352;
-}
-
-#car_buy {
+.car-buy {
   width: 290px;
   height: 45px;
 
@@ -272,7 +269,7 @@ main>p {
 
 }
 
-.car-list {
+section.car-list {
   width: 100vw;
   height: 220px;
 
@@ -289,7 +286,7 @@ main>p {
 
 }
 
-#car_list {
+ul.car-list {
   height: 100%;
 
   display: flex;
@@ -300,21 +297,21 @@ main>p {
   overflow-x: scroll;
 }
 
-#car_list>li {
+ul.car-list>li {
   margin-right: 25px;
 
   transition: transform .5s ease-in-out;
 }
 
-#car_list>li:hover {
+ul.car-list>li:hover {
   transform: translateY(-35px);
 }
 
-#car_list>li:last-of-type {
+ul.car-list>li:last-of-type {
   margin-right: 0;
 }
 
-#car_list>li>button {
+ul.car-list>li>button {
   width: 340px;
   height: 100px;
 
@@ -335,7 +332,7 @@ main>p {
 
 }
 
-#car_list>li.active>button {
+ul.car-list>li.active>button {
   background: linear-gradient(to left, #ee0b89, #fd6f67 75%);
 
 }
