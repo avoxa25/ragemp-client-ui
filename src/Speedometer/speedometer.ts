@@ -65,8 +65,12 @@ abstract class SpeedometerUi {
   }
 
   private static UpdateLocked(locked: boolean): void {
-    // TODO: Implement
-    locked;
+    const lockedElement = document.getElementById('doorLock') as HTMLElement;
+    if (locked) {
+      lockedElement.classList.remove('nonActive');
+    } else {
+      lockedElement.classList.add('nonActive');
+    }
   }
 
   private static UpdateFuel(fuel: number, fuelTank: number): void {
