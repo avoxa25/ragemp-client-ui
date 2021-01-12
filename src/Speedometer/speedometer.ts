@@ -27,12 +27,9 @@ abstract class SpeedometerUi {
     fuel: number,
     fuelTank: number) {
     SpeedometerUi.UpdateSpeed(speed);
-    SpeedometerUi.UpdateLights(lowBeam, highBeam);
-
-    // TODO: Implement leftTurn, rightTurn, locked, fuel, fuelTank
-    leftTurn; rightTurn;
-    locked;
-    fuel; fuelTank;
+    SpeedometerUi.UpdateLights(lowBeam, highBeam, leftTurn, rightTurn);
+    SpeedometerUi.UpdateLocked(locked);
+    SpeedometerUi.UpdateFuel(fuel, fuelTank);    
   }
 
   private static UpdateSpeed(speedInMpS: number): void {
@@ -41,7 +38,7 @@ abstract class SpeedometerUi {
     SpeedometerUi.innerText = speedInKmH.toString();
   }
 
-  private static UpdateLights(lowBeam: boolean, highBeam: boolean): void {
+  private static UpdateLights(lowBeam: boolean, highBeam: boolean, leftTurn: boolean, rightTurn: boolean): void {
     const lowBeamElement = document.getElementById('lights') as HTMLElement;
     if (lowBeam) {
       lowBeamElement.classList.remove('nonActive');
@@ -51,8 +48,31 @@ abstract class SpeedometerUi {
 
     // TODO: Implement highBeam
     highBeam;
+
+    const leftTurnElement = document.getElementById('arrow-left') as HTMLElement;
+    if (leftTurn) {
+      leftTurnElement.classList.remove('nonActive');
+    } else {
+      leftTurnElement.classList.add('nonActive');
+    }
+
+    const rightTurnElement = document.getElementById('arrowRight') as HTMLElement;
+    if (rightTurn) {
+      rightTurnElement.classList.remove('nonActive');
+    } else {
+      rightTurnElement.classList.add('nonActive');
+    }
   }
 
+  private static UpdateLocked(locked: boolean): void {
+    // TODO: Implement
+    locked;
+  }
+
+  private static UpdateFuel(fuel: number, fuelTank: number): void {
+    // TODO: Implement
+    fuel; fuelTank;
+  }
 };
 
 SpeedometerUi.Start();
