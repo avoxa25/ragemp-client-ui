@@ -138,26 +138,26 @@ section.active {
   transform: rotate(90deg);
 }
 
-#action-carLock {
+.car-lock {
   background-image: url("assets/car_lock.svg");
 }
 
-#action-carBaggage {
+.car-baggage {
   background-image: url("assets/car_baggage.png");
 }
 
-#action-charMeet {
+.char-meet {
   background-image: url("assets/char_hello.svg");
 }
 
-#action-charShowDocument {
+.char-show-document {
   background-image: url("assets/char_doc.svg");
 }
 
-#action-charInviteHome {
+.char-invite-home {
   background-image: url("assets/char_home.svg");
 }
 
-#action-charTrade {
+.char-trade {
   background-image: url("assets/char_cash.svg");
 }
