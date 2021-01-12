@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="autoroom.js"></script>
+  <link rel="stylesheet" href="autoroom.css">
+  <!-- Put here URL to font -->
+</head>
+
+<body>
+  <section class="car-info">
+    <header>
+      <p id="car_model">Mercedes E63 GT</p>
+    </header>
+    <main>
+      <ul class="params">
+        <li>
+          <p>Максимальная скорость: <span id="car_maxSpeed">265 км/ч</span></p>
+        </li>
+        <li>
+          <p>Разгон (0-100 км/ч): <span id="car_racing">4,3 сек</span></p>
+        </li>
+        <li>
+          <p>Расход топлива (на 100 км): <span id="car_сons">30 л</span></p>
+        </li>
+        <li>
+          <p>Объем бака: <span id="car_fuelBank_capacity">1000 л</span></p>
+        </li>
+        <li>
+          <p>Объем багажника: <span id="car_bagage_capacity">200 л</span></p>
+        </li>
+
+      </ul>
+      <p>Выбрать цвет:</p>
+      <ul class="colors">
+        <li>
+          <button id="green" onclick="changeColor('6fb352');"></button>
+        </li>
+        <li>
+          <button id="cyan" onclick="changeColor('5fa79c');"></button>
+        </li>
+        <li>
+          <button id="blue" onclick="changeColor('65a9de');"></button>
+        </li>
+        <li>
+          <button id="black" onclick="changeColor('000');"></button>
+        </li>
+        <li>
+          <button id="red" onclick="changeColor('cb2228');"></button>
+        </li>
+        <li>
+          <button id="orange" onclick="changeColor('e79523');"></button>
+        </li>
+        <li>
+          <button id="white" onclick="changeColor('fff');"></button>
+        </li>
+        <li>
+          <button id="darkblue" onclick="changeColor('0000fa');"></button>
+        </li>
+      </ul>
+      <p>Цена: 
+        <span id="car_price">$ 10,000.00</span>
+      </p>
+      <p>Ваш баланс: 
+        <span id="char_balance">$ 12,000.00</span>
+      </p>
+      <button id="car_buy" onclick="buyCar(car);">Купить</button>
+    </main>
+  </section>
+
+  <section class="car-list">
+    <ul id="car_list">
+      <li>
+        <button>Mercedes E63 GT</button>
+      </li>
+      <li class="active">
+        <button onlick="">Mercedes E63 GT</button>
+      </li>
+      <li>
+        <button>Mercedes E63 GT</button>
+      </li>
+      <li>
+        <button>Mercedes E63 GT</button>
+      </li>
+      <li>
+        <button>Mercedes E63 GT</button>
+      </li>
+      <li>
+        <button>Mercedes E63 GT</button>
+      </li>
+      <li>
+        <button>Mercedes E63 GT</button>
+      </li>
+    </ul>
+  </section>
+
+  <p>Автосалон<br><span id="room_name">DreamCars</span></p>
+
+  <div class="switch">
+    <button onlick="switchTo('left');"></button>
+    <button onlick="switchTo('right');"></button>
+  </div>
+
+</body>
+
+</html>
