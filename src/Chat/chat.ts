@@ -1,4 +1,5 @@
 import { LocalEvents } from '../Constants/localEvents';
+import { SpecificLocalEvents } from '../Constants/specificLocalEvents';
 
 abstract class Chat {
   private static hidden: boolean;
@@ -17,9 +18,10 @@ abstract class Chat {
     // To prevent player control freeze/cursor visibility interruption from system menus
     setInterval(() => Chat.sendChatToggleEvent(), 250);
 
-    mp.events.add('chat:push', (message: string) => Chat.displayMessage(message));
-    mp.events.add('chat:activate', (visible: boolean) => Chat.toggleChat(visible));
-    mp.events.add('chat:show', () => Chat.toggleMessageInput());
+    mp.events.add(SpecificLocalEvents.ChatPush, (message: string) => Chat.displayMessage(message));
+    mp.events.add(SpecificLocalEvents.ChatClear, () => Chat.clearChat());
+    mp.events.add(SpecificLocalEvents.ChatActivate, (visible: boolean) => Chat.toggleChat(visible));
+    mp.events.add(SpecificLocalEvents.ChatShow, () => Chat.toggleMessageInput());
 
     Chat.messagesDiv = document.getElementById('messagesDiv') as HTMLElement;
 
@@ -36,6 +38,11 @@ abstract class Chat {
     const messageElement = document.createElement('p');
     messageElement.innerHTML = message;
     Chat.messagesDiv.appendChild(messageElement);
+  }
+
+  private static clearChat(): void {
+    Chat.messages = [];
+    Chat.messagesDiv.innerHTML = '';
   }
 
   private static toggleChat(visible: boolean): void {
@@ -86,7 +93,7 @@ abstract class Chat {
     const message = newMessageFormData.get('message') as string;
     const channel = newMessageFormData.get('channel') as string;
 
-    setTimeout(() => mp.events.call(LocalEvents.ChatMessageSend, message, channel), 250);
+    setTimeout(() => mp.events.call(LocalEvents.ChatSendMessage, message, channel), 250);
 
     Chat.toggleMessageInput();
   }
