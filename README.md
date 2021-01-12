@@ -17,3 +17,7 @@ RageMP SweetLifeRP Server Server UI #1
 ```
 npm install -g typescript tslint webpack webpack-cli webpack-dev-server
 ```
+
+## Style guides
+
+1. [HTML/CSS style guide](./HtmlCssStyleGuide.md)
