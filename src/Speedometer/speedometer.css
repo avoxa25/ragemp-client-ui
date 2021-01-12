@@ -27,7 +27,7 @@ section {
     bottom: 35px;
 }
 
-#current_speed {
+.current-speed {
     color:rgba(255, 255, 255, 1);
     font-size: 36px;
 }
@@ -50,7 +50,7 @@ ul > li {
     height: 25px;
 }
 
-#fuel_value {
+.fuel-value {
     width: 230px;
     height: 10px;
 
@@ -65,7 +65,7 @@ ul > li {
     box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
 }
 
-#fuel_value::before {
+.fuel-value::before {
     content: "";
 
     width: 25px;
