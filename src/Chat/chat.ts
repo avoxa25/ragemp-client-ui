@@ -92,8 +92,15 @@ abstract class ChatUi {
 
     const message = newMessageFormData.get('message') as string;
     const channel = newMessageFormData.get('channel') as string;
+    const encodedMessage = `${channel}|${message}`;
 
-    setTimeout(() => mp.events.call(LocalEvents.ChatSendMessage, message, channel), 250);
+    const isCommand = message.charAt(0) === '/';
+    if (isCommand) {
+      const commandMessage = message.substr(1);
+      (mp as any).invoke('command', commandMessage);
+    } else {
+      (mp as any).invoke('chatMessage', encodedMessage);
+    }
 
     ChatUi.toggleMessageInput();
   }
