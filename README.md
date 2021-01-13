@@ -19,5 +19,10 @@ npm install -g typescript tslint webpack webpack-cli webpack-dev-server
 ```
 
 ## Style guides
-
 1. [HTML/CSS style guide](./HtmlCssStyleGuide.md)
+
+## CEF Debugging
+1. Open `regedit.msc`
+2. Add `9222 ` as `String value` in `HKEY_CURRENT_USER\SOFTWARE\RAGE-MP`
+3. Open [DevTools](chrome://inspect/#devices) in Chrome
+4. Click `inspect` on needed CEF element in `Devices` tab on `Remote Target` section
