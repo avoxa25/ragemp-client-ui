@@ -40,11 +40,11 @@
             <li>
               <button class="tab-content-link info active" id="linkContentInfo" data-tab="tabContentInfo">ОБЩАЯ
                 ИНФОРМАЦИЯ</button>
-              </li>
+            </li>
             <li>
               <button class="tab-content-link settings" id="linkContentSettings"
                 data-tab="tabContentSettings">НАСТРОЙКИ</button>
-              </li>
+            </li>
           </ul>
         </aside>
         <div class="v-line"></div>
@@ -103,7 +103,7 @@
                 <label class="switch">
                   <input type="checkbox" id="" checked>
                   <span class="slider round"></span>
-              </label>
+                </label>
               </p>
             </li>
             <li>
@@ -112,7 +112,7 @@
                 <label class="switch">
                   <input type="checkbox" id="" checked>
                   <span class="slider round"></span>
-              </label>
+                </label>
               </p>
             </li>
             <li class="grouped-settings">
@@ -121,7 +121,7 @@
                 <label class="switch">
                   <input type="checkbox" id="" checked>
                   <span class="slider round"></span>
-              </label>
+                </label>
               </p>
               <p>
                 Горячая клавиша:
@@ -139,62 +139,56 @@
         <aside>
           <ul>
             <li>
-              <button class="tab-content-link info active" id="tabContentPromoInfo" data-tab="tabContentPromoInfo">ИНФОРМАЦИЯ</button>
+              <button class="tab-content-link info active" id="tabContentPromoInfo"
+                data-tab="tabContentPromoInfo">ИНФОРМАЦИЯ</button>
             </li>
             <li>
-              <button class="tab-content-link statistic" id="tabContentPromoStatistic" data-tab="tabContentPromoStatistic">СТАТИСТИКА</button>
+              <button class="tab-content-link statistic" id="tabContentPromoStatistic"
+                data-tab="tabContentPromoStatistic">СТАТИСТИКА</button>
             </li>
           </ul>
         </aside>
         <div class="v-line"></div>
-        <div class="tab-content active" id="tabContentPromoInfo">
+        <div class="tab-content promo-info active" id="tabContentPromoInfo">
           <ul>
-            <li>
+            <li class="tell-about">
               <p>
-                СОСИ:
-                <span>Artem Rovin</span>
+                1. Расскажите друзьям о вашем реферальном промокоде
               </p>
             </li>
-            <li>
+            <li class="enter-promo">
               <p>
-                Пол:
-                <span>мужской</span>
+                2. Ваш реферальный промокод должны ввести в окно ввода промокода
               </p>
             </li>
-            <li>
+            <li class="play-at-server">
               <p>
-                Работа:
-                <span>член фракции</span>
+                3. Отыграть на нашем сервере 10 часов
               </p>
             </li>
-            <li>
+            <li class="stay-time">
               <p>
-                Отыграно часов на сервере:
-                <span>9999.3</span>
-              </p>
-            </li>
-            <li>
-              <p>
-                Организация:
-                <span>LSPD</span>
-              </p>
-            </li>
-            <li>
-              <p>
-                Должность:
-                <span>Unter Officer SS</span>
-              </p>
-            </li>
-            <li>
-              <p>
-                Наличные денежные средства:
-                <!-- Doesn't work without inline -->
-                <span class="green">$&nbsp;<span class="green" id="cash">999,999,999.00</span></span>
+                4. По достижении 10 часов игры вам и другу будет начислен бонус
               </p>
             </li>
           </ul>
+          <div class="promo">
+            <p>
+              Ваш промокод:
+              <span class="promo-own" id="">321</span>
+            </p>
+            <div>
+              <p>
+                Активировать промокод:
+              </p>
+              <div class="promo-input-container">
+                <div class="promo-input"><input type="text" class="text-gradient" id=""></input></div>
+                <button class="promo-button"></button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="tab-content" id="tabContentPromoStatistic">
+        <div class="tab-content promo-statistic" id="tabContentPromoStatistic">
           <ul>
             <li>
               <p>

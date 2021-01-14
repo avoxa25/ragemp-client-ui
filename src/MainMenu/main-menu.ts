@@ -17,13 +17,13 @@ abstract class MainMenuUi {
     for (let i = 0; i < tabs.length; i++) {
       const isSelectedTab = tabs[i].id === selectedTabId;
       if (isSelectedTab) {
-        document.querySelector('#' + tabs[i].id + ' div.tab-content')?.classList.add('active');
-        document.querySelector('#' + tabs[i].id + ' button.tab-content-link')?.classList.add('active');
+        tabs[i].querySelector('div.tab-content')?.classList.add('active');
+        tabs[i].querySelector('button.tab-content-link')?.classList.add('active');
         tabs[i].classList.add('active');
       } else {
         tabs[i].classList.remove('active');
-        document.querySelector('#' + tabs[i].id + ' div.tab-content.active')?.classList.remove('active');
-        document.querySelector('#' + tabs[i].id + ' button.tab-content-link.active')?.classList.remove('active');
+        tabs[i].querySelector('div.tab-content.active')?.classList.remove('active');
+        tabs[i].querySelector('button.tab-content-link.active')?.classList.remove('active');
       }
     }
 
