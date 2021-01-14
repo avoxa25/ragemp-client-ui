@@ -1,0 +1,340 @@
+* {
+  box-sizing: border-box;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  user-select: none;
+}
+
+P {
+  margin: 0px;
+  padding: 0px;
+}
+
+UL {
+  margin: 0;
+  padding: 0;
+
+  list-style-type: none;
+}
+
+BUTTON {
+  padding: 10px 20px 10px 20px;
+
+  background-color: rgba(0, 0, 0, 0);
+
+  border: 0;
+  border-radius: 10px;
+
+  color: white;
+  font-size: 18px;
+
+  cursor: pointer;
+  outline: none;
+}
+
+BUTTON:hover,
+BUTTON:focus,
+BUTTON.active {
+  background: linear-gradient(to left, #ee0b89, #fd6f67 75%);
+}
+
+NAV {
+  width: 100%;
+  height: 24%;
+
+  padding: 10px 25px 10px 25px;
+
+  background-color: rgba(0, 0, 0, .33);
+
+  border-top: 3px solid palevioletred;
+  border-radius: 5px 0 0 0;
+
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: #eaeaea;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 6px;
+  border-radius: 3px;
+  background: linear-gradient(to top, #ee0b89, #fd6f67 75%);
+}
+
+.green {
+  color: green;
+}
+
+.container {
+  width: 50%;
+  min-width: 683px;
+  height: 50%;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  background-color: rgba(0, 0, 0, .33);
+
+  border-radius: 5px 0 25px 0;
+
+  transform: translate(-50%, -50%);
+}
+
+nav>ul {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+nav ul>li {
+  margin-right: 15px;
+}
+
+nav ul>li:last-of-type {
+  margin-right: 0;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  max-height: 390px;
+
+  padding: 25px;
+}
+
+.tab {
+  width: 100%;
+  height: 100%;
+
+  display: none;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.tab.active {
+  display: flex;
+}
+
+
+.tab-content.active {
+  display: block;
+}
+
+aside {
+  height: 100%;
+
+  margin-right: 25px;
+}
+
+aside ul>li {
+  margin-top: 10px;
+}
+
+aside ul>li:first-child {
+  margin-top: 0;
+}
+
+aside button,
+.close {
+  position: relative;
+
+  padding-left: 45px;
+
+  background-image: url("assets/v-line-button.svg");
+  background-position: 0% 50%;
+  background-repeat: no-repeat;
+}
+
+button.close {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+}
+
+aside button:hover,
+button.close:hover {
+  background-color: linear-gradient(to left, #ee0b89, #fd6f67 75%);
+  background-image: rgba(0, 0, 0, 0);
+}
+
+button::before {
+  width: 13px;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 17px;
+
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+button.info::before {
+  content: '';
+
+  background-image: url("assets/info.svg");
+}
+
+button.settings::before {
+  content: '';
+
+  background-image: url("assets/settings.svg");
+}
+
+button.close::before {
+  content: '';
+
+  background-image: url("assets/close.svg");
+}
+
+.v-line {
+  width: 3px;
+  height: 100%;
+
+  background-image: url("assets/v-line.svg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.tab-content {
+  height: 100%;
+
+  display: none;
+  flex: 1;
+
+  margin-left: 25px;
+}
+
+.tab-content ul>li {
+  margin-top: 8px;
+}
+
+.tab-content ul>li:first-child {
+  margin-top: 0;
+}
+
+.tab-content ul>li>p {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.tab-content ul>li>p>span {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+div.settings {
+  overflow-y: scroll;
+
+  padding-right: 15px;
+}
+
+.settings>ul>li {
+  width: 100%;
+
+  padding: 15px;
+
+  background-color: rgba(255, 255, 255, .15);
+
+  border-radius: 10px;
+
+  font-weight: 700;
+}
+
+.settings>ul>li>p {
+  display: flex;
+  justify-content: space-between;
+}
+
+li.grouped-settings>p {
+  
+  margin-bottom: 5px;
+}
+
+li.grouped-settings>p:last-of-type {
+  margin-bottom: 0;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 18px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #cccccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  content: "";
+
+  width: 14px;
+  height: 14px;
+
+  position: absolute;
+  left: 3px;
+  bottom: 2px;
+
+  background-color: black;
+  box-shadow: 10px 12px 25px -13px rgba(0, 0, 0, 0.75);
+  transition: .4s;
+
+}
+
+input:checked+.slider {
+  background-color: white;
+}
+
+
+input:checked+.slider:before {
+  transform: translateX(20px);
+
+  background-color: #ee0b89;
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+div.settings ul>li button {
+  width: 40px;
+  height: 25px;
+
+  padding: 0;
+
+  background: rgba(255, 255, 255, 1);
+
+  border-radius: 5px;
+
+  color: palevioletred;
+}
+
+.key.reload {
+  background-image: url("assets/reload.svg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
