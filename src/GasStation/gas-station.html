@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="gas-station.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=PT+Sans" />
+  <link rel="stylesheet" type="text/css" href="gas-station.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <section class="container">
+    <header>
+      <img src="assets/canister.svg" width="40.3px" height="45.1px">
+      <p><span>SWEET</span>FUEL</p>
+    </header>
+    <main>
+      <ul class="items">
+        <li>
+          <button class="fuel">
+            <p>БЕНЗИН<br>
+              <span>$ 1.50</span>
+            </p>
+          </button>
+        </li>
+        <li>
+          <button class="repair-kit">
+            <p>РЕМ КОМПЛЕКТ<br>
+              <span>$ 25.00</span>
+            </p>
+          </button>
+        </li>
+        <li>
+          <button class="canister">
+            <p>КАНИСТРА<br>
+              <span>$ 25.00</span>
+            </p>
+          </button>
+        </li>
+        <li>
+          <button class="power">
+            <p>ЭЛЕКТРИЧЕСТВО<br>
+              <span>$ 1.50</span>
+            </p>
+          </button>
+        </li>
+      </ul>
+      <div class="refill-count">
+        <form>
+          <button>&#8722</button>
+          <input type="number" value="5" min="1" max="999">
+          <button>+</button>
+        </form>
+        <p>
+          В баке:<br>
+          <span>50</span>
+          <span class="capacity">/ 70</span>
+        </p>
+      </div>
+      <p class="cost">
+        Итого к оплате:<br>
+        <span>$ 35.00</span>
+      </p>
+      <ul class="payment">
+        <li>
+          <button class="cash">Наличными</button>
+        </li>
+        <li>
+          <button class="card">Картой</button>
+        </li>
+        <li>
+          <button class="full-capacity">Полный бак</button>
+        </li>
+      </ul>
+    </main>
+  </section>
+
+</body>
+
+</html>
