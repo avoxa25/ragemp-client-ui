@@ -15,4 +15,4 @@ abstract class Chat {
   }
 };
 
-Chat.Start()
+Chat.Start();
