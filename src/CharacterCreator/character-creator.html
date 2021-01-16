@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="character-creator.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!--<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=PT+Sans"/>-->
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul class="navigation">
+        <li>
+          <button class="main tabLinks" id="linkMain" data-tab="tabMain"></button>
+        </li>
+        <li>
+          <button class="clothes tabLinks" id="linkClothes" data-tab="tabClothes"></button>
+        </li>
+        <li>
+          <button class="face tabLinks" id="linkFace" data-tab="tabFace"></button>
+        </li>
+        <li>
+          <button class="hair tabLinks" id="linkHair" data-tab="tabHair"></button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="parameters" id="tabMain" style="display: block;">
+      <form id="formMain" action="javascript:void(0);">
+        <div class="body main">
+          <input type="text" name="firstName" placeholder="Имя">
+          <input type="text" name="lastName" placeholder="Фамилия">
+          <ul>
+            <li>
+              <p>Пол:</p>
+              <p>
+                <button type="button" data-input-name="gender" data-input-value-cycle="-1"></button>
+                <input type="text" name="genderText" value="Мужской" disabled>
+                <input type="text" name="gender" value="true" style="display: none;">
+                <button type="button" data-input-name="gender" data-input-value-cycle="1"></button>
+              </p>
+            </li>
+            <li>
+              <p>Отец:</p>
+              <p>
+                <button type="button" data-input-name="father" data-input-value-cycle="-1"></button>
+                <input type="text" name="fatherText" value="Benjamin" disabled>
+                <input type="text" name="father" value="0" style="display: none;">
+                <button type="button" data-input-name="father" data-input-value-cycle="1"></button>
+              </p>
+            </li>
+            <li>
+              <p>Мать:</p>
+              <p>
+                <button type="button" data-input-name="mother" data-input-value-cycle="-1"></button>
+                <input type="text" name="motherText" value="Hannah" disabled>
+                <input type="text" name="mother" value="21" style="display: none;">
+                <button type="button" data-input-name="mother" data-input-value-cycle="1"></button>
+              </p>
+            </li>
+            <li>
+              <p>Наследственность:</p>
+              <p>
+                Отец
+                <input type="range" class="slider" name="heredity" min="-1.0" max="1.0" value="0" step="0.01">
+                Мать
+              </p>
+            </li>
+            <li>
+              <p>Тон кожи:</p>
+              <p>
+                Отец
+                <input type="range" class="slider" name="skinTone" min="-1.0" max="1.0" value="0" step="0.01">
+                Мать
+              </p>
+            </li>
+          </ul>
+          <p>
+            <button type="random">СЛУЧАЙНО</button>
+            <button type="reset">СБРОСИТЬ</button>
+          </p>
+          <button type="submit">СОЗДАТЬ</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="parameters" id="tabClothes">
+      <div class="body clothes">
+        <ul>
+          <li>
+            <p>Торс:</p>
+            <p>
+              <button onclick="createTopsOutfit('-')"></button>
+              <input type="text" name="top" value="Футболка" disabled>
+              <button onclick="createTopsOutfit('+')"></button>
+            </p>
+          </li>
+          <!--<li>
+            <p>Стиль:</p>
+            <p>
+              <button onclick=""></button>
+              <input type="text" id="" value="" disabled>
+              <button onclick=""></button>
+            </p>
+          </li>-->
+          <li>
+            <p>Ноги:</p>
+            <p>
+              <button onclick="createLegsOutfit('-')"></button>
+              <input type="text" name="leg" value="Джинсы" disabled>
+              <button onclick="createLegsOutfit('+')"></button>
+            </p>
+          </li>
+          <!--<li>
+            <p>Стиль:</p>
+            <p>
+              <button onclick=""></button>
+              <input type="text" id="" value="" disabled>
+              <button onclick=""></button>
+            </p>
+          </li>-->
+          <li>
+            <p>Обувь:</p>
+            <p>
+              <button onclick="createShoesOutfit('-')"></button>
+              <input type="text" name="shoes" value="Кеды" disabled>
+              <button onclick="createShoesOutfit('+')"></button>
+            </p>
+          </li>
+        </ul>
+        <p>
+          <button onclick="randomCharParam('Clothes');">СЛУЧАЙНО</button>
+          <button onclick="resetCharParam('Clothes');">СБРОСИТЬ</button>
+        </p>
+        <button onclick="createChar();">СОЗДАТЬ</button>
+      </div>
+    </section>
+
+    <section class="parameters" id="tabFace">
+      <div class="body face">
+        <ul class="face">
+          <!--Глаза-->
+          <li>
+            <p>Глаза:</p>
+            <p>
+              <button onclick="changeEyesColor('-')"></button>
+              <input type="text" name="eyesColor" value="Green" disabled>
+              <button onclick="changeEyesColor('+')"></button>
+            </p>
+          </li>
+          <li>
+            <p>Размер глаз:</p>
+            <p>
+              Открыты<input type="range" class="slider" oninput="changeFace(11, this)" name="eyesSize" min="-1.0"
+                max="1.0" value="0" step="0.01">Закрыты
+            </p>
+          </li>
+          <!--Глаза-->
+
+          <!--Нос-->
+          <li>
+            <p>Высота Носа:</p>
+            <p>
+              Вверх<input type="range" class="slider" oninput="changeFace(1, this)" name="noseHeight" min="-1.0"
+                max="1.0" value="0" step="0.01">Вниз
+            </p>
+          </li>
+          <li>
+            <p>Ширина Носа:</p>
+            <p>
+              Узкий<input type="range" class="slider" oninput="changeFace(0, this)" name="noseWidth" min="-1.0"
+                max="1.0" value="0" step="0.01">Широкий
+            </p>
+          </li>
+          <li>
+            <p>Длина Носа:</p>
+            <p>
+              Длинный<input type="range" class="slider" oninput="changeFace(2, this)" name="noseLength" min="-1.0"
+                max="1.0" value="0" step="0.01">Короткий
+            </p>
+          </li>
+          <li>
+            <p>Носовая Перегородка:</p>
+            <p>
+              Круглая<input type="range" class="slider" oninput="changeFace(3, this)" name="noseBridge" min="-1.0"
+                max="1.0" value="0" step="0.01">Квадратная
+            </p>
+          </li>
+          <li>
+            <p>Кончик Носа:</p>
+            <p>
+              Вверх<input type="range" class="slider" oninput="changeFace(4, this)" name="noseTip" min="-1.0" max="1.0"
+                value="0" step="0.01">Вниз
+            </p>
+          </li>
+          <li>
+            <p>Смещение Переносицы:</p>
+            <p>
+              Вправо<input type="range" class="slider" oninput="changeFace(5, this)" name="noseBridgeShift" min="-1.0"
+                max="1.0" value="0" step="0.01">Влево
+            </p>
+          </li>
+          <!--Нос-->
+
+          <!--Брови-->
+          <li>
+            <p>Высота Бровей:</p>
+            <p>
+              Вверх<input type="range" class="slider" oninput="changeFace(6, this)" name="eyeBrowsHeight" min="-1.0"
+                max="1.0" value="0" step="0.01">Вниз
+            </p>
+          </li>
+          <li>
+            <p>Ширина Бровей:</p>
+            <p>
+              Узкие<input type="range" class="slider" oninput="changeFace(7, this)" name="eyeBrowsWidth" min="-1.0"
+                max="1.0" value="0" step="0.01">Широкие
+            </p>
+          </li>
+          <!--Брови-->
+
+          <!--Скулы-->
+          <li>
+            <p>Высота Скул:</p>
+            <p>
+              Вверх<input type="range" class="slider" oninput="changeFace(8, this)" name="cheekBoneHeight" min="-1.0"
+                max="1.0" value="0" step="0.01">Вниз
+            </p>
+          </li>
+          <li>
+            <p>Ширина Скул:</p>
+            <p>
+              Узкие<input type="range" class="slider" oninput="changeFace(9, this)" name="cheekBoneWidth" min="-1.0"
+                max="1.0" value="0" step="0.01">Широкие
+            </p>
+          </li>
+          <!--Скулы-->
+
+          <!--Щёки-->
+          <li>
+            <p>Ширина Щек:</p>
+            <p>
+              Внутрь<input type="range" class="slider" oninput="changeFace(10, this)" name="cheeksWidth" min="-1.0"
+                max="1.0" value="0" step="0.01">Наружу
+            </p>
+          </li>
+          <!--Щёки-->
+
+          <!--Губы-->
+          <li>
+            <p>Размер губ:</p>
+            <p>
+              Широкие<input type="range" class="slider" oninput="changeFace(12, this)" name="lipsSize" min="-1.0"
+                max="1.0" value="0" step="0.01">Узкие
+            </p>
+          </li>
+          <!--Губы-->
+
+          <!--Челюсть-->
+          <li>
+            <p>Высота Челюсти:</p>
+            <p>
+              Вверх<input type="range" class="slider" oninput="changeFace(14, this)" name="jawHeight" min="-1.0"
+                max="1.0" value="0" step="0.01">Вниз
+            </p>
+          </li>
+          <li>
+            <p>Ширина Челюсти:</p>
+            <p>
+              Узкая<input type="range" class="slider" oninput="changeFace(13, this)" name="jawWidth" min="-1.0"
+                max="1.0" value="0" step="0.01">Широкая
+            </p>
+          </li>
+          <!--Челюсть-->
+
+          <!--Подбородок-->
+          <li>
+            <p>Положение Подбородка:</p>
+            <p>
+              Внутрь<input type="range" class="slider" oninput="changeFace(16, this)" name="chinPos" min="-1.0"
+                max="1.0" value="0" step="0.01">Наружу
+            </p>
+          </li>
+          <li>
+            <p>Ширина Подбородка:</p>
+            <p>
+              Узкий<input type="range" class="slider" oninput="changeFace(17, this)" name="chinWidth" min="-1.0"
+                max="1.0" value="0" step="0.01">Широкий
+            </p>
+          </li>
+          <li>
+            <p>Длина Подбородка:</p>
+            <p>
+              Маленький<input type="range" class="slider" oninput="changeFace(15, this)" name="chinLength" min="-1.0"
+                max="1.0" value="0" step="0.01">Большой
+            </p>
+          </li>
+          <li>
+            <p>Форма Подбородка:</p>
+            <p>
+              Простой<input type="range" class="slider" oninput="changeFace(18, this)" name="chinShape" min="-1.0"
+                max="1.0" value="0" step="0.01">Двойной
+            </p>
+          </li>
+          <!--Подбородок-->
+
+          <!--Шея-->
+          <li>
+            <p>Ширина Шеи:</p>
+            <p>
+              Узкая<input type="range" class="slider" oninput="changeFace(19, this)" name="neckWidth" min="-1.0"
+                max="1.0" value="0" step="0.01">Широкая
+            </p>
+          </li>
+        </ul>
+        <!--Шея-->
+        <p>
+          <button onclick="randomCharParam('Face');">СЛУЧАЙНО</button>
+          <button onclick="resetCharParam('Face');">СБРОСИТЬ</button>
+        </p>
+        <button onclick="createChar();">СОЗДАТЬ</button>
+    </section>
+
+    <section class="parameters" id="tabHair">
+      <div class="body clothes">
+        <ul>
+          <li>
+            <p>Прическа:</p>
+            <p>
+              <button onclick="changeHairStyle('-')"></button>
+              <input type="text" name="hair" value="Close Shave" disabled>
+              <button onclick="changeHairStyle('+')"></button>
+            </p>
+          </li>
+          <li>
+            <p>Цвет:</p>
+            <p>
+              <button onclick="changeHairColor('-')"></button>
+              <input type="text" name="hairColorInput" value="1" disabled>
+              <button onclick="changeHairColor('+')"></button>
+            </p>
+          </li>
+          <li>
+            <p>Оттенок:</p>
+            <p>
+              <button onclick="changeHairHighlight('-')"></button>
+              <input type="text" name="hairHighlightInput" value="1" disabled>
+              <button onclick="changeHairHighlight('+')"></button>
+            </p>
+          </li>
+          <li>
+            <p>Брови:</p>
+            <p>
+              <button onclick="changeEyeBrowsStyle('-')"></button>
+              <input type="text" name="eyeBrows" value="None" disabled>
+              <button onclick="changeEyeBrowsStyle('+')"></button>
+            </p>
+          </li>
+          <li>
+            <p>Цвет:</p>
+            <p>
+              <button onclick="changeEyeBrowsColor('-')"></button>
+              <input type="text" name="eyeBrowsColorInput" value="1" disabled>
+              <button onclick="changeEyeBrowsColor('+')"></button>
+            </p>
+          </li>
+          <li>
+            <p>Оттенок:</p>
+            <p>
+              <button onclick="changeEyeBrowsHighlight('-')"></button>
+              <input type="text" name="eyeBrowsHighLightInput" value="1" disabled>
+              <button onclick="changeEyeBrowsHighlight('+')"></button>
+            </p>
+          </li>
+          <li>
+            <p>Борода:</p>
+            <p>
+              <button onclick="changeBeardStyle('-')"></button>
+              <input type="text" name="beard" value="None" disabled>
+              <button onclick="changeBeardStyle('+')"></button>
+            </p>
+          </li>
+          <li>
+            <p>Цвет:</p>
+            <p>
+              <button onclick="changeBeardColor('-')"></button>
+              <input type="text" name="beardColorInput" value="1" disabled>
+              <button onclick="changeBeardColor('+')"></button>
+            </p>
+          </li>
+          <li>
+            <p>Оттенок:</p>
+            <p>
+              <button onclick="changeBeardHighlight('-')"></button>
+              <input type="text" name="beardHighlightInput" value="1" disabled>
+              <button onclick="changeBeardHighlight('+')"></button>
+            </p>
+          </li>
+          <li>
+            <p>На груди:</p>
+            <p>
+              <button onclick="changeChestHair('-')"></button>
+              <input type="text" name="chestHairInput" value="None" disabled>
+              <button onclick="changeChestHair('+')"></button>
+            </p>
+          </li>
+          <li>
+            <p>Цвет:</p>
+            <p>
+              <button onclick="changeChestColor('-')"></button>
+              <input type="text" name="chestHairColorInput" value="1" disabled>
+              <button onclick="changeChestColor('+')"></button>
+            </p>
+          </li>
+          <li>
+            <p>Оттенок:</p>
+            <p>
+              <button onclick="changeChestHighlight('-')"></button>
+              <input type="text" name="chestHairHighlightInput" value="1" disabled>
+              <button onclick="changeChestHighlight('+')"></button>
+            </p>
+          </li>
+        </ul>
+        <p>
+          <button onclick="randomCharParam('Hair');">СЛУЧАЙНО</button>
+          <button onclick="resetCharParam('Hair');">СБРОСИТЬ</button>
+        </p>
+        <button onclick="createChar();">СОЗДАТЬ</button>
+      </div>
+    </section>
+  </main>
+  <script src="character-creator.js"></script>
+</body>
+
+</html>
