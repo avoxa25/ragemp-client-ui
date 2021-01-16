@@ -11,6 +11,9 @@ abstract class CharacterCreatorUi {
     CharacterCreatorUi.StartTabs();
 
     CharacterCreatorUi.StartMain();
+    CharacterCreatorUi.StartClothes();
+    CharacterCreatorUi.StartFace();
+    CharacterCreatorUi.StartHair();
   }
 
   private static StartTabs(): void {
@@ -44,8 +47,70 @@ abstract class CharacterCreatorUi {
     const randomButton = form.querySelector('button[type=random]');
 
     form.addEventListener('submit', () => CharacterCreatorUi.Create());
-    form.addEventListener('reset', () => 
-    {
+    form.addEventListener('reset', () => {
+      CharacterCreatorUi.ResetForm(form);
+      CharacterCreatorUi.UpdateCharacterFromMain(form);
+    });
+    randomButton?.addEventListener('click', () => {
+      CharacterCreatorUi.RandomForm(form);
+      CharacterCreatorUi.UpdateCharacterFromMain(form);
+    });
+
+    const inputButtons = form.querySelectorAll('button[data-input-name]');
+    inputButtons.forEach((ib) => ib.addEventListener('click', () => CharacterCreatorUi.StartInputButtons(form, ib)));
+
+    const inputs = form.querySelectorAll('input:not([style*="display: none;"])');
+    inputs.forEach((i) => i.addEventListener('change', () => CharacterCreatorUi.UpdateCharacterFromMain(form)));
+  }
+
+  private static StartClothes(): void {
+    const form = document.querySelector('form#formClothes') as HTMLFormElement;
+    const randomButton = form.querySelector('button[type=random]');
+
+    form.addEventListener('submit', () => CharacterCreatorUi.Create());
+    form.addEventListener('reset', () => {
+      CharacterCreatorUi.ResetForm(form);
+      CharacterCreatorUi.UpdateCharacterFromMain(form);
+    });
+    randomButton?.addEventListener('click', () => {
+      CharacterCreatorUi.RandomForm(form);
+      CharacterCreatorUi.UpdateCharacterFromClothes(form);
+    });
+
+    const inputButtons = form.querySelectorAll('button[data-input-name]');
+    inputButtons.forEach((ib) => ib.addEventListener('click', () => CharacterCreatorUi.StartInputButtons(form, ib)));
+
+    const inputs = form.querySelectorAll('input:not([style*="display: none;"])');
+    inputs.forEach((i) => i.addEventListener('change', () => CharacterCreatorUi.UpdateCharacterFromClothes(form)));
+  }
+
+  private static StartFace(): void {
+    const form = document.querySelector('form#formFace') as HTMLFormElement;
+    const randomButton = form.querySelector('button[type=random]');
+
+    form.addEventListener('submit', () => CharacterCreatorUi.Create());
+    form.addEventListener('reset', () => {
+      CharacterCreatorUi.ResetForm(form);
+      CharacterCreatorUi.UpdateCharacterFromFace(form);
+    });
+    randomButton?.addEventListener('click', () => {
+      CharacterCreatorUi.RandomForm(form);
+      CharacterCreatorUi.UpdateCharacterFromFace(form);
+    });
+
+    const inputButtons = form.querySelectorAll('button[data-input-name]');
+    inputButtons.forEach((ib) => ib.addEventListener('click', () => CharacterCreatorUi.StartInputButtons(form, ib)));
+
+    const inputs = form.querySelectorAll('input:not([style*="display: none;"])');
+    inputs.forEach((i) => i.addEventListener('change', () => CharacterCreatorUi.UpdateCharacterFromFace(form)));
+  }
+
+  private static StartHair(): void {
+    const form = document.querySelector('form#formHair') as HTMLFormElement;
+    const randomButton = form.querySelector('button[type=random]');
+
+    form.addEventListener('submit', () => CharacterCreatorUi.Create());
+    form.addEventListener('reset', () => {
       CharacterCreatorUi.ResetForm(form);
       CharacterCreatorUi.UpdateCharacterFromMain(form);
     });
@@ -55,7 +120,7 @@ abstract class CharacterCreatorUi {
     inputButtons.forEach((ib) => ib.addEventListener('click', () => CharacterCreatorUi.StartInputButtons(form, ib)));
 
     const inputs = form.querySelectorAll('input:not([style*="display: none;"])');
-    inputs.forEach((i) => i.addEventListener('change', () => CharacterCreatorUi.UpdateCharacterFromMain(form)));
+    inputs.forEach((i) => i.addEventListener('change', () => CharacterCreatorUi.UpdateCharacterFromHair(form)));
   }
 
   private static StartInputButtons(form: HTMLFormElement, inputButton: Element): void {
@@ -84,6 +149,106 @@ abstract class CharacterCreatorUi {
   }
 
   private static UpdateCharacterFromMain(form: HTMLFormElement): void {
+    const formData = new FormData(form);
+
+    CharacterCreatorUi.character.firstName = formData.get('firstName') as string;
+    CharacterCreatorUi.character.lastName = formData.get('lastName') as string;
+
+    CharacterCreatorUi.character.gender = formData.get('gender') === 'true';
+
+    const rawFather = formData.get('father') as string;
+    CharacterCreatorUi.character.father = Number.parseInt(rawFather);
+
+    const rawMother = formData.get('mother') as string;
+    CharacterCreatorUi.character.mother = Number.parseInt(rawMother);
+
+    const rawShapeMix = formData.get('heredity') as string;
+    CharacterCreatorUi.character.shapeMix = Number.parseFloat(rawShapeMix);
+
+    const rawSkinMix = formData.get('skinTone') as string;
+    CharacterCreatorUi.character.skinMix = Number.parseFloat(rawSkinMix);
+  }
+  private static UpdateCharacterFromClothes(form: HTMLFormElement): void {
+    const formData = new FormData(form);
+
+    const rawTop = formData.get('top') as string;
+    CharacterCreatorUi.character.top = Number.parseInt(rawTop);
+
+    const rawLegs = formData.get('legs') as string;
+    CharacterCreatorUi.character.legs = Number.parseInt(rawLegs);
+
+    const rawShoes = formData.get('shoes') as string;
+    CharacterCreatorUi.character.shoes = Number.parseInt(rawShoes);
+  }
+
+  private static UpdateCharacterFromFace(form: HTMLFormElement): void {
+    const formData = new FormData(form);
+
+    const rawEyesColor = formData.get('eyesColor') as string;
+    CharacterCreatorUi.character.eyesColor = Number.parseInt(rawEyesColor);
+
+    const rawNoseWidth = formData.get('noseWidth') as string;
+    CharacterCreatorUi.character.faceFeatures[0] = Number.parseFloat(rawNoseWidth);
+
+    const rawNoseHeight = formData.get('noseHeight') as string;
+    CharacterCreatorUi.character.faceFeatures[1] = Number.parseFloat(rawNoseHeight);
+
+    const noseLength = formData.get('noseLength') as string;
+    CharacterCreatorUi.character.faceFeatures[2] = Number.parseFloat(noseLength);
+
+    const noseBridge = formData.get('noseBridge') as string;
+    CharacterCreatorUi.character.faceFeatures[3] = Number.parseFloat(noseBridge);
+
+    const noseTip = formData.get('noseTip') as string;
+    CharacterCreatorUi.character.faceFeatures[4] = Number.parseFloat(noseTip);
+
+    const noseBridgeShift = formData.get('noseBridgeShift') as string;
+    CharacterCreatorUi.character.faceFeatures[5] = Number.parseFloat(noseBridgeShift);
+
+    const rawEyeBrowsHeight = formData.get('eyeBrowsHeight') as string;
+    CharacterCreatorUi.character.faceFeatures[6] = Number.parseFloat(rawEyeBrowsHeight);
+
+    const rawEyeBrowsWidth = formData.get('eyeBrowsWidth') as string;
+    CharacterCreatorUi.character.faceFeatures[7] = Number.parseFloat(rawEyeBrowsWidth);
+
+    const rawCheekBoneHeight = formData.get('cheekBoneHeight') as string;
+    CharacterCreatorUi.character.faceFeatures[8] = Number.parseFloat(rawCheekBoneHeight);
+
+    const rawCheekBoneWidth = formData.get('cheekBoneWidth') as string;
+    CharacterCreatorUi.character.faceFeatures[9] = Number.parseFloat(rawCheekBoneWidth);
+
+    const rawCheeksWidth = formData.get('cheeksWidth') as string;
+    CharacterCreatorUi.character.faceFeatures[10] = Number.parseFloat(rawCheeksWidth);
+
+    const rawEyesSize = formData.get('eyesSize') as string;
+    CharacterCreatorUi.character.faceFeatures[11] = Number.parseFloat(rawEyesSize);
+
+    const rawLipsSize = formData.get('lipsSize') as string;
+    CharacterCreatorUi.character.faceFeatures[12] = Number.parseFloat(rawLipsSize);
+
+    const rawJawHeight = formData.get('jawHeight') as string;
+    CharacterCreatorUi.character.faceFeatures[13] = Number.parseFloat(rawJawHeight);
+
+    const rawJawWidth = formData.get('jawWidth') as string;
+    CharacterCreatorUi.character.faceFeatures[14] = Number.parseFloat(rawJawWidth);
+
+    const rawChinLength = formData.get('chinLength') as string;
+    CharacterCreatorUi.character.faceFeatures[15] = Number.parseFloat(rawChinLength);
+
+    const rawChinPos = formData.get('chinPos') as string;
+    CharacterCreatorUi.character.faceFeatures[16] = Number.parseFloat(rawChinPos);
+
+    const rawChinWidth = formData.get('chinWidth') as string;
+    CharacterCreatorUi.character.faceFeatures[17] = Number.parseFloat(rawChinWidth);
+
+    const rawChinShape = formData.get('chinShape') as string;
+    CharacterCreatorUi.character.faceFeatures[18] = Number.parseFloat(rawChinShape);
+
+    const rawNeckWidth = formData.get('neckWidth') as string;
+    CharacterCreatorUi.character.faceFeatures[19] = Number.parseFloat(rawNeckWidth);
+  }
+
+  private static UpdateCharacterFromHair(form: HTMLFormElement): void {
     const formData = new FormData(form);
 
     CharacterCreatorUi.character.firstName = formData.get('firstName') as string;
@@ -134,7 +299,6 @@ abstract class CharacterCreatorUi {
       input.value = values[nextValueIndex];
       ti.value = textValues[nextValueIndex];
     });
-    CharacterCreatorUi.UpdateCharacterFromMain(form);
   }
 
   private static Create(): void {
@@ -146,35 +310,36 @@ abstract class CharacterCreatorUi {
 CharacterCreatorUi.Start();
 
 /*
-const blemishes = ['Measles', 'Pimples', 'Spots', 'Break Out', 'Blackheads', 'Build Up', 'Pustules', 'Zits', 'Full Acne', 'Acne', 'Cheek Rash', 'Face Rash', 'Picker', 'Puberty', 'Eyesore', 'Chin Rash', 'Two Face', 'T Zone', 'Greasy', 'Marked', 'Acne Scarring', 'Full Acne Scarring', 'Cold Sores', 'Impetigo'];
-const facialHair = ['Light Stubble', 'Бальбо', 'Circle Beard', 'Goatee', 'Chin', 'Chin Fuzz', 'Pencil Chin Strap', 'Scruffy', 'Musketeer', 'Mustache', 'Trimmed Beard', 'Stubble', 'Thin Circle Beard', 'Horseshoe', 'Pencil and 'Chops', 'Chin Strap Beard', 'Balbo and Sideburns', 'Mutton Chops', 'Scruffy Beard', 'Curly', 'Curly & Deep Stranger', 'Handlebar', 'Faustic', 'Otto & Patch', 'Otto & Full Stranger', 'Light Franz', 'The Hampstead', 'The Ambrose', 'Lincoln Curtain'];
-const eyeBrows = ['Balanced', 'Fashion', 'Cleopatra', 'Quizzical', 'Femme', 'Seductive', 'Pinched', 'Chola', 'Triomphe', 'Carefree', 'Curvaceous', 'Rodent', 'Double Tram', 'Thin', 'Penciled', 'Mother Plucker', 'Straight and Narrow', 'Natural', 'Fuzzy', 'Unkempt', 'Caterpillar', 'Regular', 'Mediterranean', 'Groomed', 'Bushels', 'Feathered', 'Prickly', 'Monobrow', 'Winged', 'Triple Tram', 'Arched Tram', 'Cutouts', 'Fade Away', 'Solo Tram'];
-const ageing = ['Crow's Feet', 'First Signs', 'Middle Aged', 'Worry Lines', 'Depression', 'Distinguished', 'Aged', 'Weathered', 'Wrinkled', 'Sagging', 'Tough Life', 'Vintage', 'Retired', 'Junkie', 'Geriatric'];
-const complexion = ['Rosy Cheeks', 'Stubble Rash', 'Hot Flush', 'Sunburn', 'Bruised', 'Alchoholic', 'Patchy', 'Totem', 'Blood Vessels', 'Damaged', 'Pale', 'Ghostly'];
-const sunDamage = ['Uneven', 'Sandpaper', 'Patchy', 'Rough', 'Leathery', 'Textured', 'Coarse', 'Rugged', 'Creased', 'Cracked', 'Gritty'];
-const freckles = ['Cherub', 'All Over', 'Irregular', 'Dot Dash', 'Over the Bridge', 'Baby Doll', 'Pixie', 'Sun Kissed', 'Beauty Marks', 'Line Up', 'Modelesque', 'Occasional', 'Speckled', 'Rain Drops', 'Double Dip', 'One Sided', 'Pairs', 'Growth'];
-const chestHair = ['Natural', 'The Strip', 'The Tree', 'Hairy', 'Grisly', 'Ape', 'Groomed Ape', 'Bikini', 'Lightning Bolt', 'Reverse Lightning', 'Love Heart', 'Chestache', 'Happy Face', 'Skull', 'Snail Trail', 'Slug and Nips', 'Hairy Arms'];
-
 //Пятна, шрамы, возраст, цвет, веснушки, родинки //цвета сделать
 
 const tops = [
-  //female
-  [{ ID: 45, Name: 'Кофта' }, { ID: 49, Name: 'Футболка' }, { ID: 26, Name: 'Блузка' }],
-  //male
-  [{ ID: 111, Name: 'Водолазка' }, { ID: 146, Name: 'Футболка' }, { ID: 241, Name: 'Рубашка Поло' }]
-];
-const legs = [
-  //female
-  [{ ID: 4, Name: 'Джинсы' }, { ID: 8, Name: 'Юбка' }, { ID: 25, Name: 'Шорты' }],
-  //male
-  [{ ID: 1, Name: 'Джинсы' }, { ID: 9, Name: 'Джоггеры' }, { ID: 6, Name: 'Шорты' }]
-];
-const shoes = [
-  //female
-  [{ ID: 3, Name: 'Кеды' }, { ID: 33, Name: 'Сникеры' }, { ID: 101, Name: 'Ботинки' }],
-  //male
-  [{ ID: 1, Name: 'Кеды' }, { ID: 26, Name: 'Сникеры' }, { ID: 97, Name: 'Ботинки' }]
-];
+      //female
+      [{ ID: 45, Name: 'Кофта' }, { ID: 49, Name: 'Футболка' }, { ID: 26, Name: 'Блузка' }],
+      //male
+      [{ ID: 111, Name: 'Водолазка' }, { ID: 146, Name: 'Футболка' }, { ID: 241, Name: 'Рубашка Поло' }]
+    ];
+    const legs = [
+      //female
+      [{ ID: 4, Name: 'Джинсы' }, { ID: 8, Name: 'Юбка' }, { ID: 25, Name: 'Шорты' }],
+      //male
+      [{ ID: 1, Name: 'Джинсы' }, { ID: 9, Name: 'Джоггеры' }, { ID: 6, Name: 'Шорты' }]
+    ];
+    const shoes = [
+      //female
+      [{ ID: 3, Name: 'Кеды' }, { ID: 33, Name: 'Сникеры' }, { ID: 101, Name: 'Ботинки' }],
+      //male
+      [{ ID: 1, Name: 'Кеды' }, { ID: 26, Name: 'Сникеры' }, { ID: 97, Name: 'Ботинки' }]
+    ];
+
+    const blemishes = ["Measles", "Pimples", "Spots", "Break Out", "Blackheads", "Build Up", "Pustules", "Zits", "Full Acne", "Acne", "Cheek Rash", "Face Rash", "Picker", "Puberty", "Eyesore", "Chin Rash", "Two Face", "T Zone", "Greasy", "Marked", "Acne Scarring", "Full Acne Scarring", "Cold Sores", "Impetigo"];
+    const facialHair = ["Light Stubble", "Бальбо", "Circle Beard", "Goatee", "Chin", "Chin Fuzz", "Pencil Chin Strap", "Scruffy", "Musketeer", "Mustache", "Trimmed Beard", "Stubble", "Thin Circle Beard", "Horseshoe", "Pencil and Chops", "Chin Strap Beard", "Balbo and Sideburns", "Mutton Chops", "Scruffy Beard", "Curly", "Curly & Deep Stranger", "Handlebar", "Faustic", "Otto & Patch", "Otto & Full Stranger", "Light Franz", "The Hampstead", "The Ambrose", "Lincoln Curtain"];
+    const eyeBrows = ["Balanced", "Fashion", "Cleopatra", "Quizzical", "Femme", "Seductive", "Pinched", "Chola", "Triomphe", "Carefree", "Curvaceous", "Rodent", "Double Tram", "Thin", "Penciled", "Mother Plucker", "Straight and Narrow", "Natural", "Fuzzy", "Unkempt", "Caterpillar", "Regular", "Mediterranean", "Groomed", "Bushels", "Feathered", "Prickly", "Monobrow", "Winged", "Triple Tram", "Arched Tram", "Cutouts", "Fade Away", "Solo Tram"];
+    const ageing = ["Crow's Feet", "First Signs", "Middle Aged", "Worry Lines", "Depression", "Distinguished", "Aged", "Weathered", "Wrinkled", "Sagging", "Tough Life", "Vintage", "Retired", "Junkie", "Geriatric"];
+    const complexion = ["Rosy Cheeks", "Stubble Rash", "Hot Flush", "Sunburn", "Bruised", "Alchoholic", "Patchy", "Totem", "Blood Vessels", "Damaged", "Pale", "Ghostly"];
+    const sunDamage = ["Uneven", "Sandpaper", "Patchy", "Rough", "Leathery", "Textured", "Coarse", "Rugged", "Creased", "Cracked", "Gritty"];
+    const freckles = ["Cherub", "All Over", "Irregular", "Dot Dash", "Over the Bridge", "Baby Doll", "Pixie", "Sun Kissed", "Beauty Marks", "Line Up", "Modelesque", "Occasional", "Speckled", "Rain Drops", "Double Dip", "One Sided", "Pairs", "Growth"];
+    const chestHair = ["Natural", "The Strip", "The Tree", "Hairy", "Grisly", "Ape", "Groomed Ape", "Bikini", "Lightning Bolt", "Reverse Lightning", "Love Heart", "Chestache", "Happy Face", "Skull", "Snail Trail", "Slug and Nips", "Hairy Arms"];
+
 
 const hairList = [
   // female
@@ -262,8 +427,6 @@ const hairList = [
     { ID: 73, Name: 'Military Buzzcut', Collection: 'mpgunrunning_overlays', Overlay: 'MP_Gunrunning_Hair_M_001_M' }
   ]
 ];
-
-const eyeColors = ['Green', 'Emerald', 'Light Blue', 'Ocean Blue', 'Light Brown', 'Dark Brown', 'Hazel', 'Dark Gray', 'Light Gray', 'Pink', 'Yellow', 'Purple', 'Blackout', 'Shades of Gray', 'Tequila Sunrise', 'Atomic', 'Warp', 'ECola', 'Space Ranger', 'Ying Yang', 'Bullseye', 'Lizard', 'Dragon', 'Extra Terrestrial', 'Goat', 'Smiley', 'Possessed', 'Demon', 'Infected', 'Alien', 'Undead', 'Zombie'];
 
 ///////////////////////////////
 
