@@ -17,6 +17,10 @@ export class Character {
   public faceFeatures: number[];
 
   public blemishes: number;
+  public ageing: number;
+  public complexion: number;
+  public sunDamage: number;
+  public freckles: number;
 
   public hair: number;
   public hairColor: number;
@@ -49,6 +53,10 @@ export class Character {
     this.shoes = 0;
     this.faceFeatures = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
     this.blemishes = 0;
+    this.ageing = 0;
+    this.complexion = 0;
+    this.sunDamage = 0;
+    this.freckles = 0;
     this.hair = 0;
     this.hairColor = 0;
     this.hairHighLight = 0;

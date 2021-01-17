@@ -5,20 +5,25 @@ import { Character } from './character';
 abstract class CharacterCreator {
   private static _browser: BrowserMp;
   private static _camera: CameraMp;
+  private static character: Character;
 
   public static Start(): void {
     const camera = new mp.Vector3(347, -1007.5515, -99.0);
     const cameraLookAt = new mp.Vector3(-0.0, 0.0, -93.0);
+    mp.gui.cursor.show(true, true);
     CharacterCreator._camera = mp.cameras.new('default', camera, cameraLookAt, 40);
 
     mp.events.add(RemoteEvents.CharacterCreatorOpen, () => CharacterCreator.Open());
-    mp.events.add(LocalEvents.CharacterCreatorCreateClose, (c: Character) => CharacterCreator.Close(c));
+    mp.events.add(LocalEvents.CharacterCreatorCreateClose, (c: string) => CharacterCreator.Close(c));
 
-    mp.events.add(LocalEvents.CharacterCreatorChangeGender, (c: Character) => CharacterCreator.ChangeGender(c));
-    mp.events.add(LocalEvents.CharacterCreatorUpdateMain, (c: Character) => CharacterCreator.UpdateMain(c));
-    mp.events.add(LocalEvents.CharacterCreatorUpdateClothes, (c: Character) => CharacterCreator.UpdateClothes(c));
-    mp.events.add(LocalEvents.CharacterCreatorUpdateFace, (c: Character) => CharacterCreator.UpdateFace(c));
-    mp.events.add(LocalEvents.CharacterCreatorUpdateHair, (c: Character) => CharacterCreator.UpdateHair(c));
+    mp.events.add(LocalEvents.CharacterCreatorChangeGender, (c: string) => CharacterCreator.ChangeGender(c));
+    mp.events.add(LocalEvents.CharacterCreatorUpdateMain, (c: string) => CharacterCreator.UpdateMain(c));
+    mp.events.add(LocalEvents.CharacterCreatorUpdateClothes, (c: string) => {
+      mp.console.logInfo(c.toString());
+      CharacterCreator.UpdateClothes(c)
+    });
+    mp.events.add(LocalEvents.CharacterCreatorUpdateFace, (c: string) => CharacterCreator.UpdateFace(c));
+    mp.events.add(LocalEvents.CharacterCreatorUpdateHair, (c: string) => CharacterCreator.UpdateHair(c));
   }
 
   private static Open(): void {
@@ -38,8 +43,8 @@ abstract class CharacterCreator {
     mp.game.cam.renderScriptCams(true, false, 0, true, false);
   }
 
-  private static Close(character : Character): void {
-    mp.events.callRemote(RemoteEvents.CharacterCreatorCreateClose, character);
+  private static Close(characterJSON: string): void {
+    mp.events.callRemote(RemoteEvents.CharacterCreatorCreateClose, characterJSON);
 
     CharacterCreator._browser.destroy();
 
@@ -57,48 +62,67 @@ abstract class CharacterCreator {
     mp.game.ui.displayRadar(true);
   }
 
-  private static ChangeGender(character : Character): void {
-    mp.events.callRemote(RemoteEvents.CharacterCreatorChangeGender, character.gender);
+  private static ChangeGender(characterJSON: string): void {
+
+    // TODO: Sync Changing Gender with clothes
+
+    CharacterCreator.character = JSON.parse(characterJSON);
+    mp.events.callRemote(RemoteEvents.CharacterCreatorChangeGender, CharacterCreator.character.gender);
   }
 
-  private static UpdateMain(character: Character): void {
+  private static UpdateMain(characterJSON: string): void {
+    CharacterCreator.character = JSON.parse(characterJSON);
+
     mp.players.local.setHeadBlendData(
-      character.father,
-      character.mother,
+      CharacterCreator.character.father,
+      CharacterCreator.character.mother,
       0,
-      character.father,
-      character.mother,
+      CharacterCreator.character.father,
+      CharacterCreator.character.mother,
       0,
-      character.shapeMix,
-      character.skinMix,
+      CharacterCreator.character.shapeMix,
+      CharacterCreator.character.skinMix,
       0.0,
       false);
   }
 
-  private static UpdateClothes(character: Character): void {
+  private static UpdateClothes(characterJSON: string): void {
+    CharacterCreator.character = JSON.parse(characterJSON);
+
     mp.players.local.setComponentVariation(3, 15, 0, 2);
-    mp.players.local.setComponentVariation(4, character.legs, 0, 2);
-    mp.players.local.setComponentVariation(6, character.shoes, 0, 2);
-    mp.players.local.setComponentVariation(11, character.top, 0, 2);
+    mp.players.local.setComponentVariation(4, CharacterCreator.character.legs, 0, 2);
+    mp.players.local.setComponentVariation(6, CharacterCreator.character.shoes, 0, 2);
+    mp.players.local.setComponentVariation(11, CharacterCreator.character.top, 0, 2);
   }
 
-  private static UpdateFace(character: Character): void {
-    character.faceFeatures.forEach((ff, i) => mp.players.local.setFaceFeature(i, ff));
-    mp.players.local.setEyeColor(character.eyesColor);
+  private static UpdateFace(characterJSON: string): void {
+    CharacterCreator.character = JSON.parse(characterJSON);
+
+    mp.players.local.setHeadOverlay(0, CharacterCreator.character.blemishes, 1, 0, 0);
+    mp.players.local.setHeadOverlay(3, CharacterCreator.character.ageing, 1, 0, 0);
+    mp.players.local.setHeadOverlay(6, CharacterCreator.character.complexion, 1, 0, 0);
+    mp.players.local.setHeadOverlay(7, CharacterCreator.character.sunDamage, 1, 0, 0);
+    mp.players.local.setHeadOverlay(9, CharacterCreator.character.freckles, 1, 0, 0);
+
+    CharacterCreator.character.faceFeatures.forEach((ff, i) => mp.players.local.setFaceFeature(i, ff));
+    mp.players.local.setEyeColor(CharacterCreator.character.eyesColor);
   }
 
-  private static UpdateHair(character: Character): void {
-    mp.players.local.setHairColor(character.hairColor, character.hairHighLight);
+  private static UpdateHair(characterJSON: string): void {
+    CharacterCreator.character = JSON.parse(characterJSON);
 
-    character.beard = character.beard === -1 ? 255 : character.beard;
-    mp.players.local.setHeadOverlay(1, character.beard, 1, character.beardColor, character.beardSecondaryColor);
+    mp.players.local.setComponentVariation(2, CharacterCreator.character.hair, 0, 2);
+    mp.players.local.setHairColor(CharacterCreator.character.hairColor, CharacterCreator.character.hairHighLight);
 
-    character.eyeBrows = character.eyeBrows === -1 ? 255 : character.eyeBrows;
-    mp.players.local.setHeadOverlay(2, character.eyeBrows, 1, character.eyeBrowsColor, character.eyeBrowsSecondaryColor);
+    CharacterCreator.character.beard = CharacterCreator.character.beard === -1 ? 255 : CharacterCreator.character.beard;
+    mp.players.local.setHeadOverlay(1, CharacterCreator.character.beard, 1, CharacterCreator.character.beardColor, CharacterCreator.character.beardSecondaryColor);
 
-    character.chestHair = character.chestHair === -1 ? 255 : character.chestHair;
-    mp.players.local.setHeadOverlay(10, character.chestHair, 1, character.chestHairColor, character.chestHairSecondaryColor);
+    CharacterCreator.character.eyeBrows = CharacterCreator.character.eyeBrows === -1 ? 255 : CharacterCreator.character.eyeBrows;
+    mp.players.local.setHeadOverlay(2, CharacterCreator.character.eyeBrows, 1, CharacterCreator.character.eyeBrowsColor, CharacterCreator.character.eyeBrowsSecondaryColor);
+
+    CharacterCreator.character.chestHair = CharacterCreator.character.chestHair === -1 ? 255 : CharacterCreator.character.chestHair;
+    mp.players.local.setHeadOverlay(10, CharacterCreator.character.chestHair, 1, CharacterCreator.character.chestHairColor, CharacterCreator.character.chestHairSecondaryColor);
   }
 };
 
-CharacterCreator.Start();
+CharacterCreator.Start();  
