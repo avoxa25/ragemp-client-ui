@@ -4,8 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="autoroom.js"></script>
   <link rel="stylesheet" href="autoroom.css">
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=PT+Sans" />
 </head>
@@ -18,27 +16,27 @@
     <main>
       <ul class="params">
         <li>
-          <p>Максимальная скорость: 
+          <p>Максимальная скорость:
             <span id="car_maxSpeed">265 км/ч</span>
           </p>
         </li>
         <li>
-          <p>Разгон (0-100 км/ч): 
+          <p>Разгон (0-100 км/ч):
             <span id="car_racing">4,3 сек</span>
           </p>
         </li>
         <li>
-          <p>Расход топлива (на 100 км): 
+          <p>Расход топлива (на 100 км):
             <span id="car_сons">30 л</span>
           </p>
         </li>
         <li>
-          <p>Объем бака: 
+          <p>Объем бака:
             <span id="car_fuelBank_capacity">1000 л</span>
           </p>
         </li>
         <li>
-          <p>Объем багажника: 
+          <p>Объем багажника:
             <span id="car_bagage_capacity">200 л</span>
           </p>
         </li>
@@ -71,10 +69,11 @@
           <button class="darkblue" onclick="changeColor('0000fa');"></button>
         </li>
       </ul>
-      <p>Цена: 
+      <p>
+        Цена:
         <span class="green" id="carPrice">$ 10,000.00</span>
       </p>
-      <p>Ваш баланс: 
+      <p>Ваш баланс:
         <span id="charBalance">$ 12,000.00</span>
       </p>
       <button class="car-buy" id="carBuy" onclick="buyCar(car);">Купить</button>
@@ -107,8 +106,9 @@
     </ul>
   </section>
 
-  <p>Автосалон<br>
-    <span id="room_name">DreamCars</span>
+  <p>
+    Автосалон<br>
+    <span id="roomName">DreamCars</span>
   </p>
 
   <div class="switch">
@@ -116,6 +116,8 @@
     <button onlick="switchTo('right');"></button>
   </div>
 
+
+<script src="autoroom.js"></script>
 </body>
 
 </html>
