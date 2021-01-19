@@ -12,7 +12,170 @@
 </head>
 
 <body>
-  
+  <section class="container small hide">
+    <header>
+      <img src="assets/maze-bank.png" width="45px" height="59px">
+      <p>
+        <span class="red">MAZE</span>
+        BANK
+      </p>
+    </header>
+    <main>
+
+      <section class="card-issue hide" id="cardIssue">
+        <p class="message">
+          Вам требуется оформить карту!
+        </p>
+        <div>
+          <button class="red">Оформить</button>
+          <button>Отмена</button>
+        </div>
+      </section>
+
+      <section class="card-selection hide" id="cardSelection">
+        <p class="message">
+          Выберите карту для оформления
+        </p>
+        <div class="selector">
+          <button class="arrow-left" id="cardPrevious"></button>
+          <div class="card platinum" id="cardType">
+            <p>world debit</p>
+            <p class="card-type" id="cardTypeText">ПЛАТИНОВАЯ</p>
+            <p class="card-number" id="cardNumber">
+              1234&nbsp;0000&nbsp;5678&nbsp;0000&nbsp;9999
+            </p>
+          </div>
+          <button class="arrow-right" id="cardNext"></button>
+        </div>
+        <p class="card-cost">
+          Стоимость:
+          <span class="red">$</span>
+          <span id="cardCost">25,000.00</span>
+        </p>
+        <p class="card-privilege">
+          Доступно для
+          <span class="red" id="cardPrivilege">PREMIUM</span>
+        </p>
+        <div>
+          <button class="red">Продолжить</button>
+          <button>Отменить</button>
+        </div>
+      </section>
+    </main>
+  </section>
+
+  <section class="container large">
+    <header>
+      <img src="assets/maze-bank.png" width="45px" height="59px">
+      <p>
+        <span class="red">MAZE</span>
+        BANK
+      </p>
+    </header>
+    <main>
+      <section class="bank-menu" id="bankMenu">
+        <aside>
+          <div class="card gold" id="cardType">
+            <p>world debit</p>
+            <p class="card-type" id="cardTypeText">ЗОЛОТАЯ</p>
+            <p class="card-number" id="cardNumber">
+              1234&nbsp;0000&nbsp;5678&nbsp;0000&nbsp;9999
+            </p>
+          </div>
+          <ul>
+            <li>
+              <button class="tablink active" id="buttonReplenishment" data-tab="tabReplenishment">Пополнить
+                карту</button>
+            </li>
+            <li>
+              <button class="tablink" id="buttonCashOut" data-tab="tabCashOut">Снять средства</button>
+            </li>
+            <li>
+              <button class="tablink" id="buttonTransfer" data-tab="tabTransfer">Перевод на карту</button>
+            </li>
+            <li>
+              <button class="tablink" id="buttonFines" data-tab="tabFines">Оплата штрафов</button>
+            </li>
+            <li>
+              <button class="tablink" id="buttonTaxes" data-tab="tabTaxes">Оплата налогов</button>
+            </li>
+            <li>
+              <button class="tablink" id="buttonPhone" data-tab="tabPhone">Пополнить телефон</button>
+            </li>
+          </ul>
+        </aside>
+        <div class="tab-content" id="tabReplenishment">
+          <p class="message">
+            Введите сумму, которую хотите пополнить
+          </p>
+          <input type="number" placeholder="Введите сумму">
+          <button class="red">Продолжить</button>
+        </div>
+        <div class="tab-content" id="tabCashOut">
+          <p class="message two-lines">
+            Введите сумму, которую хотите снять<br>
+            Ваш тариф имеет ограничение в
+            <span class="red">$</span>
+            <span id="maxValue">50,000.00</span>
+          </p>
+          <input type="number" placeholder="Введите сумму">
+          <button class="red">Продолжить</button>
+        </div>
+        <div class="tab-content active" id="tabTransfer">
+          <p class="message two-lines">
+            Введите сумму, которую хотите перевести<br>
+            Ваш тариф имеет ограничение в
+            <span class="red">$</span>
+            <span id="maxValue">50,000.00</span>
+          </p>
+          <input type="number" placeholder="Введите сумму (комиссия 5%)">
+          <input type="number" placeholder="Введите карту получателя">
+          <button class="red">Продолжить</button>
+        </div>
+        <div class="tab-content fines" id="tabFines">
+          <p class="message fines">
+            Здесь Вы можете оплатить штрафы
+          </p>
+          <ul class="fines-list">
+            <li>
+              <p>Нарушение ПДД 22.1</p>
+              <button class="red">Оплатить</button>
+            </li>
+          </ul>
+          <button class="red pay-all">Оплатить все</button>
+        </div>
+        <div class="tab-content taxes" id="tabTaxes">
+          <p class="message taxes">
+            Здесь Вы можете оплатить штрафы
+          </p>
+          <ul class="taxes-list">
+            <li>
+              <p>Налог на имущество №254235</p>
+              <button class="red">Оплатить</button>
+            </li>
+            <li>
+              <p>Налог на имущество №123432</p>
+              <button class="red">Оплатить</button>
+            </li>
+          </ul>
+          <button class="red pay-all">Оплатить все</button>
+        </div>
+        </div>
+        <div class="tab-content" id="tabPhone">
+          <p class="message two-lines">
+            Введите сумму, которую хотите перевести<br>
+            Ваш тариф имеет ограничение в
+            <span class="red">$</span>
+            <span id="maxValue">50,000.00</span>
+          </p>
+          <input type="number" placeholder="Введите сумму">
+          <input type="number" placeholder="Введите номер получателя">
+          <button class="red">Продолжить</button>
+        </div>
+      </section>
+    </main>
+  </section>
+
 
 
   <script src="bank-menu.js"></script>

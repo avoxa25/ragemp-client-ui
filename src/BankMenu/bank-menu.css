@@ -1,0 +1,549 @@
+* {
+  box-sizing: border-box;
+
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+
+  user-select: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+  margin: 0;
+}
+
+P,
+UL,
+LI {
+  margin: 0;
+  padding: 0;
+
+  list-style-type: none;
+}
+
+BUTTON {
+  width: 130px;
+  height: 40px;
+
+  border: 0;
+  border-radius: 44px;
+
+  background-color: rgba(0, 0, 0, .7);
+
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+  outline: none;
+
+  transition: box-shadow .15s ease-in-out;
+}
+
+BUTTON.red {
+  background: linear-gradient(270deg, #BB2828 0%, #930000 100%);
+}
+
+BUTTON:hover,
+BUTTON:focus,
+BUTTON.active {
+  background: linear-gradient(270deg, #BB2828 0%, #930000 100%);
+
+  box-shadow: 0px 0px 4px #BC1A1A;
+}
+
+INPUT {
+  width: 260px;
+  height: 35px;
+
+  margin: 0;
+  padding: 0 10px 0 10px;
+
+  background-color: rgba(0, 0, 0, .8);
+  border: 0;
+  border-radius: 5px;
+
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+
+  outline: none;
+  transition: color .15s ease-in-out;
+}
+
+INPUT:focus {
+  color: #930000;
+}
+
+section.hide {
+  display: none;
+}
+
+.container.small,
+.container.large {
+  width: 680px;
+  height: 450px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  background-color: rgba(0, 0, 0, .33);
+
+  border-radius: 10px;
+
+  transform: translate(-50%, -50%);
+}
+
+.container.large {
+  width: 915px;
+  height: 590px;
+}
+
+header {
+  width: 100%;
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding: 0 20px 0 20px;
+
+  background-color: rgba(0, 0, 0, .33);
+  background-image: url("assets/h-line.svg");
+  background-position: 50% 0%;
+  background-repeat: no-repeat;
+
+  border-radius: 10px 10px 0 0;
+
+}
+
+header>p {
+  margin-left: 10px;
+}
+
+header p,
+header p>span {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+p.red,
+p>span.red {
+  color: #BB1A1A;
+}
+
+main {
+  width: 100%;
+  height: 380px;
+
+  padding: 20px;
+}
+
+.message {
+  position: relative;
+
+  margin-bottom: 15px;
+
+  font-size: 16px;
+  text-indent: 20px;
+}
+
+.message::before {
+  content: "";
+
+  width: 15px;
+  height: 15px;
+
+  position: absolute;
+  top: 3px;
+  left: 0;
+
+  background-image: url("assets/info.svg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.card-issue {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-issue button.red {
+  margin-right: 10px;
+}
+
+.card {
+  width: 220px;
+  height: 120px;
+
+  position: relative;
+
+  background-position: 0% 50%;
+  background-repeat: no-repeat;
+
+  border-radius: 7px;
+}
+
+.card::before {
+  content: "mazebank";
+
+  width: 61px;
+  height: 15px;
+
+  position: absolute;
+  top: 10px;
+  right: 15px;
+
+  background-image: url("assets/mazebank_vector_small.svg");
+  background-position: 0% 50%;
+  background-repeat: no-repeat;
+
+  font-size: 10px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.card::after {
+  content: "";
+
+  width: 27px;
+  height: 27px;
+
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+
+  background-image: url("assets/mazebank_vector.svg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.card>p:first-of-type {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+
+  color: rgba(255, 255, 255, .5);
+  font-size: 10px;
+  font-weight: 300;
+}
+
+.card>p:first-of-type>span {
+  color: rgba(255, 255, 255, .5);
+  font-weight: 600;
+}
+
+.card-type {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  transform: translate(-50%, 0%);
+}
+
+.card-number {
+  width: auto;
+
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+
+  text-align: center;
+
+  transform: translate(-50%, 50%);
+}
+
+.card-number::before {
+  content: "PLAYER NAME";
+
+  position: absolute;
+  top: -8px;
+  left: 0;
+
+  font-size: 6px;
+  font-weight: 400;
+}
+
+.card.classic {
+  background-image: url("assets/card-mazebank-bg.png"), linear-gradient(89.46deg, #930000 0.43%, #C01112 99.53%);
+}
+
+.card.silver {
+  background-image: url("assets/card-mazebank-bg.png"), linear-gradient(89.46deg, #8F8F8F 0.43%, #B7B7B7 99.53%);
+}
+
+.card.gold {
+  background-image: url("assets/card-mazebank-bg.png"), linear-gradient(89.46deg, #B98500 0.43%, #ECAA00 99.53%);
+}
+
+.card.platinum {
+  background-image: url("assets/card-mazebank-bg.png"), linear-gradient(89.46deg, #282828 0.43%, #2A2A2A 99.53%);
+}
+
+button.arrow-left,
+button.arrow-right {
+  width: 24px;
+  height: 31px;
+
+  border-radius: 0;
+
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url("assets/arrow-left.svg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+button.arrow-right {
+  background-image: url("assets/arrow-right.svg");
+}
+
+button.arrow-left:hover,
+button.arrow-right:hover,
+button.arrow-left:focus,
+button.arrow-right:focus {
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.selector {
+  width: 375px;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.card-cost,
+.card-privilege {
+  position: relative;
+
+  font-size: 16px;
+  font-weight: 400;
+  text-indent: 20px;
+
+  margin-top: -10px;
+}
+
+.card-privilege {
+  margin-top: -20px;
+}
+
+.card-cost::before,
+.card-privilege::before {
+  content: "";
+
+  width: 17px;
+  height: 17px;
+
+  position: absolute;
+  top: 2px;
+  left: 0;
+
+  background-image: url("assets/cost.svg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.card-privilege::before {
+  background-image: url("assets/lock.svg");
+}
+
+.card-selection {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.container.large>header {
+  background-image: url("assets/h-line-large.svg")
+}
+
+.container.large>main {
+  height: 520px;
+
+  padding: 0;
+}
+
+.bank-menu {
+  height: 100%;
+
+  display: flex;
+}
+
+.bank-menu>aside {
+  width: 260px;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 20px;
+
+  background-image: url("assets/v-line-large.svg");
+  background-position: 100% 50%;
+  background-repeat: no-repeat;
+}
+
+.bank-menu>aside>ul,
+.bank-menu>aside>ul>li,
+.bank-menu>aside>ul>li>button {
+  width: 100%;
+  height: 30px;
+
+  border-radius: 5px;
+}
+
+.bank-menu>aside>ul>li {
+  margin-top: 10px;
+}
+
+.bank-menu>aside>ul>li:first-child {
+  margin-top: 15px;
+}
+
+.bank-menu>aside>ul>li:nth-child(3) {
+  margin-top: 35px;
+}
+
+.tab-content {
+  width: 655px;
+  height: 100%;
+
+  position: relative;
+
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab-content.active {
+  display: flex;
+
+  animation: fadeIn .5s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+input+button,
+input+input {
+  margin-top: 10px;
+}
+
+.message.two-lines,
+.message.two-lines>span {
+  font-size: 12px;
+  text-align: center;
+}
+
+.message.two-lines::first-line {
+  font-size: 16px;
+}
+
+.message.fines,
+.message.taxes {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+
+  transform: translate(-50%, 0%);
+}
+
+.tab-content.fines,
+.tab-content.taxes {
+  justify-content: flex-start;
+
+  padding: 60px 20px 80px 20px;
+}
+
+.tab-content.fines>button.pay-all,
+.tab-content.taxes>button.pay-all {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+
+ul.fines-list,
+ul.taxes-list {
+  width: 100%;
+}
+
+ul.fines-list>li,
+ul.taxes-list>li {
+  width: 100%;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 10px;
+}
+
+ul.fines-list>li:last-of-type,
+ul.taxes-list>li:last-of-type {
+  margin-bottom: 0;
+}
+
+ul.fines-list>li>p,
+ul.taxes-list>li>p {
+  max-width: 450px;
+
+  position: relative;
+
+  padding: 5px;
+
+  background-color: rgba(0, 0, 0, .33);
+  border-radius: 5px;
+
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  text-indent: 15px;
+}
+
+ul.fines-list>li>p::before,
+ul.taxes-list>li>p::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+
+  position: absolute;
+  top: 4px;
+  left: 0;
+
+  background-image: url("assets/fine.svg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+ul.taxes-list>li>p::before {
+  background-image: url("assets/tax.svg");
+}
