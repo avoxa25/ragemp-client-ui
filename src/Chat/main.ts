@@ -11,7 +11,7 @@ abstract class Chat {
   }
 
   private static OnChatCursorToggle(hidden: boolean): void {
-    mp.gui.cursor.show(!hidden, !hidden)
+    mp.gui.cursor.show(!hidden, !hidden);
   }
 };
 
