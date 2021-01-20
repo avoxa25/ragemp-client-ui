@@ -1,13 +1,22 @@
+const Keys = {
+  LeftArrow: 0x25,
+  RightArrow: 0x27
+};
+
 abstract class Speedometer {
   private static browser: BrowserMp;
   private static vehicle: VehicleMp;
   private static updaterIntervalId: number;
   private static blinkIntervalId: number;
-  private static isBlinking: boolean = false;
-  private static leftTurn: boolean = false;
-  private static rightTurn: boolean = false;
+  private static isBlinking: boolean;
+  private static leftTurn: boolean;
+  private static rightTurn: boolean;
 
   public static Start(): void {
+    Speedometer.isBlinking = false;
+    Speedometer.leftTurn = false;
+    Speedometer.rightTurn = false;
+
     mp.events.add(RageEnums.EventKey.PLAYER_ENTER_VEHICLE, (v: VehicleMp, s: number) => Speedometer.OnPlayerEnterVehicle(v, s));
     mp.events.add(RageEnums.EventKey.PLAYER_LEAVE_VEHICLE, () => Speedometer.OnPlayerExitVehicle());
 
@@ -21,16 +30,16 @@ abstract class Speedometer {
     Speedometer.vehicle = vehicle;
     Speedometer.updaterIntervalId = setInterval(() => Speedometer.UpdateSpeedometer(), 100);
 
-    mp.keys.bind(0x25, true, Speedometer.LeftTurn);
-    mp.keys.bind(0x27, true, Speedometer.RightTurn);
+    mp.keys.bind(Keys.LeftArrow, true, Speedometer.LeftTurn);
+    mp.keys.bind(Keys.RightArrow, true, Speedometer.RightTurn);
 
     Speedometer.browser.execute(`window.speedometerUi.Show();`);
   }
 
   private static OnPlayerExitVehicle(): void {
     clearInterval(Speedometer.updaterIntervalId);
-    mp.keys.unbind(0x25, true, Speedometer.LeftTurn);
-    mp.keys.unbind(0x27, true, Speedometer.RightTurn);
+    mp.keys.unbind(Keys.LeftArrow, true, Speedometer.LeftTurn);
+    mp.keys.unbind(Keys.RightArrow, true, Speedometer.RightTurn);
 
     if (Speedometer.isBlinking) {
       Speedometer.StopBlinking();
