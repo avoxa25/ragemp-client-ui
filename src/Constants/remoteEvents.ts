@@ -1,8 +1,8 @@
 export enum RemoteEvents {
-  ChatSendMessage = 'ChatSendMessage',
+  ChatSendMessage = 'Remote:Chat:SendMessage',
   CharacterCreatorOpen = 'Remote:CharacterCreator:Open',
-  CharacterCreatorCreate = 'CharacterCreatorCreate',
-  CharacterCreatorClose = 'CharacterCreatorClose',
-  CharacterCreatorChangeGender = 'CharacterCreatorChangeGender',
-  CharacterCreatorChangeGenderComplete = 'CharacterCreatorChangeGenderComplete'
+  CharacterCreatorCreate = 'Remote:CharacterCreator:Create',
+  CharacterCreatorClose = 'Remote:CharacterCreator:Close',
+  CharacterCreatorChangeGender = 'Remote:CharacterCreator:ChangeGender',
+  CharacterCreatorChangeGenderComplete = 'Remote:CharacterCreatorChange:GenderComplete'
 };

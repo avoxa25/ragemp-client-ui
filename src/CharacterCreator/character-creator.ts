@@ -4,7 +4,7 @@ import { CharacterCreatorData } from './character-creator-data';
 
 abstract class CharacterCreatorUi {
   private static character: Character;
-  private static characterJSON: string;
+  private static characterJson: string;
 
   public static Start(): void {
     CharacterCreatorUi.character = new Character();
@@ -42,21 +42,21 @@ abstract class CharacterCreatorUi {
       }
     }
 
-    CharacterCreatorUi.characterJSON = JSON.stringify(CharacterCreatorUi.character);
-    if (selectedTabId === 'tabHair') mp.events.call(LocalEvents.CharacterCreatorTabHair, true, CharacterCreatorUi.characterJSON);
-    else mp.events.call(LocalEvents.CharacterCreatorTabHair, false, CharacterCreatorUi.characterJSON);
+    CharacterCreatorUi.characterJson = JSON.stringify(CharacterCreatorUi.character);
+    if (selectedTabId === 'tabHair') mp.events.call(LocalEvents.CharacterCreatorTabHair, true, CharacterCreatorUi.characterJson);
+    else mp.events.call(LocalEvents.CharacterCreatorTabHair, false, CharacterCreatorUi.characterJson);
   }
 
   private static StartMain(): void {
     const form = document.querySelector('form#formMain') as HTMLFormElement;
-    const randomButton = form.querySelector('button[id=random]');
+    const randomButton = form.querySelector('button[id=random]') as HTMLButtonElement;
 
     form.addEventListener('submit', () => CharacterCreatorUi.Create());
     form.addEventListener('reset', () => {
       CharacterCreatorUi.ResetForm(form);
       CharacterCreatorUi.UpdateCharacterFromMain(form);
     });
-    randomButton?.addEventListener('click', () => {
+    randomButton.addEventListener('click', () => {
       CharacterCreatorUi.RandomForm(form);
       CharacterCreatorUi.UpdateCharacterFromMain(form);
     });
@@ -70,14 +70,14 @@ abstract class CharacterCreatorUi {
 
   private static StartClothes(): void {
     const form = document.querySelector('form#formClothes') as HTMLFormElement;
-    const randomButton = form.querySelector('button[id=random]');
+    const randomButton = form.querySelector('button[id=random]') as HTMLButtonElement;
 
     form.addEventListener('submit', () => CharacterCreatorUi.Create());
     form.addEventListener('reset', () => {
       CharacterCreatorUi.ResetForm(form);
       CharacterCreatorUi.UpdateCharacterFromClothes(form);
     });
-    randomButton?.addEventListener('click', () => {
+    randomButton.addEventListener('click', () => {
       CharacterCreatorUi.RandomForm(form);
       CharacterCreatorUi.UpdateCharacterFromClothes(form);
     });
@@ -91,14 +91,14 @@ abstract class CharacterCreatorUi {
 
   private static StartFace(): void {
     const form = document.querySelector('form#formFace') as HTMLFormElement;
-    const randomButton = form.querySelector('button[id=random]');
+    const randomButton = form.querySelector('button[id=random]') as HTMLButtonElement;
 
     form.addEventListener('submit', () => CharacterCreatorUi.Create());
     form.addEventListener('reset', () => {
       CharacterCreatorUi.ResetForm(form);
       CharacterCreatorUi.UpdateCharacterFromFace(form);
     });
-    randomButton?.addEventListener('click', () => {
+    randomButton.addEventListener('click', () => {
       CharacterCreatorUi.RandomForm(form);
       CharacterCreatorUi.UpdateCharacterFromFace(form);
     });
@@ -112,14 +112,14 @@ abstract class CharacterCreatorUi {
 
   private static StartHair(): void {
     const form = document.querySelector('form#formHair') as HTMLFormElement;
-    const randomButton = form.querySelector('button[id=random]');
+    const randomButton = form.querySelector('button[id=random]') as HTMLButtonElement;
 
     form.addEventListener('submit', () => CharacterCreatorUi.Create());
     form.addEventListener('reset', () => {
       CharacterCreatorUi.ResetForm(form);
       CharacterCreatorUi.UpdateCharacterFromHair(form);
     });
-    randomButton?.addEventListener('click', () => {
+    randomButton.addEventListener('click', () => {
       CharacterCreatorUi.RandomForm(form);
       CharacterCreatorUi.UpdateCharacterFromHair(form);
     });
@@ -137,21 +137,13 @@ abstract class CharacterCreatorUi {
     const inputName = inputButton.getAttribute('data-input-name') as string;
     const rawInputValueCycle = inputButton.getAttribute('data-input-value-cycle') as string;
     const inputValueCycle = Number.parseInt(rawInputValueCycle);
-    let genderNumber = CharacterCreatorUi.character.gender ? 1 : 0;
+    const genderNumber = CharacterCreatorUi.character.gender ? 1 : 0;
 
     const input = form.querySelector(`input[name=${inputName}]`) as HTMLInputElement;
     const inputText = form.querySelector(`input[name=${inputName}Text]`) as HTMLInputElement;
 
-    let values;
-    let textValues;
-    if (inputName === 'hair' || form.id === 'formClothes') {
-      values = CharacterCreatorData.GetValuesByInputName(inputName, genderNumber);
-      textValues = CharacterCreatorData.GetTextsByInputName(inputName, genderNumber);
-    }
-    else {
-      values = CharacterCreatorData.GetValuesByInputName(inputName);
-      textValues = CharacterCreatorData.GetTextsByInputName(inputName);
-    }
+    const values = CharacterCreatorData.GetValuesByInputName(inputName, genderNumber);
+    const textValues = CharacterCreatorData.GetTextsByInputName(inputName, genderNumber);
 
     const currentValueIndex = values.indexOf(input.value);
     let nextValueIndex = currentValueIndex + inputValueCycle;
@@ -159,23 +151,18 @@ abstract class CharacterCreatorUi {
       nextValueIndex = nextValueIndex <= -2 ? values.length - 1 : nextValueIndex;
       nextValueIndex = nextValueIndex === values.length + 1 ? 0 : nextValueIndex;
       nextValueIndex = nextValueIndex === values.length ? -1 : nextValueIndex;
-
-      input.value = values[nextValueIndex];
-      inputText.value = textValues[nextValueIndex];
-
-      if (nextValueIndex === -1) {
-        input.value = nextValueIndex.toString();
-        inputText.value = 'Нет';
-      }
-
-      CharacterCreatorUi.UpdateCharacter(form);
-      return;
+    } else {
+      nextValueIndex = nextValueIndex <= -1 ? values.length - 1 : nextValueIndex;
+      nextValueIndex = nextValueIndex === values.length ? 0 : nextValueIndex;
     }
-    nextValueIndex = nextValueIndex <= -1 ? values.length - 1 : nextValueIndex;
-    nextValueIndex = nextValueIndex === values.length ? 0 : nextValueIndex;
 
     input.value = values[nextValueIndex];
     inputText.value = textValues[nextValueIndex];
+
+    if (nextValueIndex === -1) {
+      input.value = nextValueIndex.toString();
+      inputText.value = 'Нет';
+    }
 
     if (inputName === 'gender') {
       CharacterCreatorUi.character.gender = !CharacterCreatorUi.character.gender;
@@ -203,8 +190,8 @@ abstract class CharacterCreatorUi {
 
     CharacterCreatorUi.ResetForm(formClothes);
 
-    CharacterCreatorUi.characterJSON = JSON.stringify(CharacterCreatorUi.character);
-    mp.events.call(LocalEvents.CharacterCreatorChangeGender, CharacterCreatorUi.characterJSON);
+    CharacterCreatorUi.characterJson = JSON.stringify(CharacterCreatorUi.character);
+    mp.events.call(LocalEvents.CharacterCreatorChangeGender, CharacterCreatorUi.characterJson);
   }
 
   private static UpdateCharacterFromMain(form: HTMLFormElement): void {
@@ -227,8 +214,8 @@ abstract class CharacterCreatorUi {
     const rawSkinMix = formData.get('skinTone') as string;
     CharacterCreatorUi.character.skinMix = Number.parseFloat(rawSkinMix);
 
-    CharacterCreatorUi.characterJSON = JSON.stringify(CharacterCreatorUi.character);
-    mp.events.call(LocalEvents.CharacterCreatorUpdateMain, CharacterCreatorUi.characterJSON);
+    CharacterCreatorUi.characterJson = JSON.stringify(CharacterCreatorUi.character);
+    mp.events.call(LocalEvents.CharacterCreatorUpdateMain, CharacterCreatorUi.characterJson);
   }
 
   private static UpdateCharacterFromClothes(form: HTMLFormElement): void {
@@ -243,8 +230,8 @@ abstract class CharacterCreatorUi {
     const rawShoes = formData.get('shoes') as string;
     CharacterCreatorUi.character.shoes = Number.parseInt(rawShoes);
 
-    CharacterCreatorUi.characterJSON = JSON.stringify(CharacterCreatorUi.character);
-    mp.events.call(LocalEvents.CharacterCreatorUpdateClothes, CharacterCreatorUi.characterJSON);
+    CharacterCreatorUi.characterJson = JSON.stringify(CharacterCreatorUi.character);
+    mp.events.call(LocalEvents.CharacterCreatorUpdateClothes, CharacterCreatorUi.characterJson);
   }
 
   private static UpdateCharacterFromFace(form: HTMLFormElement): void {
@@ -328,8 +315,8 @@ abstract class CharacterCreatorUi {
     const rawNeckWidth = formData.get('neckWidth') as string;
     CharacterCreatorUi.character.faceFeatures[19] = Number.parseFloat(rawNeckWidth);
 
-    CharacterCreatorUi.characterJSON = JSON.stringify(CharacterCreatorUi.character);
-    mp.events.call(LocalEvents.CharacterCreatorUpdateFace, CharacterCreatorUi.characterJSON);
+    CharacterCreatorUi.characterJson = JSON.stringify(CharacterCreatorUi.character);
+    mp.events.call(LocalEvents.CharacterCreatorUpdateFace, CharacterCreatorUi.characterJson);
   }
 
   private static UpdateCharacterFromHair(form: HTMLFormElement): void {
@@ -371,8 +358,8 @@ abstract class CharacterCreatorUi {
     const rawChestHairSecondaryColor = formData.get('chestHairSecondaryColor') as string;
     CharacterCreatorUi.character.chestHairSecondaryColor = Number.parseInt(rawChestHairSecondaryColor);
 
-    CharacterCreatorUi.characterJSON = JSON.stringify(CharacterCreatorUi.character);
-    mp.events.call(LocalEvents.CharacterCreatorUpdateHair, CharacterCreatorUi.characterJSON);
+    CharacterCreatorUi.characterJson = JSON.stringify(CharacterCreatorUi.character);
+    mp.events.call(LocalEvents.CharacterCreatorUpdateHair, CharacterCreatorUi.characterJson);
   }
 
   public static UpdateCharacter(form: HTMLFormElement): void {
@@ -413,18 +400,10 @@ abstract class CharacterCreatorUi {
       const inputName = ti.name.replace('Text', '');
 
       const input = form.querySelector(`input[name=${inputName}]`) as HTMLInputElement;
-      let genderNumber = CharacterCreatorUi.character.gender ? 1 : 0;
+      const genderNumber = CharacterCreatorUi.character.gender ? 1 : 0;
 
-      let values;
-      let textValues;
-      if (inputName === 'hair' || form.id === 'formClothes') {
-        values = CharacterCreatorData.GetValuesByInputName(inputName, genderNumber);
-        textValues = CharacterCreatorData.GetTextsByInputName(inputName, genderNumber);
-      }
-      else {
-        values = CharacterCreatorData.GetValuesByInputName(inputName);
-        textValues = CharacterCreatorData.GetTextsByInputName(inputName);
-      }
+      const values = CharacterCreatorData.GetValuesByInputName(inputName, genderNumber);
+      const textValues = CharacterCreatorData.GetTextsByInputName(inputName, genderNumber);
 
       let nextValueIndex = Math.floor(Math.random() * ((values.length - 1) - 0 + 1) + 0);
 
@@ -434,13 +413,11 @@ abstract class CharacterCreatorUi {
       if (input.name === 'gender') {
         if (input.value === 'false') {
           CharacterCreatorUi.character.gender = false;
-          console.log(CharacterCreatorUi.character.gender);
           CharacterCreatorUi.ChangeGender();
-          return;
+        } else {
+          CharacterCreatorUi.character.gender = true;
+          CharacterCreatorUi.ChangeGender();
         }
-        CharacterCreatorUi.character.gender = true;
-        console.log(CharacterCreatorUi.character.gender);
-        CharacterCreatorUi.ChangeGender();
       }
     });
   }
@@ -453,12 +430,11 @@ abstract class CharacterCreatorUi {
   }
 
   private static Create(): void {
-    console.log("Не работает");
     const forms = document.querySelectorAll('form') as NodeListOf<HTMLFormElement>;
     forms.forEach((f) => CharacterCreatorUi.UpdateCharacter(f));
 
-    CharacterCreatorUi.characterJSON = JSON.stringify(CharacterCreatorUi.character);
-    mp.events.call(LocalEvents.CharacterCreatorCreate, CharacterCreatorUi.characterJSON);
+    CharacterCreatorUi.characterJson = JSON.stringify(CharacterCreatorUi.character);
+    mp.events.call(LocalEvents.CharacterCreatorCreate, CharacterCreatorUi.characterJson);
   }
 };
 

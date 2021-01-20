@@ -213,21 +213,7 @@ export abstract class CharacterCreatorData {
 
   //public static ResetValues()
 
-  public static GetValuesByInputName(inputName: string, genderNumber?: number): string[] {
-    if (genderNumber != undefined) {
-      switch (inputName) {
-        case 'hair':
-          return CharacterCreatorData.hairs[genderNumber];
-        case 'top':
-          return CharacterCreatorData.tops[genderNumber];
-        case 'legs':
-          return CharacterCreatorData.legs[genderNumber];
-        case 'shoes':
-          return CharacterCreatorData.shoes[genderNumber];
-        default:
-          return [];
-      }
-    }
+  public static GetValuesByInputName(inputName: string, genderNumber: number): string[] {
     switch (inputName) {
       case 'gender':
         return CharacterCreatorData.gender;
@@ -235,6 +221,14 @@ export abstract class CharacterCreatorData {
         return CharacterCreatorData.fathers;
       case 'mother':
         return CharacterCreatorData.mothers;
+      case 'hair':
+        return CharacterCreatorData.hairs[genderNumber];
+      case 'top':
+        return CharacterCreatorData.tops[genderNumber];
+      case 'legs':
+        return CharacterCreatorData.legs[genderNumber];
+      case 'shoes':
+        return CharacterCreatorData.shoes[genderNumber];
       case 'eyesColor':
         return CharacterCreatorData.eyesColor;
       case 'blemishes':
@@ -267,21 +261,7 @@ export abstract class CharacterCreatorData {
     }
   }
 
-  public static GetTextsByInputName(inputName: string, genderNumber?: number): string[] {
-    if (genderNumber != undefined) {
-      switch (inputName) {
-        case 'hair':
-          return CharacterCreatorData.hairTexts[genderNumber];
-        case 'top':
-          return CharacterCreatorData.topTexts[genderNumber];
-        case 'legs':
-          return CharacterCreatorData.legTexts[genderNumber];
-        case 'shoes':
-          return CharacterCreatorData.shoeTexts[genderNumber];
-        default:
-          return [];
-      }
-    }
+  public static GetTextsByInputName(inputName: string, genderNumber: number): string[] {
     switch (inputName) {
       case 'gender':
         return CharacterCreatorData.genderTexts;
@@ -289,6 +269,14 @@ export abstract class CharacterCreatorData {
         return CharacterCreatorData.fatherTexts;
       case 'mother':
         return CharacterCreatorData.motherTexts;
+      case 'hair':
+        return CharacterCreatorData.hairTexts[genderNumber];
+      case 'top':
+        return CharacterCreatorData.topTexts[genderNumber];
+      case 'legs':
+        return CharacterCreatorData.legTexts[genderNumber];
+      case 'shoes':
+        return CharacterCreatorData.shoeTexts[genderNumber];
       case 'eyesColor':
         return CharacterCreatorData.eyesColorText;
       case 'blemishes':

@@ -1,7 +1,7 @@
 const path = require('path');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
-let htmlComponents = [
+const htmlComponents = [
   'CharacterCreator',
   'Chat',
   'Speedometer'

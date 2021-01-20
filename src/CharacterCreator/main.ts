@@ -3,14 +3,14 @@ import { RemoteEvents } from '../Constants/remoteEvents';
 import { Character } from './character';
 
 abstract class CharacterCreator {
-  private static _browser: BrowserMp;
-  private static _camera: CameraMp;
+  private static browser: BrowserMp;
+  private static camera: CameraMp;
   private static character: Character;
 
   public static Start(): void {
     const camera = new mp.Vector3(347, -1007.5515, -99.15);
     const cameraLookAt = new mp.Vector3(-0.0, 0.0, -93.0);
-    CharacterCreator._camera = mp.cameras.new('default', camera, cameraLookAt, 40);
+    CharacterCreator.camera = mp.cameras.new('default', camera, cameraLookAt, 40);
 
     mp.gui.chat.show(false);
 
@@ -57,7 +57,7 @@ abstract class CharacterCreator {
   }
 
   private static Open(): void {
-    CharacterCreator._browser = mp.browsers.new('package://CharacterCreator/character-creator.html');
+    CharacterCreator.browser = mp.browsers.new('package://CharacterCreator/character-creator.html');
 
     mp.players.local.freezePosition(true);
 
@@ -71,12 +71,12 @@ abstract class CharacterCreator {
 
     mp.events.call(LocalEvents.DiscordSetStatus, "Создаёт персонажа");
 
-    CharacterCreator._camera.setActive(true);
+    CharacterCreator.camera.setActive(true);
     mp.game.cam.renderScriptCams(true, false, 0, true, false);
   }
 
   private static Close(): void {
-    CharacterCreator._browser.destroy();
+    CharacterCreator.browser.destroy();
 
     mp.gui.cursor.show(false, false);
     mp.players.local.freezePosition(false);
@@ -86,14 +86,14 @@ abstract class CharacterCreator {
 
     mp.game.cam.renderScriptCams(false, false, 0, true, false);
 
-    CharacterCreator._camera.setActive(false);
-    CharacterCreator._camera.destroy();
+    CharacterCreator.camera.setActive(false);
+    CharacterCreator.camera.destroy();
 
     mp.game.ui.displayRadar(true);
   }
 
-  private static UpdateCharacterJson(characterJSON: string): void {
-    CharacterCreator.character = JSON.parse(characterJSON);
+  private static UpdateCharacterJson(characterJson: string): void {
+    CharacterCreator.character = JSON.parse(characterJson);
   }
 
   private static TabHair(isSelected: boolean): void {
@@ -119,8 +119,8 @@ abstract class CharacterCreator {
   }
 
   private static Create(): void {
-    const characterJSON = JSON.stringify(CharacterCreator.character);
-    mp.events.callRemote(RemoteEvents.CharacterCreatorCreate, characterJSON);
+    const characterJson = JSON.stringify(CharacterCreator.character);
+    mp.events.callRemote(RemoteEvents.CharacterCreatorCreate, characterJson);
   }
 
   private static UpdateMain(): void {
