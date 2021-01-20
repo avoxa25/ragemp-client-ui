@@ -18,15 +18,42 @@ abstract class CharacterCreator {
 
     mp.events.add(RemoteEvents.CharacterCreatorOpen, () => CharacterCreator.Open());
     mp.events.add(RemoteEvents.CharacterCreatorClose, () => CharacterCreator.Close());
-    mp.events.add(RemoteEvents.CharacterCreatorChangeGenderComplete, (c: string) => CharacterCreator.ChangeGenderComplete(c));
+    mp.events.add(RemoteEvents.CharacterCreatorChangeGenderComplete, () => CharacterCreator.ChangeGenderComplete());
 
-    mp.events.add(LocalEvents.CharacterCreatorTabHair, () => CharacterCreator.TabHair());
-    mp.events.add(LocalEvents.CharacterCreatorCreate, (c: string) => CharacterCreator.Create(c));
-    mp.events.add(LocalEvents.CharacterCreatorChangeGender, (c: string) => CharacterCreator.ChangeGender(c));
-    mp.events.add(LocalEvents.CharacterCreatorUpdateMain, (c: string) => CharacterCreator.UpdateMain(c));
-    mp.events.add(LocalEvents.CharacterCreatorUpdateClothes, (c: string) => CharacterCreator.UpdateClothes(c));
-    mp.events.add(LocalEvents.CharacterCreatorUpdateFace, (c: string) => CharacterCreator.UpdateFace(c));
-    mp.events.add(LocalEvents.CharacterCreatorUpdateHair, (c: string) => CharacterCreator.UpdateHair(c));
+    mp.events.add(LocalEvents.CharacterCreatorTabHair, (is: boolean, c: string) => {
+      CharacterCreator.UpdateCharacterJson(c);
+      CharacterCreator.TabHair(is)
+    });
+
+    mp.events.add(LocalEvents.CharacterCreatorCreate, (c: string) => {
+      CharacterCreator.UpdateCharacterJson(c);
+      CharacterCreator.Create();
+    });
+
+    mp.events.add(LocalEvents.CharacterCreatorChangeGender, (c: string) => {
+      CharacterCreator.UpdateCharacterJson(c);
+      CharacterCreator.ChangeGender();
+    });
+
+    mp.events.add(LocalEvents.CharacterCreatorUpdateMain, (c: string) => {
+      CharacterCreator.UpdateCharacterJson(c);
+      CharacterCreator.UpdateMain();
+    });
+
+    mp.events.add(LocalEvents.CharacterCreatorUpdateClothes, (c: string) => {
+      CharacterCreator.UpdateCharacterJson(c);
+      CharacterCreator.UpdateClothes();
+    });
+
+    mp.events.add(LocalEvents.CharacterCreatorUpdateFace, (c: string) => {
+      CharacterCreator.UpdateCharacterJson(c);
+      CharacterCreator.UpdateFace();
+    });
+
+    mp.events.add(LocalEvents.CharacterCreatorUpdateHair, (c: string) => {
+      CharacterCreator.UpdateCharacterJson(c);
+      CharacterCreator.UpdateHair();
+    });
   }
 
   private static Open(): void {
@@ -65,29 +92,38 @@ abstract class CharacterCreator {
     mp.game.ui.displayRadar(true);
   }
 
-  private static TabHair() {
-    mp.players.local.setComponentVariation(3, 15, 0, 2);
-    mp.players.local.setComponentVariation(11, 15, 0, 2);
+  private static UpdateCharacterJson(characterJSON: string): void {
+    CharacterCreator.character = JSON.parse(characterJSON);
   }
 
-  private static ChangeGender(characterJSON: string): void {
-    mp.events.callRemote(RemoteEvents.CharacterCreatorChangeGender, characterJSON);
+  private static TabHair(isSelected: boolean): void {
+    if (isSelected) {
+      mp.players.local.setComponentVariation(3, 15, 0, 2);
+      mp.players.local.setComponentVariation(11, 15, 0, 2);
+    }
+    else {
+      mp.players.local.setComponentVariation(3, CharacterCreator.character.torso, 0, 2);
+      mp.players.local.setComponentVariation(11, CharacterCreator.character.top, 0, 2);
+    }
   }
 
-  private static ChangeGenderComplete(characterJSON: string): void {
-    CharacterCreator.UpdateClothes(characterJSON);
-    CharacterCreator.UpdateMain(characterJSON);
-    CharacterCreator.UpdateFace(characterJSON);
-    CharacterCreator.UpdateHair(characterJSON);
+  private static ChangeGender(): void {
+    mp.events.callRemote(RemoteEvents.CharacterCreatorChangeGender, CharacterCreator.character.gender);
   }
 
-  private static Create(characterJSON: string): void {
+  private static ChangeGenderComplete() {
+    CharacterCreator.UpdateClothes();
+    CharacterCreator.UpdateMain();
+    CharacterCreator.UpdateFace();
+    CharacterCreator.UpdateHair();
+  }
+
+  private static Create(): void {
+    const characterJSON = JSON.stringify(CharacterCreator.character);
     mp.events.callRemote(RemoteEvents.CharacterCreatorCreate, characterJSON);
   }
 
-  private static UpdateMain(characterJSON: string): void {
-    CharacterCreator.character = JSON.parse(characterJSON);
-
+  private static UpdateMain(): void {
     mp.players.local.setHeadBlendData(
       CharacterCreator.character.father,
       CharacterCreator.character.mother,
@@ -101,9 +137,7 @@ abstract class CharacterCreator {
       false);
   }
 
-  private static UpdateClothes(characterJSON: string): void {
-    CharacterCreator.character = JSON.parse(characterJSON);
-
+  private static UpdateClothes(): void {
     switch (CharacterCreator.character.top) {
       case 111:
         CharacterCreator.character.torso = 4;
@@ -131,9 +165,7 @@ abstract class CharacterCreator {
     mp.players.local.setComponentVariation(11, CharacterCreator.character.top, 0, 2);
   }
 
-  private static UpdateFace(characterJSON: string): void {
-    CharacterCreator.character = JSON.parse(characterJSON);
-
+  private static UpdateFace(): void {
     CharacterCreator.character.blemishes = CharacterCreator.character.blemishes === -1 ? 255 : CharacterCreator.character.blemishes;
     mp.players.local.setHeadOverlay(0, CharacterCreator.character.blemishes, 1, 0, 0);
 
@@ -153,9 +185,7 @@ abstract class CharacterCreator {
     mp.players.local.setEyeColor(CharacterCreator.character.eyesColor);
   }
 
-  private static UpdateHair(characterJSON: string): void {
-    CharacterCreator.character = JSON.parse(characterJSON);
-
+  private static UpdateHair(): void {
     mp.players.local.setComponentVariation(2, CharacterCreator.character.hair, 0, 2);
     mp.players.local.setHairColor(CharacterCreator.character.hairColor, CharacterCreator.character.hairHighLight);
 

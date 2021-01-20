@@ -53,7 +53,7 @@ export class Character {
     this.top = 0;
     this.legs = 0;
     this.shoes = 0;
-    this.faceFeatures = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+    this.faceFeatures = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
     this.blemishes = 0;
     this.ageing = 0;
     this.complexion = 0;

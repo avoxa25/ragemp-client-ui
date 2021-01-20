@@ -32,10 +32,6 @@ abstract class CharacterCreatorUi {
       tabs[i].style.display = isSelectedTab ? 'block' : 'none';
     }
 
-    if (selectedTabId === 'tabHair') mp.events.call(LocalEvents.CharacterCreatorTabHair);
-
-    console.log(selectedTabId);
-
     const tabLinks = document.getElementsByClassName('tabLinks') as HTMLCollectionOf<HTMLElement>;
     for (let i = 0; i < tabLinks.length; i++) {
       const isSelectedTabLink = tabLinks[i].id === selectedTabLinkId;
@@ -45,6 +41,10 @@ abstract class CharacterCreatorUi {
         tabLinks[i].classList.remove('active');
       }
     }
+
+    CharacterCreatorUi.characterJSON = JSON.stringify(CharacterCreatorUi.character);
+    if (selectedTabId === 'tabHair') mp.events.call(LocalEvents.CharacterCreatorTabHair, true, CharacterCreatorUi.characterJSON);
+    else mp.events.call(LocalEvents.CharacterCreatorTabHair, false, CharacterCreatorUi.characterJSON);
   }
 
   private static StartMain(): void {

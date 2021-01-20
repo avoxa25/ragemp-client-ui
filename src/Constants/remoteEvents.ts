@@ -1,6 +1,6 @@
 export enum RemoteEvents {
   ChatSendMessage = 'ChatSendMessage',
-  CharacterCreatorOpen = 'CharacterCreatorOpen',
+  CharacterCreatorOpen = 'Remote:CharacterCreator:Open',
   CharacterCreatorCreate = 'CharacterCreatorCreate',
   CharacterCreatorClose = 'CharacterCreatorClose',
   CharacterCreatorChangeGender = 'CharacterCreatorChangeGender',
