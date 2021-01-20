@@ -6,8 +6,9 @@ const htmlComponents = [
   'Speedometer'
 ];
 
-var entryPoints = {};
+const entryPoints = {};
 entryPoints['index'] = path.resolve(__dirname, 'src', 'index.ts');
+
 htmlComponents
   .map((c) => ({ folder: c, file: c.replace(/([A-Z]{1})/g, '-$1').toLocaleLowerCase().slice(1) }))
   .map((ep) => ({ module: `${ep.folder}/${ep.file}`, filename: path.resolve(__dirname, 'src', ep.folder, `${ep.file}.ts`) }))
