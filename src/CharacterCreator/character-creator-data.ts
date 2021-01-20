@@ -166,8 +166,8 @@ export abstract class CharacterCreatorData {
     CharacterCreatorData.fatherTexts = ['Benjamin', 'Daniel', 'Joshua', 'Noah', 'Andrew', 'Juan', 'Alex', 'Isaac', 'Evan', 'Ethan', 'Vincent', 'Angel', 'Diego', 'Adrian', 'Gabriel', 'Michael', 'Santiago', 'Kevin', 'Louis', 'Samuel', 'Anthony', 'Claude', 'Niko', 'John'];
     CharacterCreatorData.motherTexts = ['Hannah', 'Aubrey', 'Jasmine', 'Gisele', 'Amelia', 'Isabella', 'Zoe', 'Ava', 'Camila', 'Violet', 'Sophia', 'Evelyn', 'Nicole', 'Ashley', 'Gracie', 'Brianna', 'Natalie', 'Olivia', 'Elizabeth', 'Charlotte', 'Emma', 'Misty'];
 
-    CharacterCreatorData.tops = [['45', '49', '26'], ['111', '146', '241']];
-    CharacterCreatorData.topTexts = [['Кофта', 'Футболка', 'Блузка'], ['Водолазка', 'Футболка', 'Рубашка Поло']];
+    CharacterCreatorData.tops = [['49', '45', '26'], ['146', '111', '241']];
+    CharacterCreatorData.topTexts = [['Футболка', 'Кофта', 'Блузка'], ['Футболка', 'Водолазка', 'Рубашка Поло']];
 
     CharacterCreatorData.legs = [['4', '8', '25'], ['1', '9', '6']];
     CharacterCreatorData.legTexts = [['Джинсы', 'Юбка', 'Шорты'], ['Джинсы', 'Джоггеры', 'Шорты']];
@@ -211,19 +211,19 @@ export abstract class CharacterCreatorData {
     CharacterCreatorData.colorTexts = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64'];
   }
 
+  //public static ResetValues()
+
   public static GetValuesByInputName(inputName: string, genderNumber?: number): string[] {
-    if (genderNumber != undefined) 
-    {
-      switch(inputName)
-      {
-      case 'hair':
-        return CharacterCreatorData.hairs[genderNumber];
-      case 'top':
-        return CharacterCreatorData.tops[genderNumber];
-      case 'legs':
-        return CharacterCreatorData.legs[genderNumber];
-      case 'shoes':
-        return CharacterCreatorData.shoes[genderNumber];
+    if (genderNumber != undefined) {
+      switch (inputName) {
+        case 'hair':
+          return CharacterCreatorData.hairs[genderNumber];
+        case 'top':
+          return CharacterCreatorData.tops[genderNumber];
+        case 'legs':
+          return CharacterCreatorData.legs[genderNumber];
+        case 'shoes':
+          return CharacterCreatorData.shoes[genderNumber];
         default:
           return [];
       }
@@ -254,7 +254,7 @@ export abstract class CharacterCreatorData {
       case 'chestHair':
         return CharacterCreatorData.chestHair;
       case 'hairColor':
-      case 'hairHighlight':
+      case 'hairHighLight':
       case 'eyeBrowsColor':
       case 'eyeBrowsSecondaryColor':
       case 'beardColor':
@@ -268,18 +268,16 @@ export abstract class CharacterCreatorData {
   }
 
   public static GetTextsByInputName(inputName: string, genderNumber?: number): string[] {
-    if (genderNumber != undefined) 
-    {
-      switch(inputName)
-      {
-      case 'hair':
-        return CharacterCreatorData.hairTexts[genderNumber];
-      case 'top':
-        return CharacterCreatorData.topTexts[genderNumber];
-      case 'legs':
-        return CharacterCreatorData.legTexts[genderNumber];
-      case 'shoes':
-        return CharacterCreatorData.shoeTexts[genderNumber];
+    if (genderNumber != undefined) {
+      switch (inputName) {
+        case 'hair':
+          return CharacterCreatorData.hairTexts[genderNumber];
+        case 'top':
+          return CharacterCreatorData.topTexts[genderNumber];
+        case 'legs':
+          return CharacterCreatorData.legTexts[genderNumber];
+        case 'shoes':
+          return CharacterCreatorData.shoeTexts[genderNumber];
         default:
           return [];
       }
@@ -310,7 +308,7 @@ export abstract class CharacterCreatorData {
       case 'chestHair':
         return CharacterCreatorData.chestHairTexts;
       case 'hairColor':
-      case 'hairHighlight':
+      case 'hairHighLight':
       case 'eyeBrowsColor':
       case 'eyeBrowsSecondaryColor':
       case 'beardColor':

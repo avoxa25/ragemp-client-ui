@@ -10,6 +10,7 @@ export class Character {
   public shapeMix: number;
   public skinMix: number;
 
+  public torso: number;
   public top: number;
   public legs: number;
   public shoes: number;
@@ -48,6 +49,7 @@ export class Character {
     this.mother = 0;
     this.shapeMix = 0.0;
     this.skinMix = 0.0;
+    this.torso = 0;
     this.top = 0;
     this.legs = 0;
     this.shoes = 0;

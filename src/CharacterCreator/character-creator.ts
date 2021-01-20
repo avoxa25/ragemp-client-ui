@@ -32,6 +32,10 @@ abstract class CharacterCreatorUi {
       tabs[i].style.display = isSelectedTab ? 'block' : 'none';
     }
 
+    if (selectedTabId === 'tabHair') mp.events.call(LocalEvents.CharacterCreatorTabHair);
+
+    console.log(selectedTabId);
+
     const tabLinks = document.getElementsByClassName('tabLinks') as HTMLCollectionOf<HTMLElement>;
     for (let i = 0; i < tabLinks.length; i++) {
       const isSelectedTabLink = tabLinks[i].id === selectedTabLinkId;
@@ -45,7 +49,7 @@ abstract class CharacterCreatorUi {
 
   private static StartMain(): void {
     const form = document.querySelector('form#formMain') as HTMLFormElement;
-    const randomButton = form.querySelector('button[type=random]');
+    const randomButton = form.querySelector('button[id=random]');
 
     form.addEventListener('submit', () => CharacterCreatorUi.Create());
     form.addEventListener('reset', () => {
@@ -66,7 +70,7 @@ abstract class CharacterCreatorUi {
 
   private static StartClothes(): void {
     const form = document.querySelector('form#formClothes') as HTMLFormElement;
-    const randomButton = form.querySelector('button[type=random]');
+    const randomButton = form.querySelector('button[id=random]');
 
     form.addEventListener('submit', () => CharacterCreatorUi.Create());
     form.addEventListener('reset', () => {
@@ -87,7 +91,7 @@ abstract class CharacterCreatorUi {
 
   private static StartFace(): void {
     const form = document.querySelector('form#formFace') as HTMLFormElement;
-    const randomButton = form.querySelector('button[type=random]');
+    const randomButton = form.querySelector('button[id=random]');
 
     form.addEventListener('submit', () => CharacterCreatorUi.Create());
     form.addEventListener('reset', () => {
@@ -108,14 +112,17 @@ abstract class CharacterCreatorUi {
 
   private static StartHair(): void {
     const form = document.querySelector('form#formHair') as HTMLFormElement;
-    const randomButton = form.querySelector('button[type=random]');
+    const randomButton = form.querySelector('button[id=random]');
 
     form.addEventListener('submit', () => CharacterCreatorUi.Create());
     form.addEventListener('reset', () => {
       CharacterCreatorUi.ResetForm(form);
       CharacterCreatorUi.UpdateCharacterFromHair(form);
     });
-    randomButton?.addEventListener('click', () => CharacterCreatorUi.RandomForm(form));
+    randomButton?.addEventListener('click', () => {
+      CharacterCreatorUi.RandomForm(form);
+      CharacterCreatorUi.UpdateCharacterFromHair(form);
+    });
 
     const inputButtons = form.querySelectorAll('button[data-input-name]');
     inputButtons.forEach((ib) => ib.addEventListener('click', () => {
@@ -148,13 +155,56 @@ abstract class CharacterCreatorUi {
 
     const currentValueIndex = values.indexOf(input.value);
     let nextValueIndex = currentValueIndex + inputValueCycle;
-    nextValueIndex = nextValueIndex === -1 ? values.length - 1 : nextValueIndex;
+    if (form.id === 'formHair' && inputName !== 'hair' || form.id === 'formFace' && inputName !== 'eyesColor') {
+      nextValueIndex = nextValueIndex <= -2 ? values.length - 1 : nextValueIndex;
+      nextValueIndex = nextValueIndex === values.length + 1 ? 0 : nextValueIndex;
+      nextValueIndex = nextValueIndex === values.length ? -1 : nextValueIndex;
+
+      input.value = values[nextValueIndex];
+      inputText.value = textValues[nextValueIndex];
+
+      if (nextValueIndex === -1) {
+        input.value = nextValueIndex.toString();
+        inputText.value = 'Нет';
+      }
+
+      CharacterCreatorUi.UpdateCharacter(form);
+      return;
+    }
+    nextValueIndex = nextValueIndex <= -1 ? values.length - 1 : nextValueIndex;
     nextValueIndex = nextValueIndex === values.length ? 0 : nextValueIndex;
 
     input.value = values[nextValueIndex];
     inputText.value = textValues[nextValueIndex];
 
+    if (inputName === 'gender') {
+      CharacterCreatorUi.character.gender = !CharacterCreatorUi.character.gender;
+      CharacterCreatorUi.ChangeGender();
+    }
+
     CharacterCreatorUi.UpdateCharacter(form);
+  }
+
+
+  private static ChangeGender() {
+    const formHair = document.querySelector('form#formHair') as HTMLFormElement;
+    const formClothes = document.querySelector('form#formClothes') as HTMLFormElement;
+
+    CharacterCreatorUi.ResetForm(formHair);
+
+    const genderNumber = CharacterCreatorUi.character.gender ? 1 : 0;
+    const inputs = formClothes.querySelectorAll('input[style*="display: none;"]');
+
+    inputs.forEach((i) => {
+      const inputName = i.getAttribute('name') as string;
+      const values = CharacterCreatorData.GetValuesByInputName(inputName, genderNumber);
+      (i as HTMLInputElement).defaultValue = values[0];
+    });
+
+    CharacterCreatorUi.ResetForm(formClothes);
+
+    CharacterCreatorUi.characterJSON = JSON.stringify(CharacterCreatorUi.character);
+    mp.events.call(LocalEvents.CharacterCreatorChangeGender, CharacterCreatorUi.characterJSON);
   }
 
   private static UpdateCharacterFromMain(form: HTMLFormElement): void {
@@ -192,6 +242,7 @@ abstract class CharacterCreatorUi {
 
     const rawShoes = formData.get('shoes') as string;
     CharacterCreatorUi.character.shoes = Number.parseInt(rawShoes);
+
     CharacterCreatorUi.characterJSON = JSON.stringify(CharacterCreatorUi.character);
     mp.events.call(LocalEvents.CharacterCreatorUpdateClothes, CharacterCreatorUi.characterJSON);
   }
@@ -288,37 +339,37 @@ abstract class CharacterCreatorUi {
     CharacterCreatorUi.character.hair = Number.parseInt(rawHair);
 
     const rawHairColor = formData.get('hairColor') as string;
-    CharacterCreatorUi.character.mother = Number.parseInt(rawHairColor);
+    CharacterCreatorUi.character.hairColor = Number.parseInt(rawHairColor);
 
-    const rawHairHighlight = formData.get('hairHighlight') as string;
-    CharacterCreatorUi.character.mother = Number.parseInt(rawHairHighlight);
+    const rawHairHighLight = formData.get('hairHighLight') as string;
+    CharacterCreatorUi.character.hairHighLight = Number.parseInt(rawHairHighLight);
 
     const rawEyeBrows = formData.get('eyeBrows') as string;
-    CharacterCreatorUi.character.mother = Number.parseInt(rawEyeBrows);
+    CharacterCreatorUi.character.eyeBrows = Number.parseInt(rawEyeBrows);
 
     const rawEyeBrowsColor = formData.get('eyeBrowsColor') as string;
-    CharacterCreatorUi.character.mother = Number.parseInt(rawEyeBrowsColor);
+    CharacterCreatorUi.character.eyeBrowsColor = Number.parseInt(rawEyeBrowsColor);
 
     const rawEyeBrowsSecondaryColor = formData.get('eyeBrowsSecondaryColor') as string;
-    CharacterCreatorUi.character.mother = Number.parseInt(rawEyeBrowsSecondaryColor);
+    CharacterCreatorUi.character.eyeBrowsSecondaryColor = Number.parseInt(rawEyeBrowsSecondaryColor);
 
     const rawBeard = formData.get('beard') as string;
-    CharacterCreatorUi.character.mother = Number.parseInt(rawBeard);
+    CharacterCreatorUi.character.beard = Number.parseInt(rawBeard);
 
     const rawBeardColor = formData.get('beardColor') as string;
-    CharacterCreatorUi.character.mother = Number.parseInt(rawBeardColor);
+    CharacterCreatorUi.character.beardColor = Number.parseInt(rawBeardColor);
 
     const rawBeardSecondaryColor = formData.get('beardSecondaryColor') as string;
-    CharacterCreatorUi.character.mother = Number.parseInt(rawBeardSecondaryColor);
+    CharacterCreatorUi.character.beardSecondaryColor = Number.parseInt(rawBeardSecondaryColor);
 
     const rawChestHair = formData.get('chestHair') as string;
-    CharacterCreatorUi.character.mother = Number.parseInt(rawChestHair);
+    CharacterCreatorUi.character.chestHair = Number.parseInt(rawChestHair);
 
     const rawChestHairColor = formData.get('chestHairColor') as string;
-    CharacterCreatorUi.character.mother = Number.parseInt(rawChestHairColor);
+    CharacterCreatorUi.character.chestHairColor = Number.parseInt(rawChestHairColor);
 
     const rawChestHairSecondaryColor = formData.get('chestHairSecondaryColor') as string;
-    CharacterCreatorUi.character.mother = Number.parseInt(rawChestHairSecondaryColor);
+    CharacterCreatorUi.character.chestHairSecondaryColor = Number.parseInt(rawChestHairSecondaryColor);
 
     CharacterCreatorUi.characterJSON = JSON.stringify(CharacterCreatorUi.character);
     mp.events.call(LocalEvents.CharacterCreatorUpdateHair, CharacterCreatorUi.characterJSON);
@@ -379,6 +430,18 @@ abstract class CharacterCreatorUi {
 
       input.value = values[nextValueIndex];
       ti.value = textValues[nextValueIndex];
+
+      if (input.name === 'gender') {
+        if (input.value === 'false') {
+          CharacterCreatorUi.character.gender = false;
+          console.log(CharacterCreatorUi.character.gender);
+          CharacterCreatorUi.ChangeGender();
+          return;
+        }
+        CharacterCreatorUi.character.gender = true;
+        console.log(CharacterCreatorUi.character.gender);
+        CharacterCreatorUi.ChangeGender();
+      }
     });
   }
 
@@ -390,11 +453,12 @@ abstract class CharacterCreatorUi {
   }
 
   private static Create(): void {
+    console.log("Не работает");
     const forms = document.querySelectorAll('form') as NodeListOf<HTMLFormElement>;
     forms.forEach((f) => CharacterCreatorUi.UpdateCharacter(f));
-    
+
     CharacterCreatorUi.characterJSON = JSON.stringify(CharacterCreatorUi.character);
-    mp.events.call(LocalEvents.CharacterCreatorCreateClose, CharacterCreatorUi.characterJSON);
+    mp.events.call(LocalEvents.CharacterCreatorCreate, CharacterCreatorUi.characterJSON);
   }
 };
 

@@ -80,7 +80,7 @@
             </li>
           </ul>
           <p>
-            <button type="random">СЛУЧАЙНО</button>
+            <button type="button" id="random">СЛУЧАЙНО</button>
             <button type="reset">СБРОСИТЬ</button>
           </p>
           <button type="submit">СОЗДАТЬ</button>
@@ -97,7 +97,7 @@
               <p>
                 <button type="button" data-input-name="top" data-input-value-cycle="-1""></button>
                 <input type=" text" name="topText" value="Футболка" disabled>
-                <input type="text" name="top" value="146" style="display: none;">
+                  <input type="text" name="top" value="146" style="display: none;">
                   <button type="button" data-input-name="top" data-input-value-cycle="1"></button>
               </p>
             </li>
@@ -137,7 +137,7 @@
             </li>
           </ul>
           <p>
-            <button type="random">СЛУЧАЙНО</button>
+            <button type="button" id="random">СЛУЧАЙНО</button>
             <button type="reset">СБРОСИТЬ</button>
           </p>
           <button type="submit">СОЗДАТЬ</button>
@@ -154,8 +154,8 @@
               <p>Пятна:</p>
               <p>
                 <button type="button" data-input-name="blemishes" data-input-value-cycle="-1"></button>
-                <input type="text" name="blemishesText" value="Measles" disabled>
-                <input type="text" name="blemishes" value="0" style="display: none;">
+                <input type="text" name="blemishesText" value="Нет" disabled>
+                <input type="text" name="blemishes" value="255" style="display: none;">
                 <button type="button" data-input-name="blemishes" data-input-value-cycle="1"></button>
               </p>
             </li>
@@ -163,8 +163,8 @@
               <p>Старение:</p>
               <p>
                 <button type="button" data-input-name="ageing" data-input-value-cycle="-1"></button>
-                <input type="text" name="ageingText" value="Crow's Feet" disabled>
-                <input type="text" name="ageing" value="0" style="display: none;">
+                <input type="text" name="ageingText" value="Нет" disabled>
+                <input type="text" name="ageing" value="255" style="display: none;">
                 <button type="button" data-input-name="ageing" data-input-value-cycle="1"></button>
               </p>
             </li>
@@ -172,8 +172,8 @@
               <p>Цвет лица:</p>
               <p>
                 <button type="button" data-input-name="complexion" data-input-value-cycle="-1"></button>
-                <input type="text" name="complexionText" value="Rosy Cheeks" disabled>
-                <input type="text" name="complexion" value="0" style="display: none;">
+                <input type="text" name="complexionText" value="Нет" disabled>
+                <input type="text" name="complexion" value="255" style="display: none;">
                 <button type="button" data-input-name="complexion" data-input-value-cycle="1"></button>
               </p>
             </li>
@@ -181,8 +181,8 @@
               <p>Загар:</p>
               <p>
                 <button type="button" data-input-name="sunDamage" data-input-value-cycle="-1"></button>
-                <input type="text" name="sunDamageText" value="Uneven" disabled>
-                <input type="text" name="sunDamage" value="0" style="display: none;">
+                <input type="text" name="sunDamageText" value="Нет" disabled>
+                <input type="text" name="sunDamage" value="255" style="display: none;">
                 <button type="button" data-input-name="sunDamage" data-input-value-cycle="1"></button>
               </p>
             </li>
@@ -190,8 +190,8 @@
               <p>Родинки/Веснушки:</p>
               <p>
                 <button type="button" data-input-name="freckles" data-input-value-cycle="-1"></button>
-                <input type="text" name="frecklesText" value="Cherub" disabled>
-                <input type="text" name="freckles" value="0" style="display: none;">
+                <input type="text" name="frecklesText" value="Нет" disabled>
+                <input type="text" name="freckles" value="255" style="display: none;">
                 <button type="button" data-input-name="freckles" data-input-value-cycle="1"></button>
               </p>
             </li>
@@ -210,8 +210,8 @@
             <li>
               <p>Размер глаз:</p>
               <p>
-                Открыты<input type="range" class="slider" name="eyesSize" min="-1.0"
-                  max="1.0" value="0" step="0.01">Закрыты
+                Открыты<input type="range" class="slider" name="eyesSize" min="-1.0" max="1.0" value="0"
+                  step="0.01">Закрыты
               </p>
             </li>
             <!--Глаза-->
@@ -220,43 +220,42 @@
             <li>
               <p>Высота Носа:</p>
               <p>
-                Вверх<input type="range" class="slider" name="noseHeight" min="-1.0"
-                  max="1.0" value="0" step="0.01">Вниз
+                Вверх<input type="range" class="slider" name="noseHeight" min="-1.0" max="1.0" value="0"
+                  step="0.01">Вниз
               </p>
             </li>
             <li>
               <p>Ширина Носа:</p>
               <p>
-                Узкий<input type="range" class="slider" name="noseWidth" min="-1.0"
-                  max="1.0" value="0" step="0.01">Широкий
+                Узкий<input type="range" class="slider" name="noseWidth" min="-1.0" max="1.0" value="0"
+                  step="0.01">Широкий
               </p>
             </li>
             <li>
               <p>Длина Носа:</p>
               <p>
-                Длинный<input type="range" class="slider" name="noseLength" min="-1.0"
-                  max="1.0" value="0" step="0.01">Короткий
+                Длинный<input type="range" class="slider" name="noseLength" min="-1.0" max="1.0" value="0"
+                  step="0.01">Короткий
               </p>
             </li>
             <li>
               <p>Носовая Перегородка:</p>
               <p>
-                Круглая<input type="range" class="slider" name="noseBridge" min="-1.0"
-                  max="1.0" value="0" step="0.01">Квадратная
+                Круглая<input type="range" class="slider" name="noseBridge" min="-1.0" max="1.0" value="0"
+                  step="0.01">Квадратная
               </p>
             </li>
             <li>
               <p>Кончик Носа:</p>
               <p>
-                Вверх<input type="range" class="slider" name="noseTip" min="-1.0"
-                  max="1.0" value="0" step="0.01">Вниз
+                Вверх<input type="range" class="slider" name="noseTip" min="-1.0" max="1.0" value="0" step="0.01">Вниз
               </p>
             </li>
             <li>
               <p>Смещение Переносицы:</p>
               <p>
-                Вправо<input type="range" class="slider" name="noseBridgeShift" min="-1.0"
-                  max="1.0" value="0" step="0.01">Влево
+                Вправо<input type="range" class="slider" name="noseBridgeShift" min="-1.0" max="1.0" value="0"
+                  step="0.01">Влево
               </p>
             </li>
             <!--Нос-->
@@ -265,15 +264,15 @@
             <li>
               <p>Высота Бровей:</p>
               <p>
-                Вверх<input type="range" class="slider" name="eyeBrowsHeight" min="-1.0"
-                  max="1.0" value="0" step="0.01">Вниз
+                Вверх<input type="range" class="slider" name="eyeBrowsHeight" min="-1.0" max="1.0" value="0"
+                  step="0.01">Вниз
               </p>
             </li>
             <li>
               <p>Ширина Бровей:</p>
               <p>
-                Узкие<input type="range" class="slider" name="eyeBrowsWidth" min="-1.0"
-                  max="1.0" value="0" step="0.01">Широкие
+                Узкие<input type="range" class="slider" name="eyeBrowsWidth" min="-1.0" max="1.0" value="0"
+                  step="0.01">Широкие
               </p>
             </li>
             <!--Брови-->
@@ -282,15 +281,15 @@
             <li>
               <p>Высота Скул:</p>
               <p>
-                Вверх<input type="range" class="slider" name="cheekBoneHeight" min="-1.0"
-                  max="1.0" value="0" step="0.01">Вниз
+                Вверх<input type="range" class="slider" name="cheekBoneHeight" min="-1.0" max="1.0" value="0"
+                  step="0.01">Вниз
               </p>
             </li>
             <li>
               <p>Ширина Скул:</p>
               <p>
-                Узкие<input type="range" class="slider" name="cheekBoneWidth" min="-1.0"
-                  max="1.0" value="0" step="0.01">Широкие
+                Узкие<input type="range" class="slider" name="cheekBoneWidth" min="-1.0" max="1.0" value="0"
+                  step="0.01">Широкие
               </p>
             </li>
             <!--Скулы-->
@@ -299,8 +298,8 @@
             <li>
               <p>Ширина Щек:</p>
               <p>
-                Внутрь<input type="range" class="slider" name="cheeksWidth" min="-1.0"
-                  max="1.0" value="0" step="0.01">Наружу
+                Внутрь<input type="range" class="slider" name="cheeksWidth" min="-1.0" max="1.0" value="0"
+                  step="0.01">Наружу
               </p>
             </li>
             <!--Щёки-->
@@ -309,8 +308,8 @@
             <li>
               <p>Размер губ:</p>
               <p>
-                Широкие<input type="range" class="slider" name="lipsSize" min="-1.0"
-                  max="1.0" value="0" step="0.01">Узкие
+                Широкие<input type="range" class="slider" name="lipsSize" min="-1.0" max="1.0" value="0"
+                  step="0.01">Узкие
               </p>
             </li>
             <!--Губы-->
@@ -319,15 +318,14 @@
             <li>
               <p>Высота Челюсти:</p>
               <p>
-                Вверх<input type="range" class="slider" name="jawHeight" min="-1.0"
-                  max="1.0" value="0" step="0.01">Вниз
+                Вверх<input type="range" class="slider" name="jawHeight" min="-1.0" max="1.0" value="0" step="0.01">Вниз
               </p>
             </li>
             <li>
               <p>Ширина Челюсти:</p>
               <p>
-                Узкая<input type="range" class="slider" name="jawWidth" min="-1.0"
-                  max="1.0" value="0" step="0.01">Широкая
+                Узкая<input type="range" class="slider" name="jawWidth" min="-1.0" max="1.0" value="0"
+                  step="0.01">Широкая
               </p>
             </li>
             <!--Челюсть-->
@@ -336,29 +334,29 @@
             <li>
               <p>Положение Подбородка:</p>
               <p>
-                Внутрь<input type="range" class="slider" name="chinPos" min="-1.0"
-                  max="1.0" value="0" step="0.01">Наружу
+                Внутрь<input type="range" class="slider" name="chinPos" min="-1.0" max="1.0" value="0"
+                  step="0.01">Наружу
               </p>
             </li>
             <li>
               <p>Ширина Подбородка:</p>
               <p>
-                Узкий<input type="range" class="slider"name="chinWidth" min="-1.0"
-                  max="1.0" value="0" step="0.01">Широкий
+                Узкий<input type="range" class="slider" name="chinWidth" min="-1.0" max="1.0" value="0"
+                  step="0.01">Широкий
               </p>
             </li>
             <li>
               <p>Длина Подбородка:</p>
               <p>
-                Маленький<input type="range" class="slider" name="chinLength" min="-1.0"
-                  max="1.0" value="0" step="0.01">Большой
+                Маленький<input type="range" class="slider" name="chinLength" min="-1.0" max="1.0" value="0"
+                  step="0.01">Большой
               </p>
             </li>
             <li>
               <p>Форма Подбородка:</p>
               <p>
-                Простой<input type="range" class="slider" name="chinShape" min="-1.0"
-                  max="1.0" value="0" step="0.01">Двойной
+                Простой<input type="range" class="slider" name="chinShape" min="-1.0" max="1.0" value="0"
+                  step="0.01">Двойной
               </p>
             </li>
             <!--Подбородок-->
@@ -367,14 +365,14 @@
             <li>
               <p>Ширина Шеи:</p>
               <p>
-                Узкая<input type="range" class="slider" name="neckWidth" min="-1.0"
-                  max="1.0" value="0" step="0.01">Широкая
+                Узкая<input type="range" class="slider" name="neckWidth" min="-1.0" max="1.0" value="0"
+                  step="0.01">Широкая
               </p>
             </li>
           </ul>
           <!--Шея-->
           <p>
-            <button type="random">СЛУЧАЙНО</button>
+            <button type="button" id="random">СЛУЧАЙНО</button>
             <button type="reset">СБРОСИТЬ</button>
           </p>
           <button type="submit">СОЗДАТЬ</button>
@@ -407,18 +405,18 @@
             <li>
               <p>Оттенок:</p>
               <p>
-                <button type="button" data-input-name="hairHighlight" data-input-value-cycle="-1"></button>
-                <input type="text" name="hairHighlightText" value="1" disabled>
-                <input type="text" name="hairHighlight" value="0" style="display: none;">
-                <button type="button" data-input-name="hairHighlight" data-input-value-cycle="1"></button>
+                <button type="button" data-input-name="hairHighLight" data-input-value-cycle="-1"></button>
+                <input type="text" name="hairHighLightText" value="1" disabled>
+                <input type="text" name="hairHighLight" value="0" style="display: none;">
+                <button type="button" data-input-name="hairHighLight" data-input-value-cycle="1"></button>
               </p>
             </li>
             <li>
               <p>Брови:</p>
               <p>
                 <button type="button" data-input-name="eyeBrows" data-input-value-cycle="-1"></button>
-                <input type="text" name="eyeBrowsText" value="None" disabled>
-                <input type="text" name="eyeBrows" value="0" style="display: none;">
+                <input type="text" name="eyeBrowsText" value="Нет" disabled>
+                <input type="text" name="eyeBrows" value="255" style="display: none;">
                 <button type="button" data-input-name="eyeBrows" data-input-value-cycle="1"></button>
               </p>
             </li>
@@ -444,8 +442,8 @@
               <p>Борода:</p>
               <p>
                 <button type="button" data-input-name="beard" data-input-value-cycle="-1"></button>
-                <input type="text" name="beardText" value="None" disabled>
-                <input type="text" name="beard" value="0" style="display: none;">
+                <input type="text" name="beardText" value="Нет" disabled>
+                <input type="text" name="beard" value="255" style="display: none;">
                 <button type="button" data-input-name="beard" data-input-value-cycle="1"></button>
               </p>
             </li>
@@ -471,8 +469,8 @@
               <p>На груди:</p>
               <p>
                 <button type="button" data-input-name="chestHair" data-input-value-cycle="-1"></button>
-                <input type="text" name="chestHairText" value="None" disabled>
-                <input type="text" name="chestHair" value="0" style="display: none;">
+                <input type="text" name="chestHairText" value="Нет" disabled>
+                <input type="text" name="chestHair" value="255" style="display: none;">
                 <button type="button" data-input-name="chestHair" data-input-value-cycle="1"></button>
               </p>
             </li>
@@ -496,7 +494,7 @@
             </li>
           </ul>
           <p>
-            <button type="random">СЛУЧАЙНО</button>
+            <button type="button" id="random">СЛУЧАЙНО</button>
             <button type="reset">СБРОСИТЬ</button>
           </p>
           <button type="submit">СОЗДАТЬ</button>
