@@ -1,6 +1,5 @@
-import { LocalEvents } from '../Constants/localEvents';
-
 abstract class Speedometer {
+  private static browser: BrowserMp;
   private static vehicle: VehicleMp;
   private static updaterIntervalId: number;
   private static blinkIntervalId: number;
@@ -9,10 +8,10 @@ abstract class Speedometer {
   private static rightTurn: boolean = false;
 
   public static Start(): void {
-    mp.browsers.new('package://Speedometer/speedometer.html');
-
     mp.events.add(RageEnums.EventKey.PLAYER_ENTER_VEHICLE, (v: VehicleMp, s: number) => Speedometer.OnPlayerEnterVehicle(v, s));
     mp.events.add(RageEnums.EventKey.PLAYER_LEAVE_VEHICLE, () => Speedometer.OnPlayerExitVehicle());
+
+    Speedometer.browser = mp.browsers.new('package://Speedometer/speedometer.html');
   }
 
   private static OnPlayerEnterVehicle(vehicle: VehicleMp, seat: number): void {
@@ -20,16 +19,15 @@ abstract class Speedometer {
     if (!isDriver) return;
 
     Speedometer.vehicle = vehicle;
-    Speedometer.updaterIntervalId = setInterval(() => Speedometer.UpdateSpeedometer(), 250);
+    Speedometer.updaterIntervalId = setInterval(() => Speedometer.UpdateSpeedometer(), 100);
 
     mp.keys.bind(0x25, true, Speedometer.LeftTurn);
     mp.keys.bind(0x27, true, Speedometer.RightTurn);
 
-    mp.events.call(LocalEvents.SpeedometerShow);
+    Speedometer.browser.execute(`window.speedometerUi.Show();`);
   }
 
   private static OnPlayerExitVehicle(): void {
-    mp.events.call(LocalEvents.SpeedometerHide);
     clearInterval(Speedometer.updaterIntervalId);
     mp.keys.unbind(0x25, true, Speedometer.LeftTurn);
     mp.keys.unbind(0x27, true, Speedometer.RightTurn);
@@ -37,6 +35,8 @@ abstract class Speedometer {
     if (Speedometer.isBlinking) {
       Speedometer.StopBlinking();
     }
+
+    Speedometer.browser.execute(`window.speedometerUi.Hide();`);
   }
 
   private static StopBlinking(): void {
@@ -44,8 +44,8 @@ abstract class Speedometer {
     Speedometer.isBlinking = false;
     Speedometer.rightTurn = false;
     Speedometer.leftTurn = false;
-    mp.players.local.vehicle.setIndicatorLights(1, false );
-    mp.players.local.vehicle.setIndicatorLights(0, false );
+    mp.players.local.vehicle.setIndicatorLights(1, false);
+    mp.players.local.vehicle.setIndicatorLights(0, false);
   }
 
   private static LeftTurn(): void {
@@ -53,7 +53,7 @@ abstract class Speedometer {
       Speedometer.StopBlinking();
     } else {
       Speedometer.isBlinking = true;
-      Speedometer.blinkIntervalId = setInterval(() => Speedometer.Blinking(true), 550);
+      Speedometer.blinkIntervalId = setInterval(() => Speedometer.Blinking(true), 500);
     }
   }
 
@@ -62,17 +62,17 @@ abstract class Speedometer {
       Speedometer.StopBlinking();
     } else {
       Speedometer.isBlinking = true;
-      Speedometer.blinkIntervalId = setInterval(() => Speedometer.Blinking(false), 550);
+      Speedometer.blinkIntervalId = setInterval(() => Speedometer.Blinking(false), 500);
     }
   }
 
   private static Blinking(IsLeft: boolean): void {
     if (IsLeft) {
       Speedometer.leftTurn = !Speedometer.leftTurn;
-      mp.players.local.vehicle.setIndicatorLights(1, Speedometer.leftTurn );
+      mp.players.local.vehicle.setIndicatorLights(1, Speedometer.leftTurn);
     } else {
       Speedometer.rightTurn = !Speedometer.rightTurn;
-      mp.players.local.vehicle.setIndicatorLights(0, Speedometer.rightTurn );
+      mp.players.local.vehicle.setIndicatorLights(0, Speedometer.rightTurn);
     }
   }
 
@@ -85,6 +85,7 @@ abstract class Speedometer {
     const lowBeam: boolean = lights.lightsOn;
     const highBeam: boolean = lights.highbeamsOn;
 
+    // TODO: locked should be boolean. Not number
     const locked = Speedometer.vehicle.getDoorLockStatus();
 
     const rawFuel = Speedometer.vehicle.getVariable('Fuel');
@@ -93,7 +94,7 @@ abstract class Speedometer {
     const rawFuelTank = Speedometer.vehicle.getVariable('TankSize');
     const fuelTank = Number.parseFloat(rawFuelTank);
 
-    mp.events.call(LocalEvents.SpeedometerUpdate, speed, leftTurn, lowBeam, highBeam, locked, rightTurn, fuel, fuelTank);
+    Speedometer.browser.execute(`window.speedometerUi.Update(${speed}, ${leftTurn}, ${lowBeam}, ${highBeam}, ${locked}, ${rightTurn}, ${fuel}, ${fuelTank});`);
   }
 };
 
