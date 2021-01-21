@@ -90,11 +90,11 @@ abstract class Speedometer {
     const rightTurn = Speedometer.rightTurn;
 
     const speed = Speedometer.vehicle.getSpeed();
+    
     const lights = (Speedometer.vehicle as any).getLightsState(1, 1);
     const lowBeam: boolean = lights.lightsOn;
     const highBeam: boolean = lights.highbeamsOn;
 
-    // TODO: locked should be boolean. Not number
     const locked = Speedometer.vehicle.getDoorLockStatus();
 
     const rawFuel = Speedometer.vehicle.getVariable('Fuel');

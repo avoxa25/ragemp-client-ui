@@ -12,7 +12,7 @@ class SpeedometerUi {
     leftTurn: boolean,
     lowBeam: boolean,
     highBeam: boolean,
-    locked: boolean,
+    locked: number,
     rightTurn: boolean,
     fuel: number,
     fuelTank: number) {
@@ -54,9 +54,9 @@ class SpeedometerUi {
     }
   }
 
-  private UpdateLocked(locked: boolean): void {
+  private UpdateLocked(locked: number): void {
     const lockedElement = document.getElementById('doorLock') as HTMLElement;
-    if (locked) {
+    if (locked == 1) {
       lockedElement.classList.remove('nonActive');
     } else {
       lockedElement.classList.add('nonActive');
@@ -64,8 +64,9 @@ class SpeedometerUi {
   }
 
   private UpdateFuel(fuel: number, fuelTank: number): void {
-    // TODO: Implement
-    fuel; fuelTank;
+    const fuelElement = document.getElementById('fuel_value') as HTMLElement;
+    const percentage = Math.round((fuel / fuelTank) * 100);
+    fuelElement.style.backgroundPosition = `${percentage}% 50%`
   }
 };
 
