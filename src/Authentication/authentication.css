@@ -1,0 +1,191 @@
+* {
+  box-sizing: border-box;
+
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+
+  user-select: none;
+}
+
+UL,
+LI,
+P {
+  padding: 0;
+  margin: 0;
+}
+
+UL {
+  list-style-type: none;
+}
+
+BUTTON,
+INPUT {
+  height: 40px;
+
+  padding: 5px 15px;
+
+  border: 0;
+  border-radius: 60px;
+
+  outline: none;
+}
+
+LABEL,
+INPUT {
+  width: 100%;
+}
+
+LABEL {
+  font-weight: 400;
+}
+
+INPUT {
+  background-color: rgba(0, 0, 0, .5);
+
+  color: rgba(255, 255, 255, .33);
+
+  transition: color .25s ease-in-out;
+}
+
+INPUT:focus {
+  color: white;
+}
+
+BUTTON {
+  cursor: pointer;
+}
+
+A {
+  color: rgba(255, 255, 255, .5);
+  font-size: 12px;
+  font-weight: 400;
+
+  transition: color .25s ease-in-out;
+}
+
+A:hover {
+  color: white;
+}
+
+.hide {
+  display: none;
+}
+
+.active-flex {
+  display: flex !important;
+}
+
+.active-block {
+  display: block !important;
+}
+
+.denied, .success {
+  font-size: 12px;
+  font-weight: 400;
+  color: #FF0000;
+}
+
+.success {
+   color: #70FF00;
+}
+
+.container {
+  width: 390px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  background-color: rgba(0, 0, 0, .33);
+
+  border-radius: 50px 0 50px 0;
+
+  transform: translate(-50%, -50%);
+}
+
+header {
+  width: 100%;
+  height: 100px;
+
+  margin-bottom: 20px;
+
+  background: url("assets/swetlife-logo.svg"), linear-gradient(90deg, #FF009D 0%, #DF6F67 100%);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+
+  border-radius: 50px 0 0 0;
+}
+
+main>ul:first-of-type {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main>ul:first-of-type button {
+  height: 30px;
+
+  background-color: rgba(0, 0, 0, 0);
+
+  border-radius: 0;
+  border-bottom:2px solid rgba(255, 255, 255, 0);
+
+  transition: border-bottom .25s ease-in-out;
+}
+
+main>ul:first-of-type button:first-of-type {
+  margin-right: 10px;
+}
+
+main>ul:first-of-type button:last-of-type {
+  margin-left: 10px;
+}
+
+main>ul:first-of-type button:hover,
+main>ul:first-of-type button:focus,
+main>ul:first-of-type button.active {
+  border-bottom: 2px solid white;
+}
+
+.tab {
+  width: 100%;
+
+  display: none;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 15px 30px 50px 30px;
+}
+
+.tab>form {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 15px;
+}
+
+label+label,
+label+button {
+  margin-top: 10px;
+}
+
+label>input {
+  margin-top: 5px;
+}
+
+button[type=submit] {
+  width: 240px;
+
+  background: linear-gradient(90deg, #AA106F 0%, #FF009D 0.01%, #DF6F67 100%);
+
+  transition: box-shadow .25s ease-in-out;
+}
+
+button[type=submit]:hover {
+  box-shadow: 0 0 4px #DF6F67;
+}
