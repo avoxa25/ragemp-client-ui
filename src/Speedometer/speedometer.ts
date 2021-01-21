@@ -66,7 +66,7 @@ class SpeedometerUi {
   private UpdateFuel(fuel: number, fuelTank: number): void {
     const fuelElement = document.getElementById('fuel_value') as HTMLElement;
     const percentage = Math.round((fuel / fuelTank) * 100);
-    fuelElement.style.backgroundPosition = `${percentage}% 50%`
+    fuelElement.style.backgroundPosition = `${100 - percentage}% 50%`
   }
 };
 
