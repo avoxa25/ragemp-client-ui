@@ -157,7 +157,7 @@ export abstract class CharacterCreatorData {
       ]
     ];
 
-    CharacterCreatorData.gender = rawGender.map((g) => String(g))
+    CharacterCreatorData.gender = rawGender.map((g) => String(g));
     CharacterCreatorData.genderTexts = ['Мужской', 'Женский'];
 
     CharacterCreatorData.fathers = rawFathers.map((f) => f.toString());
