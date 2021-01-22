@@ -31,11 +31,11 @@
         <form action="javascript:void(0);" id="loginForm">
           <label>
             Логин:<br>
-            <input type="text" name="username" maxlenght="256" placeholder="Введите логин">
+            <input type="text" name="username" maxlenght="256" placeholder="Введите логин" required>
           </label>
           <label>
             Пароль:<br>
-            <input type="password" name="password" maxlenght="256" placeholder="Введите пароль">
+            <input type="password" name="password" maxlenght="256" placeholder="Введите пароль" required>
           </label>
           <button type="submit">Войти</button>
           <p class="denied login-tab" hidden>
@@ -49,20 +49,25 @@
         <form action="javascript:void(0);" id="registrationForm">
           <label>
             Логин:
-            <input type="text" name="username" maxlenght="256" placeholder="Введите логин">
+            <input type="text" name="username" maxlenght="256" placeholder="Введите логин" required>
           </label>
           <label>
             E-mail:
+<<<<<<< HEAD
             <input type="email" name="email" maxlength="256" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
               placeholder="Введите почту">
+=======
+            <input type="email" name="email" maxlenght="256" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+              placeholder="Введите почту" required>
+>>>>>>> 10e5f5c9e592f69025547701e40233b0b16baac3
           </label>
           <label>
             Пароль:
-            <input type="password" name="password" maxlenght="256" placeholder="Введите пароль">
+            <input type="password" name="password" maxlenght="256" placeholder="Введите пароль" required>
           </label>
           <label>
             Подтверждение пароля:
-            <input type="password" name="passwordConfirm" maxlenght="256" placeholder="Повторите пароль">
+            <input type="password" name="passwordConfirm" maxlenght="256" placeholder="Повторите пароль" required>
           </label>
           <button type="submit">Подтвердить</button>
           <p class="denied" hidden>
@@ -75,7 +80,7 @@
         <form action="javascript:void(0);">
           <label>
             Логин / E-mail:
-            <input type="text" name="recovery" maxlenght="256" placeholder="Введите логин или почту">
+            <input type="text" name="recovery" maxlenght="256" placeholder="Введите логин или почту" required>
           </label>
           <button type="submit">Выслать код</button>
           <p class="success" hidden>
