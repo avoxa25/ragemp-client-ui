@@ -40,7 +40,7 @@ P {
   direction: rtl;
 }
 
-.chat__window p {
+.chatWindow p {
   font-size: 16px;
   color: white;
 
