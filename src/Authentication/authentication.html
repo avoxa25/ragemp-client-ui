@@ -5,6 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="authentication.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
@@ -15,7 +19,7 @@
     <main>
       <ul>
         <li>
-          <button class="tablink active" id="authenticationLink" data-tab="authenticationTab">Авторизация</button>
+          <button class="tablink active" id="loginLink" data-tab="loginTab">Авторизация</button>
         </li>
         <li> | </li>
         <li>
@@ -23,66 +27,66 @@
         </li>
       </ul>
 
-      <section class="tab active-flex" id="authenticationTab">
-        <form>
+      <section class="tab active-flex" id="loginTab">
+        <form action="javascript:void(0);">
           <label>
             Логин:<br>
-            <input type="text" name="authLogin" placeholder="Введите логин">
+            <input type="text" name="username" maxlenght="256" placeholder="Введите логин">
           </label>
           <label>
             Пароль:<br>
-            <input type="password" name="authPassword" placeholder="Введите пароль">
+            <input type="password" name="password" maxlenght="256" placeholder="Введите пароль">
           </label>
           <button type="submit">Войти</button>
+          <p class="denied" hidden>
+            Проверьте правильность введённых данных
+          </p>
         </form>
         <a href="#" class="tablink" id="recoveryLink" data-tab="recoveryTab">Забыли пароль?</a>
-        <p class="denied hide">
-          Проверьте правильность введённых данных
-        </p>
       </section>
 
       <section class="tab" id="registrationTab">
-        <form>
+        <form action="javascript:void(0);">
           <label>
             Логин:
-            <input type="text" name="regLogin" placeholder="Введите логин">
+            <input type="text" name="username" maxlenght="256" placeholder="Введите логин">
           </label>
           <label>
             E-mail:
-            <input type="email" id="email" name="regMail" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+            <input type="email" name="email" maxlenght="256" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
               placeholder="Введите почту">
           </label>
           <label>
             Пароль:
-            <input type="password" name="regPassword" placeholder="Введите пароль">
+            <input type="password" name="password" maxlenght="256" placeholder="Введите пароль">
           </label>
           <label>
-            Пароль:
-            <input type="password" name="regPasswordConfirm" placeholder="Повторите пароль">
+            Подтверждение пароля:
+            <input type="password" name="passwordConfirm" maxlenght="256" placeholder="Повторите пароль">
           </label>
           <button type="submit">Подтвердить</button>
-          <p class="denied hide">
+          <p class="denied"  hidden>
             Проверьте правильность введённых данных
           </p>
         </form>
       </section>
 
       <section class="tab" id="recoveryTab">
-        <form>
+        <form action="javascript:void(0);">
           <label>
             Логин / E-mail:
-            <input type="text" name="recovery" placeholder="Введите логин или почту">
+            <input type="text" name="recovery" maxlenght="256" placeholder="Введите логин или почту">
           </label>
           <button type="submit">Выслать код</button>
         </form>
-        <p class="success hide">
+        <p class="success" hidden>
           Проверьте Вашу почту
         </p>
       </section>
     </main>
   </section>
 
-  <script type="module" src="authentication.js"></script>
+  <script src="authentication.js"></script>
 </body>
 
 </html>

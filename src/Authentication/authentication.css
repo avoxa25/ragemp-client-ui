@@ -9,6 +9,10 @@
   user-select: none;
 }
 
+FORM {
+  position: relative;
+}
+
 UL,
 LI,
 P {
@@ -82,6 +86,11 @@ A:hover {
 }
 
 .denied, .success {
+  position: absolute;
+  bottom: -30px;
+
+  margin-top: 10px;
+
   font-size: 12px;
   font-weight: 400;
   color: #FF0000;
@@ -125,7 +134,7 @@ main>ul:first-of-type {
 }
 
 main>ul:first-of-type button {
-  height: 30px;
+  height: 40px;
 
   background-color: rgba(0, 0, 0, 0);
 
