@@ -85,6 +85,7 @@ abstract class AuthenticationUi {
   private static OnRecoveryFormSubmit(form: HTMLFormElement) {
     const formData = new FormData(form);
     const recovery = formData.get('recovery') as string;
+    const successMessage = document.querySelector('#recoveryTab .success') as HTMLElement;
 
     // TODO: Send Recovery Code to the user Email
   }

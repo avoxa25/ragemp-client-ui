@@ -102,6 +102,11 @@ A:hover {
   color: #FF0000;
 }
 
+.denied.login-tab {
+  bottom: -60px;
+}
+
+
 .success {
    color: #70FF00;
 }
