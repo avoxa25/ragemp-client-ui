@@ -1,12 +1,10 @@
 abstract class BankMenuUi {
   public static Start(): void {
     const buttonsTabLink = document.querySelectorAll('button.tablink') as NodeListOf<HTMLElement>;
-    console.log(buttonsTabLink);
     buttonsTabLink.forEach((b) => b.addEventListener('click', () => BankMenuUi.ChangeTab(b)));
   }
 
   private static ChangeTab(selectedTab: HTMLElement): void {
-    console.log(selectedTab);
     const selectedTabId = selectedTab.getAttribute('data-tab');
     const selectedTabLinkId = selectedTab.id;
 
