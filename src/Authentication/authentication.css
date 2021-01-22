@@ -85,6 +85,12 @@ A:hover {
   display: block !important;
 }
 
+.denied:first-child
+{
+  color:black;
+  bottom: -20px;
+}
+
 .denied, .success {
   position: absolute;
   bottom: -30px;

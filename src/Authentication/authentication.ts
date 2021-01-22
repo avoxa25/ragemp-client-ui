@@ -1,3 +1,6 @@
+import { LocalEvents } from "src/Constants/localEvents";
+import { ErrorMessages } from "../Constants/errorMessages";
+
 abstract class AuthenticationUi {
   public static Start(): void {
     const buttonsTabLink = document.querySelectorAll('.tablink') as NodeListOf<HTMLElement>;
@@ -40,33 +43,38 @@ abstract class AuthenticationUi {
     form.addEventListener('submit', () => AuthenticationUi.OnLoginFormSubmit(form));
   }
 
-  private static OnLoginFormSubmit(form: HTMLFormElement): void {
-    const formData = new FormData(form);
-    const username = formData.get('username') as string;
-    const password = formData.get('password') as string;
-
-    // TODO: Call Rage MP ebat
-  }
-
   private static StartRegistrationTab(): void {
     const form = document.querySelector('#registrationTab > form') as HTMLFormElement;
     form.addEventListener('submit', () => AuthenticationUi.OnRegistrationFormSubmit(form));
   }
 
+  private static OnLoginFormSubmit(form: HTMLFormElement): void {
+    const formData = new FormData(form);
+    const username = formData.get('username') as string;
+    const password = formData.get('password') as string;
+
+    if (username === '' || password === '') return AuthenticationUi.ErrorMessage(form, ErrorMessages.FillEmptyFields);
+
+    //mp.events.call(LocalEvents.AuthenticationUiLogin, username, password);
+  }
+
   private static OnRegistrationFormSubmit(form: HTMLFormElement): void {
     const formData = new FormData(form);
     const username = formData.get('username') as string;
+    const usernamePattern = new RegExp('[A-Za-z0-9]$');
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
     const passwordConfirm = formData.get('passwordConfirm') as string;
 
-    if (password !== passwordConfirm) {
-      const errorMessage = document.querySelector('#registrationTab .denied') as HTMLElement;
-      errorMessage.hidden = false;
-      return;
-    }
+    if (username === '' || email === '' || password === '' || passwordConfirm === '') return AuthenticationUi.ErrorMessage(form, ErrorMessages.FillEmptyFields);
+    if (!usernamePattern.test(username)) return AuthenticationUi.ErrorMessage(form, ErrorMessages.IncorrectLogin);
+    if (username.length < 5) return AuthenticationUi.ErrorMessage(form, ErrorMessages.LoginTooShort);
+    if (username.length > 15) return AuthenticationUi.ErrorMessage(form, ErrorMessages.LoginTooLong);
+    if (password.length < 7) return AuthenticationUi.ErrorMessage(form, ErrorMessages.PasswordTooShort);
+    if (password.length > 30) return AuthenticationUi.ErrorMessage(form, ErrorMessages.PasswordTooLong);
+    if (password !== passwordConfirm) return AuthenticationUi.ErrorMessage(form, ErrorMessages.PasswordsNotMatch);
 
-    // TODO: Call Rage MP ebat
+    //mp.events.call(LocalEvents.AuthenticationUiRegistration, username, email, password);
   }
 
   private static StartRecoveryTab(): void {
@@ -78,9 +86,16 @@ abstract class AuthenticationUi {
     const formData = new FormData(form);
     const recovery = formData.get('recovery') as string;
 
-    // TODO: Call Rage MP ebat
+    // TODO: Send Recovery Code to the user Email
+  }
+
+  private static ErrorMessage(form: HTMLFormElement, message: string) {
+    const errorMessage = document.querySelector(`#${form.id} .denied`) as HTMLElement;
+    errorMessage.hidden = false;
+    errorMessage.textContent = message;
+
+    setTimeout(() => errorMessage.hidden = true, 3000);
   }
 };
 
 AuthenticationUi.Start();
-

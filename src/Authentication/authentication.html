@@ -28,7 +28,7 @@
       </ul>
 
       <section class="tab active-flex" id="loginTab">
-        <form action="javascript:void(0);">
+        <form action="javascript:void(0);" id="loginForm">
           <label>
             Логин:<br>
             <input type="text" name="username" maxlenght="256" placeholder="Введите логин">
@@ -46,14 +46,14 @@
       </section>
 
       <section class="tab" id="registrationTab">
-        <form action="javascript:void(0);">
+        <form action="javascript:void(0);" id="registartionForm">
           <label>
             Логин:
-            <input type="text" name="username" maxlenght="256" placeholder="Введите логин">
+            <input type="text" name="username" maxlenght="256" placeholder="Введите логин" >
           </label>
           <label>
             E-mail:
-            <input type="email" name="email" maxlenght="256" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+            <input type="email" name="email" maxlength="256" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
               placeholder="Введите почту">
           </label>
           <label>
@@ -65,7 +65,7 @@
             <input type="password" name="passwordConfirm" maxlenght="256" placeholder="Повторите пароль">
           </label>
           <button type="submit">Подтвердить</button>
-          <p class="denied"  hidden>
+          <p class="denied" hidden>
             Проверьте правильность введённых данных
           </p>
         </form>
