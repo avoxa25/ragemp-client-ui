@@ -3,6 +3,7 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const htmlComponents = [
   'Chat',
+  'HUD/Location',
   'Speedometer'
 ];
 
