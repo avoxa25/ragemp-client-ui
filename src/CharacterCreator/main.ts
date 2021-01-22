@@ -22,7 +22,7 @@ abstract class CharacterCreator {
 
     mp.events.add(LocalEvents.CharacterCreatorTabHair, (is: boolean, c: string) => {
       CharacterCreator.UpdateCharacterJson(c);
-      CharacterCreator.TabHair(is)
+      CharacterCreator.TabHair(is);
     });
 
     mp.events.add(LocalEvents.CharacterCreatorCreate, (c: string) => {
