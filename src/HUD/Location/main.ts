@@ -1,20 +1,21 @@
-abstract class HudLocation {
-  private static browser: BrowserMp;
+import { RemoteResponse } from '../../Constants/remote-response';
 
-  public static Start(): void {
-    HudLocation.browser = mp.browsers.new('package://HUD/Location/location.html');
+class HudLocation {
+  private readonly browser: BrowserMp;
 
-    setInterval(() => HudLocation.Update(), 3000);
+  constructor() {
+    this.browser = mp.browsers.new('package://HUD/Location/location.html');
+    setInterval(() => this.Update(), 3000);
   }
 
-  private static Update(): void {
+  private Update(): void {
     const playerStreet = mp.game.pathfind.getStreetNameAtCoord(mp.players.local.position.x, mp.players.local.position.y, mp.players.local.position.z, 0, 0);
 
     const streetName = mp.game.ui.getStreetNameFromHashKey(playerStreet.streetName);
     const crossingRoad = mp.game.ui.getStreetNameFromHashKey(playerStreet.crossingRoad);
 
-    HudLocation.browser.execute(`window.hudLocationUi.Update("${streetName}", "${crossingRoad}");`);
+    this.browser.execute(`window.hudLocationUi.Update("${streetName}", "${crossingRoad}");`);
   }
 };
 
-HudLocation.Start();
+mp.events.add(RemoteResponse.LoginSuccess, () => new HudLocation());  

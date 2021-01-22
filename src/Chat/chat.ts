@@ -18,9 +18,7 @@ class ChatUi {
     this.sendedMessages = [];
 
     this.newMessageInput = document.querySelector('input[type=text]') as HTMLInputElement;
-  }
 
-  public Start() {
     // To prevent player control freeze/cursor visibility interruption from system menus
     setInterval(() => this.SendChatToggleEvent(), 250);
 
@@ -136,7 +134,4 @@ class ChatUi {
   }
 }
 
-const chatUi = new ChatUi();
-chatUi.Start();
-
-(window as any).chatUi = chatUi;
+(window as any).chatUi = new ChatUi();;
