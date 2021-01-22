@@ -1,4 +1,4 @@
-import { LocalEvents } from '../Constants/localEvents';
+import { LocalEvents } from '../Constants/local-events';
 
 abstract class Chat {
   public static Start(): void {
