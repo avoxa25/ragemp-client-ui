@@ -75,7 +75,7 @@ Good:
 ``` HTML
 <li>
   <img src="assets/lowBeamInactive.svg"/>
-  <img src="assets/lowBeamActive.svg" styles="display: hidden;"/>
+  <img src="assets/lowBeamActive.svg" hidden/>
 </li>
 ```
 
@@ -83,5 +83,14 @@ Good:
 
 1. No style class = inactive. If element have multiple states
 2. Separate class for active state
-3. Hide elements using inline styles with `display: hidden;`
+3. To hide elements use `hidden` attribute
 4. No style selectors by id. Use classes or/and tag selectors
+5. Wrap all `<input>` tags inside `<form>` tag for user input interaction
+6. If input are inside `<form>` tag always set add `name` attribute
+7. Use as maximum as possible input limitations such as:
+   - [type](https://www.w3schools.com/tags/att_input_type.asp)
+   - [required](https://www.w3schools.com/tags/att_input_required.asp)
+   - [min](https://www.w3schools.com/tags/att_input_min.asp)
+   - [max](https://www.w3schools.com/tags/att_input_max.asp)
+   - [step](https://www.w3schools.com/tags/att_input_step.asp)
+   - [maxlength](https://www.w3schools.com/tags/att_input_maxlength.asp)

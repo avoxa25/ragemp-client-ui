@@ -1,15 +1,16 @@
-import { RemoteEvents } from '../Constants/remoteEvents';
-import { LocalEvents } from '../Constants/localEvents';
+import { LocalEvents } from '../Constants/local-events';
+import { RemoteResponse } from '../Constants/remote-response';
 
-abstract class Chat {
-  public static Start(): void {
-    mp.gui.chat.show(false);
-    mp.events.add(RemoteEvents.ChatOpen, () => Chat.Open);
-    mp.events.add(LocalEvents.ChatCursorToggle, (h: boolean) => Chat.OnChatCursorToggle(h));
+class Chat {
+  constructor() {
+    const chat = mp.browsers.new('package://Chat/chat.html');
+    chat.markAsChat();
+
+    mp.events.add(LocalEvents.ChatCursorToggle, (fc: boolean, v: boolean) => this.ToggleCharCursor(fc, v));
   }
 
-  private static OnChatCursorToggle(hidden: boolean): void {
-    mp.gui.cursor.show(!hidden, !hidden);
+  private ToggleCharCursor(freezeControls: boolean, visible: boolean): void {
+    mp.gui.cursor.show(freezeControls, visible);
   }
 
   private static Open(): void {
@@ -18,4 +19,9 @@ abstract class Chat {
   }
 };
 
-Chat.Start();
+mp.gui.chat.show(false);
+
+let chat: Chat | undefined;
+mp.events.add(RemoteResponse.CharacterSelected, () => chat = chat ? chat : new Chat());
+
+chat = new Chat();
