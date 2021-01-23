@@ -52,32 +52,33 @@ UL {
     padding: 0;
 }
 
-.parametrs {
-    width: 400px;
-    max-height: 530px;
+.parameters {
+    width: 500px;
+    max-height: 535px;
 
     position: absolute;
     top: 50%;
-    right: 200px;
+    right: 100px;
 
     display: none;
 
     margin-top: -265px;
     padding-bottom: 40px;
 
-
     background: url("assets/h-line.svg");
     background-position: 50% 0%;
     background-repeat: no-repeat;
     background-color: rgba(0, 0, 0, .6);
 
-    border-radius: 0 0 65px 0;
+    overflow-y: auto;
+
+    border-radius: 5px 5px 65px 5px;
 
     color: white;
     font-size: 18px;
 }
 
-.parametrs div.body {
+.parameters div.body {
     height: 100%;
 
     display: flex;
@@ -99,6 +100,7 @@ UL {
 
     border-radius: 65px 0 0 0;
 
+    
     color: white;
     font-size: 18px;
 }
@@ -273,7 +275,7 @@ input.slider::-webkit-slider-thumb {
 
 ul.navigation {
     position: absolute;
-    top: 190px;
+    top: 21.4%;
     right: 618px;
 
     list-style-type: none;

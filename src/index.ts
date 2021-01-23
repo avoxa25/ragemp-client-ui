@@ -1,4 +1,4 @@
 import './Chat/main';
 import './Speedometer/main';
-
-mp.discord.update('SweetLifeRP', '');
+import './CharacterCreator/main';
+import './Utils/discord';

@@ -1,6 +1,7 @@
 import { LocalEvents } from '../Constants/localEvents';
+import { SpecificLocalEvents } from '../Constants/specificLocalEvents';
 
-abstract class Chat {
+abstract class ChatUi {
   private static hidden: boolean;
 
   private static messages: string[];
@@ -10,86 +11,99 @@ abstract class Chat {
   private static messageFormHidden: boolean;
 
   public static Start() {
-    Chat.hidden = false;
-    Chat.messages = [];
-    Chat.messageFormHidden = true;
+    ChatUi.hidden = false;
+    ChatUi.messages = [];
+    ChatUi.messageFormHidden = true;
 
     // To prevent player control freeze/cursor visibility interruption from system menus
-    setInterval(() => Chat.sendChatToggleEvent(), 250);
+    setInterval(() => ChatUi.sendChatToggleEvent(), 250);
 
-    mp.events.add('chat:push', (message: string) => Chat.displayMessage(message));
-    mp.events.add('chat:activate', (visible: boolean) => Chat.toggleChat(visible));
-    mp.events.add('chat:show', () => Chat.toggleMessageInput());
+    mp.events.add(SpecificLocalEvents.ChatPush, (message: string) => ChatUi.displayMessage(message));
+    mp.events.add(SpecificLocalEvents.ChatClear, () => ChatUi.clearChat());
+    mp.events.add(SpecificLocalEvents.ChatActivate, (visible: boolean) => ChatUi.toggleChat(visible));
+    mp.events.add(SpecificLocalEvents.ChatShow, () => ChatUi.toggleMessageInput());
 
-    Chat.messagesDiv = document.getElementById('messagesDiv') as HTMLElement;
+    ChatUi.messagesDiv = document.getElementById('messagesDiv') as HTMLElement;
 
-    Chat.messageForm = document.querySelector('form') as HTMLFormElement;
-    Chat.messageForm.hidden = Chat.messageFormHidden;
-    Chat.messageForm.addEventListener('submit', (e) => Chat.onNewMessageFormSubmit(e));
+    ChatUi.messageForm = document.querySelector('form') as HTMLFormElement;
+    ChatUi.messageForm.hidden = ChatUi.messageFormHidden;
+    ChatUi.messageForm.addEventListener('submit', (e) => ChatUi.onNewMessageFormSubmit(e));
 
-    document.body.addEventListener('keydown', (e) => Chat.onKeydown(e));
+    document.body.addEventListener('keydown', (e) => ChatUi.onKeydown(e));
   }
 
   private static displayMessage(message: string): void {
-    Chat.messages.push(message);
+    ChatUi.messages.push(message);
 
     const messageElement = document.createElement('p');
     messageElement.innerHTML = message;
-    Chat.messagesDiv.appendChild(messageElement);
+    ChatUi.messagesDiv.appendChild(messageElement);
+  }
+
+  private static clearChat(): void {
+    ChatUi.messages = [];
+    ChatUi.messagesDiv.innerHTML = '';
   }
 
   private static toggleChat(visible: boolean): void {
-    Chat.hidden = !visible;
-    document.body.hidden = Chat.hidden;
+    ChatUi.hidden = !visible;
+    document.body.hidden = ChatUi.hidden;
   }
 
   private static toggleMessageInput(): void {
-    Chat.messageFormHidden = !Chat.messageFormHidden;
+    ChatUi.messageFormHidden = !ChatUi.messageFormHidden;
 
-    Chat.messageForm.reset();
-    Chat.messageForm.hidden = Chat.messageFormHidden;
+    ChatUi.messageForm.reset();
+    ChatUi.messageForm.hidden = ChatUi.messageFormHidden;
 
-    if (!Chat.messageForm.hidden) {
+    if (!ChatUi.messageForm.hidden) {
       const messageInput = document.querySelector('input[type=text]') as HTMLInputElement;
       messageInput.focus();
     }
 
-    setTimeout(() => mp.events.call(LocalEvents.ChatCursorToggle, Chat.messageFormHidden), 250);
+    setTimeout(() => mp.events.call(LocalEvents.ChatCursorToggle, ChatUi.messageFormHidden), 250);
   }
 
   private static onKeydown(event: KeyboardEvent): void {
     const isToggleChatKey = event.which === 84;
     const isEscapeKey = event.which === 27;
 
-    const newMessageFormData = new FormData(Chat.messageForm);
+    const newMessageFormData = new FormData(ChatUi.messageForm);
     const message = newMessageFormData.get('message') as string;
     const isNewMessageEmpty = message.length === 0;
 
     const isChatToggleEvent = isToggleChatKey && isNewMessageEmpty;
-    const isChatForceCloseEvent = !Chat.messageFormHidden && isEscapeKey;
+    const isChatForceCloseEvent = !ChatUi.messageFormHidden && isEscapeKey;
     if (isChatToggleEvent || isChatForceCloseEvent) {
       event.preventDefault();
-      Chat.toggleMessageInput();
+      ChatUi.toggleMessageInput();
       return;
     }
   }
 
   private static sendChatToggleEvent(): void {
-    mp.events.call(LocalEvents.ChatCursorToggle, Chat.messageFormHidden);
+    mp.events.call(LocalEvents.ChatCursorToggle, ChatUi.messageFormHidden);
   }
 
   private static onNewMessageFormSubmit(event: Event): void {
     event.preventDefault();
 
-    const newMessageFormData = new FormData(Chat.messageForm);
+    const newMessageFormData = new FormData(ChatUi.messageForm);
 
     const message = newMessageFormData.get('message') as string;
     const channel = newMessageFormData.get('channel') as string;
+    const encodedMessage = `${channel}|${message}`;
 
-    setTimeout(() => mp.events.call(LocalEvents.ChatMessageSend, message, channel), 250);
+    const isCommand = message.charAt(0) === '/';
+    if (isCommand) {
+      const commandMessage = message.substr(1);
+      (mp as any).invoke('command', commandMessage);
+    } else {
+      (mp as any).invoke('chatMessage', encodedMessage);
+    }
 
-    Chat.toggleMessageInput();
+    ChatUi.toggleMessageInput();
   }
 }
 
-Chat.Start();
+ChatUi.Start();

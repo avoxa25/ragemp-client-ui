@@ -4,7 +4,9 @@
   "description": "RageMP SweetLifeRP Server UI",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --watch"
+    "start": "webpack --watch",
+    "build": "webpack",
+    "build:production": "webpack --mode=production"
   },
   "repository": {
     "type": "git",

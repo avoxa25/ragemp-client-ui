@@ -12,5 +12,5 @@
       <feBlend result="blend" in2="SourceGraphic"/>
     </filter>
   </defs>
-  <path id="Прямоугольник_4" data-name="Прямоугольник 4" class="cls-1" d="M1416.27,252.111h408.59v3.683H1413.27v-0.683A3,3,0,0,1,1416.27,252.111Z" transform="translate(-1413.28 -252.125)"/>
+  <path id="face" data-name="face" class="cls-1" d="M1416.27,252.111h408.59v3.683H1413.27v-0.683A3,3,0,0,1,1416.27,252.111Z" transform="translate(-1413.28 -252.125)"/>
 </svg>
