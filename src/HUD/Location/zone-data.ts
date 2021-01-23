@@ -1,10 +1,8 @@
 export abstract class ZoneData {
-  public static GetZoneName(zoneId: string): string {
-    zoneId = zoneId.toUpperCase();
-    
+  public static GetZoneName(zoneId: string): string {    
     // TODO: Localize all names
     // https://wiki.rage.mp/index.php?title=Zone::getNameOfZone
-    switch (zoneId) {
+    switch (zoneId.toUpperCase()) {
       case 'AIRP': return 'Los Santos International Airport';
       case 'ALAMO': return 'Alamo Sea';
       case 'ALTA': return 'Alta';
