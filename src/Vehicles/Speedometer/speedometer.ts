@@ -71,6 +71,4 @@ class SpeedometerUi {
 };
 
 const speedometerUi = new SpeedometerUi();
-speedometerUi.Hide();
-
 (window as any).speedometerUi = speedometerUi;
