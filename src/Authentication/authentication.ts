@@ -1,5 +1,5 @@
-import { LocalEvents } from "../Constants/localEvents";
-import { ErrorMessages } from "../Constants/errorMessages";
+import { LocalEvents } from "../Constants/local-events";
+import { ErrorMessages } from "../Constants/error-messages";
 
 class AuthenticationUi {
   public Start(): void {

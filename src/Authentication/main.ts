@@ -1,5 +1,6 @@
-import { LocalEvents } from "../Constants/localEvents";
-import { RemoteEvents } from "../Constants/remoteEvents";
+import { RemoteEvents } from "../Constants/remote-events";
+import { LocalEvents } from "../Constants/local-events";
+import { RemoteResponse } from "../Constants/remote-response";
 
 abstract class Authentication {
   private static browser: BrowserMp;
@@ -13,10 +14,10 @@ abstract class Authentication {
     mp.gui.chat.show(false);
     mp.gui.chat.activate(false);
 
-    mp.events.add(RemoteEvents.AuthenticationOpen, () => Authentication.Open());
-    mp.events.add(RemoteEvents.AuthenticationClose, () => Authentication.Close());
-    mp.events.add(RemoteEvents.AuthenticationLoginFailed, (m: string) => Authentication.ErrorMessage(m, 'loginForm'));
-    mp.events.add(RemoteEvents.AuthenticationRegistrationFailed, (m: string) => Authentication.ErrorMessage(m, 'registrationForm'));
+    mp.events.add(RemoteResponse.AuthenticationAllowed, () => Authentication.Open());
+    mp.events.add(RemoteResponse.AuthenticationSuccess, () => Authentication.Close());
+    mp.events.add(RemoteResponse.LoginFailed, (m: string) => Authentication.ErrorMessage(m, 'loginForm'));
+    mp.events.add(RemoteResponse.RegistrationFailed, (m: string) => Authentication.ErrorMessage(m, 'registrationForm'));
 
     mp.events.add(LocalEvents.AuthenticationUiLogin, (u: string, p: string) => Authentication.Login(u, p));
     mp.events.add(LocalEvents.AuthenticationUiRegistration, (u: string, e: string, p: string) => Authentication.Registration(u, e, p));
@@ -51,11 +52,11 @@ abstract class Authentication {
   }
 
   private static Login(username: string, password: string): void {
-    mp.events.callRemote(RemoteEvents.AuthenticationLogin, username, password);
+    mp.events.callRemote(RemoteEvents.Login, username, password);
   }
 
   private static Registration(username: string, email: string, password: string): void {
-    mp.events.callRemote(RemoteEvents.AuthenticationRegistration, username, email, password)
+    mp.events.callRemote(RemoteEvents.Registration, username, email, password)
   }
 }
 
