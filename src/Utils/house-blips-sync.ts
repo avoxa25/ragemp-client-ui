@@ -3,14 +3,11 @@ import { RemoteResponse } from '../Constants/remote-response';
 
 class HouseBlipsSync {
   private readonly characterId: number;
-  private readonly clientBlips: { [name: number]: BlipMp };
+  private readonly clientBlips: { [id: number]: BlipMp };
 
   constructor() {
     const rawId = mp.players.local.getVariable('Id') as string;
     this.characterId = Number.parseInt(rawId);
-
-    mp.console.logInfo(`rawId: ${rawId}`);
-    mp.console.logInfo(`characterId: ${this.characterId}`);
 
     this.clientBlips = {};
 
@@ -20,21 +17,21 @@ class HouseBlipsSync {
 
   private Initialize(): void {
     this.GetServerBlips().forEach(b => {
-      mp.console.logInfo('Initialize');
+      b.setDisplay(0);
 
-      const rawId = b.getVariable('Id') as string;
-      const rawOwnerId = b.getVariable('OwnerId') as string;
-      const rawOnSale = b.getVariable('OnSale') as string;
-
-      const id = Number.parseInt(rawId);
-      const ownerId = Number.parseInt(rawOwnerId);
-      const onSale = rawOnSale === 'true';
+      const id = b.getVariable('Id') as number;
+      const ownerId = b.getVariable('OwnerId') as number | null;
+      const onSale = b.getVariable('OnSale') as boolean;
 
       const position = b.getCoords();
 
-      let color = BlipConstants.HouseDefaultColor;
+      let color = BlipConstants.HouseOccupiedColor;
       color = onSale ? BlipConstants.HouseOnSaleColor : color;
       color = this.characterId === ownerId ? BlipConstants.HouseOwnedColor : color;
+
+      let name = BlipConstants.HouseOccupiedName;
+      name = onSale ? BlipConstants.HouseOnSaleName : name;
+      name = this.characterId === ownerId ? BlipConstants.HouseOwnedName : name;
 
       const clientBlip = mp.blips.new(
         BlipConstants.HouseSprite,
@@ -44,7 +41,7 @@ class HouseBlipsSync {
           color: color,
           dimension: BlipConstants.HouseDimension,
           drawDistance: BlipConstants.HouseDrawDistance,
-          name: BlipConstants.HouseName,
+          name: name,
           rotation: BlipConstants.HouseRotation,
           scale: BlipConstants.HouseScale,
           shortRange: BlipConstants.HouseShortRange
@@ -56,20 +53,21 @@ class HouseBlipsSync {
 
   private Sync(): void {
     this.GetServerBlips().forEach(b => {
-      const rawId = b.getVariable('Id') as string;
-      const rawOwnerId = b.getVariable('OwnerId') as string;
-      const rawOnSale = b.getVariable('OnSale') as string;
+      const id = b.getVariable('Id') as number;
+      const ownerId = b.getVariable('OwnerId') as number | null;
+      const onSale = b.getVariable('OnSale') as boolean;
 
-      const id = Number.parseInt(rawId);
-      const ownerId = Number.parseInt(rawOwnerId);
-      const onSale = rawOnSale === 'true';
-
-      let color = BlipConstants.HouseDefaultColor;
+      let color = BlipConstants.HouseOccupiedColor;
       color = onSale ? BlipConstants.HouseOnSaleColor : color;
       color = this.characterId === ownerId ? BlipConstants.HouseOwnedColor : color;
 
+      let name = BlipConstants.HouseOccupiedName;
+      name = onSale ? BlipConstants.HouseOnSaleName : name;
+      name = this.characterId === ownerId ? BlipConstants.HouseOwnedName : name;
+
       const clientBlip = this.clientBlips[id];
       clientBlip.setColour(color);
+      (clientBlip as any).name = name;
     });
   }
 
