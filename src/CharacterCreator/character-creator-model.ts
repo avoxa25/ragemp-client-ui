@@ -1,4 +1,4 @@
-export class Character {
+export class CharacterCreatorModel {
   public firstName: string;
   public lastName: string;
 

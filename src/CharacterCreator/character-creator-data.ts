@@ -51,9 +51,6 @@ export abstract class CharacterCreatorData {
   private static colorTexts: string[];
 
   public static Init(): void {
-    CharacterCreatorData.hairs = [[], []];
-    CharacterCreatorData.hairTexts = [[], []];
-
     const rawGender = [true, false];
     const rawFathers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 42, 43, 44];
     const rawMothers = [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 45];
@@ -175,8 +172,11 @@ export abstract class CharacterCreatorData {
     CharacterCreatorData.shoes = [['3', '33', '101'], ['1', '26', '97']];
     CharacterCreatorData.shoeTexts = [['Кеды', 'Сникеры', 'Ботинки'], ['Кеды', 'Сникеры', 'Ботинки']];
 
+    CharacterCreatorData.hairs = [[], []];
     CharacterCreatorData.hairs[0] = hairList[0].map((hl) => hl.ID.toString());
     CharacterCreatorData.hairs[1] = hairList[1].map((hl) => hl.ID.toString());
+
+    CharacterCreatorData.hairTexts = [[], []];
     CharacterCreatorData.hairTexts[0] = hairList[0].map((hl) => hl.Name.toString());
     CharacterCreatorData.hairTexts[1] = hairList[1].map((hl) => hl.Name.toString());
 
@@ -210,8 +210,6 @@ export abstract class CharacterCreatorData {
     CharacterCreatorData.color = rawColors.map((c) => c.toString());
     CharacterCreatorData.colorTexts = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64'];
   }
-
-  //public static ResetValues()
 
   public static GetValuesByInputName(inputName: string, genderNumber: number): string[] {
     switch (inputName) {

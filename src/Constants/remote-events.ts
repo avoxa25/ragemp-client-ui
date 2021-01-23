@@ -5,6 +5,7 @@ export enum RemoteEvents {
   CharacterSelect = 'Remote:Character:Select',
   CharacterSpawnSelect = 'Remote:Character:SpawnSelect',
   CharacterEstablishContact = 'Remote:Character:EstablishContact',
+  
   CharacterCreatorCreate = 'Remote:CharacterCreator:Create',
   CharacterCreatorChangeGender = 'Remote:CharacterCreator:ChangeGender',
 
