@@ -18,7 +18,7 @@ export abstract class BlipConstants {
   public static readonly HouseShortRange = true;
 
   public static readonly GasStationSprite = 361;
-  public static readonly GasStationAlpha = 361;
+  public static readonly GasStationAlpha = 255;
   public static readonly GasStationDimension = 0;
 
   public static readonly GasStationOccupiedColor = 4;
