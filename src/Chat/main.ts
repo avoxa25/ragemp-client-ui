@@ -12,11 +12,6 @@ class Chat {
   private ToggleCharCursor(freezeControls: boolean, visible: boolean): void {
     mp.gui.cursor.show(freezeControls, visible);
   }
-
-  private static Open(): void {
-    const chat = mp.browsers.new('package://Chat/chat.html');
-    chat.markAsChat();
-  }
 };
 
 mp.gui.chat.show(false);

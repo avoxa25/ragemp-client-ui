@@ -14,8 +14,11 @@ abstract class Authentication {
     mp.gui.chat.show(false);
     mp.gui.chat.activate(false);
 
-    mp.events.add(RemoteResponse.AuthenticationAllowed, () => Authentication.Open());
-    mp.events.add(RemoteResponse.AuthenticationSuccess, () => Authentication.Close());
+    mp.events.add(RemoteResponse.LoginAllowed, () => Authentication.Open());
+
+    mp.events.add(RemoteResponse.RegistrationSuccess, () => Authentication.Close());
+    mp.events.add(RemoteResponse.LoginSuccess, () => Authentication.Close());
+
     mp.events.add(RemoteResponse.LoginFailed, (m: string) => Authentication.ErrorMessage(m, 'loginForm'));
     mp.events.add(RemoteResponse.RegistrationFailed, (m: string) => Authentication.ErrorMessage(m, 'registrationForm'));
 
