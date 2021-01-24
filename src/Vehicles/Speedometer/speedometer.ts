@@ -24,12 +24,12 @@ class SpeedometerUi {
 
   private UpdateSpeed(speedInMpS: number): void {
     const speedInKmH = Math.ceil(speedInMpS * 3.6);
-    const speedometer = document.getElementById('current_speed') as HTMLElement;
+    const speedometer = document.querySelector('#currentSpeed') as HTMLElement;
     speedometer.innerText = speedInKmH.toString();
   }
 
   private UpdateLights(lowBeam: boolean, highBeam: boolean, leftTurn: boolean, rightTurn: boolean): void {
-    const lowBeamElement = document.getElementById('lights') as HTMLElement;
+    const lowBeamElement = document.querySelector('#lights') as HTMLElement;
     if (lowBeam) {
       lowBeamElement.classList.remove('nonActive');
     } else {
@@ -39,14 +39,14 @@ class SpeedometerUi {
     // TODO: Implement highBeam
     highBeam;
 
-    const leftTurnElement = document.getElementById('arrow-left') as HTMLElement;
+    const leftTurnElement = document.querySelector('#arrow-left') as HTMLElement;
     if (leftTurn) {
       leftTurnElement.classList.remove('nonActive');
     } else {
       leftTurnElement.classList.add('nonActive');
     }
 
-    const rightTurnElement = document.getElementById('arrowRight') as HTMLElement;
+    const rightTurnElement = document.querySelector('#arrowRight') as HTMLElement;
     if (rightTurn) {
       rightTurnElement.classList.remove('nonActive');
     } else {
@@ -55,7 +55,7 @@ class SpeedometerUi {
   }
 
   private UpdateLocked(locked: number): void {
-    const lockedElement = document.getElementById('doorLock') as HTMLElement;
+    const lockedElement = document.querySelector('#doorLock') as HTMLElement;
     if (locked == 1) {
       lockedElement.classList.remove('nonActive');
     } else {
@@ -64,7 +64,7 @@ class SpeedometerUi {
   }
 
   private UpdateFuel(fuel: number, fuelTank: number): void {
-    const fuelElement = document.getElementById('fuel_value') as HTMLElement;
+    const fuelElement = document.querySelector('#fuel_value') as HTMLElement;
     const percentage = Math.round((fuel / fuelTank) * 100);
     fuelElement.style.backgroundPosition = `${100 - percentage}% 50%`
   }
