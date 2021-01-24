@@ -1,0 +1,239 @@
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="assets/styles.css">
+	<link rel="stylesheet" href="assets/anim_bg.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<div id='stars'></div>
+	<div id='stars2'></div>
+	<div id='stars3'></div>
+
+	<div
+		style="width: 1175; height: 630px; position: absolute; left: 50%; margin-left: -587px; top: 50%; margin-top: -290px; ">
+
+		<!--Первый слот-->
+		<!--Сам персонаж-->
+		<div class="box" id="1_char_slot">
+			<div class="header">
+				<img src="assets/char.png" style="margin-top: -54px; width: 80%; margin-left: 30px;">
+				<div class="nickname" style="position: absolute; z-index: 3; margin-top: -45px; margin-left: 25px;">
+					<h4 class="text-gradient" id="1_char_name" style="height: 60px; line-height: 60px; margin: 0 0 0 0;">
+						Tri Dvarazov
+					</h4>
+				</div>
+			</div>
+			<div style="margin-left: 25px; margin-right: 25px; margin-bottom: 25px; margin-top: 50px; text-align: center;">
+				<div class="line">
+					<p style="float: left; margin-left: 25px;">В игре:</p>
+					<p id="1_ingame_time" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67">1.0</p>
+				</div>
+				<div class="line">
+					<p style="float: left; margin-left: 25px;">Фракция:</p>
+					<p id="1_fraction" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67">Отсутствует
+					</p>
+				</div>
+				<div class="line">
+					<p style="float: left; margin-left: 25px;">Наличные:</p>
+					<p id="1_papercash" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67">$
+						999,999,999.00</p>
+				</div>
+				<div class="line">
+					<p style="float: left; margin-left: 25px;">Банк:</p>
+					<p id="1_bankcash" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67">$
+						999,999,999.00</p>
+				</div>
+				<button id="1_charSelect" class="select" value="0">ВЫБРАТЬ</button>
+				<p style="margin-top: 5px; font-size: 12pt;"><a href="#" id="1_charDelete" style="color: #4d4d4d;">Удалить
+						персонажа</a></p>
+			</div>
+		</div>
+		<!--Сам персонаж-->
+		<!--Свободный слот-->
+		<div class="second" id="1_free_slot">
+			<div class="box closed" style="margin-left: 0;" id="1_empty">
+				<div class="header" style="background-image: url('assets/closed.png'); background-position: -40px;">
+					<img src="assets/add.png" style="position: absolute; left: 50%; margin-left: -92px; margin-top: 75px;">
+				</div>
+				<div style="margin-left: 25px; margin-right: 25px; margin-bottom: 25px; margin-top: 110px; text-align: center;">
+					<h1 class="text-gradient">Слот свободен</h1>
+					<p
+						style="position: absolute; z-index: 2; font-size: 12pt; margin: 20px 0px 0 30px; height: 20px; line-height: 20px; color: #333a4e">
+						Нажмите, чтобы создать персонажа<br>или перенести другого на этот аккаунт</p>
+					<img src="assets/comment.png" style="margin-top: 0px; width: 95%;">
+					<a href="#" id="1_charCreate"><img src="assets/plus.png" style="margin-top: -40px;;"></a>
+				</div>
+			</div>
+		</div>
+		<!--Свободный слот-->
+		<!--Покупка-->
+		<div class="box closed" style="margin-left: 800px; " id="1_closed_slot">
+			<div class="header"
+				style="background-image: url('assets/closed2.png'); height: 290px; background-position: -50px;">
+				<img src="assets/disabled.png"
+					style="position: absolute; left: 50%; margin-left: -92px; margin-top: 200px; width: 185px;">
+			</div>
+			<div style="margin-left: 25px; margin-right: 25px; margin-bottom: 25px; margin-top: 110px; text-align: center;">
+				<h1 class="text-gradient">Слот заблокирован</h1>
+				<button class="select" style="margin-top: 10px;">АКТИВИРОВАТЬ ЗА 99РУБ.</button>
+			</div>
+		</div>
+		<!--Покупка-->
+		<!--Первый слот-->
+
+
+
+
+
+
+
+
+		<!--Второй слот-->
+		<!--Сам персонаж-->
+		<div class="box" id="2_char_slot">
+			<div class="header">
+				<img src="assets/char.png" style="margin-top: -54px; width: 80%; margin-left: 30px;">
+				<div class="nickname" style="position: absolute; z-index: 3; margin-top: -45px; margin-left: 25px;">
+					<h4 class="text-gradient" id="2_char_name" style="height: 60px; line-height: 60px; margin: 0 0 0 0;">Tri
+						Dvarazov</h4>
+				</div>
+			</div>
+			<div style="margin-left: 25px; margin-right: 25px; margin-bottom: 25px; margin-top: 50px; text-align: center;">
+				<div class="line">
+					<p style="float: left; margin-left: 25px;">В игре:</p>
+					<p id="2_ingame_time" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67">1024.0</p>
+				</div>
+				<div class="line">
+					<p style="float: left; margin-left: 25px;">Фракция:</p>
+					<p id="2_fraction" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67">USMC</p>
+				</div>
+				<div class="line">
+					<p style="float: left; margin-left: 25px;">Наличные:</p>
+					<p id="2_papercash" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67">$
+						999,999,999.00</p>
+				</div>
+				<div class="line">
+					<p style="float: left; margin-left: 25px;">Банк:</p>
+					<p id="2_bankcash" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67">$
+						999,999,999.00</p>
+				</div>
+				<button id="charSelect" class="select">ВЫБРАТЬ</button>
+				<p style="margin-top: 5px; font-size: 12pt;"><a href="#" id="charDelete" style="color: #4d4d4d;">Удалить
+						персонажа</a></p>
+			</div>
+		</div>
+		<!--Сам персонаж-->
+		<!--Свободный слот-->
+		<div class="second" id="2_free_slot">
+			<div class="box closed" style="margin-left: 400px;" id="empty">
+				<div class="header" style="background-image: url('assets/closed.png'); background-position: -40px;">
+					<img src="assets/add.png" style="position: absolute; left: 50%; margin-left: -92px; margin-top: 75px;">
+				</div>
+				<div style="margin-left: 25px; margin-right: 25px; margin-bottom: 25px; margin-top: 110px; text-align: center;">
+					<h1 class="text-gradient">Слот свободен</h1>
+					<p
+						style="position: absolute; z-index: 2; font-size: 12pt; margin: 20px 0px 0 30px; height: 20px; line-height: 20px; color: #333a4e">
+						Нажмите, чтобы создать персонажа<br>или перенести другого на этот аккаунт</p>
+					<img src="assets/comment.png" style="margin-top: 0px; width: 95%;">
+					<a href="#" id="2_charCreate"><img src="assets/plus.png" style="margin-top: -40px;;"></a>
+				</div>
+			</div>
+		</div>
+		<!--Свободный слот-->
+		<!--Покупка-->
+		<div class="box closed" style="margin-left: 800px; " id="2_closed_slot">
+			<div class="header"
+				style="background-image: url('assets/closed2.png'); height: 290px; background-position: -50px;">
+				<img src="assets/disabled.png"
+					style="position: absolute; left: 50%; margin-left: -92px; margin-top: 200px; width: 185px;">
+			</div>
+			<div style="margin-left: 25px; margin-right: 25px; margin-bottom: 25px; margin-top: 110px; text-align: center;">
+				<h1 class="text-gradient">Слот заблокирован</h1>
+				<button class="select" style="margin-top: 10px;">АКТИВИРОВАТЬ ЗА 99РУБ.</button>
+			</div>
+		</div>
+		<!--Покупка-->
+		<!--Второй слот-->
+
+
+
+
+
+
+
+
+
+		<!--Третий слот-->
+		<!--Сам персонаж-->
+		<div class="box" id="3_char_slot">
+			<div class="header">
+				<img src="assets/char.png" style="margin-top: -54px; width: 80%; margin-left: 30px;">
+				<div class="nickname" style="position: absolute; z-index: 3; margin-top: -45px; margin-left: 25px;">
+					<h4 class="text-gradient" id="char_name" style="height: 60px; line-height: 60px; margin: 0 0 0 0;">Tri
+						Dvarazov</h4>
+				</div>
+			</div>
+			<div style="margin-left: 25px; margin-right: 25px; margin-bottom: 25px; margin-top: 50px; text-align: center;">
+				<div class="line">
+					<p style="float: left; margin-left: 25px;">В игре:</p>
+					<p id="ingame_time" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67">1024.0</p>
+				</div>
+				<div class="line">
+					<p style="float: left; margin-left: 25px;">Фракция:</p>
+					<p id="fraction" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67">USMC</p>
+				</div>
+				<div class="line">
+					<p style="float: left; margin-left: 25px;">Наличные:</p>
+					<p id="papercash" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67">$
+						999,999,999.00</p>
+				</div>
+				<div class="line">
+					<p style="float: left; margin-left: 25px;">Банк:</p>
+					<p id="bankcash" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67">$
+						999,999,999.00</p>
+				</div>
+				<button id="charSelect" class="select">ВЫБРАТЬ</button>
+				<p style="margin-top: 5px; font-size: 12pt;"><a href="#" id="charDelete" style="color: #4d4d4d;">Удалить
+						персонажа</a></p>
+			</div>
+		</div>
+		<!--Сам персонаж-->
+		<!--Свободный слот-->
+		<div class="second" id="2_free_slot">
+			<div class="box closed" style="margin-left: 400px;" id="empty">
+				<div class="header" style="background-image: url('assets/closed.png'); background-position: -40px;">
+					<img src="assets/add.png" style="position: absolute; left: 50%; margin-left: -92px; margin-top: 75px;">
+				</div>
+				<div style="margin-left: 25px; margin-right: 25px; margin-bottom: 25px; margin-top: 110px; text-align: center;">
+					<h1 class="text-gradient">Слот свободен</h1>
+					<p
+						style="position: absolute; z-index: 2; font-size: 12pt; margin: 20px 0px 0 30px; height: 20px; line-height: 20px; color: #333a4e">
+						Нажмите, чтобы создать персонажа<br>или перенести другого на этот аккаунт</p>
+					<img src="assets/comment.png" style="margin-top: 0px; width: 95%;">
+					<a href="#" id="3_charCreate"><img src="assets/plus.png" style="margin-top: -40px;;"></a>
+				</div>
+			</div>
+		</div>
+		<!--Свободный слот-->
+		<!--Покупка-->
+		<div class="box closed" style="margin-left: 800px; " id="3_closed_slot">
+			<div class="header"
+				style="background-image: url('assets/closed2.png'); height: 290px; background-position: -50px;">
+				<img src="assets/disabled.png"
+					style="position: absolute; left: 50%; margin-left: -92px; margin-top: 200px; width: 185px;">
+			</div>
+			<div style="margin-left: 25px; margin-right: 25px; margin-bottom: 25px; margin-top: 110px; text-align: center;">
+				<h1 class="text-gradient">Слот заблокирован</h1>
+				<button class="select" style="margin-top: 10px;">АКТИВИРОВАТЬ ЗА 99РУБ.</button>
+			</div>
+		</div>
+		<!--Покупка-->
+		<!--Третий слот-->
+		<script src="paper.js"></script>
+</body>
+
+</html>
