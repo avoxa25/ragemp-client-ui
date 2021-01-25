@@ -48,6 +48,10 @@ ul {
 
 ul > li {
     height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .fuel-value {
