@@ -1,0 +1,62 @@
+* {
+  box-sizing: border-box;
+
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+
+  user-select: none;
+}
+
+P {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+
+.cash {
+  height: 45px;
+
+  position: absolute;
+  top: 125px;
+  right: 35px;
+
+  display: flex;
+  align-items: center;
+
+  padding-right: 13px;
+
+  background-image: url("assets/location_line.svg");
+  background-position: 100% 50%;
+  background-repeat: no-repeat;
+
+  color: white;
+  font-size: 18px;
+}
+
+.cash p {
+  margin-left: 5px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.ammo {
+  height: 25px;
+
+  position: absolute;
+  top: 190px;
+  right: 35px;
+
+  display: flex;
+  align-items: center;
+
+  color: #bbbbbb;
+  font-size: 16px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.ammo p {
+  margin-left: 5px;
+}
+
+.ammo-magazine {
+  color: white;
+  font-size: 20px;
+}
