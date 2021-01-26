@@ -4,5 +4,6 @@ import './HUD/Location/main';
 import './Speedometer/main';
 import './Utils/gas-station-blips-sync';
 import './Utils/house-blips-sync';
+import './Render/main';
 
 mp.discord.update('SweetLifeRP', '');

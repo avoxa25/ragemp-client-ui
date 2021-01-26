@@ -1,4 +1,4 @@
-import { KeyboardKeys } from "src/Constants/keyboard-keys";
+import { KeyboardKeys } from "../Constants/keyboard-keys";
 
 abstract class Render {
   private static maxDistance: number = 625;
@@ -39,16 +39,22 @@ abstract class Render {
           let scale = (distance / Render.maxDistance);
           if (scale < 0.6) scale = 0.6;
 
-          var health = player.getHealth();
+          let health = player.getHealth();
           health = health < 100 ? 0 : ((health - 100) / 100);
 
-          var armour = player.getArmour() / 100;
+          let armour = player.getArmour() / 100;
           armour = armour < 100 ? 0 : ((armour - 100) / 100);
 
           y -= scale * (0.005 * (screenRes.y / 1080));
 
-          let roles = mp.players.local.getVariable('Role') as string;
-          if (roles == '') { // if user
+          let plyRoles = mp.players.local.getVariable('Role').split(',') as string[];
+          let adminRoles: string[] = ['МОДЕРАТОР', 'СТАРШИЙ МОДЕРАТОР', 'МЛАДШИЙ МОДЕРАТОР', 'АДМИНИСТРАТОР', 'СТАРШИЙ АДМИНИСТРАТОР', 'ГЛАВНЫЙ АДМИНИСТРАТОР', 'ТЕХНИЧЕСКИЙ АДМИНИСТРАТОР', 'РАЗРАБОТЧИК']
+          let intersect = function (arr1: string[], arr2: string[]) {
+            return arr1.filter(function (n) {
+              return arr2.indexOf(n) !== -1;
+            });
+          };
+          if (intersect(plyRoles, adminRoles).length == 0) { // if user
             graphics.drawText(`${player.name.replace('_', ' ')} (${player.remoteId})`, [x, y],
               {
                 font: 4,
@@ -90,7 +96,7 @@ abstract class Render {
             }
           }
         }
-      } catch { };
+      } catch (err) { };
     });
   }
 }
