@@ -1,13 +1,10 @@
 * {
   box-sizing: border-box;
 
-  font-family: 'PT Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
 
   user-select: none;
-}
-
-body {
-  background: gray;
 }
 
 p {
@@ -58,6 +55,13 @@ section {
 
 section.active {
   display: block;
+
+  animation: scale .25s ease-in-out;
+}
+
+@keyframes scale {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
 }
 
 .text-disc {
@@ -75,6 +79,7 @@ section.active {
 
   margin-top: -40px;
   margin-left: -40px;
+  padding: 5px;
 
   background-color: rgba(0, 0, 0, .33);
 
@@ -83,8 +88,12 @@ section.active {
 
   color: white;
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 400;
   text-align: center;
+}
+
+.text-disc>p {
+  word-wrap: break-word !important;
 }
 
 .menu-item {
@@ -92,19 +101,28 @@ section.active {
   height: 127px;
 
   position: absolute;
-  left: 50%;
   z-index: 1;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   margin-left: -109px;
+  padding: 15px;
 
 
   background-color: rgba(0, 0, 0, 0);
   background-position: 50% 50%;
   background-repeat: no-repeat;
 
-  clip-path: url("#mask");
   cursor: pointer;
   transition: background-color .12s ease-in;
+}
+
+.menu-item>p {
+  color: white;
+  font-weight: 600;
+  text-align: center;
 }
 
 .menu-item:hover {
@@ -113,51 +131,85 @@ section.active {
 
 .menu-item.up {
   top: 0;
+  left: 50%;
+
+  clip-path: url("#mask-top");
 }
 
 .menu-item.down {
   bottom: 0;
+  left: 50%;
 
-  transform: rotate(180deg);
+  clip-path: url("#mask-bottom");
 }
 
 .menu-item.left {
-  top: 50%;
-  left: 63px;
+  width: 128px;
+  height: 218px;
+  top: 48px;
+  left: 0;
 
-  margin-top: -63px;
+  margin-left: 0;
 
-  transform: rotate(-90deg);
+  clip-path: url("#mask-left");
 }
 
 .menu-item.right {
+  width: 128px;
+  height: 218px;
+
   top: 50%;
+  right: 0 !important;
 
-  margin: -63px 0 0 -15px;
+  margin: -109px 0 0 0 !important;
 
-  transform: rotate(90deg);
+  clip-path: url("#mask-right");
 }
 
 .car-lock {
-  background-image: url("assets/car_lock.svg");
+  background-image: url("assets/carlock.svg");
 }
 
 .car-baggage {
-  background-image: url("assets/car_baggage.png");
+  background-image: url("assets/baggage.svg");
 }
 
-.char-meet {
-  background-image: url("assets/char_hello.svg");
+.car-capote {
+  background-image: url("assets/capote.svg");
 }
 
-.char-show-document {
-  background-image: url("assets/char_doc.svg");
+.car-doors {
+  background-image: url("assets/doors.svg");
 }
 
-.char-invite-home {
-  background-image: url("assets/char_home.svg");
+.car-door {
+  background-image: url("assets/door.svg");
 }
 
-.char-trade {
-  background-image: url("assets/char_cash.svg");
+.car-turn-on {
+  background-image: url("assets/turnon.svg");
+}
+
+.car-catapult {
+  background-image: url("assets/catapult.svg");
+}
+
+.player-meet {
+  background-image: url("assets/handshake.svg");
+}
+
+.player-show-document {
+  background-image: url("assets/id-card.svg");
+}
+
+.player-invite-home {
+  background-image: url("assets/property.png");
+}
+
+.player-trade {
+  background-image: url("assets/money.svg");
+}
+
+.pointer {
+  cursor: pointer;
 }
