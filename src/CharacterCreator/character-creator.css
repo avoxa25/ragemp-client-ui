@@ -1,8 +1,8 @@
 * {
     box-sizing: border-box;
 
-    font-family: 'PT Sans', sans-serif;
-    font-weight: 300;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
 
     user-select: none;
 }
@@ -10,6 +10,10 @@
 P {
     margin: 0;
     padding: 0;
+}
+
+UL+P {
+    margin-top: 10px;
 }
 
 INPUT,
@@ -34,6 +38,10 @@ INPUT {
     font-size: 18px;
 }
 
+INPUT::placeholder {
+    color: rgba(0, 0, 0, .33);
+}
+
 BUTTON {
     width: 160px;
 
@@ -48,34 +56,87 @@ BUTTON:hover {
     color: white;
 }
 
+FORM {
+    width: 460px;
+    max-height: 470px;
+
+    overflow-y: auto;
+}
+
+button.tabLinks.active {
+    position: relative;
+
+    background-color: white;
+
+}
+
+button.tabLinks.active::after {
+    content: "";
+    width: 8px;
+    height: 6px;
+
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+
+    margin-left: -3px;
+
+    background-image: url("assets/active.png");
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
 UL {
+    margin: 0;
     padding: 0;
 }
 
-.parameters {
-    width: 500px;
-    max-height: 535px;
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
 
+.container {
     position: absolute;
     top: 50%;
     right: 100px;
 
-    display: none;
+    transform: translate(0%, -267px);
+}
 
-    margin-top: -265px;
-    padding-bottom: 40px;
+.parameters {
+    width: 500px;
+    max-height: 545px;
+
+    display: none;
+    padding: 20px 20px 25px 20px;
 
     background: url("assets/h-line.svg");
     background-position: 50% 0%;
     background-repeat: no-repeat;
     background-color: rgba(0, 0, 0, .6);
 
-    overflow-y: auto;
-
-    border-radius: 5px 5px 65px 5px;
+    border-radius: 5px 5px 30px 5px;
 
     color: white;
     font-size: 18px;
+}
+
+.subTab {
+    width: 100%;
+    
+    display: none;
+}
+
+.subTab.active,
+.parameters.active {
+    display: block;
+
+    animation: fadein .25s ease-in-out;
 }
 
 .parameters div.body {
@@ -100,7 +161,7 @@ UL {
 
     border-radius: 65px 0 0 0;
 
-    
+
     color: white;
     font-size: 18px;
 }
@@ -108,12 +169,7 @@ UL {
 .body {
     height: 81%;
 
-    padding: 25px 25px 0px 25px;
-}
-
-.body.face {
-    overflow-x: hidden;
-    overflow-y: scroll;
+    padding: 0 25px 0 25px;
 }
 
 .body>input:first-of-type {
@@ -185,10 +241,7 @@ ul.face li::before {
 
 .body ul li,
 .body ul li p,
-.body ul li p span,
-.body.clothes ul li,
-.body.clothes ul li p,
-.body.clothes ul li p span {
+.body ul li p span {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -275,8 +328,8 @@ input.slider::-webkit-slider-thumb {
 
 ul.navigation {
     position: absolute;
-    top: 21.4%;
-    right: 618px;
+    top: 0;
+    left: -75px;
 
     list-style-type: none;
 }
@@ -292,6 +345,8 @@ ul.navigation>li button {
     background-color: rgba(0, 0, 0, 0.6);
     background-position: 50% 50%;
     background-repeat: no-repeat;
+
+    transition: background-color .15s ease-in-out;
 }
 
 button.face {
@@ -314,10 +369,67 @@ ul.navigation>li button:hover {
     background-color: white;
 }
 
-ul.face {
-    margin: 0 0 10px 0;
-}
-
 ul.face li:last-child {
     margin-top: 5px;
+}
+
+ul.sliders>li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+    padding: 8px 0 10px 0;
+}
+
+ul.sliders>li>p:last-of-type {
+    width: 100%;
+}
+
+ul.sliders>li>p>span {
+    width: 115px;
+
+    display: flex;
+    justify-content: center;
+}
+
+ul.sliders>li::before {
+    background: none;
+}
+
+ul.face-navigation {
+    flex-direction: row;
+
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+ul.face-navigation>li {
+    margin: 0;
+    padding: 0;
+}
+
+ul.face-navigation>li::before {
+    background-image: none;
+}
+
+ul.face-navigation>li::after {
+    border: 0;
+}
+
+ul.face-navigation>li>button {
+    width: 90px;
+    height: 40px;
+
+    background-image: none !important;
+    background-color: rgba(0, 0, 0, .33) !important;
+
+    font-size: 16px;
+}
+
+ul.face-navigation>li>button:hover,
+ul.face-navigation>li>button:focus,
+ul.face-navigation>li>button.active {
+    background: linear-gradient(to left, #ee0b89, #fd6f67 75%) !important;
 }
