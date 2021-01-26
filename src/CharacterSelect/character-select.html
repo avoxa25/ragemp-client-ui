@@ -1,0 +1,94 @@
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="assets/styles.css">
+	<!-- <link rel="stylesheet" href="assets/anim_bg.css"> -->
+</head>
+
+<body>
+	<div id='stars'></div>
+	<div id='stars2'></div>
+	<div id='stars3'></div>
+
+	<div
+		style="width: 1175; height: 630px; position: absolute; left: 50%; margin-left: -587px; top: 50%; margin-top: -290px;">
+
+		<div id="copyFrom">
+			<div class="box hidden" id="characterSlot">
+				<div class="header">
+					<img src="assets/char.png" style="margin-top: -54px; width: 80%; margin-left: 30px;">
+					<div class="nickname" style="position: absolute; z-index: 3; margin-top: -45px; margin-left: 25px;">
+						<h4 class="text-gradient" id="characterName" style="height: 60px; line-height: 60px; margin: 0 0 0 0;">
+						</h4>
+					</div>
+				</div>
+				<div style="margin-left: 25px; margin-right: 25px; margin-bottom: 25px; margin-top: 50px; text-align: center;">
+					<div class="line">
+						<p style="float: left; margin-left: 25px;">В игре:</p>
+						<p id="inGameTime" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67">1.0</p>
+					</div>
+					<div class="line">
+						<p style="float: left; margin-left: 25px;">Фракция:</p>
+						<p id="fraction" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67">
+							Отсутствует
+						</p>
+					</div>
+					<div class="line">
+						<p style="float: left; margin-left: 25px;">Наличные:</p>
+						<p id="cash" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67">
+							0
+						</p>
+					</div>
+					<div class="line">
+						<p style="float: left; margin-left: 25px;">Банк:</p>
+						<p id="bankCash" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67"></p>
+					</div>
+					<button id="characterSelect" class="select" value="0">ВЫБРАТЬ</button>
+					<p style="margin-top: 5px; font-size: 12pt;">
+						<a href="#" id="characterDelete" style="color: #4d4d4d;">
+							Удалить персонажа
+						</a>
+					</p>
+				</div>
+			</div>
+
+			<div class="second hidden" id="freeSlot">
+				<div class="box closed" id="empty">
+					<div class="header" style="background-image: url('assets/closed.png'); background-position: -40px;">
+						<img src="assets/add.png" style="position: absolute; left: 50%; margin-left: -92px; margin-top: 75px;">
+					</div>
+					<div
+						style="margin-left: 25px; margin-right: 25px; margin-bottom: 25px; margin-top: 110px; text-align: center;">
+						<h1 class="text-gradient">Слот свободен</h1>
+						<p
+							style="position: absolute; z-index: 2; font-size: 12pt; margin: 20px 0px 0 30px; height: 20px; line-height: 20px; color: #333a4e">
+							Нажмите, чтобы создать персонажа<br>или перенести другого на этот аккаунт
+						</p>
+						<img src="assets/comment.png" style="margin-top: 0px; width: 95%;">
+						<a href="#" id="characterCreate"><img src="assets/plus.png" style="margin-top: -40px;;"></a>
+					</div>
+				</div>
+			</div>
+
+			<div class="box closed hidden" id="closedSlot">
+				<div class="header"
+					style="background-image: url('assets/closed2.png'); height: 290px; background-position: -50px;">
+					<img src="assets/disabled.png"
+						style="position: absolute; left: 50%; margin-left: -92px; margin-top: 200px; width: 185px;">
+				</div>
+				<div style="margin-left: 25px; margin-right: 25px; margin-bottom: 25px; margin-top: 110px; text-align: center;">
+					<h1 class="text-gradient">Слот заблокирован</h1>
+					<button class="select" style="margin-top: 10px;">АКТИВИРОВАТЬ ЗА 99РУБ.</button>
+				</div>
+			</div>
+		</div>
+
+		<form action="javascript:void(0)" id="mainForm"></form>
+
+
+
+		<script src="character-select.js"></script>
+</body>
+
+</html>

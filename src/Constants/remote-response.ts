@@ -11,6 +11,7 @@ export enum RemoteResponse {
   CharacterCreatorCreated = "RemoteResponse:CharacterCreator:Created",
 
   CharacterSelected = "RemoteResponse:Character:Selected",
+  CharacterDeleted = "RemoteResponse:Character:Deleted",
   CharacterMoneyChanged = "RemoteResponse:Character:MoneyChanged",
 
   NotificationSent = "RemoteResponse:Notification:Sent"
