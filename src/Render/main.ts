@@ -1,4 +1,5 @@
 import { KeyboardKeys } from "../Constants/keyboard-keys";
+import { RemoteResponse } from '../Constants/remote-response';
 
 class Render {
   private maxDistance: number = 625;
@@ -40,8 +41,8 @@ class Render {
           let health = player.getHealth();
           health = health < 100 ? 0 : ((health - 100) / 100);
 
-          let armour = player.getArmour() / 100;
-          armour = armour < 100 ? 0 : ((armour - 100) / 100);
+          let armor = player.getArmour() / 100;
+          armor = armor < 100 ? 0 : ((armor - 100) / 100);
 
           y -= scale * (0.005 * (screenRes.y / 1080));
 
@@ -74,7 +75,7 @@ class Render {
 
             let y2 = y + 0.042;
 
-            if (armour > 0) {
+            if (armor > 0) {
               let x2 = x - this.width / 2 - this.border / 2;
 
               graphics.drawRect(x2, y2, this.width + this.border * 2, 0.0085, 0, 0, 0, 200);
@@ -85,7 +86,7 @@ class Render {
 
               graphics.drawRect(x2, y2, this.width + this.border * 2, this.height + this.border * 2, 0, 0, 0, 200);
               graphics.drawRect(x2, y2, this.width, this.height, 41, 66, 78, 255);
-              graphics.drawRect(x2 - this.width / 2 * (1 - armour), y2, this.width * armour, this.height, 48, 108, 135, 200);
+              graphics.drawRect(x2 - this.width / 2 * (1 - armor), y2, this.width * armor, this.height, 48, 108, 135, 200);
             }
             else {
               graphics.drawRect(x, y2, this.width + this.border * 2, this.height + this.border * 2, 0, 0, 0, 200);
@@ -99,4 +100,8 @@ class Render {
   }
 }
 
-new Render().Start();
+let render: Render;
+
+mp.events.add(RemoteResponse.CharacterSpawnSelected, () => render = render ? render : new Render());
+
+render = new Render();
