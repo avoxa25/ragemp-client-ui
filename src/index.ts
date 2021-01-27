@@ -1,6 +1,4 @@
-import './Authentication/main';
-
-import './CharacterCreator/main';
+import './Character/Creator/main';
 
 import './Chat/main';
 

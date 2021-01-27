@@ -1,7 +1,7 @@
-import { LocalEvents } from '../Constants/local-events';
-import { RemoteEvents } from '../Constants/remote-events';
-import { RemoteResponse } from '../Constants/remote-response';
-import { CharacterCreatorModel } from './character-creator-model';
+import { LocalEvents } from '../../Constants/local-events';
+import { RemoteEvents } from '../../Constants/remote-events';
+import { RemoteResponse } from '../../Constants/remote-response';
+import { CharacterCreatorModel } from './creator-model';
 
 class CharacterCreator {
   private readonly camera: CameraMp;
@@ -10,7 +10,7 @@ class CharacterCreator {
   private character: CharacterCreatorModel;
 
   constructor() {
-    this.browser = mp.browsers.new('package://CharacterCreator/character-creator.html');
+    this.browser = mp.browsers.new('package://CharacterCreator/creator.html');
 
     const camera = new mp.Vector3(347, -1007.5515, -99.15);
     const cameraLookAt = new mp.Vector3(-0.0, 0.0, -93.0);
