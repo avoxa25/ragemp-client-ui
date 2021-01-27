@@ -2,6 +2,7 @@ import { NotificationType } from "../../Constants/notification-type";
 
 class NotificationsUi {
   private readonly maxNotifications = 5;
+  private readonly gapHeight = 75;
   private countOfNotifications = 0;
   private bottom = 225;
   private typeText: string | undefined;
@@ -48,12 +49,12 @@ class NotificationsUi {
 
     if (this.countOfNotifications !== 0) {
       const notifications = document.querySelectorAll('.notification');
-      this.bottom = 225;
       notifications.forEach((cn) => {
         const currentNotify = cn as HTMLElement;
         if (currentNotify.style.bottom == '450px') this.DeleteLastNotification(currentNotify);
+
         this.bottom = Number.parseInt(currentNotify.style.bottom);
-        this.bottom += 75;
+        this.bottom += this.gapHeight;
         currentNotify.style.bottom = `${this.bottom}px`;
       });
     }
