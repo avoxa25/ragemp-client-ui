@@ -1,0 +1,24 @@
+<svg id="notify" xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: none;
+        stroke: #fff;
+		
+		filter: box-shadow(0px 0px 20px 0px rgba(255,255,255,1));
+		-webkit-filter: box-shadow(0px 0px 20px 0px rgba(255,255,255,1));
+      }
+
+      .cls-1 {
+        stroke-width: 2px;
+      }
+
+      .cls-2 {
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <circle id="Эллипс_1" data-name="Эллипс 1" class="cls-1" cx="17" cy="17" r="16"/>
+  <rect id="Прямоугольник_10" data-name="Прямоугольник 10" class="cls-2" x="16" y="9" width="2" height="12"/>
+  <rect id="Прямоугольник_11" data-name="Прямоугольник 11" class="cls-2" x="16" y="23" width="2" height="2"/>
+</svg>

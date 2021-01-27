@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
+
+		* {
+			box-sizing: border-box;
+
+			font-family: 'PT Sans', sans-serif;
+
+			user-select: none;
+		}
+
+		BODY {
+			background-image: url("img/deleteME.png");
+		}
+
+		P {
+			margin: 0 0 0 0;
+			padding: 0 0 0 0;
+		}
+
+		.notification {
+			width: 285px;
+
+			position: absolute;
+			bottom: 225px;
+			left: 15px;
+
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+
+			margin-bottom: 10px;
+			padding-top: 10px;
+			padding-right: 10px;
+			padding-bottom: 10px;
+			padding-left: 60px;
+
+			background-color: rgba(0, 0, 0, .5);
+
+			border-radius: 15px 0 15px 0;
+
+			color: white;
+			font-size: 14px;
+			font-weight: 300;
+		}
+
+		.notification p:nth-child(1) {
+			font-size: 16px;
+			font-weight: 700;
+		}
+
+		#Alert {
+			display: none;
+			background-image: url("img/notify.png");
+			background-position: 10px 50%;
+			background-repeat: no-repeat;
+		}
+
+		#Error {
+			display: none;
+			background-image: url("img/fail.png");
+			background-position: 10px 50%;
+			background-repeat: no-repeat;
+		}
+
+		#Error p:nth-child(1) {
+			color: #ff002a;
+			font-size: 16px;
+			font-weight: 700;
+
+		}
+
+		#Success {
+			display: none;
+			background-image: url("img/succes.png");
+			background-position: 10px 50%;
+			background-repeat: no-repeat;
+		}
+
+		#Success p:nth-child(1) {
+			color: #0de798;
+			font-size: 16px;
+			font-weight: 700;
+
+		}
+
+		#Info {
+			display: none;
+			background-image: url("img/info.png");
+			background-position: 10px 50%;
+			background-repeat: no-repeat;
+		}
+
+		#Info p:nth-child(1) {
+			color: white;
+			font-size: 16px;
+			font-weight: 700;
+
+		}
+
+		#Warning {
+			display: none;
+			background-image: url("img/warning.png");
+			background-position: 10px 50%;
+			background-repeat: no-repeat;
+		}
+
+		#Warning p:nth-child(1) {
+			color: #ff002a;
+			font-size: 16px;
+			font-weight: 700;
+
+		}
