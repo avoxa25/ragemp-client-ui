@@ -1,4 +1,4 @@
-import { LocalEvents } from "../Constants/local-events";
+import { LocalEvents } from "../../Constants/local-events";
 
 class CharacterSpawnSelectUi {
     public Start(isPlayerOrganization: boolean, isPlayerHome: boolean): void {
@@ -74,7 +74,6 @@ class CharacterSpawnSelectUi {
 
         lastPositionFigure.addEventListener('click', () => mp.events.call(LocalEvents.CharacterSpawnSelect, 'LastPosition'));
     }
-
 }
 
 const characterSpawnSelectUi = new CharacterSpawnSelectUi();

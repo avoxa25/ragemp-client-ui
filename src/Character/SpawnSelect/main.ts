@@ -1,6 +1,6 @@
-import { LocalEvents } from '../Constants/local-events';
-import { RemoteEvents } from '../Constants/remote-events';
-import { RemoteResponse } from '../Constants/remote-response';
+import { LocalEvents } from '../../Constants/local-events';
+import { RemoteEvents } from '../../Constants/remote-events';
+import { RemoteResponse } from '../../Constants/remote-response';
 
 class CharacterSpawnSelect {
   private readonly browser: BrowserMp;
