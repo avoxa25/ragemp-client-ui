@@ -10,7 +10,6 @@
    BODY {
    font-family: PT;
    color: #fff;
-   background-color: black;
    }
    
    .box {
@@ -83,7 +82,7 @@
 	}
 	}
    
-      .text-gradient {
+   .text-gradient {
 	background: linear-gradient(-45deg, #ee0b89, #fd6f67 75%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;

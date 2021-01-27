@@ -44,13 +44,20 @@ class CharacterSelectUi {
     buttonValue.nodeValue = characterModel.Id;
   }
 
-  public ShowCharacters(characterSelectModels: any): void {
+  public ShowCharacters(characterSelectModelsJson: string): void {
+    mp.console.logError('Информация передана');
+
+    const characterSelectModels = JSON.parse(characterSelectModelsJson);
+    mp.console.logError(characterSelectModels);
+
+    mp.console.logInfo(typeof(characterSelectModels));
+
     const copyForm = document.querySelector('#copyFrom') as HTMLFormElement;
     const mainForm = document.querySelector('#mainForm') as HTMLFormElement;
 
     const characterSlot = copyForm.querySelector('#characterSlot') as HTMLElement;
     const freeSlot = copyForm.querySelector('#freeSlot') as HTMLElement;
-    const closedSlot = copyForm.querySelector('#closedSlot') as HTMLElement;
+    //const closedSlot = copyForm.querySelector('#closedSlot') as HTMLElement;
 
     // TODO: Realize buying form
 
