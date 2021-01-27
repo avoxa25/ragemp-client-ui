@@ -1,4 +1,4 @@
-import { NotificationType } from 'src/Constants/notification-type';
+import { NotificationType } from '../../Constants/notification-type';
 import { RemoteResponse } from '../../Constants/remote-response';
 
 class Notifications {
@@ -6,10 +6,11 @@ class Notifications {
 
   constructor() {
     this.browser = mp.browsers.new('package://HUD/Notifications/notifications.html');
-    mp.events.add(RemoteResponse.NotificationSent, (type: Enumerator, text: string) => this.Display(type, text));
+    mp.events.add(RemoteResponse.NotificationSent, (type: NotificationType, text: string) => this.Display(type, text));
   }
 
-  private Display(type: Enumerator, text: string): void {
+  private Display(type: NotificationType, text: string): void {
+    mp.console.logInfo(type);
     this.browser.execute(`window.notificationsUi.ShowNotification('${type}', '${text}');`);
   }
 };

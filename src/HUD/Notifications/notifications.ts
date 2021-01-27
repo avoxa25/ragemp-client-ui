@@ -1,4 +1,4 @@
-import { NotificationType } from "../../Constants/notification-type";
+import { NotificationType } from '../../Constants/notification-type';
 
 class NotificationsUi {
   private readonly maxNotifications = 5;
@@ -7,41 +7,39 @@ class NotificationsUi {
   private bottom = 225;
   private typeText: string | undefined;
   private timeout: number | undefined;
+  private readonly container = document.getElementById('notification-container') as HTMLElement;
 
-  public ShowNotification(type: string, text: string): void {
+  public ShowNotification(type: NotificationType, text: string): void {
     clearInterval(this.timeout);
 
     switch (type) {
-      case 'Alert':
-        this.typeText = NotificationType.Alert;
+      case NotificationType.Alert:
+        this.typeText = 'Оповещение';
         break;
-      case 'Info':
-        this.typeText = NotificationType.Info;
+      case NotificationType.Info:
+        this.typeText = 'Информация';
         break;
-      case 'Success':
-        this.typeText = NotificationType.Success;
+      case NotificationType.Success:
+        this.typeText = 'Успешно';
         break;
-      case 'Warning':
-        this.typeText = NotificationType.Warning;
+      case NotificationType.Warning:
+        this.typeText = 'Предупреждение';
         break;
       default:
-        this.typeText = NotificationType.Error;
+        this.typeText = 'Ошибка';
         break;
     }
-
-    const container = document.getElementById('notification-container') as HTMLElement;
 
     const notification = document.createElement('div') as HTMLElement;
     notification.classList.add('notification');
     notification.style.bottom = '225px';
-    notification.classList.add(`${type.toLowerCase()}`);
+    notification.classList.add(type.toLowerCase());
 
     const notificationText = document.createElement('p') as HTMLElement;
     notificationText.innerHTML = this.typeText;
     notification.appendChild(notificationText);
 
     const notificationType = document.createElement('p') as HTMLElement;
-    notificationType.classList.add(`${type}Text`);
     notificationType.innerHTML = text;
     notification.appendChild(notificationType);
 
@@ -59,7 +57,7 @@ class NotificationsUi {
       });
     }
 
-    container.appendChild(notification);
+    this.container.appendChild(notification);
 
     this.countOfNotifications++;
 

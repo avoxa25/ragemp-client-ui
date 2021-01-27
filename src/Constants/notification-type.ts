@@ -1,7 +1,7 @@
 export enum NotificationType{
-  Alert = 'Предупреждение',
-  Info = 'Информация',
-  Success = 'Успешно',
-  Warning = 'Предупреждение',
-  Error = 'Ошибка'
+  Alert = 'Alert',
+  Info = 'Info',
+  Success = 'Success',
+  Warning = 'Warning',
+  Error = 'Error'
 }
