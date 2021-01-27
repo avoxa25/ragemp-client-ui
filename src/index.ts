@@ -1,5 +1,6 @@
 import './Chat/main';
-import './Notifications/main';
+import './HUD/Notifications/main';
+import './HUD/main';
 import './Speedometer/main';
 
 mp.discord.update('SweetLifeRP', '');
