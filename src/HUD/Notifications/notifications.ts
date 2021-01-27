@@ -3,7 +3,7 @@ import { NotificationType } from '../../Constants/notification-type';
 class NotificationsUi {
   private readonly maxNotifications = 5;
   private readonly gapHeight = 75;
-  private countOfNotifications = 0;
+  private count = 0;
   private bottom = 225;
   private typeText: string | undefined;
   private timeout: number | undefined;
@@ -43,9 +43,9 @@ class NotificationsUi {
     notificationType.innerHTML = text;
     notification.appendChild(notificationType);
 
-    this.countOfNotifications = this.countOfNotifications >= this.maxNotifications ? this.maxNotifications - 1 : this.countOfNotifications;
+    this.count = this.count >= this.maxNotifications ? this.maxNotifications - 1 : this.count;
 
-    if (this.countOfNotifications !== 0) {
+    if (this.count !== 0) {
       const notifications = document.querySelectorAll('.notification');
       notifications.forEach((cn) => {
         const currentNotify = cn as HTMLElement;
@@ -59,7 +59,7 @@ class NotificationsUi {
 
     this.container.appendChild(notification);
 
-    this.countOfNotifications++;
+    this.count++;
 
     this.timeout = setInterval(() => {
       const notification = document.querySelector('.notification') as HTMLElement;
