@@ -18,9 +18,14 @@ class CharacterCreatorUi {
 
   private StartTabs(): void {
     const tabLinks = document.querySelectorAll('button.tabLinks');
+    const subTabLinks = document.querySelectorAll('button.subTabLinks');
     tabLinks.forEach((tl) => {
       const tabId = tl.getAttribute('data-tab') as string;
       tl.addEventListener('click', () => this.OpenTab(tabId, tl.id));
+    });
+    subTabLinks.forEach((stl) => {
+      const tabId = stl.getAttribute('data-tab') as string;
+      stl.addEventListener('click', () => this.OpenSubTab(tabId, stl.id));
     });
   }
 
@@ -28,7 +33,11 @@ class CharacterCreatorUi {
     const tabs = document.getElementsByClassName('parameters') as HTMLCollectionOf<HTMLElement>;
     for (let i = 0; i < tabs.length; i++) {
       const isSelectedTab = tabs[i].id === selectedTabId;
-      tabs[i].style.display = isSelectedTab ? 'block' : 'none';
+      if (isSelectedTab) { 
+        tabs[i].classList.add('active')
+      } else {
+        tabs[i].classList.remove('active');
+      };
     }
 
     const tabLinks = document.getElementsByClassName('tabLinks') as HTMLCollectionOf<HTMLElement>;
@@ -44,6 +53,28 @@ class CharacterCreatorUi {
     const characterJson = JSON.stringify(this.character);
     if (selectedTabId === 'tabHair') mp.events.call(LocalEvents.CharacterCreatorTabHair, true, characterJson);
     else mp.events.call(LocalEvents.CharacterCreatorTabHair, false, characterJson);
+  }
+
+  private OpenSubTab(selectedTabId: string, selectedTabLinkId: string): void {
+    const subTabs = document.getElementsByClassName('subTab') as HTMLCollectionOf<HTMLElement>;
+    for (let i = 0; i < subTabs.length; i++) {
+      const isSelectedTab = subTabs[i].id === selectedTabId;
+      if (isSelectedTab) { 
+        subTabs[i].classList.add('active')
+      } else {
+        subTabs[i].classList.remove('active');
+      };
+    }
+
+    const subTabLinks = document.getElementsByClassName('subTabLinks') as HTMLCollectionOf<HTMLElement>;
+    for (let i = 0; i < subTabLinks.length; i++) {
+      const isSelectedTabLink = subTabLinks[i].id === selectedTabLinkId;
+      if (isSelectedTabLink) {
+        subTabLinks[i].classList.add('active');
+      } else {
+        subTabLinks[i].classList.remove('active');
+      }
+    }
   }
 
   private StartMain(): void {
