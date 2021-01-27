@@ -23,6 +23,7 @@ class Authentication {
 
     mp.gui.cursor.show(true, true);
 
+    this.camera.pointAtCoord(-986.61447, 0, -186.61447);
     this.camera.setActive(true);
     mp.game.cam.renderScriptCams(true, false, 0, true, false);
 
