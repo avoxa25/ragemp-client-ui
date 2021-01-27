@@ -1,6 +1,6 @@
-import { RemoteEvents } from "../Constants/remote-events";
-import { LocalEvents } from "../Constants/local-events";
-import { RemoteResponse } from "../Constants/remote-response";
+import { RemoteEvents } from '../Constants/remote-events';
+import { LocalEvents } from '../Constants/local-events';
+import { RemoteResponse } from '../Constants/remote-response';
 
 class Authentication {
   private readonly browser: BrowserMp;
