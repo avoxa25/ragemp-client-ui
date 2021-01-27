@@ -1,15 +1,14 @@
 import { RemoteEvents } from '../Constants/remote-events';
 import { LocalEvents } from '../Constants/local-events';
 import { RemoteResponse } from '../Constants/remote-response';
+import { CameraConstants } from '../Constants/camera-constants';
 
 class Authentication {
   private readonly browser: BrowserMp;
   private readonly camera: CameraMp;
 
   public constructor() {
-    const camera = new mp.Vector3(344.3341, -998.8612, -98.19622);
-    const cameraLookAt = new mp.Vector3(0.0, 0.0, 0.0);
-    this.camera = mp.cameras.new('default', camera, cameraLookAt, 40);
+    this.camera = mp.cameras.new('default', CameraConstants.StandardCameraPosition, CameraConstants.StandardCameraRotation, 40);
 
     this.browser = mp.browsers.new('package://Authentication/authentication.html');
 

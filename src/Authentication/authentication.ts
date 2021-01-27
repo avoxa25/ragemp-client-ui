@@ -2,7 +2,9 @@ import { LocalEvents } from '../Constants/local-events';
 import { ErrorMessages } from '../Constants/error-messages';
 
 class AuthenticationUi {
-  public Start(): void {
+  private static readonly usernamePattern = new RegExp('[A-Za-z0-9]$');
+
+  public constructor() {
     const buttonsTabLink = document.querySelectorAll('.tabLink') as NodeListOf<HTMLElement>;
     buttonsTabLink.forEach((b) => b.addEventListener('click', () => this.ChangeTab(b)));
 
@@ -10,6 +12,14 @@ class AuthenticationUi {
     this.StartRegistrationTab();
     this.StartRecoveryTab();
   }
+
+  public ShowErrorMessage(type: string, message: string): void {
+    const errorMessage = document.querySelector(`#${type} .denied`) as HTMLElement;
+    errorMessage.hidden = false;
+    errorMessage.textContent = message;
+
+    setTimeout(() => errorMessage.hidden = true, 3000);
+  };
 
   private ChangeTab(selectedTab: HTMLElement): void {
     const selectedTabId = selectedTab.getAttribute('data-tab');
@@ -61,13 +71,13 @@ class AuthenticationUi {
   private OnRegistrationFormSubmit(form: HTMLFormElement): void {
     const formData = new FormData(form);
     const username = formData.get('username') as string;
-    const usernamePattern = new RegExp('[A-Za-z0-9]$');
+    //const usernamePattern = new RegExp('[A-Za-z0-9]$');
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
     const passwordConfirm = formData.get('passwordConfirm') as string;
 
     if (username === '' || email === '' || password === '' || passwordConfirm === '') return this.ShowErrorMessage(form.id as string, ErrorMessages.FillEmptyFields);
-    if (!usernamePattern.test(username)) return this.ShowErrorMessage(form.id as string, ErrorMessages.IncorrectLogin);
+    if (!AuthenticationUi.usernamePattern.test(username)) return this.ShowErrorMessage(form.id as string, ErrorMessages.IncorrectLogin);
     if (username.length < 5) return this.ShowErrorMessage(form.id as string, ErrorMessages.LoginTooShort);
     if (username.length > 15) return this.ShowErrorMessage(form.id as string, ErrorMessages.LoginTooLong);
     if (password.length < 7) return this.ShowErrorMessage(form.id as string, ErrorMessages.PasswordTooShort);
@@ -89,17 +99,8 @@ class AuthenticationUi {
 
     // TODO: Send Recovery Code to the user Email
   }
-
-  public ShowErrorMessage(type: string, message: string): void {
-    const errorMessage = document.querySelector(`#${type} .denied`) as HTMLElement;
-    errorMessage.hidden = false;
-    errorMessage.textContent = message;
-
-    setTimeout(() => errorMessage.hidden = true, 3000);
-  };
 }
 
 const authenticationUi = new AuthenticationUi();
-authenticationUi.Start();
 
 (window as any).authenticationUi = authenticationUi;
