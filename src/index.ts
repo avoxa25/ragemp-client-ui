@@ -1,3 +1,4 @@
+import './CharacterSpawnSelect/main';
 import './Chat/main';
 import './HUD/main';
 import './HUD/Location/main';

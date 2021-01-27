@@ -2,6 +2,7 @@ const path = require('path');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const htmlComponents = [
+  'CharacterSpawnSelect',
   'Chat',
   'HUD/Location',
   'Speedometer'
