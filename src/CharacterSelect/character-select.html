@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="assets/styles.css">
-	<link rel="stylesheet" href="assets/anim_bg.css"> 
+	<!-- <link rel="stylesheet" href="assets/anim_bg.css">  -->
 </head>
 
 <body>
@@ -44,9 +44,9 @@
 						<p style="float: left; margin-left: 25px;">Банк:</p>
 						<p id="bankCash" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67"></p>
 					</div>
-					<button id="characterSelect" class="select" value="0">ВЫБРАТЬ</button>
+					<button id='characterSelect' class="select buttonSelect" value="0">ВЫБРАТЬ</button>
 					<p style="margin-top: 5px; font-size: 12pt;">
-						<a href="#" id="characterDelete" style="color: #4d4d4d;">
+						<a href="#" id="characterDelete" class="buttonDelete" style="color: #4d4d4d;">
 							Удалить персонажа
 						</a>
 					</p>
@@ -66,7 +66,9 @@
 							Нажмите, чтобы создать персонажа<br>или перенести другого на этот аккаунт
 						</p>
 						<img src="assets/comment.png" style="margin-top: 0px; width: 95%;">
-						<a href="#" id="characterCreate"><img src="assets/plus.png" style="margin-top: -40px;;"></a>
+						<a href="#" id="characterCreate" class="buttonCreate">
+							<img src="assets/plus.png" style="margin-top: -40px;;">
+						</a>
 					</div>
 				</div>
 			</div>

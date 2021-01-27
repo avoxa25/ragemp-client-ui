@@ -52,7 +52,6 @@ class CharacterSelect {
 
   private ShowCharacters(characterSelectModelsJson: string): void {
     this.browser.execute(`window.characterSelectUi.ShowCharacters('${characterSelectModelsJson}');`);
-    mp.console.logInfo('Передача Информации');
   }
 
   private CharacterSelectCreate(): void {
@@ -71,5 +70,4 @@ class CharacterSelect {
 }
 
 let characterSelect: CharacterSelect | undefined;
-
 mp.events.add(RemoteResponse.LoginSuccess, (csm: string) => characterSelect = characterSelect ? characterSelect : new CharacterSelect(csm));

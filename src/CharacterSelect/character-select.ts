@@ -1,21 +1,23 @@
 import { LocalEvents } from "../Constants/local-events";
 
 class CharacterSelectUi {
-  public Start(): void {
-    this.StartButtons();
-  }
-
   private StartButtons(): void {
     const form = document.querySelector('form#mainForm') as HTMLFormElement;
-    const createButton = form.querySelector('#characterCreate') as HTMLElement;
-    const deleteButton = form.querySelector('#characterDelete') as HTMLElement;
-    const selectButton = form.querySelector('#characterSelect') as HTMLButtonElement;
-    const characterIdString = selectButton.value;
-    const characterId = +characterIdString;
 
-    selectButton.addEventListener('click', () => this.SelectCharacter(characterId));
-    createButton.addEventListener('click', () => this.CreateCharacter());
-    deleteButton.addEventListener('click', () => this.DeleteCharacter(characterId));
+    const createButtons = form.querySelectorAll('.buttonCreate');
+    const deleteButtons = form.querySelectorAll('.buttonDelete');
+    const selectButtons = form.querySelectorAll('.buttonSelect');
+
+    selectButtons.forEach((sb, key) => {
+      const selectButton = sb as HTMLButtonElement;
+      
+      const characterIdString = selectButton.value;
+      const characterId = +characterIdString;
+      sb.addEventListener('click', () => this.SelectCharacter(characterId));
+      deleteButtons[key].addEventListener('click', () => this.DeleteCharacter(characterId));
+    });
+
+    createButtons.forEach((cb) => cb.addEventListener('click', () => this.CreateCharacter()));
   }
 
   private CreateCharacter(): void {
@@ -41,16 +43,16 @@ class CharacterSelectUi {
     inGameTime.innerHTML = characterModel.TotalOnlineTime;
     fraction.innerHTML = (characterModel.fraction !== null) ? characterModel.fraction : 'Отсутствует';
     cash.innerHTML = characterModel.Cash;
-    buttonValue.nodeValue = characterModel.Id;
+    //buttonValue.nodeValue = characterModel.Id;
   }
 
   public ShowCharacters(characterSelectModelsJson: string): void {
     mp.console.logError('Информация передана');
-
+    mp.console.logError(`${characterSelectModelsJson}`);
     const characterSelectModels = JSON.parse(characterSelectModelsJson);
     mp.console.logError(characterSelectModels);
 
-    mp.console.logInfo(typeof(characterSelectModels));
+    mp.console.logInfo(typeof (characterSelectModels));
 
     const copyForm = document.querySelector('#copyFrom') as HTMLFormElement;
     const mainForm = document.querySelector('#mainForm') as HTMLFormElement;
@@ -77,6 +79,8 @@ class CharacterSelectUi {
         tSlot.classList.remove('hidden');
         tSlot.classList.add('block3');
         mainForm.append(tSlot);
+
+        this.StartButtons();
         return;
       case 2:
         const firSlot = characterSlot.cloneNode(true) as HTMLElement;
@@ -95,6 +99,8 @@ class CharacterSelectUi {
         trdSlot.classList.add('block3');
 
         mainForm.append(trdSlot);
+
+        this.StartButtons();
         return;
       case 3:
         const firstSlot = characterSlot.cloneNode(true) as HTMLElement;
@@ -113,6 +119,8 @@ class CharacterSelectUi {
         thirdSlot.classList.add('block3');
         mainForm.append(thirdSlot);
         this.ShowCharacterData(thirdSlot, characterSelectModels[2]);
+
+        this.StartButtons();
         return;
       default:
         const slot1 = freeSlot.cloneNode(true) as HTMLElement;
@@ -126,12 +134,13 @@ class CharacterSelectUi {
         slot3.classList.remove('hidden');
         slot3.classList.add('block3');
         mainForm.append(slot3);
+
+        this.StartButtons();
         return;
     }
   }
 }
 
 const characterSelectUi = new CharacterSelectUi();
-characterSelectUi.Start();
 
 (window as any).characterSelectUi = characterSelectUi;
