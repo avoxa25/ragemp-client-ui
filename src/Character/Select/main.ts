@@ -27,9 +27,10 @@ class CharacterSelect {
     this.ShowCharacters(csm);
 
     mp.events.add(RemoteResponse.CharacterSelected, () => this.Close());
+    mp.events.add(RemoteResponse.CharacterDeleted, (csm: string) => this.ShowCharacters(csm));
 
-    mp.events.add(LocalEvents.CharacterSelect, (cId: number) => this.CharacterSelect(cId));
-    mp.events.add(LocalEvents.CharacterDelete, (cId: number) => this.DeleteCharacter(cId));
+    mp.events.add(LocalEvents.CharacterSelect, (id: number) => this.CharacterSelect(id));
+    mp.events.add(LocalEvents.CharacterDelete, (id: number) => this.DeleteCharacter(id));
     mp.events.add(LocalEvents.CharacterSelectCreate, () => this.CharacterSelectCreate());
   }
 
