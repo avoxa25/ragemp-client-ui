@@ -13,5 +13,4 @@ export enum LocalEvents {
   CharacterCreatorUpdateClothes = 'Local:CharacterCreator:UpdateClothes',
   CharacterCreatorUpdateFace = 'Local:CharacterCreator:UpdateFace',
   CharacterCreatorUpdateHair = 'Local:CharacterCreator:UpdateHair'
-  
-};
+}

@@ -20,4 +20,4 @@ export enum RemoteEvents {
   HouseSetOnSellState = 'Remote:House:SetOnSaleState',
   HouseSetLockState = 'Remote:House:SetLockState',
   HouseEnterExit = 'Remote:House:EnterExit'
-};
+}

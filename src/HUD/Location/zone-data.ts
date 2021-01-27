@@ -95,4 +95,4 @@ export abstract class ZoneData {
       default: return 'Неизвестно';
     }
   }
-};
+}

@@ -306,6 +306,6 @@ export abstract class CharacterCreatorData {
         return [];
     }
   }
-};
+}
 
 CharacterCreatorData.Init();

@@ -19,7 +19,7 @@ class HudLocation {
 
     this.browser.execute(`window.hudLocationUi.Update("${streetName}", "${crossingRoad}", "${zone}");`);
   }
-};
+}
 
 let hudLocation: HudLocation | undefined;
 mp.events.add(RemoteResponse.CharacterSpawnSelected, () => hudLocation = hudLocation ? hudLocation : new HudLocation());
