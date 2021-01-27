@@ -15,7 +15,3 @@ class Notifications {
 
 let notify: Notifications | undefined;
 mp.events.add(RemoteResponse.CharacterSpawnSelected, () => notify = notify ? notify : new Notifications());
-
-// FIXME: Remove after login screen
-
-notify = new Notifications();
