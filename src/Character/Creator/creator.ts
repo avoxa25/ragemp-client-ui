@@ -466,7 +466,7 @@ class CharacterCreatorUi {
     const characterJson = JSON.stringify(this.character);
     mp.events.call(LocalEvents.CharacterCreatorCreate, characterJson);
   }
-};
+}
 
 const characterCreatorUi = new CharacterCreatorUi();
 (window as any).characterCreatorUi = characterCreatorUi;

@@ -191,7 +191,7 @@ class CharacterCreator {
     this.character.chestHair = this.character.chestHair === -1 ? 255 : this.character.chestHair;
     mp.players.local.setHeadOverlay(10, this.character.chestHair, 1, this.character.chestHairColor, this.character.chestHairSecondaryColor);
   }
-};
+}
 
 let characterCreator: CharacterCreator;
 mp.events.add(LocalEvents.CharacterCreatorOpen, () => characterCreator = characterCreator ? characterCreator : new CharacterCreator());

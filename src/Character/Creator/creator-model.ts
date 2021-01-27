@@ -73,4 +73,4 @@ export class CharacterCreatorModel {
     this.chestHairColor = 0;
     this.chestHairSecondaryColor = 0;
   }
-};
+}
