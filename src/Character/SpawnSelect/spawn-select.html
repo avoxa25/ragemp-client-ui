@@ -2,70 +2,22 @@
 
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="assets/styles.css">
-	<link rel="stylesheet" href="assets/anim_bg.css">
+	<link rel="stylesheet" href="spawn-select.css">
+	<link rel="stylesheet" href="background-animation.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
-	<div id='stars'></div>
-	<div id='stars2'></div>
-	<div id='stars3'></div>
+	<section>
+		<div id='stars'></div>
+		<div id='stars2'></div>
+		<div id='stars3'></div>
+	</section>
 
-	<div class="main">
-		<figure class="container" id="lastPosition">
-			<div class="film" id="anim1">
-				<div class="front" id="anim1f">
-					<img src="assets/last_location.png"
-						style="position: inherit; z-index: 1; margin-left: 87px; margin-top: 70px;">
-				</div>
-
-				<div class="back" id="anim1b">
-					<div style="margin-top: 120px;">
-						<h1>ТОЧКА ВЫХОДА</h1>
-						<p style="font-size: 15pt; ">Персонаж появится в месте<br>последнего выхода из игры</p>
-					</div>
-				</div>
-			</div>
-			<img src="assets/ground.png" style="position: absolute; z-index: -3; margin-top: 400px; margin-left: 82px;">
-		</figure>
-
-		<figure class="container hidden" id="organizationSpawn" style="margin-left: 400px;">
-			<div class="film" id="anim2">
-				<div class="front" id="anim2f">
-					<img src="assets/organization.png"
-						style="position: inherit; z-index: 1; margin-left: 87px; margin-top: 70px;">
-				</div>
-
-				<div class="back" id="anim2b">
-					<div style="margin-top: 120px;">
-						<h1>ОРГАНИЗАЦИЯ</h1>
-						<p style="font-size: 15pt; ">Персонаж появится на<br>территории организации</p>
-					</div>
-				</div>
-			</div>
-			<img src="assets/ground.png" style="position: absolute; z-index: -3; margin-top: 400px; margin-left: 82px; ">
-		</figure>
-
-
-
-		<figure class="container hidden" id="houseSpawn" style="margin-left: 800px;">
-			<div class="film" id="anim3">
-				<div class="front" id="anim3f">
-					<img src="assets/home.png" style="position: inherit; z-index: 1; margin-left: 87px; margin-top: 70px;">
-				</div>
-
-				<div class="back" id="anim3b">
-					<div style="margin-top: 120px;">
-						<h1>ДОМ</h1>
-						<p style="font-size: 15pt; ">Персонаж появится дома.<br>Дом, милый дом! </p>
-					</div>
-				</div>
-			</div>
-			<img src="assets/ground.png" style="position: absolute; z-index: -3; margin-top: 400px; margin-left: 82px; ">
-		</figure>
-	</div>
-
-	<script src="character-spawn-select.js"></script>
+	<!-- TODO: Perfect HTML code -->
 
 </body>
 
