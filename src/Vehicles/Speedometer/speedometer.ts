@@ -39,7 +39,7 @@ class SpeedometerUi {
     // TODO: Implement highBeam
     highBeam;
 
-    const leftTurnElement = document.querySelector('#arrow-left') as HTMLElement;
+    const leftTurnElement = document.querySelector('#arrowLeft') as HTMLElement;
     if (leftTurn) {
       leftTurnElement.classList.remove('nonActive');
     } else {
@@ -55,7 +55,7 @@ class SpeedometerUi {
   }
 
   private UpdateLocked(locked: number): void {
-    const lockedElement = document.querySelector('#doorLock') as HTMLElement;
+    const lockedElement = document.querySelector('#lock') as HTMLElement;
     if (locked == 1) {
       lockedElement.classList.remove('nonActive');
     } else {
@@ -64,7 +64,7 @@ class SpeedometerUi {
   }
 
   private UpdateFuel(fuel: number, fuelTank: number): void {
-    const fuelElement = document.querySelector('#fuel_value') as HTMLElement;
+    const fuelElement = document.querySelector('#fuelValue') as HTMLElement;
     const percentage = Math.round((fuel / fuelTank) * 100);
     fuelElement.style.backgroundPosition = `${100 - percentage}% 50%`
   }
