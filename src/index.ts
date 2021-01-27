@@ -1,3 +1,5 @@
+import './Authentication/main';
+
 import './CharacterCreator/main';
 
 import './Chat/main';

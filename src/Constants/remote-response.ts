@@ -1,10 +1,10 @@
 export enum RemoteResponse {
-  RegistrationSuccess = "RemoteResponse:Auth:RegistrationSuccess",
-  RegistrationFailed = "RemoteResponse:Auth:RegistrationFailed",
+  RegistrationSuccess = "RemoteResponse:Authentication:RegistrationSuccess",
+  RegistrationFailed = "RemoteResponse:Authentication:RegistrationFailed",
 
-  LoginAllowed = "RemoteResponse:Auth:LoginAllowed",
-  LoginSuccess = "RemoteResponse:Auth:LoginSuccess",
-  LoginFailed = "RemoteResponse:Auth:LoginFailed",
+  LoginAllowed = "RemoteResponse:Authentication:LoginAllowed",
+  LoginSuccess = "RemoteResponse:Authentication:LoginSuccess",
+  LoginFailed = "RemoteResponse:Authentication:LoginFailed",
 
   CharacterCreatorGenderChangeCompleted = "RemoteResponse:CharacterCreator:GenderChangeCompleted",
   CharacterCreatorFailed = "RemoteResponse:CharacterCreator:Failed",
