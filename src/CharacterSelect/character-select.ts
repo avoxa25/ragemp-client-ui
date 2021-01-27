@@ -142,5 +142,4 @@ class CharacterSelectUi {
 }
 
 const characterSelectUi = new CharacterSelectUi();
-
 (window as any).characterSelectUi = characterSelectUi;
