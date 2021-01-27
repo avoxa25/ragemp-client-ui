@@ -167,47 +167,47 @@ section.active {
 }
 
 .car-lock {
-  background-image: url("assets/carlock.svg");
+  background-image: url("./carlock.svg");
 }
 
 .car-baggage {
-  background-image: url("assets/baggage.svg");
+  background-image: url("./baggage.svg");
 }
 
 .car-capote {
-  background-image: url("assets/capote.svg");
+  background-image: url("./capote.svg");
 }
 
 .car-doors {
-  background-image: url("assets/doors.svg");
+  background-image: url("./doors.svg");
 }
 
 .car-door {
-  background-image: url("assets/door.svg");
+  background-image: url("./door.svg");
 }
 
 .car-turn-on {
-  background-image: url("assets/turnon.svg");
+  background-image: url("./turnon.svg");
 }
 
 .car-catapult {
-  background-image: url("assets/catapult.svg");
+  background-image: url("./catapult.svg");
 }
 
 .player-meet {
-  background-image: url("assets/handshake.svg");
+  background-image: url("./handshake.svg");
 }
 
 .player-show-document {
-  background-image: url("assets/id-card.svg");
+  background-image: url("./id-card.svg");
 }
 
 .player-invite-home {
-  background-image: url("assets/property.png");
+  background-image: url("./property.png");
 }
 
 .player-trade {
-  background-image: url("assets/money.svg");
+  background-image: url("./money.svg");
 }
 
 .pointer {
