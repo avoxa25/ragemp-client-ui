@@ -1,4 +1,3 @@
-import { KeyboardKeys } from '../Constants/keyboard-keys';
 import { LocalEvents } from '../Constants/local-events';
 import { SpecificLocalEvents } from '../Constants/specific-local-events';
 
@@ -86,7 +85,7 @@ class ChatUi {
 
   private OnDocumentBodyKeydown(event: KeyboardEvent): void {
     const isChatClosed = this.messageForm.hidden;
-    const isChatOpenKey = event.which === KeyboardKeys.T;
+    const isChatOpenKey = event.which === 84;
     if (isChatClosed && isChatOpenKey) {
       event.preventDefault();
       this.ToggleMessageInput();
@@ -97,8 +96,8 @@ class ChatUi {
     // TODO: Implement message cycling
     mp.console.logInfo(`onNewMessageInputKeydown: ${event.which}`);
 
-    const isArrowUpKey = event.which === KeyboardKeys.ArrowUp;
-    const isArrowDownKey = event.which === KeyboardKeys.ArrowDown;
+    const isArrowUpKey = event.which === 38;
+    const isArrowDownKey = event.which === 40;
 
     if (isArrowUpKey || isArrowDownKey) {
       this.CyclePreviousSendedMessages(isArrowDownKey);

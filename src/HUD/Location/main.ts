@@ -21,4 +21,5 @@ class HudLocation {
   }
 };
 
-mp.events.add(RemoteResponse.CharacterSelected, () => new HudLocation());  
+let hudLocation: HudLocation | undefined;
+mp.events.add(RemoteResponse.CharacterSpawnSelected, () => hudLocation = hudLocation ? hudLocation : new HudLocation());
