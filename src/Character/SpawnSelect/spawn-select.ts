@@ -4,15 +4,12 @@ class CharacterSpawnSelectUi {
     public Start(isPlayerOrganization: boolean, isPlayerHome: boolean): void {
         const lastPosition = document.querySelector('#anim1') as HTMLElement;
         const lastPositionFront = document.querySelector('#anim1f') as HTMLElement;
-        const lastPositionBack = document.querySelector('#anim1b') as HTMLElement;
 
         const organizationSpawn = document.querySelector('#anim2') as HTMLElement;
         const organizationSpawnFront = document.querySelector('#anim2f') as HTMLElement;
-        const organizationSpawnBack = document.querySelector('#anim2b') as HTMLElement;
 
         const houseSpawn = document.querySelector('#anim3') as HTMLElement;
         const houseSpawnFront = document.querySelector('#anim3f') as HTMLElement;
-        const houseSpawnBack = document.querySelector('#anim3b') as HTMLElement;
 
         const lastPositionFigure = document.querySelector('#lastPosition') as HTMLElement;
         const organizationSpawnFigure = document.querySelector('#organizationSpawn') as HTMLElement;
