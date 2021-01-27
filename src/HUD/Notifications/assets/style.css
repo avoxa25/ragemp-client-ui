@@ -17,7 +17,6 @@ P {
 	width: 285px;
 
 	position: absolute;
-	bottom: 225px;
 	left: 15px;
 
 	display: flex;
@@ -45,14 +44,12 @@ P {
 }
 
 .alert {
-	display: none;
 	background-image: url("img/notify.png");
 	background-position: 10px 50%;
 	background-repeat: no-repeat;
 }
 
 .error {
-	display: none;
 	background-image: url("img/fail.png");
 	background-position: 10px 50%;
 	background-repeat: no-repeat;
@@ -65,7 +62,6 @@ P {
 }
 
 .success {
-	display: none;
 	background-image: url("img/success.png");
 	background-position: 10px 50%;
 	background-repeat: no-repeat;
@@ -78,7 +74,6 @@ P {
 }
 
 .info {
-	display: none;
 	background-image: url("img/info.png");
 	background-position: 10px 50%;
 	background-repeat: no-repeat;
@@ -91,7 +86,6 @@ P {
 }
 
 .warning {
-	display: none;
 	background-image: url("img/warning.png");
 	background-position: 10px 50%;
 	background-repeat: no-repeat;
