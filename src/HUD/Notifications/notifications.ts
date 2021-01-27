@@ -5,7 +5,7 @@ class NotificationsUi {
 
     notifyText.innerHTML = text;
     notifyBlock.style.display = 'block';
-    setTimeout(() => notifyBlock.style.display = 'none', 3000);
+    setTimeout(() => notifyBlock.style.display = 'none', 4000);
   }
 }
 
