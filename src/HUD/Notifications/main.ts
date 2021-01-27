@@ -5,11 +5,11 @@ class Notifications {
 
   constructor() {
     this.browser = mp.browsers.new('package://HUD/Notifications/notifications.html');
-    mp.events.add(RemoteResponse.NotificationSent, (notifyType: string, text: string) => this.Notification(notifyType, text));
+    mp.events.add(RemoteResponse.NotificationSent, (type: string, text: string) => this.Display(type, text));
   }
 
-  private Notification(notifyType: string, text: string): void {
-    this.browser.execute(`window.notificationsUi.ShowNotification('${notifyType}', '${text}');`);
+  private Display(type: string, text: string): void {
+    this.browser.execute(`window.notificationsUi.ShowNotification('${type}', '${text}');`);
   }
 };
 

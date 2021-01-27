@@ -2,9 +2,9 @@ const path = require('path');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const htmlComponents = [
-  'HUD/Notifications',
   'Chat',
   'HUD/Location',
+  'HUD/Notifications',
   'Speedometer'
 ];
 
