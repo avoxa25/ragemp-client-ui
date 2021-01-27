@@ -54,8 +54,8 @@ class CharacterSelect {
     mp.console.logInfo(characterSelectModelsJson);
     const csmTest = JSON.parse(characterSelectModelsJson);
     mp.console.logError(typeof (csmTest));
-    mp.console.logInfo(csmTest[0].id);
-    mp.console.logInfo(csmTest[1].id);
+    mp.console.logInfo(csmTest[0].firstName);
+    mp.console.logInfo(csmTest[1].firstName);
     this.browser.execute(`window.characterSelectUi.ShowCharacters('${characterSelectModelsJson}');`);
   }
 

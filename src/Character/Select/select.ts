@@ -37,20 +37,20 @@ class CharacterSelectUi {
     const inGameTime = slot.querySelector('#inGameTime') as HTMLElement;
     const fraction = slot.querySelector('#fraction') as HTMLElement;
     const cash = slot.querySelector('#cash') as HTMLElement;
-    const buttonValue = slot.querySelector('#characterSelect') as Element;
+    //const buttonValue = slot.querySelector('#characterSelect') as Element;
 
-    characterName.innerHTML = `${characterModel.FirstName}_${characterModel.LastName}`;
-    inGameTime.innerHTML = characterModel.TotalOnlineTime;
-    fraction.innerHTML = (characterModel.fraction !== null) ? characterModel.fraction : 'Отсутствует';
-    cash.innerHTML = characterModel.Cash;
+    characterName.innerText = `${characterModel.FirstName} ${characterModel.LastName}`;
+    inGameTime.innerText = characterModel.TotalOnlineTime;
+    fraction.innerText = (characterModel.fraction !== null) ? characterModel.fraction : 'Отсутствует';
+    cash.innerText = characterModel.Cash;
     //buttonValue.nodeValue = characterModel.Id;
   }
 
   public ShowCharacters(characterSelectModelsJson: string): void {
     mp.console.logError('Информация передана');
     mp.console.logError(`${characterSelectModelsJson}`);
-    const characterSelectModels = JSON.parse(characterSelectModelsJson);
-    mp.console.logError(characterSelectModels);
+    const characterSelectModels = JSON.parse(characterSelectModelsJson) as any[];
+    mp.console.logError(characterSelectModels.length.toString());
 
     mp.console.logInfo(typeof (characterSelectModels));
 
@@ -126,10 +126,12 @@ class CharacterSelectUi {
         const slot1 = freeSlot.cloneNode(true) as HTMLElement;
         slot1.classList.remove('hidden');
         mainForm.append(slot1);
+
         const slot2 = freeSlot.cloneNode(true) as HTMLElement;
         slot2.classList.remove('hidden');
         slot2.classList.add('block2');
         mainForm.append(slot2);
+
         const slot3 = freeSlot.cloneNode(true) as HTMLElement;
         slot3.classList.remove('hidden');
         slot3.classList.add('block3');
