@@ -1,4 +1,4 @@
-import { LocalEvents } from "../Constants/local-events";
+import { LocalEvents } from "../../Constants/local-events";
 
 class CharacterSelectUi {
   private StartButtons(): void {
@@ -10,7 +10,7 @@ class CharacterSelectUi {
 
     selectButtons.forEach((sb, key) => {
       const selectButton = sb as HTMLButtonElement;
-      
+
       const characterIdString = selectButton.value;
       const characterId = +characterIdString;
       sb.addEventListener('click', () => this.SelectCharacter(characterId));

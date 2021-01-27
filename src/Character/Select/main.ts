@@ -1,6 +1,6 @@
-import { LocalEvents } from "../Constants/local-events";
-import { RemoteEvents } from "../Constants/remote-events";
-import { RemoteResponse } from "../Constants/remote-response";
+import { LocalEvents } from "../../Constants/local-events";
+import { RemoteEvents } from "../../Constants/remote-events";
+import { RemoteResponse } from "../../Constants/remote-response";
 
 class CharacterSelect {
   private readonly browser: BrowserMp;
@@ -11,7 +11,7 @@ class CharacterSelect {
     const cameraLookAt = new mp.Vector3(-0.0, 0.0, -93.0);
     this.camera = mp.cameras.new('default', camera, cameraLookAt, 40);
 
-    this.browser = mp.browsers.new('package://CharacterSelect/character-select.html');
+    this.browser = mp.browsers.new('package://CharacterSelect/select.html');
     mp.players.local.freezePosition(true);
 
     mp.game.ui.displayRadar(false);
@@ -53,7 +53,7 @@ class CharacterSelect {
   private ShowCharacters(characterSelectModelsJson: string): void {
     mp.console.logInfo(characterSelectModelsJson);
     const csmTest = JSON.parse(characterSelectModelsJson);
-    mp.console.logError(typeof(csmTest));
+    mp.console.logError(typeof (csmTest));
     mp.console.logInfo(csmTest[0].id);
     mp.console.logInfo(csmTest[1].id);
     this.browser.execute(`window.characterSelectUi.ShowCharacters('${characterSelectModelsJson}');`);
