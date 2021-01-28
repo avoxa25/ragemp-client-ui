@@ -4,7 +4,7 @@ export abstract class CameraConstants{
 
   public static readonly StandardCameraPosition = new mp.Vector3(344.3341, -998.8612, -98.19622);
   public static readonly StandardCameraRotation = new mp.Vector3(0, 0, 0);
-  public static readonly StandardCameraPoint = new mp.Vector3(-986.61447, 0, -186.61447);
+  public static readonly StandardCameraPoint = { x: -986.61447, y: 0, z: -186.61447 };
 
   public static readonly StandardCameraFOV = 40;
 }
