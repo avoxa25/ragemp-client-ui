@@ -2,7 +2,7 @@ import { RemoteEvents } from '../Constants/remote-events';
 import { LocalEvents } from '../Constants/local-events';
 import { RemoteResponse } from '../Constants/remote-response';
 import { CameraConstants } from '../Constants/camera-constants';
-import { ErrorTypes } from './authentifications-errors';
+import { ErrorTypes } from './authentications-errors';
 
 class Authentication {
   private readonly browser: BrowserMp;
@@ -23,7 +23,7 @@ class Authentication {
 
     mp.gui.cursor.show(true, true);
 
-    this.camera.pointAtCoord(-986.61447, 0, -186.61447);
+    this.camera.pointAtCoord(CameraConstants.StandardCameraPoint.x, CameraConstants.StandardCameraPoint.y, CameraConstants.StandardCameraPoint.z);
     this.camera.setActive(true);
     mp.game.cam.renderScriptCams(true, false, 0, true, false);
 
