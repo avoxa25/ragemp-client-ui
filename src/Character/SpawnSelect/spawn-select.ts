@@ -1,4 +1,5 @@
 import { LocalEvents } from '../../Constants/local-events';
+import { SpawnSelectConstant } from './spawn-select-constants';
 
 class CharacterSpawnSelectUi {
   public constructor(haveOrganization: boolean, haveHomes: boolean) {
@@ -32,7 +33,7 @@ class CharacterSpawnSelectUi {
         organizationSpawnFront.classList.remove('hide');
       });
 
-      organizationSpawnFigure.addEventListener('click', () => mp.events.call(LocalEvents.CharacterSpawnSelect, 'OrganizationSpawn'));
+      organizationSpawnFigure.addEventListener('click', () => mp.events.call(LocalEvents.CharacterSpawnSelect, SpawnSelectConstant.Organization));
     }
 
     if (haveHomes) {
@@ -50,7 +51,7 @@ class CharacterSpawnSelectUi {
         houseSpawnFront.classList.remove('hide');
       });
 
-      houseSpawnFigure.addEventListener('click', () => mp.events.call(LocalEvents.CharacterSpawnSelect, 'HouseSpawn'));
+      houseSpawnFigure.addEventListener('click', () => mp.events.call(LocalEvents.CharacterSpawnSelect, SpawnSelectConstant.House));
     }
 
     if (haveOrganization && haveHomes) {
@@ -68,7 +69,7 @@ class CharacterSpawnSelectUi {
       lastPositionFront.classList.remove('hide');
     });
 
-    lastPositionFigure.addEventListener('click', () => mp.events.call(LocalEvents.CharacterSpawnSelect, 'LastPosition'));
+    lastPositionFigure.addEventListener('click', () => mp.events.call(LocalEvents.CharacterSpawnSelect, SpawnSelectConstant.LastPosition));
   }
 }
 

@@ -2,6 +2,7 @@ import { CameraConstants } from '../../Constants/camera-constants';
 import { LocalEvents } from '../../Constants/local-events';
 import { RemoteEvents } from '../../Constants/remote-events';
 import { RemoteResponse } from '../../Constants/remote-response';
+import { SpawnSelectConstant } from './spawn-select-constants';
 
 class CharacterSpawnSelect {
   private readonly browser: BrowserMp;
@@ -24,10 +25,10 @@ class CharacterSpawnSelect {
     mp.game.cam.renderScriptCams(true, false, 0, true, false);
 
     mp.events.add(RemoteResponse.CharacterSpawnSelected, () => this.Close());
-    mp.events.add(LocalEvents.CharacterSpawnSelect, (d: string) => this.CharacterSpawnSelect(d));
+    mp.events.add(LocalEvents.CharacterSpawnSelect, (d: SpawnSelectConstant) => this.CharacterSpawnSelect(d));
   }
 
-  private CharacterSpawnSelect(spawnPosition: string): void {
+  private CharacterSpawnSelect(spawnPosition: SpawnSelectConstant): void {
     mp.events.callRemote(RemoteEvents.CharacterSpawnSelect, spawnPosition);
   }
 
