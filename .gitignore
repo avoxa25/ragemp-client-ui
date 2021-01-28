@@ -25,6 +25,7 @@ speed-measure-plugin*.json
 *.sublime-workspace
 
 # IDE - VSCode
+.vs/*
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -42,3 +43,5 @@ speed-measure-plugin*.json
 # System Files
 .DS_Store
 Thumbs.db
+/.vs/ProjectSettings.json
+*.sqlite

@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+
+  font-family: 'Open Sans', sans-serif;
+
+  user-select: none;
+}
+
+P {
+  margin: 0;
+  padding: 0;
+}
+
+.location {
+  height: 60px;
+
+  position: absolute;
+  left: 330px;
+  bottom: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 0 0 3px 10px;
+
+  background-image: url("assets/location_line.svg");
+  background-position: 0 50%;
+  background-repeat: no-repeat;
+
+  color: white;
+  font-size: 18px;
+  font-weight: 300;
+  text-align: left;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.location p:nth-child(1) {
+  font-size: 20px;
+  font-weight: 700;
+}

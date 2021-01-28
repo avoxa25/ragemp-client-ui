@@ -1,10 +1,23 @@
-import { LocalEvents } from '../Constants/localEvents';
-import { RemoteEvents } from '../Constants/remoteEvents';
+import { LocalEvents } from '../Constants/local-events';
+import { RemoteResponse } from '../Constants/remote-response';
+
+class Chat {
+  constructor() {
+    const chat = mp.browsers.new('package://Chat/chat.html');
+    chat.markAsChat();
+
+    mp.events.add(LocalEvents.ChatCursorToggle, (fc: boolean, v: boolean) => this.ToggleCharCursor(fc, v));
+  }
+
+  private ToggleCharCursor(freezeControls: boolean, visible: boolean): void {
+    mp.gui.cursor.show(freezeControls, visible);
+  }
+};
 
 mp.gui.chat.show(false);
 
-mp.events.add(LocalEvents.ChatCursorToggle, (hidden: boolean) => mp.gui.cursor.show(!hidden, !hidden));
-mp.events.add(LocalEvents.ChatSendMessage, (message: string, channel: string) => mp.events.callRemote(RemoteEvents.ChatSendMessage, message, channel));
+let chat: Chat | undefined;
+mp.events.add(RemoteResponse.CharacterSpawnSelected, () => chat = chat ? chat : new Chat());
 
-const chat = mp.browsers.new('package://Chat/chat.html');
-chat.markAsChat();
+// TODO: Remove after login screen
+chat = new Chat();
