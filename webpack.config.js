@@ -4,6 +4,7 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const htmlComponents = [
   'Character/Creator',
   'Chat',
+  'HUD/AlphaTest',
   'HUD/Location',
   'Speedometer'
 ];
