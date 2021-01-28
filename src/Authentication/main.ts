@@ -39,9 +39,6 @@ class Authentication {
 
   private Close(): void {
     this.browser.destroy();
-
-    this.camera.setActive(false);
-    this.camera.destroy();
   }
 
   private ErrorMessage(message: string, type: string): void {
