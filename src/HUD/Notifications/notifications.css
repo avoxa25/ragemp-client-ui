@@ -1,25 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
-
 * {
 	box-sizing: border-box;
 
-	font-family: 'PT Sans', sans-serif;
-	
+	font-family: 'Open Sans', sans-serif;
+
 	user-select: none;
 }
 
 P {
-	margin: 0 0 0 0;
-	padding: 0 0 0 0;
+	margin: 0;
+	padding: 0;
+}
+
+@keyframes show {
+	from {
+		opacity: 0;
+		transform: translateY(-150px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes hide {
+	from {
+		opacity: 1;
+	}
+
+	to {
+		opacity: 0;
+	}
+}
+
+.window {
+	width: 285px;
+
+	display: flex;
+	flex-direction: column-reverse;
+
+	position: absolute;
+	bottom: 350px;
+	left: 35px;
 }
 
 .notification {
 	width: 285px;
 
-	position: absolute;
-	left: 15px;
-
-	display: flex;
+	display: none;
 	flex-direction: column;
 	justify-content: center;
 
@@ -36,6 +64,8 @@ P {
 	color: white;
 	font-size: 14px;
 	font-weight: 300;
+
+	transition: opacity .25s ease-in-out;
 }
 
 .notification p:nth-child(1) {
@@ -44,13 +74,15 @@ P {
 }
 
 .alert {
-	background-image: url("img/notify.png");
+	display: none;
+	background-image: url("assets/notify.png");
 	background-position: 10px 50%;
 	background-repeat: no-repeat;
 }
 
 .error {
-	background-image: url("img/fail.png");
+	display: none;
+	background-image: url("assets/error.png");
 	background-position: 10px 50%;
 	background-repeat: no-repeat;
 }
@@ -59,10 +91,12 @@ P {
 	color: #ff002a;
 	font-size: 16px;
 	font-weight: 700;
+
 }
 
 .success {
-	background-image: url("img/success.png");
+	display: none;
+	background-image: url("assets/success.png");
 	background-position: 10px 50%;
 	background-repeat: no-repeat;
 }
@@ -71,10 +105,12 @@ P {
 	color: #0de798;
 	font-size: 16px;
 	font-weight: 700;
+
 }
 
 .info {
-	background-image: url("img/info.png");
+	display: none;
+	background-image: url("assets/info.png");
 	background-position: 10px 50%;
 	background-repeat: no-repeat;
 }
@@ -83,10 +119,12 @@ P {
 	color: white;
 	font-size: 16px;
 	font-weight: 700;
+
 }
 
 .warning {
-	background-image: url("img/warning.png");
+	display: none;
+	background-image: url("assets/warning.png");
 	background-position: 10px 50%;
 	background-repeat: no-repeat;
 }
@@ -95,4 +133,15 @@ P {
 	color: #ff002a;
 	font-size: 16px;
 	font-weight: 700;
+
+}
+
+.show {
+	display: flex;
+
+	animation: show 2s;
+}
+
+.hide {
+	animation: hide 2s;
 }
