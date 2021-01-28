@@ -1,0 +1,1 @@
+mp.discord.update('SweetLifeRP', '');
