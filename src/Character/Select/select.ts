@@ -1,53 +1,6 @@
 import { LocalEvents } from "../../Constants/local-events";
 
 class CharacterSelectUi {
-  private StartButtons(): void {
-    const form = document.querySelector('form#mainForm') as HTMLFormElement;
-
-    const createButtons = form.querySelectorAll('.buttonCreate');
-    const deleteButtons = form.querySelectorAll('.buttonDelete');
-    const selectButtons = form.querySelectorAll('.buttonSelect');
-
-    selectButtons.forEach((sb, key) => {
-      const selectButton = sb as HTMLButtonElement;
-
-      const characterIdString = selectButton.value;
-      const characterId = +characterIdString;
-      sb.addEventListener('click', () => this.SelectCharacter(characterId));
-      deleteButtons[key].addEventListener('click', () => this.DeleteCharacter(characterId));
-    });
-
-    createButtons.forEach((cb) => cb.addEventListener('click', () => this.CreateCharacter()));
-  }
-
-  private CreateCharacter(): void {
-    mp.events.call(LocalEvents.CharacterSelectCreate);
-  }
-
-  private DeleteCharacter(characterId: number): void {
-    mp.events.call(LocalEvents.CharacterDelete, characterId);
-  }
-
-  private SelectCharacter(characterId: number): void {
-    mp.events.call(LocalEvents.CharacterSelect, characterId)
-  }
-
-  private ShowCharacterData(slot: HTMLElement, characterModel: any): void {
-    const characterName = slot.querySelector('#characterName') as HTMLElement;
-    const inGameTime = slot.querySelector('#inGameTime') as HTMLElement;
-    const fraction = slot.querySelector('#fraction') as HTMLElement;
-    const cash = slot.querySelector('#cash') as HTMLElement;
-    const bankCash = slot.querySelector('#bankCash') as HTMLElement;
-    const buttonValue = slot.querySelector('#characterSelect') as HTMLButtonElement;
-
-    characterName.innerText = `${characterModel.FirstName} ${characterModel.LastName}`;
-    inGameTime.innerText = characterModel.TotalOnlineTime;
-    fraction.innerText = (characterModel.fraction !== null) ? characterModel.fraction : 'Отсутствует';
-    cash.innerText = characterModel.Cash;
-    bankCash.innerText = characterModel.BankCash;
-    buttonValue.value = characterModel.Id;
-  }
-
   public ShowCharacters(characterSelectModelsJson: string): void {
     const characterSelectModels = JSON.parse(characterSelectModelsJson) as any[];
 
@@ -136,6 +89,52 @@ class CharacterSelectUi {
         this.StartButtons();
         return;
     }
+  }
+  private StartButtons(): void {
+    const form = document.querySelector('form#mainForm') as HTMLFormElement;
+
+    const createButtons = form.querySelectorAll('.buttonCreate');
+    const deleteButtons = form.querySelectorAll('.buttonDelete');
+    const selectButtons = form.querySelectorAll('.buttonSelect');
+
+    selectButtons.forEach((sb, key) => {
+      const selectButton = sb as HTMLButtonElement;
+
+      const characterIdString = selectButton.value;
+      const characterId = +characterIdString;
+      sb.addEventListener('click', () => this.SelectCharacter(characterId));
+      deleteButtons[key].addEventListener('click', () => this.DeleteCharacter(characterId));
+    });
+
+    createButtons.forEach((cb) => cb.addEventListener('click', () => this.CreateCharacter()));
+  }
+
+  private CreateCharacter(): void {
+    mp.events.call(LocalEvents.CharacterSelectCreate);
+  }
+
+  private DeleteCharacter(characterId: number): void {
+    mp.events.call(LocalEvents.CharacterDelete, characterId);
+  }
+
+  private SelectCharacter(characterId: number): void {
+    mp.events.call(LocalEvents.CharacterSelect, characterId)
+  }
+
+  private ShowCharacterData(slot: HTMLElement, characterModel: any): void {
+    const characterName = slot.querySelector('#characterName') as HTMLElement;
+    const inGameTime = slot.querySelector('#inGameTime') as HTMLElement;
+    const fraction = slot.querySelector('#fraction') as HTMLElement;
+    const cash = slot.querySelector('#cash') as HTMLElement;
+    const bankCash = slot.querySelector('#bankCash') as HTMLElement;
+    const buttonValue = slot.querySelector('#characterSelect') as HTMLButtonElement;
+
+    characterName.innerText = `${characterModel.FirstName} ${characterModel.LastName}`;
+    inGameTime.innerText = characterModel.TotalOnlineTime;
+    fraction.innerText = (characterModel.fraction !== null) ? characterModel.fraction : 'Отсутствует';
+    cash.innerText = characterModel.Cash;
+    bankCash.innerText = characterModel.BankCash;
+    buttonValue.value = characterModel.Id;
   }
 }
 
