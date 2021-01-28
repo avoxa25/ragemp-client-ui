@@ -71,7 +71,6 @@ class AuthenticationUi {
   private OnRegistrationFormSubmit(form: HTMLFormElement): void {
     const formData = new FormData(form);
     const username = formData.get('username') as string;
-    //const usernamePattern = new RegExp('[A-Za-z0-9]$');
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
     const passwordConfirm = formData.get('passwordConfirm') as string;

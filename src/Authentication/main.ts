@@ -2,13 +2,14 @@ import { RemoteEvents } from '../Constants/remote-events';
 import { LocalEvents } from '../Constants/local-events';
 import { RemoteResponse } from '../Constants/remote-response';
 import { CameraConstants } from '../Constants/camera-constants';
+import { ErrorTypes } from './authentifications-errors';
 
 class Authentication {
   private readonly browser: BrowserMp;
   private readonly camera: CameraMp;
 
   public constructor() {
-    this.camera = mp.cameras.new('default', CameraConstants.StandardCameraPosition, CameraConstants.StandardCameraRotation, 40);
+    this.camera = mp.cameras.new('default', CameraConstants.StandardCameraPosition, CameraConstants.StandardCameraRotation, CameraConstants.StandardCameraFOV);
 
     this.browser = mp.browsers.new('package://Authentication/authentication.html');
 
@@ -29,8 +30,8 @@ class Authentication {
     mp.events.add(RemoteResponse.RegistrationSuccess, () => this.Close());
     mp.events.add(RemoteResponse.LoginSuccess, () => this.Close());
 
-    mp.events.add(RemoteResponse.LoginFailed, (m: string) => this.ErrorMessage(m, 'loginForm'));
-    mp.events.add(RemoteResponse.RegistrationFailed, (m: string) => this.ErrorMessage(m, 'registrationForm'));
+    mp.events.add(RemoteResponse.LoginFailed, (m: string) => this.ErrorMessage(m, ErrorTypes.Login));
+    mp.events.add(RemoteResponse.RegistrationFailed, (m: string) => this.ErrorMessage(m, ErrorTypes.Registration));
 
     mp.events.add(LocalEvents.AuthenticationUiLogin, (u: string, p: string) => this.Login(u, p));
     mp.events.add(LocalEvents.AuthenticationUiRegistration, (u: string, e: string, p: string) => this.Registration(e, u, p));
