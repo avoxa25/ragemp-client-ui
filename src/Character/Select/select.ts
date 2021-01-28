@@ -37,29 +37,25 @@ class CharacterSelectUi {
     const inGameTime = slot.querySelector('#inGameTime') as HTMLElement;
     const fraction = slot.querySelector('#fraction') as HTMLElement;
     const cash = slot.querySelector('#cash') as HTMLElement;
-    //const buttonValue = slot.querySelector('#characterSelect') as Element;
+    const bankCash = slot.querySelector('#bankCash') as HTMLElement;
+    const buttonValue = slot.querySelector('#characterSelect') as HTMLButtonElement;
 
     characterName.innerText = `${characterModel.FirstName} ${characterModel.LastName}`;
     inGameTime.innerText = characterModel.TotalOnlineTime;
     fraction.innerText = (characterModel.fraction !== null) ? characterModel.fraction : 'Отсутствует';
     cash.innerText = characterModel.Cash;
-    //buttonValue.nodeValue = characterModel.Id;
+    bankCash.innerText = characterModel.BankCash;
+    buttonValue.value = characterModel.Id;
   }
 
   public ShowCharacters(characterSelectModelsJson: string): void {
-    mp.console.logError('Информация передана');
-    mp.console.logError(`${characterSelectModelsJson}`);
     const characterSelectModels = JSON.parse(characterSelectModelsJson) as any[];
-    mp.console.logError(characterSelectModels.length.toString());
-
-    mp.console.logInfo(typeof (characterSelectModels));
 
     const copyForm = document.querySelector('#copyFrom') as HTMLFormElement;
     const mainForm = document.querySelector('#mainForm') as HTMLFormElement;
 
     const characterSlot = copyForm.querySelector('#characterSlot') as HTMLElement;
     const freeSlot = copyForm.querySelector('#freeSlot') as HTMLElement;
-    //const closedSlot = copyForm.querySelector('#closedSlot') as HTMLElement;
 
     // TODO: Realize buying form
 
@@ -144,4 +140,5 @@ class CharacterSelectUi {
 }
 
 const characterSelectUi = new CharacterSelectUi();
+
 (window as any).characterSelectUi = characterSelectUi;
