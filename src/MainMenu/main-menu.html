@@ -89,7 +89,6 @@
             <li>
               <p>
                 Наличные денежные средства:
-                <!-- Doesn't work without inline -->
                 <span class="green">
                   $&nbsp;<span class="green" id="cash">999,999,999.00</span>
                 </span>
@@ -205,6 +204,96 @@
               </p>
             </li>
           </ul>
+        </div>
+      </section>
+      <section class="tab" id="tabShop">
+        <aside>
+          <ul>
+            <li>
+              <button class="tab-content-link shop-main active" id="linkContentShopMain"
+                data-tab="tabContentShopMain">МАГАЗИН</button>
+            </li>
+            <li>
+              <button class="tab-content-link exchange" id="linkContentExchange"
+                data-tab="tabContentExchange">КОНВЕРТАЦИЯ ВАЛЮТЫ</button>
+            </li>
+            <li>
+              <button class="tab-content-link replenishment" id="linkContentReplenishment"
+                data-tab="tabContentReplenishment">ПОПОЛНИТЬ БАЛАНС</button>
+            </li>
+          </ul>
+        </aside>
+        <div class="v-line"></div>
+        <div class="tab-content shop-main active" id="tabContentShopMain">
+          <p class="currency-value">
+            <span>
+              БАЛАНС:
+              <span class="rubles" id="rubles">5000 руб.</span>
+            </span>
+            <span>
+              ИГРОВОЙ СЧЕТ:
+              <span class="cash" id="cash">$&nbsp;100,000,000</span>
+            </span>
+          </p>
+          <ul class="packages">
+            <li>
+              <button class="package">
+                <p class="package-value" id="packageValue">$ 100,000</p>
+                <img src="assets/dollar.svg">
+                <p class="package-name" id="packageName">СТАРТ</p>
+              </button>
+            </li>
+            <li>
+              <button class="package">
+                <p class="package-value" id="packageValue">$ 100,000</p>
+                <img src="assets/dollar.svg">
+                <p class="package-name" id="packageName">СТАРТ</p>
+              </button>
+            </li>
+            <li>
+              <button class="package">
+                <p class="package-value" id="packageValue">$ 100,000</p>
+                <img src="assets/dollar.svg">
+                <p class="package-name" id="packageName">СТАРТ</p>
+              </button>
+            </li>
+            <li>
+              <button class="package">
+                <p class="package-value" id="packageValue">$ 100,000</p>
+                <img src="assets/dollar.svg">
+                <p class="package-name" id="packageName">СТАРТ</p>
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-content exchange" id="tabContentExchange">
+          <p class="currency-value">
+            <span>
+              БАЛАНС:
+              <span class="rubles" id="rubles">5000 руб.</span>
+            </span>
+            <span>
+              ИГРОВОЙ СЧЕТ:
+              <span class="cash" id="cash">$&nbsp;100,000,000</span>
+            </span>
+          </p>
+          <form>
+            <input type="number" class="rubles">
+            <button class="do-exchange" type="sumbit"></button>
+            <input type="number" class="cash">
+          </form>
+        </div>
+        <div class="tab-content replenishment" id="tabContentReplenishment">
+          <p class="currency-value">
+            <span>
+              БАЛАНС:
+              <span class="rubles" id="rubles">5000 руб.</span>
+            </span>
+          </p>
+          <form>
+            <input type="number" placeholder="Введите сумму">
+            <button type="sumbit">ПОПОЛНИТЬ</button>
+          </form>
         </div>
       </section>
     </main>
