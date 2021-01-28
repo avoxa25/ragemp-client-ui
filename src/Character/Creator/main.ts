@@ -13,7 +13,7 @@ class CharacterCreator {
   constructor() {
     this.browser = mp.browsers.new('package://CharacterCreator/creator.html');
 
-    this.camera = mp.cameras.new('default', CameraConstants.CreatorCameraPosition, CameraConstants.CreatorCameraRotation, 40);
+    this.camera = mp.cameras.new('default', CameraConstants.CreatorCameraPosition, CameraConstants.CreatorCameraRotation, CameraConstants.StandardCameraFOV);
     this.camera.setActive(true);
 
     this.character = new CharacterCreatorModel();
