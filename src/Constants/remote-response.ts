@@ -16,4 +16,4 @@ export enum RemoteResponse {
   CharacterMoneyChanged = "RemoteResponse:Character:MoneyChanged",
 
   NotificationSent = "RemoteResponse:Notification:Sent"
-};
+}
