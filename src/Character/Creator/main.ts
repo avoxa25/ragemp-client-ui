@@ -1,3 +1,4 @@
+import { CameraConstants } from '../../Constants/camera-constants';
 import { LocalEvents } from '../../Constants/local-events';
 import { RemoteEvents } from '../../Constants/remote-events';
 import { RemoteResponse } from '../../Constants/remote-response';
@@ -12,9 +13,7 @@ class CharacterCreator {
   constructor() {
     this.browser = mp.browsers.new('package://CharacterCreator/creator.html');
 
-    const camera = new mp.Vector3(347, -1007.5515, -99.15);
-    const cameraLookAt = new mp.Vector3(-0.0, 0.0, -93.0);
-    this.camera = mp.cameras.new('default', camera, cameraLookAt, 40);
+    this.camera = mp.cameras.new('default', CameraConstants.CreatorCameraPosition, CameraConstants.CreatorCameraRotation, 40);
     this.camera.setActive(true);
 
     this.character = new CharacterCreatorModel();
