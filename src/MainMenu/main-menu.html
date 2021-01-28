@@ -14,7 +14,7 @@
 
 <body>
   <div class="container">
-    <button class="close">ЗАКРЫТЬ МЕНЮ</button>
+    <button class="close" id="close">ЗАКРЫТЬ МЕНЮ</button>
     <header>
       <nav>
         <ul>
@@ -53,37 +53,37 @@
             <li>
               <p>
                 Имя фамилия:
-                <span>Artem Rovin</span>
+                <span id='fullName'>Artem Rovin</span>
               </p>
             </li>
             <li>
               <p>
                 Пол:
-                <span>мужской</span>
+                <span id='gender'>мужской</span>
               </p>
             </li>
             <li>
               <p>
                 Работа:
-                <span>член фракции</span>
+                <span id='job'>член фракции</span>
               </p>
             </li>
             <li>
               <p>
                 Отыграно часов на сервере:
-                <span>9999.3</span>
+                <span id='playedTime'>9999.3</span>
               </p>
             </li>
             <li>
               <p>
                 Организация:
-                <span>LSPD</span>
+                <span id='orgName'>LSPD</span>
               </p>
             </li>
             <li>
               <p>
                 Должность:
-                <span>Unter Officer SS</span>
+                <span id='orgRank'>Unter Officer SS</span>
               </p>
             </li>
             <li>
@@ -103,7 +103,7 @@
               <p>
                 Уведомления:
                 <label class="switch">
-                  <input type="checkbox" id="" checked>
+                  <input type="checkbox" class="settings" id="notify" checked>
                   <span class="slider round"></span>
                 </label>
               </p>
@@ -112,7 +112,7 @@
               <p>
                 Игровой чат:
                 <label class="switch">
-                  <input type="checkbox" id="" checked>
+                  <input type="checkbox" class="settings" id="textChat" checked>
                   <span class="slider round"></span>
                 </label>
               </p>
@@ -121,7 +121,7 @@
               <p>
                 Голосовой чат:
                 <label class="switch">
-                  <input type="checkbox" id="" checked>
+                  <input type="checkbox" class="settings" id="voiceChat" checked>
                   <span class="slider round"></span>
                 </label>
               </p>

@@ -1,15 +1,25 @@
-abstract class MainMenuUi {
-  public static Start(): void {
+import { SpecificLocalEvents } from "../Constants/specific-local-events";
+import { LocalEvents } from "../Constants/local-events";
+import { Settings } from "./settings";
+
+class MainMenuUi {
+  private settings: Settings;
+  public constructor(){
+    this.settings = new Settings();
+
     const buttonsTabLink = document.querySelectorAll('button.tablink') as NodeListOf<HTMLElement>;
     const buttonsTabContentLink = document.querySelectorAll('button.tab-content-link') as NodeListOf<HTMLElement>;
-    console.log(buttonsTabLink);
-    console.log(buttonsTabContentLink);
-    buttonsTabLink.forEach((b) => b.addEventListener('click', () => MainMenuUi.ChangeTab(b)));
-    buttonsTabContentLink.forEach((bu) => bu.addEventListener('click', () => MainMenuUi.ChangeTabContent(bu)));
+    const closeButton = document.querySelector('#close') as HTMLElement;
+    const switchesSettings = document.querySelectorAll('input.settings') as NodeListOf<HTMLElement>;
+
+
+    closeButton.addEventListener('click', () => this.Hide());
+    switchesSettings.forEach((s) => s.addEventListener('click', () => this.UpdateSettings(s)));
+    buttonsTabLink.forEach((b) => b.addEventListener('click', () => this.ChangeTab(b)));
+    buttonsTabContentLink.forEach((bu) => bu.addEventListener('click', () => this.ChangeTabContent(bu)));
   }
 
-  private static ChangeTab(selectedTab: HTMLElement): void {
-    console.log(selectedTab);
+  private ChangeTab(selectedTab: HTMLElement): void {
     const selectedTabId = selectedTab.getAttribute('data-tab');
     const selectedTabLinkId = selectedTab.id;
 
@@ -38,8 +48,7 @@ abstract class MainMenuUi {
     }
   }
 
-  private static ChangeTabContent(selectedTab: HTMLElement): void {
-    console.log(selectedTab);
+  private ChangeTabContent(selectedTab: HTMLElement): void {
     const selectedTabId = selectedTab.getAttribute('data-tab');
     const selectedTabLinkId = selectedTab.id;
 
@@ -63,6 +72,54 @@ abstract class MainMenuUi {
       }
     }
   }
+
+  private UpdateSettings(element: HTMLElement): void {
+    element.toggleAttribute('checked');
+    const toggled = element.hasAttribute('checked');
+    switch (element.id) {
+      case 'notify':
+        this.settings.notify = toggled;
+        // TODO: toggle notifications
+        return;
+      case 'textChat':
+        mp.events.call(SpecificLocalEvents.ChatActivate, toggled);
+        return;
+      case 'voiceChat':
+        // TODO: toggle voicechat
+        return;
+    }
+
+    const settingsJson = JSON.stringify(this.settings);
+    mp.events.call(LocalEvents.SettingsUpdate, settingsJson);
+  }
+
+  private Show(name: string, surname: string, gender: string, job: string, playerTime: string, orgName: string, orgRank: string, cash: number): void {
+    const fullNameElement = document.querySelector('#fullName') as HTMLElement;
+    const genderElement = document.querySelector('#gender') as HTMLElement;
+    const jobElement = document.querySelector('#job') as HTMLElement;
+    const playerTimeElement = document.querySelector('#playerTime') as HTMLElement;
+    const orgNameElement = document.querySelector('#orgName') as HTMLElement;
+    const orgRankElement = document.querySelector('#orgRank') as HTMLElement;
+    const cashElement = document.querySelector('#cashElement') as HTMLElement;
+
+    const cashFormat = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(cash);
+
+    fullNameElement.innerText = `${name} ${surname}`;
+    genderElement.innerText = gender;
+    jobElement.innerText = job;
+    playerTimeElement.innerText = playerTime;
+    orgNameElement.innerText = orgName;
+    orgRankElement.innerText = orgRank;
+    cashElement.innerText = cashFormat;
+
+    document.body.hidden = false;
+  }
+
+  private Hide(): void {
+    document.body.hidden = true;
+    mp.events.call(LocalEvents.MenuIsActiveUpdate, false);
+  }
 };
 
-MainMenuUi.Start();
+const mainMenuUi = new MainMenuUi();
+(window as any).mainMenuUi = mainMenuUi;
