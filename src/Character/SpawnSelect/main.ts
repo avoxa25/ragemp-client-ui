@@ -1,3 +1,4 @@
+import { CameraConstants } from '../../Constants/camera-constants';
 import { LocalEvents } from '../../Constants/local-events';
 import { RemoteEvents } from '../../Constants/remote-events';
 import { RemoteResponse } from '../../Constants/remote-response';
@@ -16,9 +17,9 @@ class CharacterSpawnSelect {
 
     mp.gui.cursor.show(true, true);
 
-    this.camera = mp.cameras.new('default', new mp.Vector3(344.3341, -998.8612, -98.19622), new mp.Vector3(0, 0, 0), 40);
+    this.camera = mp.cameras.new('default', CameraConstants.StandardCameraPosition, CameraConstants.StandardCameraRotation, CameraConstants.StandardCameraFOV);
 
-    this.camera.pointAtCoord(-986.61447, 0, -186.61447); //-99.19622 Changes the rotation of the camera to point towards a location
+    this.camera.pointAtCoord(CameraConstants.StandardCameraPoint.X, CameraConstants.StandardCameraPoint.Y, CameraConstants.StandardCameraPoint.Z); //-99.19622 Changes the rotation of the camera to point towards a location
     this.camera.setActive(true);
     mp.game.cam.renderScriptCams(true, false, 0, true, false);
 
