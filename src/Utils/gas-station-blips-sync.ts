@@ -77,7 +77,7 @@ class GasStationBlipsSync {
       .filter(b => b.hasVariable('Exists') && b.hasVariable('Exists') === false)
       .filter(b => b.hasVariable('Type') && b.getVariable('Type') === 'GasStation');
   }
-};
+}
 
 let gasStationBlipsSync: GasStationBlipsSync | undefined;
 mp.events.add(RemoteResponse.CharacterSpawnSelected, () => gasStationBlipsSync = gasStationBlipsSync ? gasStationBlipsSync : new GasStationBlipsSync());
