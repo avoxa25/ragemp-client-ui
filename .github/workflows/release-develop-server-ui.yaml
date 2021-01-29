@@ -30,7 +30,7 @@ jobs:
       uses: papeloto/action-zip@v1
       with:
         files: ./src
-        dest: ./artifacts/${{ steps.version.outputs.version }}-develop.zip
+        dest: ./${{ steps.version.outputs.version }}-develop.zip
     - name: Create release
       uses: actions/create-release@v1
       id: create_release
@@ -45,7 +45,7 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./artifacts/${{ steps.version.outputs.version }}-develop.zip
+        asset_path: ./${{ steps.version.outputs.version }}-develop.zip
         asset_name: ${{ steps.version.outputs.version }}-develop.zip
         asset_content_type: application/zip
       env:
