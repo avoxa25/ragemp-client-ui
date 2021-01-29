@@ -1,8 +1,12 @@
 import { LocalEvents } from "../../Constants/local-events";
+import { SectionType } from "./section-type";
+import { CharacterSelectModel } from "./select-model";
 
 class CharacterSelectUi {
+  private ul = document.querySelector('section.container ul') as HTMLElement;
+
   public ShowCharacters(characterSelectModelsJson: string): void {
-    const characterSelectModels = JSON.parse(characterSelectModelsJson) as any[];
+    const characterSelectModels = JSON.parse(characterSelectModelsJson);
 
     const copyForm = document.querySelector('#copyFrom') as HTMLFormElement;
     const mainForm = document.querySelector('#mainForm') as HTMLFormElement;
@@ -90,12 +94,98 @@ class CharacterSelectUi {
         return;
     }
   }
-  private StartButtons(): void {
-    const form = document.querySelector('form#mainForm') as HTMLFormElement;
 
-    const createButtons = form.querySelectorAll('.buttonCreate');
-    const deleteButtons = form.querySelectorAll('.buttonDelete');
-    const selectButtons = form.querySelectorAll('.buttonSelect');
+  private CreateSection(type: SectionType, characterModel?: CharacterSelectModel) {
+    switch (type) {
+      case SectionType.Character:
+        if(!characterModel) return;
+
+        const characterLi = document.createElement('li') as HTMLElement;
+        const section = document.createElement('section') as HTMLElement;
+        section.classList.add('slot');
+        section.classList.add('active');
+    
+        const header = document.createElement('header') as HTMLElement;
+        const main = document.createElement('main') as HTMLElement;
+        const fullName = document.createElement('h2') as HTMLElement;
+        fullName.classList.add('text-gradient');
+        //fullName.innerText = `${characterModel.firstName} ${characterModel.lastName}`;
+    
+        const info = document.createElement('ul') as HTMLElement;
+        const playedTimeLi = document.createElement('li') as HTMLElement;
+        const playedTimeP = document.createElement('p') as HTMLElement;
+        playedTimeP.innerText = 'Наиграно часов:';
+        const playedTimeSpan = document.createElement('span') as HTMLElement;
+        //playedTimeSpan.innerText = characterModel.totalOnlineTime;
+    
+        const factionLi = document.createElement('li') as HTMLElement;
+        const factionP = document.createElement('p') as HTMLElement;
+        factionP.innerText = 'Фракция:';
+        const factionSpan = document.createElement('span') as HTMLElement;
+        //factionSpan.innerText = characterModel.faction;
+    
+        const cashLi = document.createElement('li') as HTMLElement;
+        const cashP = document.createElement('p') as HTMLElement;
+        cashP.innerText = 'Наличные:';
+        const cashSpan = document.createElement('span') as HTMLElement;
+        //cashSpan.innerText = characterModel.cash;
+    
+        const bankCashLi = document.createElement('li') as HTMLElement;
+        const bankCashP = document.createElement('p') as HTMLElement;
+        bankCashP.innerText = 'Банк:';
+        const bankCashSpan = document.createElement('span') as HTMLElement;
+        //bankCashSpan.innerText = characterModel.bankCash;
+    
+        const buttonSelect = document.createElement('button') as HTMLButtonElement;
+        buttonSelect.innerText = 'ВЫБРАТЬ';
+        buttonSelect.classList.add('select');
+        //buttonSelect.value = characterModel.id.toString();
+        
+        const buttonDelete = document.createElement('button') as HTMLButtonElement;
+        buttonDelete.innerText = 'Удалить персонажа';
+        buttonDelete.classList.add('delete');
+        //buttonDelete.value = characterModel.id.toString();
+    
+        this.ul.appendChild(characterLi);
+        characterLi.appendChild(section);
+        section.appendChild(header);
+        section.appendChild(main);
+        main.appendChild(fullName);
+        main.appendChild(info);
+    
+        info.appendChild(playedTimeLi);
+        playedTimeLi.appendChild(playedTimeP);
+        playedTimeP.appendChild(playedTimeSpan);
+    
+        info.appendChild(factionLi);
+        factionLi.appendChild(factionP);
+        factionP.appendChild(factionSpan);
+    
+        cashLi.appendChild(cashP);
+        info.appendChild(cashLi);
+        cashP.appendChild(cashSpan);
+    
+        info.appendChild(bankCashLi);
+        bankCashLi.appendChild(bankCashP);
+        bankCashP.appendChild(bankCashSpan);
+    
+        main.appendChild(buttonSelect);
+        main.appendChild(buttonDelete);
+
+        console.log(characterModel);
+        break;
+      case SectionType.Create:
+        break;
+    }
+  }
+
+  public StartButtons(): void {
+    const section = document.querySelector('section.container') as HTMLFormElement;
+
+    const createButtons = section.querySelectorAll('.create');
+    const deleteButtons = section.querySelectorAll('.delete');
+    const selectButtons = section.querySelectorAll('.select');
+    console.log(selectButtons);
 
     selectButtons.forEach((sb, key) => {
       const selectButton = sb as HTMLButtonElement;
@@ -110,14 +200,17 @@ class CharacterSelectUi {
   }
 
   private CreateCharacter(): void {
+    console.log('Тест');
     mp.events.call(LocalEvents.CharacterSelectCreate);
   }
 
   private DeleteCharacter(characterId: number): void {
+    console.log('Тест2');
     mp.events.call(LocalEvents.CharacterDelete, characterId);
   }
 
   private SelectCharacter(characterId: number): void {
+    console.log('Тест3');
     mp.events.call(LocalEvents.CharacterSelect, characterId)
   }
 
@@ -139,5 +232,5 @@ class CharacterSelectUi {
 }
 
 const characterSelectUi = new CharacterSelectUi();
-
+characterSelectUi.StartButtons();
 (window as any).characterSelectUi = characterSelectUi;
