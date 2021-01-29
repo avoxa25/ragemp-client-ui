@@ -3,8 +3,6 @@ import { ErrorMessages } from '../Constants/error-messages';
 import { AuthenticationErrorType } from './authentications-errors';
 
 class AuthenticationUi {
-  private static readonly usernamePattern = new RegExp('[A-Za-z0-9]$');
-
   public constructor() {
     const buttonsTabLink = document.querySelectorAll('.tabLink') as NodeListOf<HTMLElement>;
     buttonsTabLink.forEach((b) => b.addEventListener('click', () => this.ChangeTab(b)));
@@ -18,10 +16,10 @@ class AuthenticationUi {
     let errorMessage;
     switch (type) {
       case AuthenticationErrorType.Login:
-        errorMessage = document.querySelector(`#loginForm .denied`) as HTMLElement;
+        errorMessage = document.querySelector('#loginForm .denied') as HTMLElement;
         break;
       case AuthenticationErrorType.Registration:
-        errorMessage = document.querySelector(`#registrationForm .denied`) as HTMLElement;
+        errorMessage = document.querySelector('#registrationForm .denied') as HTMLElement;
         break;
     }
 
@@ -73,7 +71,7 @@ class AuthenticationUi {
 
     if (username === '' || password === '') return this.ShowErrorMessage(AuthenticationErrorType.Login, ErrorMessages.FillEmptyFields);
 
-    mp.events.call(LocalEvents.AuthenticationUiLogin, username, password);
+    mp.events.call(LocalEvents.Login, username, password);
   }
 
   private OnRegistrationFormSubmit(form: HTMLFormElement): void {
@@ -84,14 +82,13 @@ class AuthenticationUi {
     const passwordConfirm = formData.get('passwordConfirm') as string;
 
     if (username === '' || email === '' || password === '' || passwordConfirm === '') return this.ShowErrorMessage(AuthenticationErrorType.Registration, ErrorMessages.FillEmptyFields);
-    if (!AuthenticationUi.usernamePattern.test(username)) return this.ShowErrorMessage(AuthenticationErrorType.Registration, ErrorMessages.IncorrectLogin);
     if (username.length < 5) return this.ShowErrorMessage(AuthenticationErrorType.Registration, ErrorMessages.LoginTooShort);
     if (username.length > 15) return this.ShowErrorMessage(AuthenticationErrorType.Registration, ErrorMessages.LoginTooLong);
     if (password.length < 7) return this.ShowErrorMessage(AuthenticationErrorType.Registration, ErrorMessages.PasswordTooShort);
     if (password.length > 30) return this.ShowErrorMessage(AuthenticationErrorType.Registration, ErrorMessages.PasswordTooLong);
     if (password !== passwordConfirm) return this.ShowErrorMessage(AuthenticationErrorType.Registration, ErrorMessages.PasswordsNotMatch);
 
-    mp.events.call(LocalEvents.AuthenticationUiRegistration, username, email, password);
+    mp.events.call(LocalEvents.Registration, username, email, password);
   }
 
   private StartRecoveryTab(): void {

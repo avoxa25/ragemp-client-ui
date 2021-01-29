@@ -33,8 +33,8 @@ class Authentication {
     mp.events.add(RemoteResponse.LoginFailed, (m: string) => this.ErrorMessage(AuthenticationErrorType.Login, m));
     mp.events.add(RemoteResponse.RegistrationFailed, (m: string) => this.ErrorMessage(AuthenticationErrorType.Registration, m));
 
-    mp.events.add(LocalEvents.AuthenticationUiLogin, (u: string, p: string) => this.Login(u, p));
-    mp.events.add(LocalEvents.AuthenticationUiRegistration, (u: string, e: string, p: string) => this.Registration(e, u, p));
+    mp.events.add(LocalEvents.Login, (u: string, p: string) => this.Login(u, p));
+    mp.events.add(LocalEvents.Registration, (u: string, e: string, p: string) => this.Registration(e, u, p));
   }
 
   private Close(): void {
