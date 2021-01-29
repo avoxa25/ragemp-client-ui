@@ -9,20 +9,20 @@ class NotificationsUi {
     this.container = document.querySelector('#window') as HTMLElement;
   }
 
-  public Push(type: string, text: string): void {
+  public Push(type: NotificationType, text: string): void {
     let typeText;
 
     switch (type) {
-      case 'Alert':
+      case NotificationType.Alert:
         typeText = 'Оповещение';
         break;
-      case 'Info':
+      case NotificationType.Info:
         typeText = 'Информация';
         break;
-      case 'Success':
+      case NotificationType.Success:
         typeText = 'Успешно';
         break;
-      case 'Warning':
+      case NotificationType.Warning:
         typeText = 'Предупреждение';
         break;
       default:
