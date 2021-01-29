@@ -15,17 +15,16 @@ class AuthenticationUi {
   }
 
   public ShowErrorMessage(type: AuthenticationErrorType, message: string): void {
-    let errorType;
+    let errorMessage;
     switch (type) {
       case AuthenticationErrorType.Login:
-        errorType = 'loginForm';
+        errorMessage = document.querySelector(`#loginForm .denied`) as HTMLElement;
         break;
       case AuthenticationErrorType.Registration:
-        errorType = 'registrationForm';
+        errorMessage = document.querySelector(`#registrationForm .denied`) as HTMLElement;
         break;
     }
 
-    const errorMessage = document.querySelector(`#${errorType} .denied`) as HTMLElement;
     errorMessage.hidden = false;
     errorMessage.textContent = message;
   };
