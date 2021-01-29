@@ -10,7 +10,7 @@ export class CharacterSelectModel {
   public bankCash: number;
 
   // FIXME: Fix type of totalOnlineTime
-  public totalOnlineTime: string;
+  public totalOnlineTime: any;
   constructor() {
     this.id = 0;
     this.firstName = '';
@@ -18,6 +18,5 @@ export class CharacterSelectModel {
     this.faction = '';
     this.cash = 0;
     this.bankCash = 0;
-    this.totalOnlineTime = '';
   }
 }

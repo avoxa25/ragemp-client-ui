@@ -4,6 +4,11 @@ import { CharacterSelectModel } from "./select-model";
 
 class CharacterSelectUi {
   private ul = document.querySelector('section.container ul') as HTMLElement;
+  private characterModel: CharacterSelectModel;
+
+  public constructor() {
+    this.characterModel = new CharacterSelectModel();
+  }
 
   public ShowCharacters(characterSelectModelsJson: string): void {
     const characterSelectModels = JSON.parse(characterSelectModelsJson);
@@ -12,26 +17,40 @@ class CharacterSelectUi {
 
     switch (characterSelectModels.length) {
       case 1:
-        this.CreateSection(SectionType.Character, characterSelectModels[0]);
+        this.characterModel = characterSelectModels[0];
+        this.CreateSection(SectionType.Character, this.characterModel);
+
         this.CreateSection(SectionType.Create);
         this.CreateSection(SectionType.Create);
+
         this.StartButtons();
         return;
       case 2:
-        this.CreateSection(SectionType.Character, characterSelectModels[0]);
-        this.CreateSection(SectionType.Character, characterSelectModels[1]);
+        this.characterModel = characterSelectModels[0];
+        this.CreateSection(SectionType.Character, this.characterModel);
+
+        this.characterModel = characterSelectModels[1];
+        this.CreateSection(SectionType.Character, this.characterModel);
         this.CreateSection(SectionType.Create);
+
         this.StartButtons();
         return;
       case 3:
-        this.CreateSection(SectionType.Character, characterSelectModels[0]);
-        this.CreateSection(SectionType.Character, characterSelectModels[1]);
-        this.CreateSection(SectionType.Character, characterSelectModels[2]);
+        this.characterModel = characterSelectModels[0];
+        this.CreateSection(SectionType.Character, this.characterModel);
+
+        this.characterModel = characterSelectModels[1];
+        this.CreateSection(SectionType.Character, this.characterModel);
+
+        this.characterModel = characterSelectModels[2];
+        this.CreateSection(SectionType.Character, this.characterModel);
+
         this.StartButtons();
         return;
       default:
-        for(let i = 0; i < 3; i++)
+        for (let i = 0; i < 3; i++)
           this.CreateSection(SectionType.Create);
+
         this.StartButtons();
         return;
     }
@@ -58,13 +77,13 @@ class CharacterSelectUi {
         const playedTimeText = document.createElement('p') as HTMLElement;
         playedTimeText.innerText = 'Наиграно часов:';
         const playedTimeSpan = document.createElement('span') as HTMLElement;
-        playedTimeSpan.innerText = characterModel.totalOnlineTime;
+        playedTimeSpan.innerText = characterModel.totalOnlineTime.hours;
 
         const factionLi = document.createElement('li') as HTMLElement;
         const factionText = document.createElement('p') as HTMLElement;
         factionText.innerText = 'Фракция:';
         const factionSpan = document.createElement('span') as HTMLElement;
-        factionSpan.innerText = characterModel.faction;
+        factionSpan.innerText = characterModel.faction !== undefined ? characterModel.faction : 'Отсутствует';
 
         const cashLi = document.createElement('li') as HTMLElement;
         const cashText = document.createElement('p') as HTMLElement;
@@ -113,8 +132,6 @@ class CharacterSelectUi {
 
         characterMain.appendChild(buttonSelect);
         characterMain.appendChild(buttonDelete);
-
-        console.log(characterModel);
         break;
       case SectionType.Create:
         const createLi = document.createElement('li') as HTMLElement;
@@ -124,12 +141,12 @@ class CharacterSelectUi {
 
         const createHeader = document.createElement('header') as HTMLElement;
         const createMain = document.createElement('main') as HTMLElement;
-        
-        const createSlotText = document.createElement('p') as HTMLElement;
-        const countSlots = document.querySelectorAll('section.container ul li').length;
-        createSlotText.innerText = `Слот №${countSlots + 1} <br> свободен`;
 
-        const createPrompt = document.createElement('div') as HTMLElement; 
+        const createSlotText = document.createElement('p') as HTMLElement;
+        const countSlots = document.querySelectorAll('section.slot').length;
+        createSlotText.innerText = `Слот №${countSlots + 1} \n свободен`;
+
+        const createPrompt = document.createElement('div') as HTMLElement;
         createPrompt.classList.add('prompt');
         const createPromptText = document.createElement('p') as HTMLElement;
         createPromptText.innerText = 'Нажмите чтобы создать нового персонажа';
@@ -147,7 +164,6 @@ class CharacterSelectUi {
         createMain.appendChild(createPrompt);
         createPrompt.appendChild(createPromptText);
         createMain.appendChild(createButton);
-        
         break;
     }
   }
@@ -158,7 +174,6 @@ class CharacterSelectUi {
     const createButtons = section.querySelectorAll('.create');
     const deleteButtons = section.querySelectorAll('.delete');
     const selectButtons = section.querySelectorAll('.select');
-    console.log(createButtons);
 
     selectButtons.forEach((sb, key) => {
       const selectButton = sb as HTMLButtonElement;

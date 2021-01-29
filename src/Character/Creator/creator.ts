@@ -79,7 +79,7 @@ class CharacterCreatorUi {
 
   private StartMain(): void {
     const form = document.querySelector('form#formMain') as HTMLFormElement;
-    const randomButton = form.querySelector('button[id=random]') as HTMLButtonElement;
+    const randomButton = form.querySelector('button[name=random]') as HTMLButtonElement;
 
     form.addEventListener('submit', () => this.Create());
     form.addEventListener('reset', () => {
@@ -87,6 +87,7 @@ class CharacterCreatorUi {
       this.UpdateCharacterFromMain(form);
     });
     randomButton.addEventListener('click', () => {
+      console.log('Main');
       this.RandomForm(form);
       this.UpdateCharacterFromMain(form);
     });
@@ -100,7 +101,7 @@ class CharacterCreatorUi {
 
   private StartClothes(): void {
     const form = document.querySelector('form#formClothes') as HTMLFormElement;
-    const randomButton = form.querySelector('button[id=random]') as HTMLButtonElement;
+    const randomButton = form.querySelector('button[name=random]') as HTMLButtonElement;
 
     form.addEventListener('submit', () => this.Create());
     form.addEventListener('reset', () => {
@@ -121,7 +122,7 @@ class CharacterCreatorUi {
 
   private StartFace(): void {
     const form = document.querySelector('form#formFace') as HTMLFormElement;
-    const randomButton = form.querySelector('button[id=random]') as HTMLButtonElement;
+    const randomButton = form.querySelector('button[name=random]') as HTMLButtonElement;
 
     form.addEventListener('submit', () => this.Create());
     form.addEventListener('reset', () => {
@@ -142,7 +143,7 @@ class CharacterCreatorUi {
 
   private StartHair(): void {
     const form = document.querySelector('form#formHair') as HTMLFormElement;
-    const randomButton = form.querySelector('button[id=random]') as HTMLButtonElement;
+    const randomButton = form.querySelector('button[name=random]') as HTMLButtonElement;
 
     form.addEventListener('submit', () => this.Create());
     form.addEventListener('reset', () => {

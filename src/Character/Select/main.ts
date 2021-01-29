@@ -3,7 +3,7 @@ import { RemoteEvents } from '../../Constants/remote-events';
 import { RemoteResponse } from '../../Constants/remote-response';
 
 class CharacterSelect {
-  private readonly browser: BrowserMp;
+  private browser: BrowserMp;
 
   constructor(csm: string) {
     this.browser = mp.browsers.new('package://Character/Select/select.html');
@@ -18,7 +18,11 @@ class CharacterSelect {
 
     mp.events.add(LocalEvents.CharacterSelect, (id: number) => this.CharacterSelect(id));
     mp.events.add(LocalEvents.CharacterDelete, (id: number) => this.DeleteCharacter(id));
-    mp.events.add(LocalEvents.CharacterSelectCreate, () => this.CharacterSelectCreate());
+    mp.events.add(LocalEvents.CharacterSelectCreate, () => 
+    {
+      this.Close();
+      this.CharacterSelectCreate();
+    });
   }
 
   private Close(): void {
@@ -26,11 +30,12 @@ class CharacterSelect {
   }
 
   private ShowCharacters(characterSelectModelsJson: string): void {
+    mp.console.logFatal(characterSelectModelsJson);
     this.browser.execute(`window.characterSelectUi.ShowCharacters('${characterSelectModelsJson}');`);
   }
 
   private CharacterSelectCreate(): void {
-    mp.events.callRemote(RemoteEvents.CharacterCreatorCreate);
+    mp.events.call(LocalEvents.CharacterCreatorOpen);
   }
 
   private DeleteCharacter(characterId: number): void {
