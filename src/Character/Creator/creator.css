@@ -867,3 +867,18 @@ ul.face-navigation>li>button:focus,
 ul.face-navigation>li>button.active {
     background: linear-gradient(to left, #ee0b89, #fd6f67 75%) !important;
 }
+
+.subTab ul > li .slider {
+    width: 150px !important;
+}
+
+.subTab ul > li > P > span {
+    width: 120px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.body .buttons {
+    margin-top: 10px;
+} 
