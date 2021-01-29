@@ -13,7 +13,7 @@ jobs:
     - name: Setup version
       id: version
       shell: pwsh
-      run: ./.github/workflow-scripts/set-version.ps1 1.0.0.0 ${{ github.run_id }}
+      run: Write-Output "::set-output name=version::1.0.${{ github.run_id }}"
     - name: Use Node.js
       uses: actions/setup-node@v1
       with:
