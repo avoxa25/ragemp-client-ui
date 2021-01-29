@@ -28,8 +28,8 @@ jobs:
       uses: thedoctor0/zip-release@master
       with:
         directory: ./src
-        filename: ./${{ steps.version.outputs.version }}-linux-develop.zip
-        exclusions: "*.ts"
+        filename: ${{ steps.version.outputs.version }}-linux-develop.zip
+        exclusions: "*.ts **/*.ts"
     - name: Create release
       uses: actions/create-release@v1
       id: create_release
