@@ -3,14 +3,13 @@ import { NotificationType } from '../../Constants/notification-type';
 class NotificationsUi {
   private readonly container: HTMLElement;
   private notificationsArray = new Array;
-  private timeout: number | undefined;
+  private readonly maxNotifications = 3;
 
   constructor() {
     this.container = document.querySelector('#window') as HTMLElement;
   }
 
   public Push(type: string, text: string): void {
-    clearTimeout(this.timeout);
     let typeText;
 
     switch (type) {
@@ -43,29 +42,29 @@ class NotificationsUi {
     notificationType.innerHTML = text;
     notification.appendChild(notificationType);
 
-    this.notificationsArray.push(notification);
-
-    this.timeout = setTimeout(() => this.ShowController(), 3000);
-  }
-
-  private ShowController(): void {
-    const isArrayNotEmpty = this.notificationsArray.length > 0;
-
-    if (isArrayNotEmpty) {
-      for (let i = 0; i < this.notificationsArray.length; i++) {
-        if ((i + 1) % 2 === 0) setTimeout(() => this.ShowHide(this.notificationsArray[i]), 9000);
-        else this.ShowHide(this.notificationsArray[i]);
-      }
+    const countNotifications = document.querySelectorAll('.notification');
+    if (countNotifications.length >= this.maxNotifications) {
+      this.notificationsArray.push(notification);
+      return;
     }
+
+    this.container.appendChild(notification);
+
+    setTimeout(() => this.Delete(notification), 9999);
   }
 
-  private ShowHide(notification: HTMLElement): void {
-    this.container.appendChild(notification);
-    setTimeout(() => 
-    {
-      this.notificationsArray.shift();
-      notification.remove();
-    }, 10000);
+  private Delete(notification: HTMLElement): void {
+    notification.remove();
+
+    if (this.notificationsArray.length > 0) {
+      this.container.appendChild(this.notificationsArray[0]);
+      setTimeout(() => {
+        const temp = this.notificationsArray[0];
+        this.notificationsArray.shift();
+        this.Delete(temp);
+      }, 10001);
+      return;
+    }
   }
 }
 
