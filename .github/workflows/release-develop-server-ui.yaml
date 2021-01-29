@@ -1,0 +1,51 @@
+name: Release developer server UI
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup version
+      id: version
+      shell: pwsh
+      run: Write-Output "::set-output name=version::1.0.${{ github.run_id }}"
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 15.x
+    - name: NPM version
+      run: npm version ${{ steps.version.outputs.version }} --no-git-tag-version --allow-same-version
+    - name: NPM install
+      run: npm install
+    - name: NPM build development
+      run: npm run build
+    - name: Archive release
+      uses: thedoctor0/zip-release@master
+      with:
+        directory: ./src
+        filename: ./${{ steps.version.outputs.version }}-linux-develop.zip
+        exclusions: *.ts
+    - name: Create release
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        tag_name: ${{ steps.version.outputs.version }}-develop
+        release_name: ${{ steps.version.outputs.version }} developer preview
+        prerelease: true
+        draft: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload artifact
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./${{ steps.version.outputs.version }}-linux-develop.zip
+        asset_name: ${{ steps.version.outputs.version }}-linux-develop.zip
+        asset_content_type: application/zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
