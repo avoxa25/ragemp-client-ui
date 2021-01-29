@@ -2,95 +2,89 @@
 
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="assets/styles.css">
-	<link rel="stylesheet" href="assets/anim_bg.css">
+	<link rel="stylesheet" href="select.css">
+	<link rel="stylesheet" href="background-animation.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap"
+		rel="stylesheet">
 </head>
 
 <body>
-	<div id='stars'></div>
-	<div id='stars2'></div>
-	<div id='stars3'></div>
-
-	<div
-		style="width: 1175; height: 630px; position: absolute; left: 50%; margin-left: -587px; top: 50%; margin-top: -290px;">
-
-		<div id="copyFrom">
-			<div class="box hidden" id="characterSlot">
-				<div class="header">
-					<img src="assets/char.png" style="margin-top: -54px; width: 80%; margin-left: 30px;">
-					<div class="nickname" style="position: absolute; z-index: 3; margin-top: -45px; margin-left: 25px;">
-						<h4 class="text-gradient" id="characterName" style="height: 60px; line-height: 60px; margin: 0 0 0 0;">
-						</h4>
-					</div>
-				</div>
-				<div style="margin-left: 25px; margin-right: 25px; margin-bottom: 25px; margin-top: 50px; text-align: center;">
-					<div class="line">
-						<p style="float: left; margin-left: 25px;">В игре:</p>
-						<p id="inGameTime" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67">1.0</p>
-					</div>
-					<div class="line">
-						<p style="float: left; margin-left: 25px;">Фракция:</p>
-						<p id="fraction" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67">
-							Отсутствует
+	<section class="container">
+		<ul>
+			<li>
+				<section class="slot active">
+					<header></header>
+					<main>
+						<h2 id="charName" class="text-gradient">Tri Dvarazov</h2>
+						<ul>
+							<li>
+								<p>
+									Наиграно часов:
+									<span id="playedHours">999.9 ч</span>
+								</p>
+							</li>
+							<li>
+								<p>
+									Фракция:
+									<span id="faction">LSPD</span>
+								</p>
+							</li>
+							<li>
+								<p>
+									Наличные:
+									<span id="cash">$ 20,000</span>
+								</p>
+							</li>
+							<li>
+								<p>
+									Банк:
+									<span id="bank">$ 50,000</span>
+								</p>
+							</li>
+						</ul>
+						<button>ВЫБРАТЬ</button>
+						<button class="delete">Удалить персонажа</button>
+					</main>
+				</section>
+			</li>
+			<li>
+				<section class="slot non-active">
+					<header></header>
+					<main>
+						<p>
+							Слот №2
+							<br>
+							свободен
 						</p>
-					</div>
-					<div class="line">
-						<p style="float: left; margin-left: 25px;">Наличные:</p>
-						<p id="cash" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67">
-							0
+						<div class="prompt">
+							<p>Нажмите чтобы создать нового персонажа</p>
+						</div>
+						<button class="plus"></button>
+					</main>
+				</section>
+			</li>
+			<li>
+				<section class="slot non-active">
+					<header></header>
+					<main>
+						<p>
+							Слот №3
+							<br>
+							свободен
 						</p>
-					</div>
-					<div class="line">
-						<p style="float: left; margin-left: 25px;">Банк:</p>
-						<p id="bankCash" style="float: right; margin-right: 25px; font-family: PT-lat; color: #fd6f67"></p>
-					</div>
-					<button id='characterSelect' class="select buttonSelect" value="0">ВЫБРАТЬ</button>
-					<p style="margin-top: 5px; font-size: 12pt;">
-						<a href="#" id="characterDelete" class="buttonDelete" style="color: #4d4d4d;">
-							Удалить персонажа
-						</a>
-					</p>
-				</div>
-			</div>
+						<div class="prompt">
+							<p>Нажмите чтобы создать нового персонажа</p>
+						</div>
+						<button class="plus"></button>
+					</main>
+				</section>
+			</li>
+		</ul>
+	</section>
 
-			<div class="second hidden" id="freeSlot">
-				<div class="box closed" id="empty">
-					<div class="header" style="background-image: url('assets/closed.png'); background-position: -40px;">
-						<img src="assets/add.png" style="position: absolute; left: 50%; margin-left: -92px; margin-top: 75px;">
-					</div>
-					<div
-						style="margin-left: 25px; margin-right: 25px; margin-bottom: 25px; margin-top: 110px; text-align: center;">
-						<h1 class="text-gradient">Слот свободен</h1>
-						<p
-							style="position: absolute; z-index: 2; font-size: 12pt; margin: 20px 0px 0 30px; height: 20px; line-height: 20px; color: #333a4e">
-							Нажмите, чтобы создать персонажа<br>или перенести другого на этот аккаунт
-						</p>
-						<img src="assets/comment.png" style="margin-top: 0px; width: 95%;">
-						<a href="#" id="characterCreate" class="buttonCreate">
-							<img src="assets/plus.png" style="margin-top: -40px;;">
-						</a>
-					</div>
-				</div>
-			</div>
-
-			<div class="box closed hidden" id="closedSlot">
-				<div class="header"
-					style="background-image: url('assets/closed2.png'); height: 290px; background-position: -50px;">
-					<img src="assets/disabled.png"
-						style="position: absolute; left: 50%; margin-left: -92px; margin-top: 200px; width: 185px;">
-				</div>
-				<div style="margin-left: 25px; margin-right: 25px; margin-bottom: 25px; margin-top: 110px; text-align: center;">
-					<h1 class="text-gradient">Слот заблокирован</h1>
-					<button class="select" style="margin-top: 10px;">АКТИВИРОВАТЬ ЗА 99РУБ.</button>
-				</div>
-			</div>
-		</div>
-
-		<form action="javascript:void(0)" id="mainForm"></form>
-
-
-
-		<script src="./select.js"></script>
+	<script src="select.js"></script>
 </body>
 
 </html>
