@@ -1,75 +1,77 @@
 import { NotificationType } from '../../Constants/notification-type';
 
 class NotificationsUi {
-  private readonly maxNotifications = 5;
-  private readonly gapHeight = 75;
-  private count = 0;
-  private bottom = 225;
-  private typeText: string | undefined;
-  private timeout: number | undefined;
-  private readonly container = document.getElementById('notification-container') as HTMLElement;
+  private readonly container: HTMLElement;
+  private notificationsArray = new Array;
 
-  public ShowNotification(type: NotificationType, text: string): void {
-    clearInterval(this.timeout);
+  constructor() {
+    this.container = document.querySelector('#window') as HTMLElement;
+  }
+
+  public Push(type: NotificationType, text: string): void {
+
+    let typeText;
 
     switch (type) {
       case NotificationType.Alert:
-        this.typeText = 'Оповещение';
+        typeText = 'Оповещение';
         break;
       case NotificationType.Info:
-        this.typeText = 'Информация';
+        typeText = 'Информация';
         break;
       case NotificationType.Success:
-        this.typeText = 'Успешно';
+        typeText = 'Успешно';
         break;
       case NotificationType.Warning:
-        this.typeText = 'Предупреждение';
+        typeText = 'Предупреждение';
         break;
       default:
-        this.typeText = 'Ошибка';
+        typeText = 'Ошибка';
         break;
     }
 
     const notification = document.createElement('div') as HTMLElement;
     notification.classList.add('notification');
-    notification.style.bottom = '225px';
-    notification.classList.add(type.toLowerCase());
+    notification.classList.add(type.toString().toLowerCase());
 
     const notificationText = document.createElement('p') as HTMLElement;
-    notificationText.innerHTML = this.typeText;
+    notificationText.innerHTML = typeText;
     notification.appendChild(notificationText);
 
     const notificationType = document.createElement('p') as HTMLElement;
     notificationType.innerHTML = text;
     notification.appendChild(notificationType);
 
-    this.count = this.count >= this.maxNotifications ? this.maxNotifications - 1 : this.count;
+    this.notificationsArray.push(notification);
 
-    if (this.count !== 0) {
-      const notifications = document.querySelectorAll('.notification');
-      notifications.forEach((cn) => {
-        const currentNotify = cn as HTMLElement;
-        if (currentNotify.style.bottom == '450px') this.DeleteLastNotification(currentNotify);
-
-        this.bottom = Number.parseInt(currentNotify.style.bottom);
-        this.bottom += this.gapHeight;
-        currentNotify.style.bottom = `${this.bottom}px`;
-      });
-    }
-
-    this.container.appendChild(notification);
-
-    this.count++;
-
-    this.timeout = setInterval(() => {
-      const notification = document.querySelector('.notification') as HTMLElement;
-      this.DeleteLastNotification(notification);
-    }, 3000);
+    setTimeout(this.ShowController, 30000);
   }
-  private DeleteLastNotification(notification: HTMLElement): void {
-    // TODO: Create smooth hiding @memoryx3
 
-    notification.remove();
+  private ShowController(): void {
+    const isArrayNotEmpty = this.notificationsArray.length > 0;
+
+    if (isArrayNotEmpty) {
+      for (let i = 0; i < this.notificationsArray.length; i++) {
+        if (i++ % 2) setTimeout(() => {}, 10000);
+        this.Show(this.notificationsArray[i]);
+        this.Delete(i++);
+      }
+    }
+  }
+
+  private Show(notification: HTMLElement): void {
+    this.container.innerHTML += notification;
+  }
+
+  private Delete(count: number): void {
+    let firstNotification;
+
+    for (let i = 0; i < count; i++) {
+      setTimeout(() => {
+        firstNotification = document.querySelector('.notification') as HTMLElement;
+        firstNotification.remove();
+      }, 10000);
+    }
   }
 }
 
