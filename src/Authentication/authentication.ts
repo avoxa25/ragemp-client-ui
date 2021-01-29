@@ -1,5 +1,6 @@
 import { LocalEvents } from '../Constants/local-events';
 import { ErrorMessages } from '../Constants/error-messages';
+import { AuthenticationErrorType } from './authentications-errors';
 
 class AuthenticationUi {
   private static readonly usernamePattern = new RegExp('[A-Za-z0-9]$');
@@ -13,12 +14,20 @@ class AuthenticationUi {
     this.StartRecoveryTab();
   }
 
-  public ShowErrorMessage(type: string, message: string): void {
-    const errorMessage = document.querySelector(`#${type} .denied`) as HTMLElement;
+  public ShowErrorMessage(type: AuthenticationErrorType, message: string): void {
+    let errorType;
+    switch (type) {
+      case AuthenticationErrorType.Login:
+        errorType = 'loginForm';
+        break;
+      case AuthenticationErrorType.Registration:
+        errorType = 'registrationForm';
+        break;
+    }
+
+    const errorMessage = document.querySelector(`#${errorType} .denied`) as HTMLElement;
     errorMessage.hidden = false;
     errorMessage.textContent = message;
-
-    setTimeout(() => errorMessage.hidden = true, 3000);
   };
 
   private ChangeTab(selectedTab: HTMLElement): void {
@@ -63,7 +72,7 @@ class AuthenticationUi {
     const username = formData.get('username') as string;
     const password = formData.get('password') as string;
 
-    if (username === '' || password === '') return this.ShowErrorMessage(form.id as string, ErrorMessages.FillEmptyFields);
+    if (username === '' || password === '') return this.ShowErrorMessage(AuthenticationErrorType.Login, ErrorMessages.FillEmptyFields);
 
     mp.events.call(LocalEvents.AuthenticationUiLogin, username, password);
   }
@@ -75,13 +84,13 @@ class AuthenticationUi {
     const password = formData.get('password') as string;
     const passwordConfirm = formData.get('passwordConfirm') as string;
 
-    if (username === '' || email === '' || password === '' || passwordConfirm === '') return this.ShowErrorMessage(form.id as string, ErrorMessages.FillEmptyFields);
-    if (!AuthenticationUi.usernamePattern.test(username)) return this.ShowErrorMessage(form.id as string, ErrorMessages.IncorrectLogin);
-    if (username.length < 5) return this.ShowErrorMessage(form.id as string, ErrorMessages.LoginTooShort);
-    if (username.length > 15) return this.ShowErrorMessage(form.id as string, ErrorMessages.LoginTooLong);
-    if (password.length < 7) return this.ShowErrorMessage(form.id as string, ErrorMessages.PasswordTooShort);
-    if (password.length > 30) return this.ShowErrorMessage(form.id as string, ErrorMessages.PasswordTooLong);
-    if (password !== passwordConfirm) return this.ShowErrorMessage(form.id as string, ErrorMessages.PasswordsNotMatch);
+    if (username === '' || email === '' || password === '' || passwordConfirm === '') return this.ShowErrorMessage(AuthenticationErrorType.Registration, ErrorMessages.FillEmptyFields);
+    if (!AuthenticationUi.usernamePattern.test(username)) return this.ShowErrorMessage(AuthenticationErrorType.Registration, ErrorMessages.IncorrectLogin);
+    if (username.length < 5) return this.ShowErrorMessage(AuthenticationErrorType.Registration, ErrorMessages.LoginTooShort);
+    if (username.length > 15) return this.ShowErrorMessage(AuthenticationErrorType.Registration, ErrorMessages.LoginTooLong);
+    if (password.length < 7) return this.ShowErrorMessage(AuthenticationErrorType.Registration, ErrorMessages.PasswordTooShort);
+    if (password.length > 30) return this.ShowErrorMessage(AuthenticationErrorType.Registration, ErrorMessages.PasswordTooLong);
+    if (password !== passwordConfirm) return this.ShowErrorMessage(AuthenticationErrorType.Registration, ErrorMessages.PasswordsNotMatch);
 
     mp.events.call(LocalEvents.AuthenticationUiRegistration, username, email, password);
   }

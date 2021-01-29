@@ -1,4 +1,4 @@
 export enum AuthenticationErrorType {
-  Login = 'loginForm',
-  Registration = 'registrationForm'
+  Login,
+  Registration
 }
