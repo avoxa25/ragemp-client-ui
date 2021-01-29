@@ -1,3 +1,4 @@
+import './Authentication/main';
 
 import './Character/Creator/main';
 import './Character/Select/main';
