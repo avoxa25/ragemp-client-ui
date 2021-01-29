@@ -1,5 +1,5 @@
 import { LocalEvents } from '../../Constants/local-events';
-import { SpawnSelectConstant } from './spawn-select-constants';
+import { SpawnType } from './spawn-types';
 
 class CharacterSpawnSelectUi {
   public constructor(haveOrganization: boolean, haveHomes: boolean) {
@@ -33,7 +33,7 @@ class CharacterSpawnSelectUi {
         organizationSpawnFront.classList.remove('hide');
       });
 
-      organizationSpawnFigure.addEventListener('click', () => mp.events.call(LocalEvents.CharacterSpawnSelect, SpawnSelectConstant.Organization));
+      organizationSpawnFigure.addEventListener('click', () => mp.events.call(LocalEvents.CharacterSpawnSelect, SpawnType.Organization));
     }
 
     if (haveHomes) {
@@ -51,7 +51,7 @@ class CharacterSpawnSelectUi {
         houseSpawnFront.classList.remove('hide');
       });
 
-      houseSpawnFigure.addEventListener('click', () => mp.events.call(LocalEvents.CharacterSpawnSelect, SpawnSelectConstant.House));
+      houseSpawnFigure.addEventListener('click', () => mp.events.call(LocalEvents.CharacterSpawnSelect, SpawnType.House));
     }
 
     if (haveOrganization && haveHomes) {
@@ -69,12 +69,11 @@ class CharacterSpawnSelectUi {
       lastPositionFront.classList.remove('hide');
     });
 
-    lastPositionFigure.addEventListener('click', () => mp.events.call(LocalEvents.CharacterSpawnSelect, SpawnSelectConstant.LastPosition));
+    lastPositionFigure.addEventListener('click', () => mp.events.call(LocalEvents.CharacterSpawnSelect, SpawnType.LastPosition));
   }
 }
 
-const characterSpawnSelectUi = new CharacterSpawnSelectUi(false, false);
-
 // TODO: Create Event for display of figures according to the character's belonging to the faction and the presence of houses
 
+const characterSpawnSelectUi = new CharacterSpawnSelectUi(false, false);
 (window as any).characterSpawnSelectUi = characterSpawnSelectUi;

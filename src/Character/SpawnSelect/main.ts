@@ -2,7 +2,7 @@ import { CameraConstants } from '../../Constants/camera-constants';
 import { LocalEvents } from '../../Constants/local-events';
 import { RemoteEvents } from '../../Constants/remote-events';
 import { RemoteResponse } from '../../Constants/remote-response';
-import { SpawnSelectConstant } from './spawn-select-constants';
+import { SpawnType } from './spawn-types';
 
 class CharacterSpawnSelect {
   private readonly browser: BrowserMp;
@@ -14,22 +14,20 @@ class CharacterSpawnSelect {
     mp.game.ui.displayRadar(false);
     mp.game.ui.displayHud(false);
 
-    // TODO: Realize choosing spawn position
-
     mp.gui.cursor.show(true, true);
 
     this.camera = mp.cameras.new('default', CameraConstants.StandardCameraPosition, CameraConstants.StandardCameraRotation, CameraConstants.StandardCameraFOV);
 
-    this.camera.pointAtCoord(CameraConstants.StandardCameraPoint.X, CameraConstants.StandardCameraPoint.Y, CameraConstants.StandardCameraPoint.Z); //-99.19622 Changes the rotation of the camera to point towards a location
+    this.camera.pointAtCoord(CameraConstants.StandardCameraPoint.x, CameraConstants.StandardCameraPoint.y, CameraConstants.StandardCameraPoint.z);
     this.camera.setActive(true);
     mp.game.cam.renderScriptCams(true, false, 0, true, false);
 
     mp.events.add(RemoteResponse.CharacterSpawnSelected, () => this.Close());
-    mp.events.add(LocalEvents.CharacterSpawnSelect, (d: SpawnSelectConstant) => this.CharacterSpawnSelect(d));
+    mp.events.add(LocalEvents.CharacterSpawnSelect, (st: SpawnType) => this.CharacterSpawnSelect(st));
   }
 
-  private CharacterSpawnSelect(spawnPosition: SpawnSelectConstant): void {
-    mp.events.callRemote(RemoteEvents.CharacterSpawnSelect, spawnPosition);
+  private CharacterSpawnSelect(spawnType: SpawnType): void {
+    mp.events.callRemote(RemoteEvents.CharacterSpawnSelect, spawnType);
   }
 
   private Close() {
