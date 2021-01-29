@@ -2,7 +2,7 @@ import { RemoteEvents } from '../Constants/remote-events';
 import { LocalEvents } from '../Constants/local-events';
 import { RemoteResponse } from '../Constants/remote-response';
 import { CameraConstants } from '../Constants/camera-constants';
-import { ErrorTypes } from './authentications-errors';
+import { AuthenticationErrorType } from './authentications-errors';
 
 class Authentication {
   private readonly browser: BrowserMp;
@@ -23,15 +23,15 @@ class Authentication {
 
     mp.gui.cursor.show(true, true);
 
-    this.camera.pointAtCoord(CameraConstants.StandardCameraPoint.x, CameraConstants.StandardCameraPoint.y, CameraConstants.StandardCameraPoint.z);
+    this.camera.pointAtCoord(CameraConstants.StandardCameraPoint.X, CameraConstants.StandardCameraPoint.Y, CameraConstants.StandardCameraPoint.Z);
     this.camera.setActive(true);
     mp.game.cam.renderScriptCams(true, false, 0, true, false);
 
     mp.events.add(RemoteResponse.RegistrationSuccess, () => this.Close());
     mp.events.add(RemoteResponse.LoginSuccess, () => this.Close());
 
-    mp.events.add(RemoteResponse.LoginFailed, (m: string) => this.ErrorMessage(m, ErrorTypes.Login));
-    mp.events.add(RemoteResponse.RegistrationFailed, (m: string) => this.ErrorMessage(m, ErrorTypes.Registration));
+    mp.events.add(RemoteResponse.LoginFailed, (m: string) => this.ErrorMessage(AuthenticationErrorType.Login, m));
+    mp.events.add(RemoteResponse.RegistrationFailed, (m: string) => this.ErrorMessage(AuthenticationErrorType.Registration, m));
 
     mp.events.add(LocalEvents.AuthenticationUiLogin, (u: string, p: string) => this.Login(u, p));
     mp.events.add(LocalEvents.AuthenticationUiRegistration, (u: string, e: string, p: string) => this.Registration(e, u, p));
@@ -41,7 +41,7 @@ class Authentication {
     this.browser.destroy();
   }
 
-  private ErrorMessage(message: string, type: string): void {
+  private ErrorMessage(type: AuthenticationErrorType, message: string): void {
     this.browser.execute(`window.authenticationUi.ShowErrorMessage('${type}', '${message}');`);
   }
 

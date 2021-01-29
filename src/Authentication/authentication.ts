@@ -101,5 +101,4 @@ class AuthenticationUi {
 }
 
 const authenticationUi = new AuthenticationUi();
-
 (window as any).authenticationUi = authenticationUi;

@@ -1,4 +1,4 @@
-export enum ErrorTypes {
+export enum AuthenticationErrorType {
   Login = 'loginForm',
   Registration = 'registrationForm'
 }
