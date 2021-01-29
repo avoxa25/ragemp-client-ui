@@ -13,23 +13,24 @@ jobs:
     - name: Setup version
       id: version
       shell: pwsh
-      run: Write-Output "::set-output name=version::1.0.${{ github.run_id }}"
+      run: ./.github/workflow-scripts/set-version.ps1 1.0.0.0 ${{ github.run_id }}
     - name: Use Node.js
       uses: actions/setup-node@v1
       with:
         node-version: 15.x
     - name: NPM version
-      run: npm version ${{ steps.version.outputs.version }} --no-git-tag-version --allow-same-version
+      run: npm version ${{ steps.version.outputs.version }} --no-git-tag-version
     - name: NPM install
       run: npm install
     - name: NPM build development
       run: npm run build
+    - name: Remove TS files
+      run: rm **/*.ts
     - name: Archive release
-      uses: thedoctor0/zip-release@master
+      uses: papeloto/action-zip@v1
       with:
-        directory: ./src
-        filename: ${{ steps.version.outputs.version }}-linux-develop.zip
-        exclusions: "*.ts **/*.ts"
+        files: ./src
+        dest: ./artifacts/${{ steps.version.outputs.version }}-develop.zip
     - name: Create release
       uses: actions/create-release@v1
       id: create_release
@@ -44,8 +45,8 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./${{ steps.version.outputs.version }}-linux-develop.zip
-        asset_name: ${{ steps.version.outputs.version }}-linux-develop.zip
+        asset_path: ./artifacts/${{ steps.version.outputs.version }}-develop.zip
+        asset_name: ${{ steps.version.outputs.version }}-develop.zip
         asset_content_type: application/zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
