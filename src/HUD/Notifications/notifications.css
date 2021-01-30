@@ -17,11 +17,6 @@ P {
 		transform: translateX(-150px);
 	}
 
-	15% {
-		opacity: .8;
-		transform: translateX(-30px);
-	}
-
 	20% {
 		opacity: 1;
 		transform: translateX(0);
@@ -69,7 +64,7 @@ P {
 
 	transition: transform .15s ease-in-out;
 
-	animation: show-and-hide 10s;
+	animation: show-and-hide 10s ease-in-out;
 }
 
 .notification p:nth-child(1) {
