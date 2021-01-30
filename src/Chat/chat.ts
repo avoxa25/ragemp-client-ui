@@ -71,9 +71,9 @@ class ChatUi {
       const isCommand = message.charAt(0) === '/';
       if (isCommand) {
         const commandMessage = message.substr(1);
-        mp.game.invoke('command', commandMessage);
+        (mp as any).invoke('command', commandMessage);
       } else {
-        mp.game.invoke('chatMessage', message);
+        (mp as any).invoke('chatMessage', message);
       }
 
       this.sendedMessages.push(message);
