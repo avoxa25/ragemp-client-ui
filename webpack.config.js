@@ -8,7 +8,8 @@ const htmlComponents = [
   'Character/SpawnSelect',
 
   'Chat',
-
+  
+  'HUD/DateTimeMicrophone',
   'HUD/Location',
   
   'Speedometer'
