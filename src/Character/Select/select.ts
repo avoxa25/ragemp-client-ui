@@ -3,56 +3,20 @@ import { SectionType } from "./section-type";
 import { CharacterSelectModel } from "./select-model";
 
 class CharacterSelectUi {
-  private ul = document.querySelector('section.container ul') as HTMLElement;
-  private characterModel: CharacterSelectModel;
+  private readonly ul: HTMLElement;
 
   public constructor() {
-    this.characterModel = new CharacterSelectModel();
+    this.ul = document.querySelector('section.container ul') as HTMLElement;
   }
 
   public ShowCharacters(characterSelectModelsJson: string): void {
-    const characterSelectModels = JSON.parse(characterSelectModelsJson);
+    const characterSelectModels = JSON.parse(characterSelectModelsJson) as CharacterSelectModel[];
 
     // TODO: Realize buying form
 
-    switch (characterSelectModels.length) {
-      case 1:
-        this.characterModel = characterSelectModels[0];
-        this.CreateSection(SectionType.Character, this.characterModel);
-
-        this.CreateSection(SectionType.Create);
-        this.CreateSection(SectionType.Create);
-
-        this.StartButtons();
-        return;
-      case 2:
-        this.characterModel = characterSelectModels[0];
-        this.CreateSection(SectionType.Character, this.characterModel);
-
-        this.characterModel = characterSelectModels[1];
-        this.CreateSection(SectionType.Character, this.characterModel);
-        this.CreateSection(SectionType.Create);
-
-        this.StartButtons();
-        return;
-      case 3:
-        this.characterModel = characterSelectModels[0];
-        this.CreateSection(SectionType.Character, this.characterModel);
-
-        this.characterModel = characterSelectModels[1];
-        this.CreateSection(SectionType.Character, this.characterModel);
-
-        this.characterModel = characterSelectModels[2];
-        this.CreateSection(SectionType.Character, this.characterModel);
-
-        this.StartButtons();
-        return;
-      default:
-        for (let i = 0; i < 3; i++)
-          this.CreateSection(SectionType.Create);
-
-        this.StartButtons();
-        return;
+    for (let i = 0; i < 3; i++) {
+      if (characterSelectModels.length < i) this.CreateSection(SectionType.Create);
+      else this.CreateSection(SectionType.Character, characterSelectModels[i]);
     }
   }
 
