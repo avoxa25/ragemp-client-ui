@@ -91,5 +91,5 @@ jobs:
         build-args: |
           VERSION=${{ steps.version.outputs.version }}
         tags: |
-          docker.pkg.github.com/SweetLifeRP/server-ui/server-ui:latest-develop
-          docker.pkg.github.com/SweetLifeRP/server-ui/server-ui:${{ steps.version.outputs.version }}-develop
+          docker.pkg.github.com/sweetliferp/server-ui/server-ui:latest-develop
+          docker.pkg.github.com/sweetliferp/server-ui/server-ui:${{ steps.version.outputs.version }}-develop
