@@ -378,13 +378,13 @@ class CharacterCreatorUi {
     this.character.eyeBrowsSecondaryColor = Number.parseInt(rawEyeBrowsSecondaryColor);
 
     const rawBeard = formData.get('beard') as string;
-    this.character.beard = Number.parseInt(rawBeard);
+    this.character.facialHair = Number.parseInt(rawBeard);
 
     const rawBeardColor = formData.get('beardColor') as string;
-    this.character.beardColor = Number.parseInt(rawBeardColor);
+    this.character.facialHairColor = Number.parseInt(rawBeardColor);
 
     const rawBeardSecondaryColor = formData.get('beardSecondaryColor') as string;
-    this.character.beardSecondaryColor = Number.parseInt(rawBeardSecondaryColor);
+    this.character.facialHairSecondaryColor = Number.parseInt(rawBeardSecondaryColor);
 
     const rawChestHair = formData.get('chestHair') as string;
     this.character.chestHair = Number.parseInt(rawChestHair);

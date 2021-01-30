@@ -96,8 +96,8 @@ class CharacterCreator {
       mp.players.local.setComponentVariation(11, 15, 0, 2);
     }
     else {
-      mp.players.local.setComponentVariation(3, this.character.torso, 0, 2);
       mp.players.local.setComponentVariation(11, this.character.top, 0, 2);
+      mp.players.local.setComponentVariation(3, this.character.torso, 0, 2);
     }
   }
 
@@ -155,8 +155,13 @@ class CharacterCreator {
         this.character.torso = 7;
         mp.players.local.setComponentVariation(3, this.character.torso, 0, 2);
         break;
+      default:
+        this.character.torso = 15;
+        mp.players.local.setComponentVariation(3, this.character.torso, 0, 2);
+        break;
     }
 
+    mp.players.local.setComponentVariation(3, this.character.torso, 0, 2);
     mp.players.local.setComponentVariation(4, this.character.legs, 0, 2);
     mp.players.local.setComponentVariation(8, 15, 0, 2);
     mp.players.local.setComponentVariation(6, this.character.shoes, 0, 2);
@@ -187,8 +192,8 @@ class CharacterCreator {
     mp.players.local.setComponentVariation(2, this.character.hair, 0, 2);
     mp.players.local.setHairColor(this.character.hairColor, this.character.hairHighLight);
 
-    this.character.beard = this.character.beard === -1 ? 255 : this.character.beard;
-    mp.players.local.setHeadOverlay(1, this.character.beard, 1, this.character.beardColor, this.character.beardSecondaryColor);
+    this.character.facialHair = this.character.facialHair === -1 ? 255 : this.character.facialHair;
+    mp.players.local.setHeadOverlay(1, this.character.facialHair, 1, this.character.facialHairColor, this.character.facialHairSecondaryColor);
 
     this.character.eyeBrows = this.character.eyeBrows === -1 ? 255 : this.character.eyeBrows;
     mp.players.local.setHeadOverlay(2, this.character.eyeBrows, 1, this.character.eyeBrowsColor, this.character.eyeBrowsSecondaryColor);
