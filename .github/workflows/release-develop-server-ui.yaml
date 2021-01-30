@@ -1,0 +1,102 @@
+name: Release developer server UI
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup version
+      id: version
+      shell: pwsh
+      run: Write-Output "::set-output name=version::1.0.${{ github.run_id }}"
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 15.x
+    - name: NPM version
+      run: npm version ${{ steps.version.outputs.version }} --no-git-tag-version
+    - name: NPM install
+      run: npm install
+    - name: NPM build development
+      run: npm run build
+    - name: Remove TS files
+      run: |        
+        find ./src -type f -name "*.ts" -delete
+        find ./src -type d -empty -delete
+    - name: Archive release
+      uses: papeloto/action-zip@v1
+      with:
+        files: ./src
+        dest: ./${{ steps.version.outputs.version }}-develop.zip
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ steps.version.outputs.version }}-develop
+        path: ./${{ steps.version.outputs.version }}-develop.zip
+        retention-days: 1
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: 
+    - build
+    steps:
+    - name: Download build artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{ needs.build.outputs.version }}-develop
+    - name: Create version release
+      uses: actions/create-release@v1
+      id: release
+      with:
+        tag_name: ${{ needs.build.outputs.version }}-develop
+        release_name: ${{ needs.build.outputs.version }} developer preview
+        prerelease: true
+        draft: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload artifact
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.release.outputs.upload_url }}
+        asset_path: ./${{ needs.build.outputs.version }}-develop.zip
+        asset_name: ${{ needs.build.outputs.version }}-develop.zip
+        asset_content_type: application/zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  docker-build-push:
+    name: Docker build & push
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup version
+      id: version
+      shell: pwsh
+      run: Write-Output "::set-output name=version::1.0.${{ github.run_id }}"
+    - name: Docker login
+      uses: docker/login-action@v1 
+      with:
+        registry: ghcr.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Docker build and push
+      uses: docker/build-push-action@v2
+      with:
+        file: ./Docker/build-develop-server-ui.dockerfile
+        push: true
+        build-args: |
+          VERSION=${{ steps.version.outputs.version }}
+        tags: |
+          ghcr.io/sweetliferp/server-ui:latest-develop
+          ghcr.io/sweetliferp/server-ui:${{ steps.version.outputs.version }}-develop

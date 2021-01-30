@@ -1,5 +1,12 @@
 {
   "editor.detectIndentation": true,
   "editor.insertSpaces": true,
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "cSpell.words": [
+    "Buildx",
+    "QEMU",
+    "pwsh",
+    "ragemp",
+    "sweetliferp"
+  ]
 }

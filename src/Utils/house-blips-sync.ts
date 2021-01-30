@@ -78,7 +78,7 @@ class HouseBlipsSync {
       .filter(b => b.hasVariable('Exists') && b.hasVariable('Exists') === false)
       .filter(b => b.hasVariable('Type') && b.getVariable('Type') === 'House');
   }
-};
+}
 
 let houseBlipsSync: HouseBlipsSync | undefined;
 mp.events.add(RemoteResponse.CharacterSpawnSelected, () => houseBlipsSync = houseBlipsSync ? houseBlipsSync : new HouseBlipsSync());
