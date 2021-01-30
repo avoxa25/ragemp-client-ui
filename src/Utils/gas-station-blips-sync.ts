@@ -74,7 +74,7 @@ class GasStationBlipsSync {
   private GetServerBlips(): BlipMp[] {
     return mp.blips
       .toArray()
-      .filter(b => b.hasVariable('Exists') && b.hasVariable('Exists') === false)
+      .filter(b => b.hasVariable('Exists') && b.getVariable('Exists') === false)
       .filter(b => b.hasVariable('Type') && b.getVariable('Type') === 'GasStation');
   }
 }

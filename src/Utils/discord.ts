@@ -15,6 +15,8 @@ class Discord {
 
     mp.events.add(RageEnums.EventKey.PLAYER_ENTER_VEHICLE, () => mp.discord.update(this.title, 'Едет в транспорте'));
     mp.events.add(RageEnums.EventKey.PLAYER_LEAVE_VEHICLE, () => mp.discord.update(this.title, 'Гуляет пешком'));
+
+    mp.discord.update(this.title, 'Входит на сервер');
   }
 }
 
