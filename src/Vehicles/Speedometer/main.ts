@@ -1,9 +1,5 @@
+import { KeyboardKeys } from '../../Constants/keyboard-keys';
 import { RemoteResponse } from '../../Constants/remote-response';
-
-const Keys = {
-  LeftArrow: 0x25,
-  RightArrow: 0x27
-};
 
 class Speedometer {
   private readonly browser: BrowserMp;
@@ -34,16 +30,18 @@ class Speedometer {
     this.vehicle = vehicle;
     this.updaterIntervalId = setInterval(() => this.UpdateSpeedometer(), 100);
 
-    mp.keys.bind(Keys.LeftArrow, true, this.LeftTurn);
-    mp.keys.bind(Keys.RightArrow, true, this.RightTurn);
+    mp.keys.bind(KeyboardKeys.LeftArrow, true, this.LeftTurn);
+    mp.keys.bind(KeyboardKeys.RightArrow, true, this.RightTurn);
+    mp.keys.bind(KeyboardKeys.UpArrow, true, this.EmergencySignal);
 
     this.browser.execute(`window.speedometerUi.Show();`);
   }
 
   private OnPlayerExitVehicle(): void {
     clearInterval(this.updaterIntervalId);
-    mp.keys.unbind(Keys.LeftArrow, true, this.LeftTurn);
-    mp.keys.unbind(Keys.RightArrow, true, this.RightTurn);
+    mp.keys.unbind(KeyboardKeys.LeftArrow, true, this.LeftTurn);
+    mp.keys.unbind(KeyboardKeys.RightArrow, true, this.RightTurn);
+    mp.keys.unbind(KeyboardKeys.UpArrow, true, this.EmergencySignal);
 
     if (this.isBlinking) {
       this.StopBlinking();
@@ -61,12 +59,21 @@ class Speedometer {
     mp.players.local.vehicle.setIndicatorLights(0, false);
   }
 
+  private EmergencySignal(): void {
+    if (this.isBlinking) {
+      this.StopBlinking();
+    } else {
+      this.isBlinking = true;
+      this.blinkIntervalId = setInterval(() => this.Blinking(true, true), 500);
+    }
+  }
+
   private LeftTurn(): void {
     if (this.isBlinking) {
       this.StopBlinking();
     } else {
       this.isBlinking = true;
-      this.blinkIntervalId = setInterval(() => this.Blinking(true), 500);
+      this.blinkIntervalId = setInterval(() => this.Blinking(true, false), 500);
     }
   }
 
@@ -75,12 +82,17 @@ class Speedometer {
       this.StopBlinking();
     } else {
       this.isBlinking = true;
-      this.blinkIntervalId = setInterval(() => this.Blinking(false), 500);
+      this.blinkIntervalId = setInterval(() => this.Blinking(false, true), 500);
     }
   }
 
-  private Blinking(IsLeft: boolean): void {
-    if (IsLeft) {
+  private Blinking(IsLeft: boolean, IsRight: boolean): void {
+    if (IsLeft && IsRight) {
+      this.leftTurn = !this.leftTurn;
+      this.rightTurn = !this.rightTurn;
+      mp.players.local.vehicle.setIndicatorLights(1, this.leftTurn);
+      mp.players.local.vehicle.setIndicatorLights(0, this.rightTurn);
+    } else if (IsLeft) {
       this.leftTurn = !this.leftTurn;
       mp.players.local.vehicle.setIndicatorLights(1, this.leftTurn);
     } else {
