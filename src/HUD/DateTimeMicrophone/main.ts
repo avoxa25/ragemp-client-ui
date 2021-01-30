@@ -5,18 +5,18 @@ class DateTimeMicrophone {
   private browser: BrowserMp;
   public constructor() {
     this.browser = mp.browsers.new('package://HUD/DateTimeMicrophone/date-time-microphone.html');
-    
-    mp.keys.bind(KeyboardKeys.KeyN, true, this.MicrophoneOn);
-    mp.keys.bind(KeyboardKeys.KeyN, false, this.MicrophoneOff);
+
+    mp.keys.bind(KeyboardKeys.KeyN, true, this.EnableMicrophone);
+    mp.keys.bind(KeyboardKeys.KeyN, false, this.DisableMicrophone);
   }
 
   // TODO: Realize voice chat
 
-  private MicrophoneOn(): void{
+  private EnableMicrophone(): void {
     this.browser.execute(`window.dateTimeMicrophoneUi.ToggleMicrophone(${true});`);
   }
 
-  private MicrophoneOff(): void{
+  private DisableMicrophone(): void {
     this.browser.execute(`window.dateTimeMicrophoneUi.ToggleMicrophone(${false});`);
   }
 };

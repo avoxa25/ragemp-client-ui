@@ -17,27 +17,18 @@ class DateTimeMicrophoneUi {
     }, 1000);
   }
 
-  public ToggleMicrophone(buttonPressed: boolean){
-    if(buttonPressed){
-      this.microphoneElement.setAttribute('src', './assets/micro-active.svg');
-    }else{      
-      this.microphoneElement.setAttribute('src', './assets/micro-non-active.svg');
-    }
+  public ToggleMicrophone(buttonPressed: boolean): void {
+    if (buttonPressed) this.microphoneElement.setAttribute('src', './assets/micro-active.svg');
+    else this.microphoneElement.setAttribute('src', './assets/micro-non-active.svg');
   }
 
-  private SetCurrentDate() {
-    const day = ((this.dateTimeNow.getDate() < 10) ? "0" : "") + this.dateTimeNow.getDate();
-    const month = ((this.dateTimeNow.getMonth() < 10) ? "0" : "") + (this.dateTimeNow.getMonth()  + 1);
-    const year = this.dateTimeNow.getFullYear();
-    
-    this.dateElement.innerText = `${day}.${month}.${year}`;
+  private SetCurrentDate(): void {
+    this.dateElement.innerText = this.dateTimeNow.toLocaleDateString('ru-RU');
   }
 
-  private SetCurrentTime() {
-    const hours = ((this.dateTimeNow.getHours() < 10) ? "0" : "") + this.dateTimeNow.getHours();
-    const minutes = ((this.dateTimeNow.getMinutes() < 10) ? "0" : "") + (this.dateTimeNow.getMinutes()  + 1);
-    
-    this.timeElement.innerText = `${hours}:${minutes}`;
+  private SetCurrentTime(): void {
+    const timeOptions = {hour: '2-digit', minute: '2-digit'}
+    this.timeElement.innerText = this.dateTimeNow.toLocaleTimeString('ru-RU', timeOptions);
   }
 }
 
