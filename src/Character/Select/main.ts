@@ -17,7 +17,7 @@ class CharacterSelect {
     mp.events.add(RemoteResponse.CharacterDeleted, (csm: string) => 
     {
       this.browser.reload(false);
-      this.ShowCharacters(csm)
+      this.ShowCharacters(csm);
     });
 
     mp.events.add(LocalEvents.CharacterSelect, (id: number) => this.CharacterSelect(id));
