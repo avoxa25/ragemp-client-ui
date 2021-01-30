@@ -42,7 +42,7 @@ class Authentication {
   }
 
   private ErrorMessage(type: AuthenticationErrorType, message: string): void {
-    this.browser.execute(`window.authenticationUi.ShowErrorMessage('${type}', '${message}');`);
+    this.browser.execute(`window.authenticationUi.ShowErrorMessage(${type}, '${message}');`);
   }
 
   private Login(username: string, password: string): void {

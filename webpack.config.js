@@ -5,8 +5,9 @@ const htmlComponents = [
   'Authentication',
 
   'Character/Creator',
+  'Character/Select',
   'Character/SpawnSelect',
-
+  
   'Chat',
   
   'HUD/DateTimeMicrophone',
