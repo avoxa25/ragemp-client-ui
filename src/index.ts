@@ -13,4 +13,4 @@ import './Utils/discord';
 import './Utils/gas-station-blips-sync';
 import './Utils/house-blips-sync';
 
-import './Render/main';
+import './HUD/Nicknames/main';

@@ -1,6 +1,6 @@
-import { RoleConstants } from '../Constants/role.constants';
-import { KeyboardKeys } from '../Constants/keyboard-keys';
-import { RemoteResponse } from '../Constants/remote-response';
+import { RoleConstants } from '../../Constants/role.constants';
+import { KeyboardKeys } from '../../Constants/keyboard-keys';
+import { RemoteResponse } from '../../Constants/remote-response';
 
 class Render {
   private readonly maxDistance: number = 625;
