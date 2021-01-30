@@ -11,7 +11,7 @@ class CharacterCreator {
   private character: CharacterCreatorModel;
 
   constructor() {
-    this.browser = mp.browsers.new('package://CharacterCreator/creator.html');
+    this.browser = mp.browsers.new('package://Character/Creator/creator.html');
 
     this.camera = mp.cameras.new('default', CameraConstants.CreatorCameraPosition, CameraConstants.CreatorCameraRotation, CameraConstants.StandardCameraFOV);
     this.camera.setActive(true);
@@ -31,6 +31,7 @@ class CharacterCreator {
 
     mp.events.add(RemoteResponse.CharacterCreatorCreated, () => this.Close());
     mp.events.add(RemoteResponse.CharacterCreatorGenderChangeCompleted, () => this.ChangeGenderComplete());
+    mp.events.add(RemoteResponse.CharacterCreatorFailed, (m: string) => this.ErrorMessage(m));
 
     mp.events.add(LocalEvents.CharacterCreatorTabHair, (is: boolean, c: string) => {
       this.UpdateCharacterJson(c);
@@ -114,6 +115,10 @@ class CharacterCreator {
   private Create(): void {
     const characterJson = JSON.stringify(this.character);
     mp.events.callRemote(RemoteEvents.CharacterCreatorCreate, characterJson);
+  }
+
+  private ErrorMessage(message: string): void {
+    this.browser.execute(`window.characterCreatorUi.ShowErrorMessage('${message}');`);
   }
 
   private UpdateMain(): void {

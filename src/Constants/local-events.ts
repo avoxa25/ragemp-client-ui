@@ -5,9 +5,14 @@ export enum LocalEvents {
   Registration = 'Local:AuthenticationUi:Registration',
   AuthenticationUiErrorMessage = 'Local:AuthenticationUi:ErrorMessage',
 
+  CharacterDelete = 'Local:Character:Delete',
+  CharacterSelect = 'Local:Character:Select',
+  CharacterSelectCreate = 'Local:Character:SelectCreate',
+  CharacterSpawnSelect = 'Local:Character:SpawnSelect',
+
   CharacterCreatorOpen = 'Local:CharacterCreator:Open',
   CharacterCreatorTabHair = 'Local:CharacterCreator:TabHair',
-  CharacterCreatorCreate = 'Local:CharacterCreator:Create',  
+  CharacterCreatorCreate = 'Local:CharacterCreator:Create',
   CharacterCreatorChangeGender = 'Local:CharacterCreator:ChangeGender',
   CharacterCreatorUpdateMain = 'Local:CharacterCreator:UpdateMain',
   CharacterCreatorUpdateClothes = 'Local:CharacterCreator:UpdateClothes',

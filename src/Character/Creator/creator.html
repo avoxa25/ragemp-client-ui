@@ -83,7 +83,7 @@
               </li>
             </ul>
             <p>
-              <button type="button" id="random">СЛУЧАЙНО</button>
+              <button type="button" name="random">СЛУЧАЙНО</button>
               <button type="reset">СБРОСИТЬ</button>
             </p>
             <button type="submit">СОЗДАТЬ</button>
@@ -124,7 +124,7 @@
               </li>
             </ul>
             <p>
-              <button type="button" id="random">СЛУЧАЙНО</button>
+              <button type="button" name="random">СЛУЧАЙНО</button>
               <button type="reset">СБРОСИТЬ</button>
             </p>
             <button type="submit">СОЗДАТЬ</button>
@@ -137,16 +137,24 @@
           <div class="body face">
             <ul class="face-navigation">
               <li>
-                <button class="subTabLinks active" id="subTabLinksFace" data-tab="subTabFace">Лицо</button>
+                <button type="button" class="subTabLinks active" id="subTabLinksFace" data-tab="subTabFace">
+                  Лицо
+                </button>
               </li>
               <li>
-                <button class="subTabLinks" id="subTabLinksEyes" data-tab="subTabEyes">Глаза</button>
+                <button type="button" class="subTabLinks" id="subTabLinksEyes" data-tab="subTabEyes">
+                  Глаза
+                </button>
               </li>
               <li>
-                <button class="subTabLinks" id="subTabLinksNose" data-tab="subTabNose">Нос</button>
+                <button type="button" class="subTabLinks" id="subTabLinksNose" data-tab="subTabNose">
+                  Нос
+                </button>
               </li>
               <li>
-                <button class="subTabLinks" id="subTabLinksMouth" data-tab="subTabMouth">Рот</button>
+                <button type="button" class="subTabLinks" id="subTabLinksMouth" data-tab="subTabMouth">
+                  Рот
+                </button>
               </li>
             </ul>
 
@@ -422,7 +430,7 @@
               </ul>
             </div>
             <p class="buttons">
-              <button type="button" id="random">СЛУЧАЙНО</button>
+              <button type="button" name="random">СЛУЧАЙНО</button>
               <button type="reset">СБРОСИТЬ</button>
             </p>
             <button type="submit">СОЗДАТЬ</button>
@@ -544,7 +552,7 @@
               </li>
             </ul>
             <p>
-              <button type="button" id="random">СЛУЧАЙНО</button>
+              <button type="button" name="random">СЛУЧАЙНО</button>
               <button type="reset">СБРОСИТЬ</button>
             </p>
             <button type="submit">СОЗДАТЬ</button>
@@ -552,6 +560,7 @@
         </form>
       </section>
     </main>
+    <p class="errorMessage" id="creatorError" hidden></p>
   </section>
   <script src="creator.js"></script>
 </body>
