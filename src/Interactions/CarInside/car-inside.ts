@@ -1,6 +1,10 @@
-abstract class InteractionMainMenuUi {
+class InteractionMainMenuUi {
+  constructor() {
+    this.MouseOverHandler();
+    this.TransitionBetweenMenus();
+  }
 
-  public static MouseOverHandler(): void {
+  private MouseOverHandler(): void {
     const menuItems = document.querySelectorAll("div.menu-item") as NodeListOf<Element>;
 
     menuItems.forEach((mi) => {
@@ -11,12 +15,12 @@ abstract class InteractionMainMenuUi {
     });
   }
 
-  private static ShowInformation(promptTagId: string, prompt: string) {
+  private ShowInformation(promptTagId: string, prompt: string): void {
     const promptTag = document.querySelector('#' + promptTagId) as HTMLElement;
     promptTag.innerHTML = prompt;
   }
 
-  private static HideInformation(promptTagId: string) {
+  private HideInformation(promptTagId: string): void {
     const promptTag = document.querySelector('#' + promptTagId) as HTMLElement;
     if (promptTagId === 'carDoorsActionPrompt' || promptTagId === 'catapultPlayerListActionPrompt') {
       promptTag.innerHTML = 'Вернуться назад';
@@ -26,7 +30,7 @@ abstract class InteractionMainMenuUi {
 
   }
 
-  public static TransitionBetweenMenus(): void {
+  private TransitionBetweenMenus(): void {
     const menuLinks = document.querySelectorAll('.menuLink') as NodeListOf<HTMLElement>;
 
     menuLinks.forEach((ml) => {
@@ -48,5 +52,5 @@ abstract class InteractionMainMenuUi {
   }
 };
 
-InteractionMainMenuUi.MouseOverHandler();
-InteractionMainMenuUi.TransitionBetweenMenus();
+const interactionMainMenuUi = new InteractionMainMenuUi();
+(window as any).interactionMainMenuUi = interactionMainMenuUi;
