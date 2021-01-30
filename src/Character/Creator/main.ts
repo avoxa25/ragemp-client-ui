@@ -26,7 +26,7 @@ class CharacterCreator {
 
     mp.gui.chat.activate(false);
     mp.gui.chat.show(false);
-        
+
     mp.game.cam.renderScriptCams(true, false, 0, true, false);
 
     mp.events.add(RemoteResponse.CharacterCreatorCreated, () => this.Close());
@@ -80,7 +80,7 @@ class CharacterCreator {
     mp.gui.chat.activate(true);
     mp.gui.chat.show(true);
 
-    mp.game.cam.renderScriptCams(false, false, 0, true, false);    
+    mp.game.cam.renderScriptCams(false, false, 0, true, false);
 
     mp.game.ui.displayRadar(true);
   }
