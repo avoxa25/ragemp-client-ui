@@ -39,7 +39,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: ${{ steps.version.outputs.version }}-develop
-        path: ./artifacts/${{ steps.version.outputs.version }}-develop.zip
+        path: ./${{ steps.version.outputs.version }}-develop.zip
         retention-days: 1
   release:
     name: Release
@@ -87,6 +87,7 @@ jobs:
     - name: Docker build and push
       uses: docker/build-push-action@v2
       with:
+        file: ./Docker/build-develop-server-ui.dockerfile
         push: true
         build-args: |
           VERSION=${{ steps.version.outputs.version }}
