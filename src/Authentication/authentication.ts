@@ -16,15 +16,15 @@ class AuthenticationUi {
     let errorMessage;
     switch (type) {
       case AuthenticationErrorType.Login:
-        errorMessage = document.querySelector('#loginForm .denied') as HTMLElement;
+        errorMessage = document.querySelector('p.login-tab') as HTMLElement;
         break;
       case AuthenticationErrorType.Registration:
-        errorMessage = document.querySelector('#registrationForm .denied') as HTMLElement;
+        errorMessage = document.querySelector('p.registration-tab') as HTMLElement;
         break;
     }
 
     errorMessage.hidden = false;
-    errorMessage.textContent = message;
+    errorMessage.innerText = message;
   };
 
   private ChangeTab(selectedTab: HTMLElement): void {

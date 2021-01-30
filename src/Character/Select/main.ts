@@ -14,7 +14,11 @@ class CharacterSelect {
     this.ShowCharacters(csm);
 
     mp.events.add(RemoteResponse.CharacterSelected, () => this.Close());
-    mp.events.add(RemoteResponse.CharacterDeleted, (csm: string) => this.ShowCharacters(csm));
+    mp.events.add(RemoteResponse.CharacterDeleted, (csm: string) => 
+    {
+      this.browser.reload(false);
+      this.ShowCharacters(csm)
+    });
 
     mp.events.add(LocalEvents.CharacterSelect, (id: number) => this.CharacterSelect(id));
     mp.events.add(LocalEvents.CharacterDelete, (id: number) => this.DeleteCharacter(id));
@@ -30,7 +34,6 @@ class CharacterSelect {
   }
 
   private ShowCharacters(characterSelectModelsJson: string): void {
-    mp.console.logFatal(characterSelectModelsJson);
     this.browser.execute(`window.characterSelectUi.ShowCharacters('${characterSelectModelsJson}');`);
   }
 

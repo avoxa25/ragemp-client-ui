@@ -4,9 +4,11 @@ import { CharacterCreatorData } from './creator-data';
 
 class CharacterCreatorUi {
   private character: CharacterCreatorModel;
+  private errorTextElement: HTMLElement;
 
   constructor() {
     this.character = new CharacterCreatorModel();
+    this.errorTextElement = document.getElementById('creatorError') as HTMLElement;
 
     this.StartTabs();
 
@@ -14,6 +16,11 @@ class CharacterCreatorUi {
     this.StartClothes();
     this.StartFace();
     this.StartHair();
+  }
+
+  public ShowErrorMessage(message: string) {
+    this.errorTextElement.innerHTML += `${message}<br>`;
+    this.errorTextElement.hidden = false;
   }
 
   private StartTabs(): void {
@@ -33,7 +40,7 @@ class CharacterCreatorUi {
     const tabs = document.getElementsByClassName('parameters') as HTMLCollectionOf<HTMLElement>;
     for (let i = 0; i < tabs.length; i++) {
       const isSelectedTab = tabs[i].id === selectedTabId;
-      if (isSelectedTab) { 
+      if (isSelectedTab) {
         tabs[i].classList.add('active')
       } else {
         tabs[i].classList.remove('active');
@@ -59,7 +66,7 @@ class CharacterCreatorUi {
     const subTabs = document.getElementsByClassName('subTab') as HTMLCollectionOf<HTMLElement>;
     for (let i = 0; i < subTabs.length; i++) {
       const isSelectedTab = subTabs[i].id === selectedTabId;
-      if (isSelectedTab) { 
+      if (isSelectedTab) {
         subTabs[i].classList.add('active')
       } else {
         subTabs[i].classList.remove('active');
@@ -87,7 +94,6 @@ class CharacterCreatorUi {
       this.UpdateCharacterFromMain(form);
     });
     randomButton.addEventListener('click', () => {
-      console.log('Main');
       this.RandomForm(form);
       this.UpdateCharacterFromMain(form);
     });
@@ -461,6 +467,7 @@ class CharacterCreatorUi {
   }
 
   private Create(): void {
+    this.errorTextElement.innerHTML = '';
     const forms = document.querySelectorAll('form') as NodeListOf<HTMLFormElement>;
     forms.forEach((f) => this.UpdateCharacter(f));
 

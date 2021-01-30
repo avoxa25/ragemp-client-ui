@@ -882,3 +882,8 @@ ul.face-navigation>li>button.active {
 .body .buttons {
     margin-top: 10px;
 } 
+.errorMessage{
+    color: red;
+    text-align: center;
+    font-weight: bold;
+}
