@@ -33,12 +33,28 @@ jobs:
       with:
         files: ./src
         dest: ./${{ steps.version.outputs.version }}-develop.zip
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ steps.version.outputs.version }}-develop
+        path: ./artifacts/${{ steps.version.outputs.version }}-develop.zip
+        retention-days: 1
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: 
+    - build
+    steps:
+    - name: Download build artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{ needs.build.outputs.version }}-develop
     - name: Create version release
       uses: actions/create-release@v1
       id: release
       with:
-        tag_name: ${{ steps.version.outputs.version }}-develop
-        release_name: ${{ steps.version.outputs.version }} developer preview
+        tag_name: ${{ needs.build.outputs.version }}-develop
+        release_name: ${{ needs.build.outputs.version }} developer preview
         prerelease: true
         draft: false
       env:
@@ -47,8 +63,36 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.release.outputs.upload_url }}
-        asset_path: ./${{ steps.version.outputs.version }}-develop.zip
-        asset_name: ${{ steps.version.outputs.version }}-develop.zip
+        asset_path: ./${{ needs.build.outputs.version }}-develop.zip
+        asset_name: ${{ needs.build.outputs.version }}-develop.zip
         asset_content_type: application/zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  docker-build-push:
+    name: Docker build & push
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup version
+      id: version
+      shell: pwsh
+      run: Write-Output "::set-output name=version::1.0.${{ github.run_id }}"
+    - name: Docker login
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Docker build and push
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          build-args: |
+            VERSION=${{ steps.version.outputs.version }}
+          tags: |
+            docker.pkg.github.com/SweetLifeRP/server-ui/server-ui:latest-develop
+            docker.pkg.github.com/SweetLifeRP/server-ui/server-ui:${{ steps.version.outputs.version }}-develop            
