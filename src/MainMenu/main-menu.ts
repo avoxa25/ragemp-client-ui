@@ -12,11 +12,13 @@ class MainMenuUi {
     const buttonsTabContentLink = document.querySelectorAll('button.tab-content-link') as NodeListOf<HTMLElement>;
     const closeButton = document.querySelector('#close') as HTMLElement;
     const switchesSettings = document.querySelectorAll('input.settings') as NodeListOf<HTMLElement>;
+    const packages = document.querySelectorAll('.package') as NodeListOf<HTMLElement>;
 
-    closeButton.addEventListener('click', () => this.Hide());
-    switchesSettings.forEach((s) => s.addEventListener('click', () => this.UpdateSettings(s)));
     buttonsTabLink.forEach((b) => b.addEventListener('click', () => this.ChangeTab(b)));
     buttonsTabContentLink.forEach((bu) => bu.addEventListener('click', () => this.ChangeTabContent(bu)));
+    switchesSettings.forEach((s) => s.addEventListener('click', () => this.UpdateSettings(s)));
+    closeButton.addEventListener('click', () => this.Hide());
+    packages.forEach((p) => this.PackageMouseEvents(p));
   }
 
   private ChangeTab(selectedTab: HTMLElement): void {
@@ -118,6 +120,23 @@ class MainMenuUi {
     document.body.hidden = true;
     mp.events.call(LocalEvents.MenuToggle, false);
   }
+
+  private PackageMouseEvents(packageElement: HTMLElement): void {
+    const packageElementContent = packageElement.innerHTML;
+    packageElement.addEventListener('mouseover', () =>
+      packageElement.innerHTML = 'ПОДРОБНЕЕ'
+    );
+    packageElement.addEventListener('focus', () =>
+      packageElement.innerHTML = 'ПОДРОБНЕЕ'
+    );
+    packageElement.addEventListener('mouseout', () =>
+      packageElement.innerHTML = packageElementContent
+    );
+    packageElement.addEventListener('focusout', () =>
+      packageElement.innerHTML = packageElementContent
+    );
+  }
+
 };
 
 const mainMenuUi = new MainMenuUi();

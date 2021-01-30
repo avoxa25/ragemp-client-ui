@@ -6,6 +6,11 @@
   user-select: none;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+}
+
 P {
   margin: 0px;
   padding: 0px;
@@ -502,4 +507,179 @@ button.promo-button::before {
 .promo-statistic li>p>span {
   color: #ee0b89;
   font-weight: 700;
+}
+
+button.shop-main::before {
+  background-image: url("assets/shop-main.svg");
+}
+
+button.exchange::before {
+  background-image: url("assets/exchange.svg");
+}
+
+button.replenishment {
+  background-image: url("assets/v-line-button-replenishment.svg")
+}
+
+button.replenishment:hover,
+button.replenishment:focus,
+button.replenishment.active {
+  background: linear-gradient(90deg, #B18000 0%, #E4A400 100%);
+  background-image: rgba(0, 0, 0, 0);
+}
+
+button.replenishment::before {
+  background-image: url("assets/replenishment.svg");
+}
+
+.shop-main {
+  padding-right: 25px;
+
+  overflow-y: auto;
+}
+
+.currency-value {
+  display: flex;
+  justify-content: space-between;
+}
+
+.currency-value span.rubles {
+  color: #E4A400 !important;
+}
+
+.currency-value span.cash {
+  color: #0EEB4C !important;
+}
+
+ul.packages {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+ul.packages>li:last-of-type {
+  justify-self: flex-start !important;
+}
+
+
+ul.packages>li {
+  margin-top: 15px !important;
+}
+
+ul.packages .package {
+  width: 120px;
+  height: 120px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  padding: 0;
+
+  background: rgba(0, 0, 0, 0.33);
+  border: 1px solid #AA106F;
+  border-radius: 3px;
+
+  cursor: pointer;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  80% {
+    opacity: .9;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+ul.packages .package:hover,
+ul.packages .package:focus {
+  background: linear-gradient(to left, #ee0b89, #fd6f67);
+
+  animation: fadein .25s ease-in-out;
+}
+
+.exchange {
+  position: relative;
+}
+
+.exchange>form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  transform: translate(-50%, -50%);
+}
+
+input.rubles {
+  border: 1px solid #E4A400 !important;
+
+  color: #E4A400;
+}
+
+input.cash {
+  border: 1px solid #0EEB4C !important;
+
+  color: #0EEB4C;
+}
+
+.do-exchange,
+.do-exchange:hover,
+.do-exchange:focus {
+  width: 36px;
+  height: 36px;
+
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url("assets/exchange-button.svg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.replenishment {
+  position: relative;
+}
+
+.replenishment>form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  transform: translate(-50%, -50%);
+}
+
+.replenishment>form input,
+.exchange>form input {
+  width: 200px;
+  height: 35px;
+
+  background-color: rgba(0, 0, 0, .33);
+
+  border: 1px solid white;
+  border-radius: 5px;
+
+  font-size: 14px;
+  text-align: center;
+
+  outline: none;
+}
+
+.replenishment>form input+button {
+  margin-top: 15px;
+
+  background: linear-gradient(to left, #ee0b89, #fd6f67);
 }
