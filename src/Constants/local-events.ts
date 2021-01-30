@@ -17,7 +17,5 @@ export enum LocalEvents {
   CharacterCreatorUpdateMain = 'Local:CharacterCreator:UpdateMain',
   CharacterCreatorUpdateClothes = 'Local:CharacterCreator:UpdateClothes',
   CharacterCreatorUpdateFace = 'Local:CharacterCreator:UpdateFace',
-  CharacterCreatorUpdateHair = 'Local:CharacterCreator:UpdateHair',
-
-  ChatCursorToggle = 'Local:Chat:CursorToggle'
+  CharacterCreatorUpdateHair = 'Local:CharacterCreator:UpdateHair'
 }
