@@ -1,4 +1,3 @@
-import { LocalEvents } from '../../Constants/local-events';
 import { RemoteResponse } from '../../Constants/remote-response';
 
 class Online {
