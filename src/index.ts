@@ -12,3 +12,5 @@ import './Speedometer/main';
 import './Utils/discord';
 import './Utils/gas-station-blips-sync';
 import './Utils/house-blips-sync';
+
+import './Render/main';
