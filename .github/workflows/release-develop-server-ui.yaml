@@ -33,7 +33,7 @@ jobs:
         dest: ./${{ steps.version.outputs.version }}-develop.zip
     - name: Create version release
       uses: actions/create-release@v1
-      id: release-version
+      id: release
       with:
         tag_name: ${{ steps.version.outputs.version }}-develop
         release_name: ${{ steps.version.outputs.version }} developer preview
@@ -41,31 +41,12 @@ jobs:
         draft: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Create latest release
-      uses: actions/create-release@v1
-      id: release-latest
-      with:
-        tag_name: latest-develop
-        release_name: Latest developer preview
-        prerelease: true
-        draft: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Upload version artifact
+    - name: Upload artifact
       uses: actions/upload-release-asset@v1
       with:
-        upload_url: ${{ steps.release-version.outputs.upload_url }}
+        upload_url: ${{ steps.release.outputs.upload_url }}
         asset_path: ./${{ steps.version.outputs.version }}-develop.zip
         asset_name: ${{ steps.version.outputs.version }}-develop.zip
-        asset_content_type: application/zip
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Upload latest artifact
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ steps.release-latest.outputs.upload_url }}
-        asset_path: ./${{ steps.version.outputs.version }}-develop.zip
-        asset_name: latest-develop.zip
         asset_content_type: application/zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
