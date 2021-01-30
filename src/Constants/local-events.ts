@@ -1,5 +1,6 @@
 export enum LocalEvents {
   ChatCursorToggle = 'Local:Chat:CursorToggle',
+  CharacterSpawnSelect = 'Local:Character:SpawnSelect',
 
   Login = 'Local:AuthenticationUi:Login',
   Registration = 'Local:AuthenticationUi:Registration',
@@ -7,7 +8,7 @@ export enum LocalEvents {
 
   CharacterCreatorOpen = 'Local:CharacterCreator:Open',
   CharacterCreatorTabHair = 'Local:CharacterCreator:TabHair',
-  CharacterCreatorCreate = 'Local:CharacterCreator:Create',  
+  CharacterCreatorCreate = 'Local:CharacterCreator:Create',
   CharacterCreatorChangeGender = 'Local:CharacterCreator:ChangeGender',
   CharacterCreatorUpdateMain = 'Local:CharacterCreator:UpdateMain',
   CharacterCreatorUpdateClothes = 'Local:CharacterCreator:UpdateClothes',
