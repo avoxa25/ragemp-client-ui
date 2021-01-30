@@ -5,7 +5,7 @@ import { RemoteResponse } from '../../Constants/remote-response';
 class CharacterSelect {
   private browser: BrowserMp;
 
-  constructor(csm: string) {
+  public constructor(csm: string) {
     this.browser = mp.browsers.new('package://Character/Select/select.html');
     mp.players.local.freezePosition(true);
 
