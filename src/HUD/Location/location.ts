@@ -17,7 +17,7 @@ class HudLocationUi {
     const zoneElement = document.querySelector('#zone') as HTMLElement;
     zoneElement.innerText = zone;
   }
-};
+}
 
 const hudLocationUi = new HudLocationUi();
 (window as any).hudLocationUi = hudLocationUi;

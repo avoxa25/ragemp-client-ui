@@ -1,3 +1,1 @@
-export enum MarkerConstants {
-  
-}
+export enum MarkerConstants { }
