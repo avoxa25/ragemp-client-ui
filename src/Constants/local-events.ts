@@ -2,8 +2,8 @@ export enum LocalEvents {
   ChatCursorToggle = 'Local:Chat:CursorToggle',
   CharacterSpawnSelect = 'Local:Character:SpawnSelect',
 
-  AuthenticationUiLogin = 'Local:AuthenticationUi:Login',
-  AuthenticationUiRegistration = 'Local:AuthenticationUi:Registration',
+  Login = 'Local:AuthenticationUi:Login',
+  Registration = 'Local:AuthenticationUi:Registration',
   AuthenticationUiErrorMessage = 'Local:AuthenticationUi:ErrorMessage',
 
   CharacterCreatorOpen = 'Local:CharacterCreator:Open',

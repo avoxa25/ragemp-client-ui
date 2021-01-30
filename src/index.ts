@@ -1,3 +1,5 @@
+import './Authentication/main';
+
 import './Character/Creator/main';
 import './Character/SpawnSelect/main';
 import './Chat/main';

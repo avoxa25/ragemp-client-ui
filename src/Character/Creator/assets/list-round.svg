@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="11.88" height="11.844" viewBox="0 0 11.88 11.844">
-  <defs>
-    <style>
-      .cls-1 {
-        fill-rule: evenodd;
-        fill: url(#linear-gradient);
-      }
-    </style>
-    <linearGradient id="linear-gradient" x1="1273.06" y1="410.938" x2="1273.06" y2="399.094" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#cc1385"/>
-      <stop offset="1" stop-color="#df6f67"/>
-    </linearGradient>
-  </defs>
-  <path id="Фигура_5" data-name="Фигура 5" class="cls-1" d="M1278.99,405.025a5.94,5.94,0,1,1-5.94-5.927A5.934,5.934,0,0,1,1278.99,405.025Z" transform="translate(-1267.12 -399.094)"/>
+	<defs>
+		<style>
+			.cls-1 {
+			fill-rule: evenodd;
+			fill: url(#linear-gradient);
+			}
+		</style>
+		<linearGradient id="linear-gradient" x1="1273.06" y1="410.938" x2="1273.06" y2="399.094" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="#cc1385" />
+			<stop offset="1" stop-color="#df6f67" />
+		</linearGradient>
+	</defs>
+	<path id="Фигура_5" data-name="Фигура 5" class="cls-1" d="M1278.99,405.025a5.94,5.94,0,1,1-5.94-5.927A5.934,5.934,0,0,1,1278.99,405.025Z" transform="translate(-1267.12 -399.094)" />
 </svg>
