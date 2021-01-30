@@ -4,7 +4,7 @@ import { CharacterCreatorData } from './creator-data';
 
 class CharacterCreatorUi {
   private character: CharacterCreatorModel;
-  private errorTextElement: HTMLElement;
+  private readonly errorTextElement: HTMLElement;
 
   constructor() {
     this.character = new CharacterCreatorModel();
@@ -18,7 +18,7 @@ class CharacterCreatorUi {
     this.StartHair();
   }
 
-  public ShowErrorMessage(message: string) {
+  public ShowErrorMessage(message: string): void {
     this.errorTextElement.innerHTML += `${message}<br>`;
     this.errorTextElement.hidden = false;
   }
@@ -210,7 +210,7 @@ class CharacterCreatorUi {
   }
 
 
-  private ChangeGender() {
+  private ChangeGender(): void {
     const formHair = document.querySelector('form#formHair') as HTMLFormElement;
     const formClothes = document.querySelector('form#formClothes') as HTMLFormElement;
 

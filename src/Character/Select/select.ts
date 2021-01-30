@@ -1,6 +1,6 @@
-import { LocalEvents } from "../../Constants/local-events";
-import { SectionType } from "./section-type";
-import { CharacterSelectModel } from "./select-model";
+import { LocalEvents } from '../../Constants/local-events';
+import { SectionType } from './section-type';
+import { CharacterSelectModel } from './select-model';
 
 class CharacterSelectUi {
   private readonly ul: HTMLElement;
@@ -43,7 +43,7 @@ class CharacterSelectUi {
         const playedTimeText = document.createElement('p') as HTMLElement;
         playedTimeText.innerText = 'Наиграно часов:';
         const playedTimeSpan = document.createElement('span') as HTMLElement;
-        playedTimeSpan.innerText = characterModel.totalOnlineTime.hours;
+        playedTimeSpan.innerText = characterModel.totalOnlineTimeHours.toString();
 
         const factionLi = document.createElement('li') as HTMLElement;
         const factionText = document.createElement('p') as HTMLElement;
