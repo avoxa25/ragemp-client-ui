@@ -1,75 +1,50 @@
 import { LocalEvents } from '../../Constants/local-events';
-import { SpawnType } from './spawn-types';
+import { SpawnLocation } from './spawn-location';
 
 class CharacterSpawnSelectUi {
+  private section: HTMLElement;
+
   public constructor(haveOrganization: boolean, haveHomes: boolean) {
-    const lastPosition = document.querySelector('#anim1') as HTMLElement;
-    const lastPositionFront = document.querySelector('#anim1f') as HTMLElement;
+    this.section = document.querySelector('section.container ul') as HTMLElement;
 
-    const organizationSpawn = document.querySelector('#anim2') as HTMLElement;
-    const organizationSpawnFront = document.querySelector('#anim2f') as HTMLElement;
+    this.CreateSpawnItem(SpawnLocation.LastLocation);
+    if (haveOrganization) this.CreateSpawnItem(SpawnLocation.Organization);
+    if (haveHomes) this.CreateSpawnItem(SpawnLocation.House);
+  }
 
-    const houseSpawn = document.querySelector('#anim3') as HTMLElement;
-    const houseSpawnFront = document.querySelector('#anim3f') as HTMLElement;
+  private CreateSpawnItem(location: SpawnLocation): void {
+    const itemLi = document.createElement('li') as HTMLElement;
+    const button = document.createElement('button') as HTMLButtonElement;
+    button.classList.add('spawn-item');
+    const image = document.createElement('img') as HTMLElement;
+    const text = document.createElement('p') as HTMLElement;
 
-    const lastPositionFigure = document.querySelector('#lastPosition') as HTMLElement;
-    const organizationSpawnFigure = document.querySelector('#organizationSpawn') as HTMLElement;
-    const houseSpawnFigure = document.querySelector('#houseSpawn') as HTMLElement;
-
-    lastPositionFigure.style.marginLeft = '400px';
-
-    if (haveOrganization) {
-      organizationSpawnFigure.classList.remove('hidden');
-
-      lastPositionFigure.style.marginLeft = '50px';
-      organizationSpawnFigure.style.marginLeft = '650px';
-
-      organizationSpawn.addEventListener('mouseover', () => {
-        organizationSpawn.classList.add('anim');
-        organizationSpawnFront.classList.add('hide');
-      });
-      organizationSpawn.addEventListener('mouseout', () => {
-        organizationSpawn.classList.remove('anim');
-        organizationSpawnFront.classList.remove('hide');
-      });
-
-      organizationSpawnFigure.addEventListener('click', () => mp.events.call(LocalEvents.CharacterSpawnSelect, SpawnType.Organization));
+    switch (location) {
+      case SpawnLocation.LastLocation:
+        button.classList.add('last-location');
+        image.setAttribute('src', './assets/last-location.svg');
+        text.innerText = 'Персонаж появится в месте последнего выхода из игры';
+        break;
+      case SpawnLocation.Organization:
+        button.classList.add('organization');
+        image.setAttribute('src', './assets/organization.svg');
+        text.innerText = 'Персонаж появится на территории организации';
+        break;
+      case SpawnLocation.House:
+        button.classList.add('home');
+        image.setAttribute('src', './assets/home.svg');
+        text.innerText = 'Персонаж появится дома. Дом, милый дом!';
+        break;
     }
 
-    if (haveHomes) {
-      houseSpawnFigure.classList.remove('hidden');
+    this.section.appendChild(itemLi);
+    itemLi.appendChild(button);
+    button.appendChild(image);
+    button.appendChild(text);
 
-      lastPositionFigure.style.marginLeft = '100px';
-      houseSpawnFigure.style.marginLeft = '700px';
-
-      houseSpawn.addEventListener('mouseover', () => {
-        houseSpawn.classList.add('anim');
-        houseSpawnFront.classList.add('hide');
-      });
-      houseSpawn.addEventListener('mouseout', () => {
-        houseSpawn.classList.remove('anim');
-        houseSpawnFront.classList.remove('hide');
-      });
-
-      houseSpawnFigure.addEventListener('click', () => mp.events.call(LocalEvents.CharacterSpawnSelect, SpawnType.House));
-    }
-
-    if (haveOrganization && haveHomes) {
-      lastPositionFigure.style.marginLeft = '0';
-      organizationSpawnFigure.style.marginLeft = '400px';
-      houseSpawnFigure.style.marginLeft = '800px';
-    }
-
-    lastPosition.addEventListener('mouseover', () => {
-      lastPosition.classList.add('anim');
-      lastPositionFront.classList.add('hide');
-    });
-    lastPosition.addEventListener('mouseout', () => {
-      lastPosition.classList.remove('anim');
-      lastPositionFront.classList.remove('hide');
-    });
-
-    lastPositionFigure.addEventListener('click', () => mp.events.call(LocalEvents.CharacterSpawnSelect, SpawnType.LastPosition));
+    button.addEventListener('click', () => {
+      mp.events.call(LocalEvents.CharacterSpawnSelect, location);
+    })
   }
 }
 

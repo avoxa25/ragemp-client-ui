@@ -2,14 +2,14 @@ import { CameraConstants } from '../../Constants/camera-constants';
 import { LocalEvents } from '../../Constants/local-events';
 import { RemoteEvents } from '../../Constants/remote-events';
 import { RemoteResponse } from '../../Constants/remote-response';
-import { SpawnType } from './spawn-types';
+import { SpawnLocation } from './spawn-location';
 
 class CharacterSpawnSelect {
   private readonly browser: BrowserMp;
   private readonly camera: CameraMp;
 
   public constructor() {
-    this.browser = mp.browsers.new('package://CharacterSpawnSelect/character-spawn-select.html');
+    this.browser = mp.browsers.new('package://Character/SpawnSelect/spawn-select.html');
     mp.players.local.freezePosition(true);
     mp.game.ui.displayRadar(false);
     mp.game.ui.displayHud(false);
@@ -23,14 +23,14 @@ class CharacterSpawnSelect {
     mp.game.cam.renderScriptCams(true, false, 0, true, false);
 
     mp.events.add(RemoteResponse.CharacterSpawnSelected, () => this.Close());
-    mp.events.add(LocalEvents.CharacterSpawnSelect, (st: SpawnType) => this.CharacterSpawnSelect(st));
+    mp.events.add(LocalEvents.CharacterSpawnSelect, (l: SpawnLocation) => this.SpawnSelect(l));
   }
 
-  private CharacterSpawnSelect(spawnType: SpawnType): void {
-    mp.events.callRemote(RemoteEvents.CharacterSpawnSelect, spawnType);
+  private SpawnSelect(location: SpawnLocation): void {
+    mp.events.callRemote(RemoteEvents.CharacterSpawnSelect, location);
   }
 
-  private Close() {
+  private Close(): void {
     this.browser.destroy();
     mp.players.local.freezePosition(false);
 
