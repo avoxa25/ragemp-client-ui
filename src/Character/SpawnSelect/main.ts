@@ -8,7 +8,7 @@ class CharacterSpawnSelect {
   private readonly browser: BrowserMp;
   private readonly camera: CameraMp;
 
-  constructor() {
+  public constructor() {
     this.browser = mp.browsers.new('package://CharacterSpawnSelect/character-spawn-select.html');
     mp.players.local.freezePosition(true);
     mp.game.ui.displayRadar(false);
