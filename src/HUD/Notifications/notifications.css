@@ -40,7 +40,7 @@ P {
 	width: 285px;
 
 	display: flex;
-	flex-direction: column-reverse;
+	flex-direction: column;
 
 	position: absolute;
 	bottom: 225px;
