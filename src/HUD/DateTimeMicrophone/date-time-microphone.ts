@@ -27,7 +27,7 @@ class DateTimeMicrophoneUi {
   }
 
   private SetCurrentTime(): void {
-    const timeOptions = {hour: '2-digit', minute: '2-digit'}
+    const timeOptions = { hour: '2-digit', minute: '2-digit' }
     this.timeElement.innerText = this.dateTimeNow.toLocaleTimeString('ru-RU', timeOptions);
   }
 }
