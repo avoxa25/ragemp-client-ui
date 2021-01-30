@@ -1,5 +1,5 @@
 export enum SpawnLocation {
-  LastLocation,
-  Organization,
-  House
+  LastLocation = 1,
+  Organization = 2,
+  House = 3
 }
