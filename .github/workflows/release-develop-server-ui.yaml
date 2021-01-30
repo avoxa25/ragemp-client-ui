@@ -98,5 +98,5 @@ jobs:
         build-args: |
           VERSION=${{ steps.version.outputs.version }}
         tags: |
-          ghcr.io/sweetliferp/server-ui/server-ui:latest-develop
-#         ghcr.io/sweetliferp/server-ui/server-ui:${{ steps.version.outputs.version }}-develop
+          ghcr.io/sweetliferp/server-ui:latest-develop
+#         ghcr.io/sweetliferp/server-ui:${{ steps.version.outputs.version }}-develop
