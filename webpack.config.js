@@ -12,6 +12,7 @@ const htmlComponents = [
   
   'HUD/DateTimeMicrophone',
   'HUD/Location',
+  'HUD/Notifications',
   
   'Speedometer'
 ];
