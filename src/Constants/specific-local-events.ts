@@ -3,4 +3,4 @@ export enum SpecificLocalEvents {
   ChatClear = 'chat:clear',
   ChatActivate = 'chat:activate',
   ChatShow = 'chat:show'
-};
+}
