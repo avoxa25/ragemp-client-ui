@@ -92,5 +92,5 @@ jobs:
         build-args: |
           VERSION=${{ steps.version.outputs.version }}
         tags: |
-          server-ui/server-ui:latest-develop
-          server-ui/server-ui:${{ steps.version.outputs.version }}-develop
+          server-ui:latest-develop
+          server-ui:${{ steps.version.outputs.version }}-develop
