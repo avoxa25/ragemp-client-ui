@@ -4,10 +4,10 @@ export class CharacterSelectModel {
   public firstName: string;
   public lastName: string;
 
-  public faction: string;
-
   public cash: number;
-  public bankCash: number;
+  public bankMoney: number;
+
+  public organization: string;
 
   // FIXME: Fix type of totalOnlineTime
   public totalOnlineTime: any;
@@ -15,8 +15,9 @@ export class CharacterSelectModel {
     this.id = 0;
     this.firstName = '';
     this.lastName = '';
-    this.faction = '';
+    this.organization = '';
     this.cash = 0;
-    this.bankCash = 0;
+    this.bankMoney = 0;
+    this.totalOnlineTime = '';
   }
 }

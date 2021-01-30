@@ -15,9 +15,11 @@ class CharacterSelectUi {
     // TODO: Realize buying form
 
     for (let i = 0; i < 3; i++) {
-      if (characterSelectModels.length < i) this.CreateSection(SectionType.Create);
+      if (characterSelectModels.length <= i) this.CreateSection(SectionType.Create);
       else this.CreateSection(SectionType.Character, characterSelectModels[i]);
     }
+
+    this.StartButtons();
   }
 
   private CreateSection(type: SectionType, characterModel?: CharacterSelectModel): void {
@@ -47,7 +49,7 @@ class CharacterSelectUi {
         const factionText = document.createElement('p') as HTMLElement;
         factionText.innerText = 'Фракция:';
         const factionSpan = document.createElement('span') as HTMLElement;
-        factionSpan.innerText = characterModel.faction !== undefined ? characterModel.faction : 'Отсутствует';
+        factionSpan.innerText = characterModel.organization !== undefined && characterModel.organization === '' ? characterModel.organization : 'Отсутствует';
 
         const cashLi = document.createElement('li') as HTMLElement;
         const cashText = document.createElement('p') as HTMLElement;
@@ -59,7 +61,7 @@ class CharacterSelectUi {
         const bankCashText = document.createElement('p') as HTMLElement;
         bankCashText.innerText = 'Банк:';
         const bankCashSpan = document.createElement('span') as HTMLElement;
-        bankCashSpan.innerText = characterModel.bankCash.toString();
+        bankCashSpan.innerText = characterModel.bankMoney.toString();
 
         const buttonSelect = document.createElement('button') as HTMLButtonElement;
         buttonSelect.innerText = 'ВЫБРАТЬ';
@@ -128,6 +130,9 @@ class CharacterSelectUi {
         createMain.appendChild(createPrompt);
         createPrompt.appendChild(createPromptText);
         createMain.appendChild(createButton);
+        break;
+      default:
+        alert('Какая-то ошибка');
         break;
     }
   }

@@ -243,7 +243,3 @@ button.plus {
   background-image: url("assets/plus.svg");
   background-repeat: no-repeat;
 }
-
-.hidden{
-  display: none;
-}
