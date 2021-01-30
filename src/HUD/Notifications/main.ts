@@ -4,7 +4,7 @@ import { RemoteResponse } from '../../Constants/remote-response';
 class Notifications {
   private readonly browser: BrowserMp;
 
-  constructor() {
+  public constructor() {
     this.browser = mp.browsers.new('package://HUD/Notifications/notifications.html');
     mp.events.add(RemoteResponse.NotificationSent, (type: NotificationType, text: string) => this.Display(type, text));
   }

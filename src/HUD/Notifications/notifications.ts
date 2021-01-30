@@ -5,7 +5,7 @@ class NotificationsUi {
   private notificationsArray = new Array;
   private readonly maxNotifications = 3;
 
-  constructor() {
+  public constructor() {
     this.container = document.querySelector('#window') as HTMLElement;
   }
 
