@@ -5,6 +5,7 @@ const htmlComponents = [
   'Authentication',
   'Character/Creator',
   'Chat',
+  'HUD/DateTimeMicrophone',
   'HUD/Location',
   'Speedometer'
 ];
