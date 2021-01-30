@@ -6,6 +6,7 @@ const htmlComponents = [
   'Character/Creator',
   'Character/Select',
   'Chat',
+  'HUD/DateTimeMicrophone',
   'HUD/Location',
   'Speedometer'
 ];
