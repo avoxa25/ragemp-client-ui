@@ -2,7 +2,7 @@ import { LocalEvents } from '../../Constants/local-events';
 import { SpawnLocation } from './spawn-location';
 
 class CharacterSpawnSelectUi {
-  private section: HTMLElement;
+  private readonly section: HTMLElement;
 
   public constructor(haveOrganization: boolean, haveHomes: boolean) {
     this.section = document.querySelector('section.container ul') as HTMLElement;
@@ -49,6 +49,5 @@ class CharacterSpawnSelectUi {
 }
 
 // TODO: Create Event for display of figures according to the character's belonging to the faction and the presence of houses
-
 const characterSpawnSelectUi = new CharacterSpawnSelectUi(false, false);
 (window as any).characterSpawnSelectUi = characterSpawnSelectUi;
