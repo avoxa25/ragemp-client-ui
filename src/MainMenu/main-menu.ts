@@ -1,9 +1,10 @@
-import { SpecificLocalEvents } from "../Constants/specific-local-events";
-import { LocalEvents } from "../Constants/local-events";
-import { Settings } from "./settings";
+import { SpecificLocalEvents } from '../Constants/specific-local-events';
+import { LocalEvents } from '../Constants/local-events';
+import { Settings } from './settings';
 
 class MainMenuUi {
   private settings: Settings;
+  
   public constructor(){
     this.settings = new Settings();
 
@@ -11,7 +12,6 @@ class MainMenuUi {
     const buttonsTabContentLink = document.querySelectorAll('button.tab-content-link') as NodeListOf<HTMLElement>;
     const closeButton = document.querySelector('#close') as HTMLElement;
     const switchesSettings = document.querySelectorAll('input.settings') as NodeListOf<HTMLElement>;
-
 
     closeButton.addEventListener('click', () => this.Hide());
     switchesSettings.forEach((s) => s.addEventListener('click', () => this.UpdateSettings(s)));
@@ -78,19 +78,18 @@ class MainMenuUi {
     const toggled = element.hasAttribute('checked');
     switch (element.id) {
       case 'notify':
-        this.settings.notify = toggled;
+        this.settings.notificationsHidden = toggled;
         // TODO: toggle notifications
         return;
       case 'textChat':
+        this.settings.textChatHidden = toggled;
         mp.events.call(SpecificLocalEvents.ChatActivate, toggled);
         return;
       case 'voiceChat':
+        this.settings.voiceChatMuted = toggled;
         // TODO: toggle voicechat
         return;
     }
-
-    const settingsJson = JSON.stringify(this.settings);
-    mp.events.call(LocalEvents.SettingsUpdate, settingsJson);
   }
 
   private Show(name: string, surname: string, gender: string, job: string, playerTime: string, orgName: string, orgRank: string, cash: number): void {
@@ -102,7 +101,7 @@ class MainMenuUi {
     const orgRankElement = document.querySelector('#orgRank') as HTMLElement;
     const cashElement = document.querySelector('#cashElement') as HTMLElement;
 
-    const cashFormat = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(cash);
+    const formattedCash = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(cash);
 
     fullNameElement.innerText = `${name} ${surname}`;
     genderElement.innerText = gender;
@@ -110,14 +109,14 @@ class MainMenuUi {
     playerTimeElement.innerText = playerTime;
     orgNameElement.innerText = orgName;
     orgRankElement.innerText = orgRank;
-    cashElement.innerText = cashFormat;
+    cashElement.innerText = formattedCash;
 
     document.body.hidden = false;
   }
 
   private Hide(): void {
     document.body.hidden = true;
-    mp.events.call(LocalEvents.MenuIsActiveUpdate, false);
+    mp.events.call(LocalEvents.MenuToggle, false);
   }
 };
 

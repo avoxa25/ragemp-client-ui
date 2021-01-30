@@ -20,7 +20,5 @@ export enum RemoteEvents {
   HouseSetLockState = 'Remote:House:SetLockState',
   HouseEnterExit = 'Remote:House:EnterExit',
 
-  MainMenuOpen = 'Remote:MainMenu:Open',
-
-  SettingsUpdate = 'Remote:Settings:Update'
+  MainMenuOpen = 'Remote:MainMenu:Open'
 };

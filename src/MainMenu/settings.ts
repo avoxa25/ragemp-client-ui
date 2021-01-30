@@ -1,11 +1,11 @@
 export class Settings {
-  public notify: boolean;
-  public textChat: boolean;
-  public voiceChat: boolean;
+  public notificationsHidden: boolean;
+  public textChatHidden: boolean;
+  public voiceChatMuted: boolean;
 
   constructor() {
-    this.notify = true;
-    this.textChat = true;
-    this.voiceChat = true;
+    this.notificationsHidden = true;
+    this.textChatHidden = true;
+    this.voiceChatMuted = true;
   }
 }
