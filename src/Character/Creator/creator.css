@@ -883,12 +883,12 @@ ul.face-navigation>li>button.active {
   justify-content: center;
 }
 
-.body .buttons {  
+.body .buttons {
   margin-top: 10px;
-} 
+}
 
-.errorMessage{
-    color: red;
-    text-align: center;
-    font-weight: bold;
+.errorMessage {
+  color: red;
+  text-align: center;
+  font-weight: bold;
 }
