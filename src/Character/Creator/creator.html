@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="creator.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <section class="container">
+    <header>
+      <nav>
+        <ul class="navigation">
+          <li>
+            <button class="main tabLinks active" id="linkMain" data-tab="tabMain"></button>
+          </li>
+          <li>
+            <button class="clothes tabLinks" id="linkClothes" data-tab="tabClothes"></button>
+          </li>
+          <li>
+            <button class="face tabLinks" id="linkFace" data-tab="tabFace"></button>
+          </li>
+          <li>
+            <button class="hair tabLinks" id="linkHair" data-tab="tabHair"></button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="parameters active" id="tabMain">
+        <form id="formMain" action="javascript:void(0);">
+          <div class="body main">
+            <input type="text" name="firstName" placeholder="Имя">
+            <input type="text" name="lastName" placeholder="Фамилия">
+            <ul>
+              <li>
+                <p>Пол:</p>
+                <p>
+                  <button type="button" data-input-name="gender" data-input-value-cycle="-1"></button>
+                  <input type="text" name="genderText" value="Мужской" disabled>
+                  <input type="text" name="gender" value="true" style="display: none;">
+                  <button type="button" data-input-name="gender" data-input-value-cycle="1"></button>
+                </p>
+              </li>
+              <li>
+                <p>Отец:</p>
+                <p>
+                  <button type="button" data-input-name="father" data-input-value-cycle="-1"></button>
+                  <input type="text" name="fatherText" value="Benjamin" disabled>
+                  <input type="text" name="father" value="0" style="display: none;">
+                  <button type="button" data-input-name="father" data-input-value-cycle="1"></button>
+                </p>
+              </li>
+              <li>
+                <p>Мать:</p>
+                <p>
+                  <button type="button" data-input-name="mother" data-input-value-cycle="-1"></button>
+                  <input type="text" name="motherText" value="Hannah" disabled>
+                  <input type="text" name="mother" value="21" style="display: none;">
+                  <button type="button" data-input-name="mother" data-input-value-cycle="1"></button>
+                </p>
+              </li>
+              <li>
+                <p>Наследственность:</p>
+                <p>
+                  Отец
+                  <input type="range" class="slider" name="heredity" min="-1.0" max="1.0" value="0" step="0.01">
+                  Мать
+                </p>
+              </li>
+              <li>
+                <p>Тон кожи:</p>
+                <p>
+                  Отец
+                  <input type="range" class="slider" name="skinTone" min="-1.0" max="1.0" value="0" step="0.01">
+                  Мать
+                </p>
+              </li>
+            </ul>
+            <p>
+              <button type="button" id="random">СЛУЧАЙНО</button>
+              <button type="reset">СБРОСИТЬ</button>
+            </p>
+            <button type="submit">СОЗДАТЬ</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="parameters" id="tabClothes">
+        <form id="formClothes" action="javascript:void(0);">
+          <div class="body clothes">
+            <ul>
+              <li>
+                <p>Торс:</p>
+                <p>
+                  <button type="button" data-input-name="top" data-input-value-cycle="-1"></button>
+                  <input type=" text" name="topText" value="Футболка" disabled>
+                  <input type="text" name="top" value="146" style="display: none;">
+                  <button type="button" data-input-name="top" data-input-value-cycle="1"></button>
+                </p>
+              </li>
+              <li>
+                <p>Ноги:</p>
+                <p>
+                  <button type="button" data-input-name="legs" data-input-value-cycle="-1"></button>
+                  <input type="text" name="legsText" value="Джинсы" disabled>
+                  <input type="text" name="legs" value="1" style="display: none;">
+                  <button type="button" data-input-name="legs" data-input-value-cycle="1"></button>
+                </p>
+              </li>
+              <li>
+                <p>Обувь:</p>
+                <p>
+                  <button type="button" data-input-name="shoes" data-input-value-cycle="-1"></button>
+                  <input type="text" name="shoesText" value="Кеды" disabled>
+                  <input type="text" name="shoes" value="1" style="display: none;">
+                  <button type="button" data-input-name="shoes" data-input-value-cycle="1"></button>
+                </p>
+              </li>
+            </ul>
+            <p>
+              <button type="button" id="random">СЛУЧАЙНО</button>
+              <button type="reset">СБРОСИТЬ</button>
+            </p>
+            <button type="submit">СОЗДАТЬ</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="parameters" id="tabFace">
+        <form id="formFace" action="javascript:void(0);">
+          <div class="body face">
+            <ul class="face-navigation">
+              <li>
+                <button class="subTabLinks active" id="subTabLinksFace" data-tab="subTabFace">Лицо</button>
+              </li>
+              <li>
+                <button class="subTabLinks" id="subTabLinksEyes" data-tab="subTabEyes">Глаза</button>
+              </li>
+              <li>
+                <button class="subTabLinks" id="subTabLinksNose" data-tab="subTabNose">Нос</button>
+              </li>
+              <li>
+                <button class="subTabLinks" id="subTabLinksMouth" data-tab="subTabMouth">Рот</button>
+              </li>
+            </ul>
+
+            <div class="subTab active" id="subTabFace">
+              <ul class="face">
+                <li>
+                  <p>Пятна:</p>
+                  <p>
+                    <button type="button" data-input-name="blemishes" data-input-value-cycle="-1"></button>
+                    <input type="text" name="blemishesText" value="Нет" disabled>
+                    <input type="text" name="blemishes" value="255" style="display: none;">
+                    <button type="button" data-input-name="blemishes" data-input-value-cycle="1"></button>
+                  </p>
+                </li>
+                <li>
+                  <p>Старение:</p>
+                  <p>
+                    <button type="button" data-input-name="ageing" data-input-value-cycle="-1"></button>
+                    <input type="text" name="ageingText" value="Нет" disabled>
+                    <input type="text" name="ageing" value="255" style="display: none;">
+                    <button type="button" data-input-name="ageing" data-input-value-cycle="1"></button>
+                  </p>
+                </li>
+                <li>
+                  <p>Цвет лица:</p>
+                  <p>
+                    <button type="button" data-input-name="complexion" data-input-value-cycle="-1"></button>
+                    <input type="text" name="complexionText" value="Нет" disabled>
+                    <input type="text" name="complexion" value="255" style="display: none;">
+                    <button type="button" data-input-name="complexion" data-input-value-cycle="1"></button>
+                  </p>
+                </li>
+                <li>
+                  <p>Загар:</p>
+                  <p>
+                    <button type="button" data-input-name="sunDamage" data-input-value-cycle="-1"></button>
+                    <input type="text" name="sunDamageText" value="Нет" disabled>
+                    <input type="text" name="sunDamage" value="255" style="display: none;">
+                    <button type="button" data-input-name="sunDamage" data-input-value-cycle="1"></button>
+                  </p>
+                </li>
+                <li>
+                  <p>Родинки/Веснушки:</p>
+                  <p>
+                    <button type="button" data-input-name="freckles" data-input-value-cycle="-1"></button>
+                    <input type="text" name="frecklesText" value="Нет" disabled>
+                    <input type="text" name="freckles" value="255" style="display: none;">
+                    <button type="button" data-input-name="freckles" data-input-value-cycle="1"></button>
+                  </p>
+                </li>
+                <li>
+                  <p>Высота бровей:</p>
+                  <p>
+                    <span>Вверх</span>
+
+                    <input type="range" class="slider" name="eyeBrowsHeight" min="-1.0" max="1.0" value="0" step="0.01">
+
+                    <span>Вниз</span>
+                  </p>
+                </li>
+                <li>
+                  <p>Ширина бровей:</p>
+                  <p>
+                    <span>Узкие</span>
+
+                    <input type="range" class="slider" name="eyeBrowsWidth" min="-1.0" max="1.0" value="0" step="0.01">
+
+                    <span>Широкие</span>
+                  </p>
+                </li>
+                <li>
+                  <p>Высота скул:</p>
+                  <p>
+                    <span>Вверх</span>
+
+                    <input type="range" class="slider" name="cheekBoneHeight" min="-1.0" max="1.0" value="0"
+                      step="0.01">
+
+                    <span>Вниз</span>
+                  </p>
+                </li>
+                <li>
+                  <p>Ширина скул:</p>
+                  <p>
+                    <span>Узкие</span>
+
+                    <input type="range" class="slider" name="cheekBoneWidth" min="-1.0" max="1.0" value="0" step="0.01">
+
+                    <span>Широкие</span>
+                  </p>
+                </li>
+                <li>
+                  <p>Ширина щёк:</p>
+                  <p>
+                    <span>Внутрь</span>
+
+                    <input type="range" class="slider" name="cheeksWidth" min="-1.0" max="1.0" value="0" step="0.01">
+
+                    <span>Наружу</span>
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="subTab" id="subTabEyes">
+              <ul class="face">
+                <li>
+                  <p>Глаза:</p>
+                  <p>
+                    <button type="button" data-input-name="eyesColor" data-input-value-cycle="-1"></button>
+                    <input type="text" name="eyesColorText" value="Green" disabled>
+                    <input type="text" name="eyesColor" value="0" style="display: none;">
+                    <button type="button" data-input-name="eyesColor" data-input-value-cycle="1"></button>
+                  </p>
+                </li>
+              </ul>
+              <ul class="sliders">
+                <li>
+                  <p>Размер глаз:</p>
+                  <p>
+                    <span>Открыты</span>
+                    <input type="range" class="slider" name="eyesSize" min="-1.0" max="1.0" value="0" step="0.01">
+                    <span>Закрыты</span>
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="subTab" id="subTabNose">
+              <ul class="face">
+                <li>
+                  <p>Высота носа:</p>
+                  <p>
+                    <span>Вверх</span>
+                    <input type="range" class="slider" name="noseHeight" min="-1.0" max="1.0" value="0" step="0.01">
+                    <span>Вниз</span>
+                  </p>
+                </li>
+                <li>
+                  <p>Ширина носа:</p>
+                  <p>
+                    <span>Узкий</span>
+
+                    <input type="range" class="slider" name="noseWidth" min="-1.0" max="1.0" value="0" step="0.01">
+
+                    <span>Широкий</span>
+                  </p>
+                </li>
+                <li>
+                  <p>Длина носа:</p>
+                  <p>
+                    <span>Длинный</span>
+
+                    <input type="range" class="slider" name="noseLength" min="-1.0" max="1.0" value="0" step="0.01">
+
+                    <span>Короткий</span>
+                  </p>
+                </li>
+                <li>
+                  <p>Носовая перегородка:</p>
+                  <p>
+                    <span>Круглая</span>
+
+                    <input type="range" class="slider" name="noseBridge" min="-1.0" max="1.0" value="0" step="0.01">
+
+                    <span>Квадратная</span>
+                  </p>
+                </li>
+                <li>
+                  <p>Кончик носа:</p>
+                  <p>
+                    <span>Вверх</span>
+
+                    <input type="range" class="slider" name="noseTip" min="-1.0" max="1.0" value="0" step="0.01">
+
+                    <span>Вниз</span>
+                  </p>
+                </li>
+                <li>
+                  <p>Смещение переносицы:</p>
+                  <p>
+                    <span>Вправо</span>
+
+                    <input type="range" class="slider" name="noseBridgeShift" min="-1.0" max="1.0" value="0"
+                      step="0.01">
+
+                    <span>Влево</span>
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="subTab" id="subTabMouth">
+              <ul class="face">
+                <li>
+                  <p>Размер губ:</p>
+                  <p>
+                    <span>Широкие</span>
+
+                    <input type="range" class="slider" name="lipsSize" min="-1.0" max="1.0" value="0" step="0.01">
+
+                    <span>Узкие</span>
+                  </p>
+                </li>
+                <li>
+                  <p>Высота челюсти:</p>
+                  <p>
+                    <span>Вверх</span>
+
+                    <input type="range" class="slider" name="jawHeight" min="-1.0" max="1.0" value="0" step="0.01">
+
+                    <span>Вниз</span>
+                  </p>
+                </li>
+                <li>
+                  <p>Ширина челюсти:</p>
+                  <p>
+                    <span>Узкая</span>
+
+                    <input type="range" class="slider" name="jawWidth" min="-1.0" max="1.0" value="0" step="0.01">
+
+                    <span>Широкая</span>
+                  </p>
+                </li>
+                <li>
+                  <p>Положение подбородка:</p>
+                  <p>
+                    <span>Внутрь</span>
+
+                    <input type="range" class="slider" name="chinPos" min="-1.0" max="1.0" value="0" step="0.01">
+
+                    <span>Наружу</span>
+                  </p>
+                </li>
+                <li>
+                  <p>Ширина подбородка:</p>
+                  <p>
+                    <span>Узкий</span>
+
+                    <input type="range" class="slider" name="chinWidth" min="-1.0" max="1.0" value="0" step="0.01">
+
+                    <span>Широкий</span>
+                  </p>
+                </li>
+                <li>
+                  <p>Длина подбородка:</p>
+                  <p>
+                    <span>Маленький</span>
+
+                    <input type="range" class="slider" name="chinLength" min="-1.0" max="1.0" value="0" step="0.01">
+
+                    <span>Большой</span>
+                  </p>
+                </li>
+                <li>
+                  <p>Форма подбородка:</p>
+                  <p>
+                    <span>Простой</span>
+
+                    <input type="range" class="slider" name="chinShape" min="-1.0" max="1.0" value="0" step="0.01">
+
+                    <span>Двойной</span>
+                  </p>
+                </li>
+                <li>
+                  <p>Ширина шеи:</p>
+                  <p>
+                    <span>Узкая</span>
+                    <input type="range" class="slider" name="neckWidth" min="-1.0" max="1.0" value="0" step="0.01">
+                    <span>Широкая</span>
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <p class="buttons">
+              <button type="button" id="random">СЛУЧАЙНО</button>
+              <button type="reset">СБРОСИТЬ</button>
+            </p>
+            <button type="submit">СОЗДАТЬ</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="parameters" id="tabHair">
+        <form id="formHair" action="javascript:void(0);">
+          <div class="body clothes">
+            <ul>
+              <li>
+                <p>Прическа:</p>
+                <p>
+                  <button type="button" data-input-name="hair" data-input-value-cycle="-1"></button>
+                  <input type="text" name="hairText" value="Close Shave" disabled>
+                  <input type="text" name="hair" value="0" style="display: none;">
+                  <button type="button" data-input-name="hair" data-input-value-cycle="1"></button>
+                </p>
+              </li>
+              <li>
+                <p>Цвет:</p>
+                <p>
+                  <button type="button" data-input-name="hairColor" data-input-value-cycle="-1"></button>
+                  <input type="text" name="hairColorText" value="1" disabled>
+                  <input type="text" name="hairColor" value="0" style="display: none;">
+                  <button type="button" data-input-name="hairColor" data-input-value-cycle="1"></button>
+                </p>
+              </li>
+              <li>
+                <p>Оттенок:</p>
+                <p>
+                  <button type="button" data-input-name="hairHighLight" data-input-value-cycle="-1"></button>
+                  <input type="text" name="hairHighLightText" value="1" disabled>
+                  <input type="text" name="hairHighLight" value="0" style="display: none;">
+                  <button type="button" data-input-name="hairHighLight" data-input-value-cycle="1"></button>
+                </p>
+              </li>
+              <li>
+                <p>Брови:</p>
+                <p>
+                  <button type="button" data-input-name="eyeBrows" data-input-value-cycle="-1"></button>
+                  <input type="text" name="eyeBrowsText" value="Нет" disabled>
+                  <input type="text" name="eyeBrows" value="255" style="display: none;">
+                  <button type="button" data-input-name="eyeBrows" data-input-value-cycle="1"></button>
+                </p>
+              </li>
+              <li>
+                <p>Цвет:</p>
+                <p>
+                  <button type="button" data-input-name="eyeBrowsColor" data-input-value-cycle="-1"></button>
+                  <input type="text" name="eyeBrowsColorText" value="1" disabled>
+                  <input type="text" name="eyeBrowsColor" value="0" style="display: none;">
+                  <button type="button" data-input-name="eyeBrowsColor" data-input-value-cycle="1"></button>
+                </p>
+              </li>
+              <li>
+                <p>Оттенок:</p>
+                <p>
+                  <button type="button" data-input-name="eyeBrowsSecondaryColor" data-input-value-cycle="-1"></button>
+                  <input type="text" name="eyeBrowsSecondaryColorText" value="1" disabled>
+                  <input type="text" name="eyeBrowsSecondaryColor" value="0" style="display: none;">
+                  <button type="button" data-input-name="eyeBrowsSecondaryColor" data-input-value-cycle="1"></button>
+                </p>
+              </li>
+              <li>
+                <p>Борода:</p>
+                <p>
+                  <button type="button" data-input-name="beard" data-input-value-cycle="-1"></button>
+                  <input type="text" name="beardText" value="Нет" disabled>
+                  <input type="text" name="beard" value="255" style="display: none;">
+                  <button type="button" data-input-name="beard" data-input-value-cycle="1"></button>
+                </p>
+              </li>
+              <li>
+                <p>Цвет:</p>
+                <p>
+                  <button type="button" data-input-name="beardColor" data-input-value-cycle="-1"></button>
+                  <input type="text" name="beardColorText" value="1" disabled>
+                  <input type="text" name="beardColor" value="0" style="display: none;">
+                  <button type="button" data-input-name="beardColor" data-input-value-cycle="1"></button>
+                </p>
+              </li>
+              <li>
+                <p>Оттенок:</p>
+                <p>
+                  <button type="button" data-input-name="beardSecondaryColor" data-input-value-cycle="-1"></button>
+                  <input type="text" name="beardSecondaryColorText" value="1" disabled>
+                  <input type="text" name="beardSecondaryColor" value="0" style="display: none;">
+                  <button type="button" data-input-name="beardSecondaryColor" data-input-value-cycle="1"></button>
+                </p>
+              </li>
+              <li>
+                <p>На груди:</p>
+                <p>
+                  <button type="button" data-input-name="chestHair" data-input-value-cycle="-1"></button>
+                  <input type="text" name="chestHairText" value="Нет" disabled>
+                  <input type="text" name="chestHair" value="255" style="display: none;">
+                  <button type="button" data-input-name="chestHair" data-input-value-cycle="1"></button>
+                </p>
+              </li>
+              <li>
+                <p>Цвет:</p>
+                <p>
+                  <button type="button" data-input-name="chestHairColor" data-input-value-cycle="-1"></button>
+                  <input type="text" name="chestHairColorText" value="1" disabled>
+                  <input type="text" name="chestHairColor" value="0" style="display: none;">
+                  <button type="button" data-input-name="chestHairColor" data-input-value-cycle="1"></button>
+                </p>
+              </li>
+              <li>
+                <p>Оттенок:</p>
+                <p>
+                  <button type="button" data-input-name="chestHairSecondaryColor" data-input-value-cycle="-1"></button>
+                  <input type="text" name="chestHairSecondaryColorText" value="1" disabled>
+                  <input type="text" name="chestHairSecondaryColor" value="0" style="display: none;">
+                  <button type="button" data-input-name="chestHairSecondaryColor" data-input-value-cycle="1"></button>
+                </p>
+              </li>
+            </ul>
+            <p>
+              <button type="button" id="random">СЛУЧАЙНО</button>
+              <button type="reset">СБРОСИТЬ</button>
+            </p>
+            <button type="submit">СОЗДАТЬ</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </section>
+  <script src="creator.js"></script>
+</body>
+
+</html>
