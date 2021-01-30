@@ -1,4 +1,3 @@
-import { KeyboardKeys } from '../Constants/keyboard-keys';
 import { LocalEvents } from '../Constants/local-events';
 import { SpecificLocalEvents } from '../Constants/specific-local-events';
 
@@ -21,10 +20,10 @@ class ChatUi {
 
     this.newMessageInput = document.querySelector('input[type=text]') as HTMLInputElement;
 
-    mp.events.add(SpecificLocalEvents.ChatPush, (message: string) => this.DisplayMessage(message));
+    mp.events.add(SpecificLocalEvents.ChatPush, (m: string) => this.DisplayMessage(m));
     mp.events.add(SpecificLocalEvents.ChatClear, () => this.ClearChat());
-    mp.events.add(SpecificLocalEvents.ChatActivate, (visible: boolean) => this.ToggleChat(visible));
-    mp.events.add(SpecificLocalEvents.ChatShow, () => this.ToggleMessageInput());
+    mp.events.add(SpecificLocalEvents.ChatActivate, (v: boolean) => this.ToggleChat(v));
+    mp.events.add(SpecificLocalEvents.ChatShow, (v: boolean) => this.ToggleMessageInput(v));
 
     document.body.addEventListener('keydown', (e) => this.OnDocumentBodyKeydown(e));
     this.messageForm.addEventListener('submit', () => this.OnNewMessageFormSubmit());
@@ -49,19 +48,19 @@ class ChatUi {
     document.body.hidden = visible;
   }
 
-  private ToggleMessageInput(): void {
-    this.messageForm.hidden = !this.messageForm.hidden;
+  private ToggleMessageInput(visible: boolean): void {
+    if (this.messageForm.hidden === !visible) return;
 
+    this.messageForm.hidden = !visible;
     this.messageForm.reset();
 
-    if (this.messageForm.hidden) {
-      clearInterval(this.cursorSetIntervalId);
-    } else {
+    if (visible) {
       this.newMessageInput.focus();
-      this.cursorSetIntervalId = setInterval(() => mp.events.call(LocalEvents.ChatCursorToggle, true, true), 250);
+      this.cursorSetIntervalId = setInterval(() => mp.events.call(LocalEvents.ChatCursorToggle, visible, visible), 250);
+    } else {
+      clearInterval(this.cursorSetIntervalId);
+      mp.events.call(LocalEvents.ChatCursorToggle, visible, visible);
     }
-
-    mp.events.call(LocalEvents.ChatCursorToggle, !this.messageForm.hidden, !this.messageForm.hidden);
   }
 
   private OnNewMessageFormSubmit(): void {
@@ -81,15 +80,15 @@ class ChatUi {
       this.selectedSendedMessage = undefined;
     }
 
-    this.ToggleMessageInput();
+    this.ToggleMessageInput(false);
   }
 
   private OnDocumentBodyKeydown(event: KeyboardEvent): void {
     const isChatClosed = this.messageForm.hidden;
-    const isChatOpenKey = event.which === KeyboardKeys.T;
+    const isChatOpenKey = event.which === 84;
     if (isChatClosed && isChatOpenKey) {
       event.preventDefault();
-      this.ToggleMessageInput();
+      this.ToggleMessageInput(true);
     }
   }
 
@@ -97,8 +96,8 @@ class ChatUi {
     // TODO: Implement message cycling
     mp.console.logInfo(`onNewMessageInputKeydown: ${event.which}`);
 
-    const isArrowUpKey = event.which === KeyboardKeys.ArrowUp;
-    const isArrowDownKey = event.which === KeyboardKeys.ArrowDown;
+    const isArrowUpKey = event.which === 38;
+    const isArrowDownKey = event.which === 40;
 
     if (isArrowUpKey || isArrowDownKey) {
       this.CyclePreviousSendedMessages(isArrowDownKey);

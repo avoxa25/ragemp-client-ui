@@ -74,10 +74,10 @@ class GasStationBlipsSync {
   private GetServerBlips(): BlipMp[] {
     return mp.blips
       .toArray()
-      .filter(b => b.hasVariable('Exists'))
+      .filter(b => b.hasVariable('Exists') && b.getVariable('Exists') === false)
       .filter(b => b.hasVariable('Type') && b.getVariable('Type') === 'GasStation');
   }
-};
+}
 
 let gasStationBlipsSync: GasStationBlipsSync | undefined;
-mp.events.add(RemoteResponse.CharacterSelected, () => gasStationBlipsSync = gasStationBlipsSync ? gasStationBlipsSync : new GasStationBlipsSync());
+mp.events.add(RemoteResponse.CharacterSpawnSelected, () => gasStationBlipsSync = gasStationBlipsSync ? gasStationBlipsSync : new GasStationBlipsSync());

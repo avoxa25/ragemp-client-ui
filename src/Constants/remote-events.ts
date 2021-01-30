@@ -1,10 +1,12 @@
 export enum RemoteEvents {
-  Registration = 'Remote:Auth:Registration',
-  Login = 'Remote:Auth:Login',
+  Login = 'Remote:Authentication:Login',
+  Registration = 'Remote:Authentication:Registration',
 
   CharacterSelect = 'Remote:Character:Select',
+  CharacterDelete = "Remote:Character:Delete",
   CharacterSpawnSelect = 'Remote:Character:SpawnSelect',
   CharacterEstablishContact = 'Remote:Character:EstablishContact',
+  
   CharacterCreatorCreate = 'Remote:CharacterCreator:Create',
   CharacterCreatorChangeGender = 'Remote:CharacterCreator:ChangeGender',
 
@@ -19,4 +21,4 @@ export enum RemoteEvents {
   HouseSetOnSellState = 'Remote:House:SetOnSaleState',
   HouseSetLockState = 'Remote:House:SetLockState',
   HouseEnterExit = 'Remote:House:EnterExit'
-};
+}

@@ -17,6 +17,4 @@ class Chat {
 mp.gui.chat.show(false);
 
 let chat: Chat | undefined;
-mp.events.add(RemoteResponse.CharacterSelected, () => chat = chat ? chat : new Chat());
-
-chat = new Chat();
+mp.events.add(RemoteResponse.CharacterSpawnSelected, () => chat = chat ? chat : new Chat());
