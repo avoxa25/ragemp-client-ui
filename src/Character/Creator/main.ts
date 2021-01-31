@@ -11,9 +11,9 @@ class CharacterCreator {
   private character: CharacterCreatorModel;
 
   constructor() {
-    this.browser = mp.browsers.new('package://CharacterCreator/creator.html');
+    this.browser = mp.browsers.new('package://Character/Creator/creator.html');
 
-    this.camera = mp.cameras.new('default', CameraConstants.CreatorCameraPosition, CameraConstants.CreatorCameraRotation, 40);
+    this.camera = mp.cameras.new('default', CameraConstants.CreatorCameraPosition, CameraConstants.CreatorCameraRotation, CameraConstants.StandardCameraFOV);
     this.camera.setActive(true);
 
     this.character = new CharacterCreatorModel();
@@ -26,11 +26,12 @@ class CharacterCreator {
 
     mp.gui.chat.activate(false);
     mp.gui.chat.show(false);
-        
+
     mp.game.cam.renderScriptCams(true, false, 0, true, false);
 
     mp.events.add(RemoteResponse.CharacterCreatorCreated, () => this.Close());
     mp.events.add(RemoteResponse.CharacterCreatorGenderChangeCompleted, () => this.ChangeGenderComplete());
+    mp.events.add(RemoteResponse.CharacterCreatorFailed, (m: string) => this.ErrorMessage(m));
 
     mp.events.add(LocalEvents.CharacterCreatorTabHair, (is: boolean, c: string) => {
       this.UpdateCharacterJson(c);
@@ -80,7 +81,7 @@ class CharacterCreator {
     mp.gui.chat.activate(true);
     mp.gui.chat.show(true);
 
-    mp.game.cam.renderScriptCams(false, false, 0, true, false);    
+    mp.game.cam.renderScriptCams(false, false, 0, true, false);
 
     mp.game.ui.displayRadar(true);
   }
@@ -95,8 +96,8 @@ class CharacterCreator {
       mp.players.local.setComponentVariation(11, 15, 0, 2);
     }
     else {
-      mp.players.local.setComponentVariation(3, this.character.torso, 0, 2);
       mp.players.local.setComponentVariation(11, this.character.top, 0, 2);
+      mp.players.local.setComponentVariation(3, this.character.torso, 0, 2);
     }
   }
 
@@ -114,6 +115,10 @@ class CharacterCreator {
   private Create(): void {
     const characterJson = JSON.stringify(this.character);
     mp.events.callRemote(RemoteEvents.CharacterCreatorCreate, characterJson);
+  }
+
+  private ErrorMessage(message: string): void {
+    this.browser.execute(`window.characterCreatorUi.ShowErrorMessage('${message}');`);
   }
 
   private UpdateMain(): void {
@@ -150,8 +155,13 @@ class CharacterCreator {
         this.character.torso = 7;
         mp.players.local.setComponentVariation(3, this.character.torso, 0, 2);
         break;
+      default:
+        this.character.torso = 15;
+        mp.players.local.setComponentVariation(3, this.character.torso, 0, 2);
+        break;
     }
 
+    mp.players.local.setComponentVariation(3, this.character.torso, 0, 2);
     mp.players.local.setComponentVariation(4, this.character.legs, 0, 2);
     mp.players.local.setComponentVariation(8, 15, 0, 2);
     mp.players.local.setComponentVariation(6, this.character.shoes, 0, 2);
@@ -182,8 +192,8 @@ class CharacterCreator {
     mp.players.local.setComponentVariation(2, this.character.hair, 0, 2);
     mp.players.local.setHairColor(this.character.hairColor, this.character.hairHighLight);
 
-    this.character.beard = this.character.beard === -1 ? 255 : this.character.beard;
-    mp.players.local.setHeadOverlay(1, this.character.beard, 1, this.character.beardColor, this.character.beardSecondaryColor);
+    this.character.facialHair = this.character.facialHair === -1 ? 255 : this.character.facialHair;
+    mp.players.local.setHeadOverlay(1, this.character.facialHair, 1, this.character.facialHairColor, this.character.facialHairSecondaryColor);
 
     this.character.eyeBrows = this.character.eyeBrows === -1 ? 255 : this.character.eyeBrows;
     mp.players.local.setHeadOverlay(2, this.character.eyeBrows, 1, this.character.eyeBrowsColor, this.character.eyeBrowsSecondaryColor);

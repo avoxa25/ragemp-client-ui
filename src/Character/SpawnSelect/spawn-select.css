@@ -1,0 +1,131 @@
+* {
+  box-sizing: border-box;
+
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+
+  user-select: none;
+}
+
+UL,
+LI,
+P {
+  margin: 0;
+  padding: 0;
+}
+
+UL {
+  list-style-type: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+
+.container>ul {
+  display: flex;
+}
+
+.spawn-item {
+  width: 278px;
+  height: 336px;
+
+  position: relative;
+  z-index: 2;
+
+  padding: 20px;
+
+  background-color: rgba(0, 0, 0, .33);
+
+  background-position: 50% 35%;
+  background-repeat: no-repeat;
+
+  border: 0;
+
+  clip-path: url(#mask);
+  cursor: pointer;
+  outline: none;
+
+  transition: transform .25s ease-in-out;
+}
+
+.spawn-item>p {
+  width: 95%;
+
+  position: absolute;
+  top: 40%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  opacity: 0;
+
+  transition: opacity .25s ease-in-out;
+}
+
+.spawn-item>img {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  opacity: 1;
+
+  transition: opacity .25s ease-in-out;
+}
+
+.spawn-item:hover {
+  transform: translateY(-50px);
+}
+
+.spawn-item:hover>p {
+  opacity: 1;
+}
+
+.spawn-item:hover>img {
+  opacity: 0;
+}
+
+.container>ul>li {
+  position: relative;
+
+  margin-right: 25px;
+}
+
+.container>ul:last-of-type {
+  margin-right: 0;
+}
+
+.container>ul>li::after {
+  content: "";
+  width: 139px;
+  height: 44px;
+
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  z-index: 1;
+
+  background-image: url("assets/pedestal.svg");
+
+  transform: translateX(-50%);
+}
