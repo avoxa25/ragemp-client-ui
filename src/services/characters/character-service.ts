@@ -22,4 +22,5 @@ export abstract class CharacterService {
   }
 }
 
+mp.events.add(RemoteResponse.CharacterCreatorCreated, () => CharacterService.Start());
 mp.events.add(RemoteResponse.CharacterSelected, () => CharacterService.Start());

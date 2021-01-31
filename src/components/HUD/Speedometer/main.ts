@@ -138,4 +138,5 @@ class Speedometer {
 };
 
 let speedometer: Speedometer;
+mp.events.add(RemoteResponse.CharacterCreatorCreated, () => speedometer = speedometer ? speedometer : new Speedometer());
 mp.events.add(RemoteResponse.CharacterSelected, () => speedometer = speedometer ? speedometer : new Speedometer());
