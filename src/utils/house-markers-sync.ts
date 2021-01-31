@@ -1,9 +1,9 @@
-import { MarkerConstants } from '../constants/marker.constants';
-import { RemoteResponse } from '../constants/events/remote-response';
+import { MarkerConstants } from '../constants/marker';
 import { Character } from '../models/characters/character';
 import { CharacterService } from '../services/characters/character-service';
 import { HouseService } from '../services/houses/house-service';
-import { House } from 'src/models/houses/house';
+import { House } from '../models/houses/house';
+import { RemoteResponse } from '../constants/events/remote-response';
 
 class HouseMarkersSync {
   private readonly entranceMarkers: { [id: number]: { marker: MarkerMp, ownerId: number | null, onSale: boolean, locked: boolean } };
