@@ -1,13 +1,13 @@
-class GasStationUi {
-  private readonly cashFormat = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 });
+class GasPumpUi {
+  private readonly cashFormat: Intl.NumberFormat;
 
-  private readonly oilPriceTag = document.querySelector('#oilPrice') as HTMLElement;
-  private readonly powerPriceTag = document.querySelector('#powerPrice') as HTMLElement;
-  private readonly canisterPriceTag = document.querySelector('#canisterPrice') as HTMLElement;
-  private readonly repairKitPriceTag = document.querySelector('#repairKitPrice') as HTMLElement;
-  private readonly currentFuelValueTag = document.querySelector('#currentFuelValue') as HTMLElement;
-  private readonly maxFuelValueTag = document.querySelector('#maxFuelValue') as HTMLElement;
-  private readonly inputProductAmount = document.querySelector('#inputProductAmount') as HTMLInputElement;
+  private readonly oilPriceTag: HTMLElement;
+  private readonly powerPriceTag: HTMLElement;
+  private readonly canisterPriceTag: HTMLElement;
+  private readonly repairKitPriceTag: HTMLElement;
+  private readonly currentFuelValueTag: HTMLElement;
+  private readonly maxFuelValueTag: HTMLElement;
+  private readonly inputProductAmount: HTMLInputElement;
 
   private oilPrice: number;
   private powerPrice: number;
@@ -18,6 +18,16 @@ class GasStationUi {
   private differenceFuelValue: number;
 
   constructor() {
+    this.cashFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 });
+
+    this.oilPriceTag = document.querySelector('#oilPrice') as HTMLElement;
+    this.powerPriceTag = document.querySelector('#powerPrice') as HTMLElement;
+    this.canisterPriceTag = document.querySelector('#canisterPrice') as HTMLElement;
+    this.repairKitPriceTag = document.querySelector('#repairKitPrice') as HTMLElement;
+    this.currentFuelValueTag = document.querySelector('#currentFuelValue') as HTMLElement;
+    this.maxFuelValueTag = document.querySelector('#maxFuelValue') as HTMLElement;
+    this.inputProductAmount = document.querySelector('#inputProductAmount') as HTMLInputElement;
+
     this.oilPrice = 0;
     this.powerPrice = 0;
     this.canisterPrice = 0;
@@ -64,15 +74,16 @@ class GasStationUi {
   }
 
   private Pay(button: HTMLButtonElement): void {
-    switch (button.getAttribute('data-method')) {
+    const paymentMethod = button.getAttribute('data-method');
+    switch (paymentMethod) {
       case 'cash':
-        //TODO: Payment cash
+        // TODO: Payment cash
         break;
       case 'bank':
-        //TODO: Payment bank
+        // TODO: Payment bank
         break;
       default:
-        throw 'Invalid payment method'
+        throw 'Invalid payment method';
     }
   }
 
@@ -104,8 +115,9 @@ class GasStationUi {
       this.inputProductAmount.value = this.differenceFuelValue.toString();
     }
 
-    let productPrice;
-    switch (activeProduct.getAttribute('data-product')) {
+    let productPrice: number;
+    const productType = activeProduct.getAttribute('data-product');
+    switch (productType) {
       case 'oil':
         productPrice = this.oilPrice;
         break;
@@ -125,7 +137,7 @@ class GasStationUi {
     let totalPrice = productAmount * productPrice;
     totalCost.innerText = this.cashFormat.format(totalPrice);
   }
-
 };
 
-(window as any).gasStationUi = new GasStationUi;
+const gasPumpUi = new GasPumpUi();
+(window as any).gasPumpUi = gasPumpUi;
