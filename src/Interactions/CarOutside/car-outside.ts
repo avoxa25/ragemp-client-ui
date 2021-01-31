@@ -1,7 +1,26 @@
-class InteractionCarInsideUi {
+import { LocalEvents } from "../../Constants/local-events";
+
+class InteractionCarOutsideUi {
   constructor() {
     this.MouseOverHandler();
     this.TransitionBetweenMenus();
+
+    const actionCarLock = document.querySelector('#actionCarLock') as HTMLElement;
+    actionCarLock.addEventListener('click', () => this.CarLock());
+
+    const frontLeftDoor = document.querySelector('#actionCarOpenFirstDoor') as HTMLElement;
+    const frontRightDoor = document.querySelector('#actionCarOpenSecondDoor') as HTMLElement;
+    const backLeftDoor = document.querySelector('#actionCarOpenThirdDoor') as HTMLElement;
+    const backRightDoor = document.querySelector('#actionCarOpenFourthDoor') as HTMLElement;
+    const actionCarThunk = document.querySelector('#actionCarThunk') as HTMLElement;
+    const actionCarHood = document.querySelector('#actionCarHood') as HTMLElement;
+
+    frontLeftDoor.addEventListener('click', () => this.DoorToggle(0));
+    frontRightDoor.addEventListener('click', () => this.DoorToggle(1));
+    backLeftDoor.addEventListener('click', () => this.DoorToggle(2));
+    backRightDoor.addEventListener('click', () => this.DoorToggle(3));
+    actionCarHood.addEventListener('click', () => this.DoorToggle(4));
+    actionCarThunk.addEventListener('click', () => this.DoorToggle(5));
   }
 
   private MouseOverHandler(): void {
@@ -59,7 +78,15 @@ class InteractionCarInsideUi {
     const InCarSection = document.querySelector('#menuCarInside') as HTMLElement;
     InCarSection.classList.remove('active');
   }
+
+  private CarLock(): void {
+    mp.events.call(LocalEvents.InteractionCarOutsideToggleLock);
+  }
+
+  private DoorToggle(door: number): void {
+    mp.events.call(LocalEvents.InteractionCarOutsideToggleDoor, door);
+  }
 };
 
-const interactionCarInsideUi = new InteractionCarInsideUi();
-(window as any).interactionCarInsideUi = interactionCarInsideUi;
+const interactionCarOutsideUi = new InteractionCarOutsideUi();
+(window as any).interactionCarOutsideUi = interactionCarOutsideUi;

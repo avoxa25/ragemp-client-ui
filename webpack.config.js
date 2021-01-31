@@ -5,6 +5,7 @@ const htmlComponents = [
   'Character/Creator',
   'Chat',
   'Interactions/CarInside',
+  'Interactions/CarOutside',
   'HUD/Location',
   'Speedometer'
 ];

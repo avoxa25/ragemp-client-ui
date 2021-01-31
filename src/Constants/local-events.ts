@@ -12,5 +12,10 @@ export enum LocalEvents {
   CharacterCreatorUpdateMain = 'Local:CharacterCreator:UpdateMain',
   CharacterCreatorUpdateClothes = 'Local:CharacterCreator:UpdateClothes',
   CharacterCreatorUpdateFace = 'Local:CharacterCreator:UpdateFace',
-  CharacterCreatorUpdateHair = 'Local:CharacterCreator:UpdateHair'
+  CharacterCreatorUpdateHair = 'Local:CharacterCreator:UpdateHair',
+
+  InteractionCarOutsideToggleLock = 'Local:Interaction:CarOutside:ToggleLock',
+  InteractionCarOutsideToggleThunk = 'Local:Interaction:CarOutside:ToggleThunk',
+  InteractionCarOutsideToggleHood = 'Local:Interaction:CarOutside:ToggleHood',
+  InteractionCarOutsideToggleDoor = 'Local:Interaction:CarOutside:ToggleDoor',
 }
