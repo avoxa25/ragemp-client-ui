@@ -1,4 +1,4 @@
-import { LocalEvents } from 'src/Constants/local-events';
+import { LocalEvents } from '../../Constants/local-events';
 import { KeyboardKeys } from '../../Constants/keyboard-keys';
 import { RemoteResponse } from '../../Constants/remote-response';
 

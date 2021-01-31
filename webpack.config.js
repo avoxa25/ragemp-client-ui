@@ -6,6 +6,7 @@ const htmlComponents = [
   'Chat',
   'Interactions/CarInside',
   'Interactions/CarOutside',
+  'Interactions/NearPlayer',
   'HUD/Location',
   'Speedometer'
 ];
