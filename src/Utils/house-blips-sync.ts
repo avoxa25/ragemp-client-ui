@@ -1,5 +1,5 @@
-import { BlipConstants } from '../Constants/blip.constants';
-import { RemoteResponse } from '../Constants/remote-response';
+import { BlipConstants } from '../constants/blip.constants';
+import { RemoteResponse } from '../models/enums/events/remote-response';
 
 class HouseBlipsSync {
   private readonly characterId: number;
@@ -75,8 +75,7 @@ class HouseBlipsSync {
     return mp.blips
       .toArray()
       .filter(b => b.dimension === 4294967295)
-      .filter(b => b.hasVariable('Exists') && b.getVariable('Exists') === false)
-      .filter(b => b.hasVariable('Type') && b.getVariable('Type') === 'House');
+      .filter(b => b.hasVariable('DummyEntity') && b.getVariable('DummyEntity') === 'House');
   }
 }
 

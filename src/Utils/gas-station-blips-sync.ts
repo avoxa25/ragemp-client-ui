@@ -1,5 +1,5 @@
-import { BlipConstants } from '../Constants/blip.constants';
-import { RemoteResponse } from '../Constants/remote-response';
+import { BlipConstants } from '../constants/blip.constants';
+import { RemoteResponse } from '../models/enums/events/remote-response';
 
 class GasStationBlipsSync {
   private readonly characterId: number;
@@ -74,8 +74,7 @@ class GasStationBlipsSync {
   private GetServerBlips(): BlipMp[] {
     return mp.blips
       .toArray()
-      .filter(b => b.hasVariable('Exists') && b.getVariable('Exists') === false)
-      .filter(b => b.hasVariable('Type') && b.getVariable('Type') === 'GasStation');
+      .filter(b => b.hasVariable('DummyEntity') && b.getVariable('DummyEntity') === 'GasStation');
   }
 }
 

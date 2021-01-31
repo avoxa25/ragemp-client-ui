@@ -1,5 +1,5 @@
-import { LocalEvents } from '../Constants/local-events';
-import { RemoteResponse } from '../Constants/remote-response';
+import { LocalEvent } from '../models/enums/events/local-event';
+import { RemoteResponse } from '../models/enums/events/remote-response';
 
 class Discord {
   private readonly title: string;
@@ -9,7 +9,7 @@ class Discord {
 
     mp.events.add(RemoteResponse.LoginAllowed, () => mp.discord.update(this.title, 'Авторизовывается'));
     mp.events.add(RemoteResponse.LoginSuccess, () => mp.discord.update(this.title, 'Выбирает персонажа'));
-    mp.events.add(LocalEvents.CharacterCreatorOpen, () => mp.discord.update(this.title, 'Создаёт персонажа'));
+    mp.events.add(LocalEvent.CharacterCreatorOpen, () => mp.discord.update(this.title, 'Создаёт персонажа'));
     mp.events.add(RemoteResponse.CharacterSelected, () => mp.discord.update(this.title, 'Выбирает точку появления'));
     mp.events.add(RemoteResponse.CharacterSpawnSelected, () => mp.discord.update(this.title, 'Гуляет пешком'));
 
