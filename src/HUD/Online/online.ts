@@ -1,5 +1,5 @@
 class OnlineUi {
-  private currentOnlineElement: HTMLElement;
+  private readonly onlineElement: HTMLElement;
 
   public constructor() {
     lottie.loadAnimation({
@@ -10,11 +10,11 @@ class OnlineUi {
       path: 'assets/animlogo.json'
     });
 
-    this.currentOnlineElement = document.querySelector('#currentOnline') as HTMLElement;
+    this.onlineElement = document.querySelector('#online') as HTMLElement;
   }
 
-  private SetCurrentOnline(currentOnline: string) {
-    this.currentOnlineElement.innerText = currentOnline;
+  private SetOnline(online: string) {
+    this.onlineElement.innerText = online;
   }
 }
 

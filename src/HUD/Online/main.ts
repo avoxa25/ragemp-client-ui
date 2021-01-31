@@ -1,16 +1,18 @@
 import { RemoteResponse } from '../../Constants/remote-response';
 
 class Online {
-  private browser: BrowserMp;
+  private readonly browser: BrowserMp;
 
   public constructor() {
     this.browser = mp.browsers.new('package://HUD/Online/online.html');
 
-    setInterval(() => this.SetCurrentOnline(), 100);
+    setInterval(() => this.UpdateOnline(), 1000);
   }
 
-  private SetCurrentOnline(){
-    this.browser.execute(`window.onlineUi.SetCurrentOnline('${mp.players.length}');`); 
+  private UpdateOnline(): void {
+    // TODO: Get max online from server
+    const online = mp.players.length;
+    this.browser.execute(`window.onlineUi.SetOnline('${online}');`);
   }
 };
 
