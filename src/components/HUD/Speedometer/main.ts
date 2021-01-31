@@ -114,9 +114,6 @@ class Speedometer {
   private UpdateSpeedometer(): void {
     if (!this.vehicle) return;
 
-    const leftTurn = this.leftTurn;
-    const rightTurn = this.rightTurn;
-
     const speed = this.vehicle.getSpeed();
     const trip = speed / 1000;
 
@@ -133,7 +130,7 @@ class Speedometer {
     }
 
 
-    this.browser.execute(`window.speedometerUi.Update(${speed}, ${leftTurn}, ${lowBeam}, ${highBeam}, ${this.locked}, ${rightTurn}, ${this.fuel}, ${this.fuelTank});`);
+    this.browser.execute(`window.speedometerUi.Update(${speed}, ${this.leftTurn}, ${lowBeam}, ${highBeam}, ${this.locked}, ${this.rightTurn}, ${this.fuel}, ${this.fuelTank});`);
   }
 };
 

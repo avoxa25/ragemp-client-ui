@@ -29,20 +29,21 @@ class SpeedometerUi {
   }
 
   private UpdateLights(lowBeam: boolean, highBeam: boolean, leftTurn: boolean, rightTurn: boolean): void {
-    const lowBeamElement = document.querySelector('#lights') as HTMLElement;
-    if (lowBeam) lowBeamElement.classList.remove('nonActive');
-    else lowBeamElement.classList.add('nonActive');
+    const lowBeamElement = document.querySelector('#lowBeam') as HTMLElement;
+    if (lowBeam) lowBeamElement.setAttribute('src', './assets/lights-active.svg');
+    else lowBeamElement.setAttribute('src', './assets/lights.svg');
 
-    // TODO: Implement highBeam
-    highBeam;
+    const highBeamElement = document.querySelector('#highBeam') as HTMLElement;
+    if (highBeam) highBeamElement.setAttribute('src', './assets/high-beam-active.svg');
+    else highBeamElement.setAttribute('src', './assets/high-beam.svg');
 
     const leftTurnElement = document.querySelector('#arrowLeft') as HTMLElement;
-    if (leftTurn) leftTurnElement.classList.remove('nonActive');
-    else leftTurnElement.classList.add('nonActive');
+    if (leftTurn) leftTurnElement.setAttribute('src', './assets/arrow-left-active.svg');
+    else leftTurnElement.setAttribute('src', './assets/arrow-left.svg');
 
     const rightTurnElement = document.querySelector('#arrowRight') as HTMLElement;
-    if (rightTurn) rightTurnElement.classList.remove('nonActive');
-    else rightTurnElement.classList.add('nonActive');
+    if (rightTurn) rightTurnElement.setAttribute('src', './assets/arrow-right-active.svg');
+    else rightTurnElement.setAttribute('src', './assets/arrow-right.svg');
 
   }
 
