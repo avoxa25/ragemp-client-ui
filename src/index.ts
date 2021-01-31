@@ -1,21 +1,20 @@
-import './Authentication/main';
+import './components/Authentication/main';
 
-import './Character/Creator/main';
-import './Character/Select/main';
-import './Character/SpawnSelect/main';
+import './components/Character/Creator/main';
+import './components/Character/Select/main';
+import './components/Character/SpawnSelect/main';
 
-import './Chat/main';
+import './components/Chat/main';
 
-import './HUD/AlphaTest/main';
-import './HUD/CashAmmo/main'
-import './HUD/DateTimeMicrophone/main'
-import './HUD/Location/main';
-import './HUD/Notifications/main';
-import './HUD/Online/main';
-import './HUD/main';
+import './components/HUD/AlphaTest/main';
+import './components/HUD/CashAmmo/main'
+import './components/HUD/DateTimeMicrophone/main'
+import './components/HUD/Location/main';
+import './components/HUD/Notifications/main';
+import './components/HUD/Online/main';
+import './components/HUD/main';
+import './components/HUD/Speedometer/main';
 
-import './Speedometer/main';
-
-import './Utils/discord';
-import './Utils/gas-station-blips-sync';
-import './Utils/house-blips-sync';
+import './utils/discord';
+import './utils/gas-station-blips-sync';
+import './utils/house-blips-sync';

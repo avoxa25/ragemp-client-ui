@@ -9,21 +9,21 @@ const htmlComponents = [
   'Character/SpawnSelect',
 
   'Chat',
-  
+
   'HUD/AlphaTest',
   'HUD/CashAmmo',
   'HUD/DateTimeMicrophone',
   'HUD/Location',
   'HUD/Notifications',
   'HUD/Online',
-
-  'Speedometer'
+  'HUD/Speedometer'
 ];
 
 const entryPoints = {};
 entryPoints['index'] = path.resolve(__dirname, 'src', 'index.ts');
 
 htmlComponents
+  .map((c) => `components/${c}`)
   .map((c) => ({ folder: c, file: c.replace(/^[\w\d\/]*\//g, '') }))
   .map((ep) => ({ folder: ep.folder, file: ep.file.replace(/([A-Z]{1})/g, '-$1').toLocaleLowerCase().slice(1) }))
   .map((ep) => ({ module: `${ep.folder}/${ep.file}`, filename: path.resolve(__dirname, 'src', ep.folder, `${ep.file}.ts`) }))
