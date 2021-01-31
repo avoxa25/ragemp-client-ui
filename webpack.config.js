@@ -9,8 +9,9 @@ const htmlComponents = [
   'Character/SpawnSelect',
 
   'Chat',
-
+  
   'HUD/AlphaTest',
+  'HUD/CashAmmo',
   'HUD/DateTimeMicrophone',
   'HUD/Location',
   'HUD/Notifications',
