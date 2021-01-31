@@ -10,8 +10,8 @@ class DateTimeMicrophone {
     this.browser = mp.browsers.new('package://HUD/DateTimeMicrophone/date-time-microphone.html');
     this.worldTimeDummyEntity = mp.dummies.toArray().find(d => d.id === DummyEntitiesConstants.WorldTimeId) as DummyEntityMp;
 
-    mp.keys.bind(KeyboardKeys.KeyN, true, this.EnableMicrophone);
-    mp.keys.bind(KeyboardKeys.KeyN, false, this.DisableMicrophone);
+    mp.keys.bind(KeyboardKeys.KeyN, true, () => this.EnableMicrophone());
+    mp.keys.bind(KeyboardKeys.KeyN, false, () => this.DisableMicrophone());
 
     const multiplier = this.worldTimeDummyEntity.getVariable('Multiplier') as number;
     const updateIntervalInMillis = (1 / multiplier) * 60 * 1000;
