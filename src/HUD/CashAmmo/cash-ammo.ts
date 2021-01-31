@@ -1,22 +1,38 @@
-class CashAndAmmoUi {
+class CashAmmoUi {
+  private readonly cashElement: HTMLElement;
+  private readonly cashFormat: Intl.NumberFormat;
 
-  public HideAmmo(): void {
-    const ammoElement = document.querySelector('#ammo') as HTMLElement;
-    ammoElement.style.display = 'none';
-  }
+  private readonly ammoElement: HTMLElement;
+  private readonly ammoClipElement: HTMLElement;
+  private readonly ammoTotalElement: HTMLElement;
 
-  public ShowAmmo(): void {
-    const ammoElement = document.querySelector('#ammo') as HTMLElement;
-    ammoElement.style.display = 'flex';
+  public constructor() {
+    this.cashElement = document.querySelector('#cash') as HTMLElement;
+    this.cashFormat = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 });
+
+    this.ammoElement = document.querySelector('#ammo') as HTMLElement;
+    this.ammoClipElement = document.querySelector('#ammoClip') as HTMLElement;
+    this.ammoTotalElement = document.querySelector('#ammoTotal') as HTMLElement;
   }
 
   public UpdateCash(cash: number): void {
-    const cashFormat = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(cash);
+    const formattedCash = this.cashFormat.format(cash);
+    this.cashElement.innerText = formattedCash;
+  }
 
-    const cashElement = document.querySelector('#cash') as HTMLElement;
-    cashElement.innerText = cashFormat;
+  public ShowAmmo(): void {
+    this.ammoElement.hidden = false;
+  }
+
+  public HideAmmo(): void {
+    this.ammoElement.hidden = true;
+  }
+
+  public SetAmmo(clip: number, total: number): void {
+    this.ammoClipElement.innerText = clip.toString();
+    this.ammoTotalElement.innerText = total.toString();
   }
 }
 
-const cashAndAmmoUi = new CashAndAmmoUi();
-(window as any).cashAndAmmoUi = cashAndAmmoUi;
+const cashAmmoUi = new CashAmmoUi();
+(window as any).CashAmmoUi = cashAmmoUi;

@@ -7,13 +7,13 @@
   user-select: none;
 }
 
-body{
-  background-color: black;
-}
-
 P {
   margin: 0;
   padding: 0;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 .cash {
@@ -47,8 +47,8 @@ P {
   position: absolute;
   top: 190px;
   right: 35px;
-
-  display: none;
+  
+  display: flex;
   align-items: center;
 
   color: #bbbbbb;
