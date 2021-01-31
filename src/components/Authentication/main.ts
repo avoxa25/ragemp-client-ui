@@ -1,7 +1,7 @@
 import { RemoteEvent } from '../../models/enums/events/remote-event.enum';
 import { LocalEvent } from '../../models/enums/events/local-event.enum';
 import { RemoteResponse } from '../../models/enums/events/remote-response.enum';
-import { CameraConstants } from '../../constants/camera.constants';
+import { CameraConstants } from '../../constants/camera';
 import { AuthenticationErrorType } from '../../models/enums/authentication-error-type.enum';
 
 class Authentication {
@@ -50,7 +50,7 @@ class Authentication {
   }
 
   private Registration(username: string, email: string, password: string): void {
-    mp.events.callRemote(RemoteEvent.Registration, username, email, password)
+    mp.events.callRemote(RemoteEvent.Registration, username, email, password);
   }
 }
 

@@ -1,4 +1,4 @@
-import { CameraConstants } from '../../../constants/camera.constants';
+import { CameraConstants } from '../../../constants/camera';
 import { LocalEvent } from '../../../models/enums/events/local-event.enum';
 import { RemoteEvent } from '../../../models/enums/events/remote-event.enum';
 import { RemoteResponse } from '../../../models/enums/events/remote-response.enum';

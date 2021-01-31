@@ -1,5 +1,5 @@
 import { RemoteResponse } from '../models/enums/events/remote-response.enum';
-import { DummyEntitiesConstants } from '../constants/dummy-entities.constants';
+import { DummyEntityConstants } from '../constants/dummy-entity';
 
 export abstract class DateTimeService {
   private static worldTimeDummyEntity: DummyEntityMp;
@@ -11,7 +11,7 @@ export abstract class DateTimeService {
   private static serverDateTime: Date;
 
   public static Start(): void {
-    DateTimeService.worldTimeDummyEntity = mp.dummies.toArray().find(d => d.id === DummyEntitiesConstants.WorldTimeId) as DummyEntityMp;
+    DateTimeService.worldTimeDummyEntity = mp.dummies.toArray().find(d => d.id === DummyEntityConstants.WorldTimeId) as DummyEntityMp;
 
     const multiplier = DateTimeService.worldTimeDummyEntity.getVariable('Multiplier') as number;
     DateTimeService.multiplier = multiplier;
