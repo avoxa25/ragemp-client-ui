@@ -19,7 +19,7 @@ class Speedometer {
   private blinkIntervalId: number | undefined;
 
   constructor() {
-    this.browser = mp.browsers.new('package://components/Speedometer/speedometer.html');
+    this.browser = mp.browsers.new('package://components/HUD/Speedometer/speedometer.html');
 
     this.isBlinking = false;
     this.leftTurn = false;
@@ -138,4 +138,5 @@ class Speedometer {
 };
 
 let speedometer: Speedometer;
+mp.events.add(RemoteResponse.CharacterCreatorCreated, () => speedometer = speedometer ? speedometer : new Speedometer());
 mp.events.add(RemoteResponse.CharacterSelected, () => speedometer = speedometer ? speedometer : new Speedometer());
