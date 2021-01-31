@@ -19,7 +19,7 @@ class Speedometer {
   private blinkIntervalId: number | undefined;
 
   constructor() {
-    this.browser = mp.browsers.new('package://Speedometer/speedometer.html');
+    this.browser = mp.browsers.new('package://components/Speedometer/speedometer.html');
 
     this.isBlinking = false;
     this.leftTurn = false;
