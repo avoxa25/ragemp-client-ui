@@ -4,7 +4,9 @@
   "description": "RageMP SweetLifeRP Server UI",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --watch"
+    "start": "webpack --watch",
+    "build": "webpack",
+    "build:production": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
@@ -17,7 +19,7 @@
   },
   "homepage": "https://github.com/SweetLifeRP/server-ui",
   "devDependencies": {
-    "@types/ragemp-c": "https://github.com/CocaColaBear/types-ragemp-c/tarball/v1.0",
+    "@types/ragemp-c": "github:CocaColaBear/types-ragemp-c#v1.0",
     "browser-sync": "^2.26.13",
     "browser-sync-webpack-plugin": "^2.3.0",
     "ts-loader": "^8.0.14",
