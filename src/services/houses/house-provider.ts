@@ -27,7 +27,7 @@ export abstract class HouseProvider {
     mp.blips
       .toArray()
       .filter(b => b.hasVariable('DummyEntity') && b.getVariable('DummyEntity') === 'House')
-      .filter(b => b.getVariable('Id') === house.id)
+      .filter(b => b.hasVariable('Id') && b.getVariable('Id') === house.id)
       .forEach(b => {
         const ownerId = b.getVariable('OwnerId') as number | null;
         house.ownerId = ownerId;
@@ -45,16 +45,21 @@ export abstract class HouseProvider {
       .toArray()
       .filter(m => m.dimension !== 0)
       .filter(m => (m as any).hasVariable('DummyEntity') && m.getVariable('DummyEntity') === 'House')
-      .filter(m => m.getVariable('Id') === house.id)
-      .forEach(m => house.exitPosition = m.position);
+      .filter(m => (m as any).hasVariable('Id') && m.getVariable('Id') === house.id)
+      .forEach(m => {
+        const locked = m.getVariable('Locked') as boolean;
+        house.locked = locked;
+
+        house.exitPosition = m.position;
+      });
   }
 
   public static UpdateFromColShape(house: House): void {
     mp.colshapes
       .toArray()
-      .filter(cs => cs.dimension !== 0)
+      .filter(cs => cs.dimension === 0)
       .filter(cs => (cs as any).hasVariable('DummyEntity') && cs.getVariable('DummyEntity') === 'House')
-      .filter(cs => cs.getVariable('Id') === house.id)
+      .filter(cs => (cs as any).hasVariable('Id') && cs.getVariable('Id') === house.id)
       .forEach(cs => {
         const type = cs.getVariable('Type') as HouseType;
         house.type = type;

@@ -34,7 +34,7 @@ class HouseMenu {
   }
 
   private PlayerEnterColShape(colShape: ColshapeMp): void {
-    const houseColShape = (colShape as any).hasVariable('DummyEntity') && colShape.getVariable('DummyEntity') !== 'House';
+    const houseColShape = (colShape as any).hasVariable('DummyEntity') && colShape.getVariable('DummyEntity') === 'House';
     if (!houseColShape) return;
 
     const houseId = colShape.getVariable('Id') as number;

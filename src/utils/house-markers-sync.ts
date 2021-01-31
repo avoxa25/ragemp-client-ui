@@ -44,9 +44,12 @@ class HouseMarkersSync {
   private CreateHouseMarkers(house: House): void {
     let color = this.GetColor(house.ownerId as number | null, house.onSale as boolean);
 
+    const entrancePosition = new mp.Vector3(house.entrancePosition?.x, house.entrancePosition?.y, house.entrancePosition?.z);
+    entrancePosition.z -= 1.5;
+
     const entranceMarker = mp.markers.new(
       MarkerConstants.HouseMarkerType,
-      house.entrancePosition as Vector3Mp,
+      entrancePosition,
       MarkerConstants.HouseScale,
       {
         bobUpAndDown: false,
@@ -64,9 +67,12 @@ class HouseMarkersSync {
       locked: house.locked as boolean
     };
 
+    const exitPosition = new mp.Vector3(house.entrancePosition?.x, house.entrancePosition?.y, house.entrancePosition?.z);
+    exitPosition.z -= 1.5;
+
     const exitMarker = mp.markers.new(
       MarkerConstants.HouseMarkerType,
-      house.entrancePosition as Vector3Mp,
+      exitPosition,
       MarkerConstants.HouseScale,
       {
         bobUpAndDown: false,
@@ -100,8 +106,13 @@ class HouseMarkersSync {
 
     if (!ownerChanged && !onSaleChanged && !lockedChanged) return;
 
-    this.entranceMarkers[house.id].marker.setVisible(false, true);
-    this.exitMarkers[house.id].marker.setVisible(false, true);
+    // TODO: Find a better way to destroy/hide markers
+    // marker.setVisible is not a function
+    // marker.destroy is not a function
+    // marker.setCoords is not a function
+    // marker.setCoords2 is not a function
+    // marker.getPedIndexFromIndex is not a function
+    // Cannot assign to read only property 'dimension'
 
     this.CreateHouseMarkers(house);
   }

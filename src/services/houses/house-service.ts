@@ -9,6 +9,7 @@ export abstract class HouseService {
     HouseService.houses = HouseProvider.GetAllFromBlips();
 
     setInterval(() => HouseService.Update(), 1000);
+    HouseService.Update();
   }
 
   public static GetAll(): House[] {

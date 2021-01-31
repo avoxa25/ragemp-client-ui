@@ -124,8 +124,8 @@ class HouseMenuUi {
     manageButtons.forEach((mb) => mb.addEventListener('click', () => this.ChangeTabMenu()));
     houseBuy.forEach((hb) => hb.addEventListener('click', () => this.BuyHouse()));
     houseEnter.forEach((he) => he.addEventListener('click', () => this.EnterHouse()));
-    houseLock.forEach((hl) => hl.addEventListener('click', () => this.LockHouse()));
-    houseSell.forEach((hs) => hs.addEventListener('click', () => this.SellHouse()));
+    houseLock.forEach((hl) => hl.addEventListener('click', () => this.LockHouse(!this.house?.locked)));
+    houseSell.forEach((hs) => hs.addEventListener('click', () => this.SellHouse(!this.house?.onSale, this.house?.onSalePrice)));
 
     // TODO: Create a tax for houses
     // TODO: Create a garage current capacity for houses
@@ -141,12 +141,12 @@ class HouseMenuUi {
     mp.events.call(LocalEvent.HouseEnterExit);
   }
 
-  private LockHouse(): void {
-    mp.events.call(LocalEvent.HouseSetLockState, !(this.house as House).locked);
+  private LockHouse(locked: boolean | undefined): void {
+    mp.events.call(LocalEvent.HouseSetLockState, locked);
   }
 
-  private SellHouse(): void {
-    mp.events.call(LocalEvent.HouseSetOnSellState, !(this.house as House).onSale, (this.house as House).originalPrice);
+  private SellHouse(onSale: boolean | undefined, onSalePrice: number | undefined): void {
+    mp.events.call(LocalEvent.HouseSetOnSellState, onSale, onSalePrice);
   }
 }
 
