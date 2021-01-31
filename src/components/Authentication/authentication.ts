@@ -1,6 +1,6 @@
-import { LocalEvent } from '../../models/enums/events/local-event';
-import { ErrorMessage } from '../../models/enums/error-message';
-import { AuthenticationErrorType } from '../../models/enums/authentication-error-type';
+import { LocalEvent } from '../../models/enums/events/local-event.enum';
+import { ErrorMessage } from '../../models/enums/error-message.enum';
+import { AuthenticationErrorType } from '../../models/enums/authentication-error-type.enum';
 
 class AuthenticationUi {
   public constructor() {
@@ -75,6 +75,7 @@ class AuthenticationUi {
   }
 
   private OnRegistrationFormSubmit(form: HTMLFormElement): void {
+  
     const formData = new FormData(form);
     const username = formData.get('username') as string;
     const email = formData.get('email') as string;

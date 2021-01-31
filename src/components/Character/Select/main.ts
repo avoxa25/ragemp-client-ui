@@ -1,12 +1,12 @@
-import { LocalEvent } from '../../../models/enums/events/local-event';
-import { RemoteEvent } from '../../../models/enums/events/remote-event';
-import { RemoteResponse } from '../../../models/enums/events/remote-response';
+import { LocalEvent } from '../../../models/enums/events/local-event.enum';
+import { RemoteEvent } from '../../../models/enums/events/remote-event.enum';
+import { RemoteResponse } from '../../../models/enums/events/remote-response.enum';
 
 class CharacterSelect {
   private browser: BrowserMp;
 
   public constructor(csm: string) {
-    this.browser = mp.browsers.new('package://Character/Select/select.html');
+    this.browser = mp.browsers.new('package://components/Character/Select/select.html');
     mp.players.local.freezePosition(true);
 
     mp.gui.cursor.show(true, true);

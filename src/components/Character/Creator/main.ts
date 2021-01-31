@@ -1,8 +1,8 @@
 import { CameraConstants } from '../../../constants/camera.constants';
-import { LocalEvent } from '../../../models/enums/events/local-event';
-import { RemoteEvent } from '../../../models/enums/events/remote-event';
-import { RemoteResponse } from '../../../models/enums/events/remote-response';
-import { CharacterCreatorModel } from '../../../models/view-models/character-creator-model';
+import { LocalEvent } from '../../../models/enums/events/local-event.enum';
+import { RemoteEvent } from '../../../models/enums/events/remote-event.enum';
+import { RemoteResponse } from '../../../models/enums/events/remote-response.enum';
+import { CharacterCreatorModel } from '../../../models/view-models/characters/character-creator.model';
 
 class CharacterCreator {
   private readonly camera: CameraMp;
@@ -11,7 +11,7 @@ class CharacterCreator {
   private character: CharacterCreatorModel;
 
   constructor() {
-    this.browser = mp.browsers.new('package://Character/Creator/creator.html');
+    this.browser = mp.browsers.new('package://components/Character/Creator/creator.html');
 
     this.camera = mp.cameras.new('default', CameraConstants.CreatorCameraPosition, CameraConstants.CreatorCameraRotation, CameraConstants.StandardCameraFOV);
     this.camera.setActive(true);

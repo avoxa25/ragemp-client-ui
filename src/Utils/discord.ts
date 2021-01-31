@@ -1,5 +1,5 @@
-import { LocalEvent } from '../models/enums/events/local-event';
-import { RemoteResponse } from '../models/enums/events/remote-response';
+import { LocalEvent } from '../models/enums/events/local-event.enum';
+import { RemoteResponse } from '../models/enums/events/remote-response.enum';
 
 class Discord {
   private readonly title: string;

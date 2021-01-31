@@ -1,9 +1,9 @@
-import { RemoteResponse } from '../../../models/enums/events/remote-response';
+import { RemoteResponse } from '../../../models/enums/events/remote-response.enum';
 import { DummyEntitiesConstants } from '../../../constants/dummy-entities.constants';
 
 class AlphaTest {
   constructor() {
-    const browser = mp.browsers.new('package://HUD/AlphaTest/alpha-test.html');
+    const browser = mp.browsers.new('package://components/HUD/AlphaTest/alpha-test.html');
 
     const serverVersionDummyEntity = mp.dummies.toArray().find(d => d.id === DummyEntitiesConstants.ServerId) as DummyEntityMp;
     const serverVersion = serverVersionDummyEntity.getVariable('Version');

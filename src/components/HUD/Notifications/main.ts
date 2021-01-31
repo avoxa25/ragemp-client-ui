@@ -1,16 +1,15 @@
-import { NotificationType } from '../../../models/enums/notification-type';
-import { RemoteResponse } from '../../../models/enums/events/remote-response';
+import { NotificationType } from '../../../models/enums/notification-type.enum';
+import { RemoteResponse } from '../../../models/enums/events/remote-response.enum';
 
 class Notifications {
   private readonly browser: BrowserMp;
 
   public constructor() {
-    this.browser = mp.browsers.new('package://HUD/Notifications/notifications.html');
+    this.browser = mp.browsers.new('package://components/HUD/Notifications/notifications.html');
     mp.events.add(RemoteResponse.NotificationSent, (type: NotificationType, text: string) => this.Display(type, text));
   }
 
   private Display(type: NotificationType, text: string): void {
-    mp.console.logInfo(type);
     this.browser.execute(`window.notificationsUi.Push('${type}', '${text}');`);
   }
 };

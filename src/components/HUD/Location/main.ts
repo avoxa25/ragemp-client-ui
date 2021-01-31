@@ -1,11 +1,11 @@
-import { RemoteResponse } from '../../../models/enums/events/remote-response';
+import { RemoteResponse } from '../../../models/enums/events/remote-response.enum';
 import { ZoneData } from '../../../models/static/zone-data';
 
 class HudLocation {
   private readonly browser: BrowserMp;
 
   constructor() {
-    this.browser = mp.browsers.new('package://HUD/Location/location.html');
+    this.browser = mp.browsers.new('package://components/HUD/Location/location.html');
     setInterval(() => this.Update(), 1000);
   }
 

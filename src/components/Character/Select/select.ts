@@ -1,6 +1,6 @@
-import { LocalEvent } from '../../../models/enums/events/local-event';
+import { LocalEvent } from '../../../models/enums/events/local-event.enum';
 import { SectionType } from './section-type';
-import { CharacterSelectModel } from '../../../models/view-models/character-select-model';
+import { CharacterSelectModel } from '../../../models/view-models/characters/character-select.model';
 
 class CharacterSelectUi {
   private readonly ul: HTMLElement;

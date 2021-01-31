@@ -1,8 +1,8 @@
-import { RemoteEvent } from '../../models/enums/events/remote-event';
-import { LocalEvent } from '../../models/enums/events/local-event';
-import { RemoteResponse } from '../../models/enums/events/remote-response';
+import { RemoteEvent } from '../../models/enums/events/remote-event.enum';
+import { LocalEvent } from '../../models/enums/events/local-event.enum';
+import { RemoteResponse } from '../../models/enums/events/remote-response.enum';
 import { CameraConstants } from '../../constants/camera.constants';
-import { AuthenticationErrorType } from '../../models/enums/authentication-error-type';
+import { AuthenticationErrorType } from '../../models/enums/authentication-error-type.enum';
 
 class Authentication {
   private readonly browser: BrowserMp;
@@ -11,7 +11,7 @@ class Authentication {
   public constructor() {
     this.camera = mp.cameras.new('default', CameraConstants.StandardCameraPosition, CameraConstants.StandardCameraRotation, CameraConstants.StandardCameraFOV);
 
-    this.browser = mp.browsers.new('package://Authentication/authentication.html');
+    this.browser = mp.browsers.new('package://components/Authentication/authentication.html');
 
     mp.players.local.freezePosition(true);
 

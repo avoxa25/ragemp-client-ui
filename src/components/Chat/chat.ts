@@ -1,5 +1,5 @@
-import { LocalEvent } from '../../models/enums/events/local-event';
-import { SpecificLocalEvent } from '../../constants/specific-local-event';
+import { LocalEvent } from '../../models/enums/events/local-event.enum';
+import { SpecificLocalEvent } from '../../models/enums/events/specific-local-event.enum';
 
 class ChatUi {
   private readonly messagesDiv: HTMLElement;
@@ -94,8 +94,6 @@ class ChatUi {
 
   private OnNewMessageInputKeydown(event: KeyboardEvent): void {
     // TODO: Implement message cycling
-    mp.console.logInfo(`onNewMessageInputKeydown: ${event.which}`);
-
     const isArrowUpKey = event.which === 38;
     const isArrowDownKey = event.which === 40;
 

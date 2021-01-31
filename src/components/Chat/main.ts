@@ -1,9 +1,9 @@
-import { LocalEvent } from '../../models/enums/events/local-event';
-import { RemoteResponse } from '../../models/enums/events/remote-response';
+import { LocalEvent } from '../../models/enums/events/local-event.enum';
+import { RemoteResponse } from '../../models/enums/events/remote-response.enum';
 
 class Chat {
   constructor() {
-    const chat = mp.browsers.new('package://Chat/chat.html');
+    const chat = mp.browsers.new('package://components/Chat/chat.html');
     chat.markAsChat();
 
     mp.events.add(LocalEvent.ChatCursorToggle, (fc: boolean, v: boolean) => this.ToggleCharCursor(fc, v));

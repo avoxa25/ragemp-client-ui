@@ -1,10 +1,10 @@
-import { RemoteResponse } from '../../../models/enums/events/remote-response';
+import { RemoteResponse } from '../../../models/enums/events/remote-response.enum';
 
 class Online {
   private readonly browser: BrowserMp;
 
   public constructor() {
-    this.browser = mp.browsers.new('package://HUD/Online/online.html');
+    this.browser = mp.browsers.new('package://components/HUD/Online/online.html');
 
     setInterval(() => this.UpdateOnline(), 1000);
   }

@@ -1,7 +1,7 @@
 import { CameraConstants } from '../../../constants/camera.constants';
-import { LocalEvent } from '../../../models/enums/events/local-event';
-import { RemoteEvent } from '../../../models/enums/events/remote-event';
-import { RemoteResponse } from '../../../models/enums/events/remote-response';
+import { LocalEvent } from '../../../models/enums/events/local-event.enum';
+import { RemoteEvent } from '../../../models/enums/events/remote-event.enum';
+import { RemoteResponse } from '../../../models/enums/events/remote-response.enum';
 import { SpawnLocation } from './spawn-location';
 
 class CharacterSpawnSelect {
@@ -9,7 +9,7 @@ class CharacterSpawnSelect {
   private readonly camera: CameraMp;
 
   public constructor() {
-    this.browser = mp.browsers.new('package://Character/SpawnSelect/spawn-select.html');
+    this.browser = mp.browsers.new('package://components/Character/SpawnSelect/spawn-select.html');
     mp.players.local.freezePosition(true);
     mp.game.ui.displayRadar(false);
     mp.game.ui.displayHud(false);

@@ -1,18 +1,21 @@
-import { RemoteResponse } from '../../../models/enums/events/remote-response';
+import { Character } from '../../../models/view-models/characters/character.model';
+import { CharacterService } from '../../../services/characters/character-service';
+import { RemoteResponse } from '../../../models/enums/events/remote-response.enum';
 
 class CashAmmo {
   private readonly browser: BrowserMp;
+  private readonly character: Character;
 
   constructor() {
-    this.browser = mp.browsers.new('package://HUD/CashAmmo/cash-ammo.html');
+    this.browser = mp.browsers.new('package://components/HUD/CashAmmo/cash-ammo.html');
+    this.character = CharacterService.Get();
 
-    mp.events.add(RemoteResponse.CharacterMoneyChanged, () => this.UpdateCash());
-    setInterval(() => this.UpdateAmmo(), 5000);
+    setInterval(() => this.UpdateCash(), 5000);
+    setInterval(() => this.UpdateAmmo(), 100);
   }
 
   private UpdateCash(): void {
-    const cash = mp.players.local.getVariable('Cash');
-    this.browser.execute(`window.cashAmmo.UpdateCash(${cash});`);
+    this.browser.execute(`window.cashAmmoUi.UpdateCash(${this.character.cash});`);
   }
 
   private UpdateAmmo(): void {
@@ -20,16 +23,12 @@ class CashAmmo {
     const clip = mp.players.local.getAmmoInClip(weaponHash);
     const total = (mp.players.local as any).getWeaponAmmo(weaponHash) as number;
 
-    mp.console.logInfo(`weaponHash: ${weaponHash}`);
-    mp.console.logInfo(`clip: ${clip}`);
-    mp.console.logInfo(`total: ${total}`);
-
     // TODO: Check if weapon is not melee
     if (clip === 0 && total === 0) {
-      this.browser.execute('window.cashAmmo.HideAmmo();');
+      this.browser.execute('window.cashAmmoUi.HideAmmo();');
     } else {
-      this.browser.execute('window.cashAmmo.ShowAmmo();');
-      this.browser.execute(`window.cashAmmo.SetAmmo(${clip}, ${total});`);
+      this.browser.execute('window.cashAmmoUi.ShowAmmo();');
+      this.browser.execute(`window.cashAmmoUi.SetAmmo(${clip}, ${total});`);
     }
   }
 }

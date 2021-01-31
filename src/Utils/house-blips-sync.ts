@@ -1,41 +1,52 @@
+import { Character } from '../models/view-models/characters/character.model';
+import { HouseService } from '../services/houses/house-service';
+import { CharacterService } from '../services/characters/character-service';
 import { BlipConstants } from '../constants/blip.constants';
-import { RemoteResponse } from '../models/enums/events/remote-response';
+import { RemoteResponse } from '../models/enums/events/remote-response.enum';
 
 class HouseBlipsSync {
-  private readonly characterId: number;
-  private readonly clientBlips: { [id: number]: BlipMp };
+  private readonly blips: { [id: number]: BlipMp };
+  private readonly player: Character;
 
   constructor() {
-    const rawId = mp.players.local.getVariable('Id') as string;
-    this.characterId = Number.parseInt(rawId);
+    this.blips = [];
+    this.player = CharacterService.Get();
 
-    this.clientBlips = {};
-
-    this.Initialize();
+    this.HideServerBlips();
+    this.CreateClientBlips();
+    
     setInterval(() => this.Sync(), 1000);
   }
 
-  private Initialize(): void {
-    this.GetServerBlips().forEach(b => {
-      b.setDisplay(0);
+  private HideServerBlips(): void {
+    mp.blips
+      .toArray()
+      .filter(b => b.hasVariable('DummyEntity') && b.getVariable('DummyEntity') === 'House')
+      .forEach(b => b.setDisplay(0));
+  }
 
-      const id = b.getVariable('Id') as number;
-      const ownerId = b.getVariable('OwnerId') as number | null;
-      const onSale = b.getVariable('OnSale') as boolean;
-
-      const position = b.getCoords();
+  private CreateClientBlips(): void {
+    const houses = HouseService.getAll();
+    for (let i = 0; i < houses.length; i++) {
+      const house = houses[i];
+      if (house.ownerId === undefined ||
+        house.onSale === undefined ||
+        house.entrancePosition === undefined) {
+        mp.console.logError('Invalid house was provided');
+        continue;
+      }
 
       let color = BlipConstants.HouseOccupiedColor;
-      color = onSale ? BlipConstants.HouseOnSaleColor : color;
-      color = this.characterId === ownerId ? BlipConstants.HouseOwnedColor : color;
+      color = house.onSale ? BlipConstants.HouseOnSaleColor : color;
+      color = this.player.id === house.ownerId ? BlipConstants.HouseOwnedColor : color;
 
       let name = BlipConstants.HouseOccupiedName;
-      name = onSale ? BlipConstants.HouseOnSaleName : name;
-      name = this.characterId === ownerId ? BlipConstants.HouseOwnedName : name;
+      name = house.onSale ? BlipConstants.HouseOnSaleName : name;
+      name = this.player.id === house.ownerId ? BlipConstants.HouseOwnedName : name;
 
-      const clientBlip = mp.blips.new(
+      const blip = mp.blips.new(
         BlipConstants.HouseSprite,
-        position,
+        house.entrancePosition,
         {
           alpha: BlipConstants.HouseAlpha,
           color: color,
@@ -47,35 +58,41 @@ class HouseBlipsSync {
           shortRange: BlipConstants.HouseShortRange
         });
 
-      this.clientBlips[id] = clientBlip;
-    });
+      this.blips[house.id] = blip;
+    }
   }
 
   private Sync(): void {
-    this.GetServerBlips().forEach(b => {
-      const id = b.getVariable('Id') as number;
-      const ownerId = b.getVariable('OwnerId') as number | null;
-      const onSale = b.getVariable('OnSale') as boolean;
+    const houses = HouseService.getAll();
+    for (let i = 0; i < houses.length; i++) {
+      const house = houses[i];
+      if (house.ownerId === undefined || house.onSale === undefined) {
+        mp.console.logError('Invalid house was provided');
+        continue;
+      }
 
-      let color = BlipConstants.HouseOccupiedColor;
-      color = onSale ? BlipConstants.HouseOnSaleColor : color;
-      color = this.characterId === ownerId ? BlipConstants.HouseOwnedColor : color;
+      const color = this.GetColor(house.ownerId, house.onSale);
+      this.blips[house.id].setColour(color);
 
-      let name = BlipConstants.HouseOccupiedName;
-      name = onSale ? BlipConstants.HouseOnSaleName : name;
-      name = this.characterId === ownerId ? BlipConstants.HouseOwnedName : name;
-
-      const clientBlip = this.clientBlips[id];
-      clientBlip.setColour(color);
-      (clientBlip as any).name = name;
-    });
+      const name = this.GetName(house.ownerId, house.onSale);
+      (this.blips[house.id] as any).name = name;
+    }
   }
 
-  private GetServerBlips(): BlipMp[] {
-    return mp.blips
-      .toArray()
-      .filter(b => b.dimension === 4294967295)
-      .filter(b => b.hasVariable('DummyEntity') && b.getVariable('DummyEntity') === 'House');
+  private GetColor(ownerId: number | null, onSale: boolean): number {
+    let color = BlipConstants.HouseOccupiedColor;
+    color = onSale ? BlipConstants.HouseOnSaleColor : color;
+    color = this.player.id === ownerId ? BlipConstants.HouseOwnedColor : color;
+
+    return color;
+  }
+
+  private GetName(ownerId: number | null, onSale: boolean): string {
+    let name = BlipConstants.HouseOccupiedName;
+    name = onSale ? BlipConstants.HouseOnSaleName : name;
+    name = this.player.id === ownerId ? BlipConstants.HouseOwnedName : name;
+
+    return name;
   }
 }
 

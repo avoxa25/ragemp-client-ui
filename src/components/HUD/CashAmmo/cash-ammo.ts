@@ -8,7 +8,7 @@ class CashAmmoUi {
 
   public constructor() {
     this.cashElement = document.querySelector('#cash') as HTMLElement;
-    this.cashFormat = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 });
+    this.cashFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 });
 
     this.ammoElement = document.querySelector('#ammo') as HTMLElement;
     this.ammoClipElement = document.querySelector('#ammoClip') as HTMLElement;
@@ -35,4 +35,4 @@ class CashAmmoUi {
 }
 
 const cashAmmoUi = new CashAmmoUi();
-(window as any).CashAmmoUi = cashAmmoUi;
+(window as any).cashAmmoUi = cashAmmoUi;
