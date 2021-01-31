@@ -14,6 +14,7 @@ class Chat {
   }
 };
 
+mp.gui.chat.activate(false);
 mp.gui.chat.show(false);
 
 let chat: Chat | undefined;

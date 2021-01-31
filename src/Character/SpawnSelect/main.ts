@@ -34,8 +34,6 @@ class CharacterSpawnSelect {
     this.browser.destroy();
     mp.players.local.freezePosition(false);
 
-    mp.gui.chat.activate(true);
-    mp.gui.chat.show(true);
     mp.gui.cursor.show(false, false);
 
     mp.game.cam.renderScriptCams(false, false, 0, true, false);

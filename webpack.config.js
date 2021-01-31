@@ -7,13 +7,17 @@ const htmlComponents = [
   'Character/Creator',
   'Character/Select',
   'Character/SpawnSelect',
-  
+
   'Chat',
   'Menus/Home',
   
+  'HUD/AlphaTest',
+  'HUD/CashAmmo',
   'HUD/DateTimeMicrophone',
   'HUD/Location',
-  
+  'HUD/Notifications',
+  'HUD/Online',
+
   'Speedometer'
 ];
 

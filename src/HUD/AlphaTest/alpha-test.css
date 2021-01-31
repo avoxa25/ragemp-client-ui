@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+
+  font-family: 'Open Sans', sans-serif;
+
+  user-select: none;
+}
+
+P {
+  margin: 0;
+  padding: 0;
+
+  color: rgba(224, 224, 224, 0.33);
+  font-size: 12px;
+  text-align: center;
+}
+
+.container {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+
+  transform: translateX(-50%);
+}
+
+.animation-alpha-test {
+  width: 713px;
+  height: 137px;
+}

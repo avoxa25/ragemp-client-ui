@@ -24,9 +24,6 @@ class CharacterCreator {
     mp.game.ui.displayRadar(false);
     mp.game.ui.displayHud(false);
 
-    mp.gui.chat.activate(false);
-    mp.gui.chat.show(false);
-
     mp.game.cam.renderScriptCams(true, false, 0, true, false);
 
     mp.events.add(RemoteResponse.CharacterCreatorCreated, () => this.Close());
@@ -77,9 +74,6 @@ class CharacterCreator {
 
     mp.gui.cursor.show(false, false);
     mp.players.local.freezePosition(false);
-
-    mp.gui.chat.activate(true);
-    mp.gui.chat.show(true);
 
     mp.game.cam.renderScriptCams(false, false, 0, true, false);
 
@@ -142,13 +136,10 @@ class CharacterCreator {
         mp.players.local.setComponentVariation(3, this.character.torso, 0, 2);
         break;
       case 49:
+      case 14:
       case 146:
       case 241:
         this.character.torso = 0;
-        mp.players.local.setComponentVariation(3, this.character.torso, 0, 2);
-        break;
-      case 26:
-        this.character.torso = 15;
         mp.players.local.setComponentVariation(3, this.character.torso, 0, 2);
         break;
       case 45:
@@ -161,7 +152,6 @@ class CharacterCreator {
         break;
     }
 
-    mp.players.local.setComponentVariation(3, this.character.torso, 0, 2);
     mp.players.local.setComponentVariation(4, this.character.legs, 0, 2);
     mp.players.local.setComponentVariation(8, 15, 0, 2);
     mp.players.local.setComponentVariation(6, this.character.shoes, 0, 2);
