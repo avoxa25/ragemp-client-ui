@@ -1,4 +1,4 @@
-import { RemoteResponse } from '../models/enums/events/remote-response';
+import { RemoteResponse } from '../constants/events/remote-response';
 import { DummyEntityConstants } from '../constants/dummy-entity';
 
 export abstract class DateTimeService {

@@ -1,5 +1,5 @@
-import { RemoteResponse } from '../../models/enums/events/remote-response';
-import { Character } from '../../models/view-models/characters/character';
+import { RemoteResponse } from '../../constants/events/remote-response';
+import { Character } from '../../models/characters/character';
 import { CharacterProvider } from './character-provider';
 
 export abstract class CharacterService {

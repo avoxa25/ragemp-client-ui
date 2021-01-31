@@ -21,5 +21,13 @@ export enum LocalEvent {
 
   SpeedometerShow = 'Local:Speedometer:Show',
   SpeedometerHide = 'Local:Speedometer:Hide',
-  SpeedometerUpdate = 'Local:Speedometer:Update'
+  SpeedometerUpdate = 'Local:Speedometer:Update',
+
+  HouseBuy = 'Local:House:Buy',
+  HouseEnterExit = 'Local:House:EnterExit',
+  HouseSetLockState = 'Local:House:SetLockState',
+  HouseSetOnSellState = 'Local:House:SetOnSellState',
+  
+  HouseMenuClose = 'Local:HouseMenu:Close',
+  HouseMenuCursorVisible = 'Local:HouseMenu:Visible'
 }

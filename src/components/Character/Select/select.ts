@@ -1,6 +1,6 @@
-import { LocalEvent } from '../../../models/enums/events/local-event';
+import { LocalEvent } from '../../../constants/events/local-event';
 import { SectionType } from './section-type';
-import { CharacterSelectModel } from '../../../models/view-models/characters/character-select';
+import { CharacterSelectModel } from '../../../models/characters/character-select';
 
 class CharacterSelectUi {
   private readonly ul: HTMLElement;
@@ -25,6 +25,7 @@ class CharacterSelectUi {
   private CreateSection(type: SectionType, characterModel?: CharacterSelectModel): void {
     switch (type) {
       case SectionType.Character:
+      
         if (!characterModel) return;
 
         const characterLi = document.createElement('li') as HTMLElement;

@@ -12,9 +12,12 @@ import './components/HUD/DateTimeMicrophone/main'
 import './components/HUD/Location/main';
 import './components/HUD/Notifications/main';
 import './components/HUD/Online/main';
-import './components/HUD/main';
 import './components/HUD/Speedometer/main';
+import './components/HUD/main';
+
+import './components/Menu/House/main';
 
 import './utils/discord';
 import './utils/gas-station-blips-sync';
 import './utils/house-blips-sync';
+import './utils/house-markers-sync';

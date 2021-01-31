@@ -10,6 +10,8 @@ const htmlComponents = [
 
   'Chat',
 
+  'Menu/House',
+  
   'HUD/AlphaTest',
   'HUD/CashAmmo',
   'HUD/DateTimeMicrophone',

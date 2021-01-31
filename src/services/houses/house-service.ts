@@ -1,26 +1,29 @@
-import { RemoteResponse } from '../../models/enums/events/remote-response';
-import { House } from '../../models/view-models/houses/house';
+import { RemoteResponse } from '../../constants/events/remote-response';
+import { House } from '../../models/houses/house';
 import { HouseProvider } from './house-provider';
 
 export abstract class HouseService {
   private static houses: House[];
 
   public static Start(): void {
-    HouseService.houses = HouseProvider.getAllFromBlips();
+    HouseService.houses = HouseProvider.GetAllFromBlips();
 
-    setInterval(() => HouseService.updateHousesFromBlips(), 1000);
+    setInterval(() => HouseService.Update(), 1000);
+    HouseService.Update();
   }
 
-  public static getAll(): House[] {
+  public static GetAll(): House[] {
     return HouseService.houses;
   }
 
-  public static getById(id: number): House | undefined {
+  public static GetById(id: number): House | undefined {
     return HouseService.houses.find(h => h.id === id);
   }
 
-  private static updateHousesFromBlips(): void {
-    HouseService.houses.forEach(h => HouseProvider.updateFromBlip(h));
+  private static Update(): void {
+    HouseService.houses.forEach(h => HouseProvider.UpdateFromBlip(h));
+    HouseService.houses.forEach(h => HouseProvider.UpdateFromMarkers(h));
+    HouseService.houses.forEach(h => HouseProvider.UpdateFromColShape(h));
   }
 }
 

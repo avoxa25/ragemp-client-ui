@@ -1,8 +1,8 @@
-import { RemoteEvent } from '../../models/enums/events/remote-event';
-import { LocalEvent } from '../../models/enums/events/local-event';
-import { RemoteResponse } from '../../models/enums/events/remote-response';
+import { RemoteEvent } from '../../constants/events/remote-event';
+import { LocalEvent } from '../../constants/events/local-event';
+import { RemoteResponse } from '../../constants/events/remote-response';
 import { CameraConstants } from '../../constants/camera';
-import { AuthenticationErrorType } from '../../models/enums/authentication-error-type';
+import { AuthenticationErrorType } from '../../constants/enums/authentication-error-type';
 
 class Authentication {
   private readonly browser: BrowserMp;
@@ -27,7 +27,7 @@ class Authentication {
     this.camera.setActive(true);
     mp.game.cam.renderScriptCams(true, false, 0, true, false);
 
-    mp.events.add(RemoteResponse.RegistrationSuccess, () => this.Close());
+    mp.events.add(RemoteResponse.RegistrationSuccess, () => this.browser.reload(false));
     mp.events.add(RemoteResponse.LoginSuccess, () => this.Close());
 
     mp.events.add(RemoteResponse.LoginFailed, (m: string) => this.ErrorMessage(AuthenticationErrorType.Login, m));

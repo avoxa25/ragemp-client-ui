@@ -15,5 +15,8 @@ export enum RemoteResponse {
   CharacterSpawnSelected = "RemoteResponse:Character:SpawnSelected",
   CharacterMoneyChanged = "RemoteResponse:Character:MoneyChanged",
 
+  MenusHouseClose = "RemoteResponse:MenusHouse:Close",
+  MenusHouseReload = "RemoteResponse:MenusHouse:Reload",
+
   NotificationSent = "RemoteResponse:Notification:Sent"
 }
