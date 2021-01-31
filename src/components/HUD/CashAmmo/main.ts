@@ -1,6 +1,6 @@
-import { Character } from '../../../models/view-models/characters/character.model';
+import { Character } from '../../../models/view-models/characters/character';
 import { CharacterService } from '../../../services/characters/character-service';
-import { RemoteResponse } from '../../../models/enums/events/remote-response.enum';
+import { RemoteResponse } from '../../../models/enums/events/remote-response';
 
 class CashAmmo {
   private readonly browser: BrowserMp;

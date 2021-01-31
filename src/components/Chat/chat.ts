@@ -1,5 +1,5 @@
-import { LocalEvent } from '../../models/enums/events/local-event.enum';
-import { SpecificLocalEvent } from '../../models/enums/events/specific-local-event.enum';
+import { LocalEvent } from '../../models/enums/events/local-event';
+import { SpecificLocalEvent } from '../../models/enums/events/specific-local-event';
 
 class ChatUi {
   private readonly messagesDiv: HTMLElement;

@@ -1,5 +1,5 @@
-import { NotificationType } from '../../../models/enums/notification-type.enum';
-import { RemoteResponse } from '../../../models/enums/events/remote-response.enum';
+import { NotificationType } from '../../../models/enums/notification-type';
+import { RemoteResponse } from '../../../models/enums/events/remote-response';
 
 class Notifications {
   private readonly browser: BrowserMp;

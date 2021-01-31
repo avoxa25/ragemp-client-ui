@@ -1,4 +1,4 @@
-import { House } from '../../models/view-models/houses/house.model';
+import { House } from '../../models/view-models/houses/house';
 
 export abstract class HouseProvider {
   public static getAllFromBlips(): House[] {

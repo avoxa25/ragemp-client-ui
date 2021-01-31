@@ -1,4 +1,4 @@
-import { LocalEvent } from '../../../models/enums/events/local-event.enum';
+import { LocalEvent } from '../../../models/enums/events/local-event';
 import { SpawnLocation } from './spawn-location';
 
 class CharacterSpawnSelectUi {

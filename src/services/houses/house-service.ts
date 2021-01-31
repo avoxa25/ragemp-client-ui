@@ -1,5 +1,5 @@
-import { RemoteResponse } from '../../models/enums/events/remote-response.enum';
-import { House } from '../../models/view-models/houses/house.model';
+import { RemoteResponse } from '../../models/enums/events/remote-response';
+import { House } from '../../models/view-models/houses/house';
 import { HouseProvider } from './house-provider';
 
 export abstract class HouseService {

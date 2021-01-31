@@ -1,5 +1,5 @@
-import { KeyboardKeys } from '../../../models/enums/keyboard-keys.enum';
-import { RemoteResponse } from '../../../models/enums/events/remote-response.enum';
+import { KeyboardKeys } from '../../../models/enums/keyboard-keys';
+import { RemoteResponse } from '../../../models/enums/events/remote-response';
 import { DateTimeService } from '../../../services/datetime-service';
 
 class DateTimeMicrophone {

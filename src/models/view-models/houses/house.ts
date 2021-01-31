@@ -1,4 +1,4 @@
-import { HouseType } from './house-type.enum';
+import { HouseType } from './house-type';
 
 export class House {
   public id: number;

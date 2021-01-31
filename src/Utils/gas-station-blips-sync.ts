@@ -1,5 +1,5 @@
 import { BlipConstants } from '../constants/blip';
-import { RemoteResponse } from '../models/enums/events/remote-response.enum';
+import { RemoteResponse } from '../models/enums/events/remote-response';
 
 class GasStationBlipsSync {
   private readonly characterId: number;

@@ -1,8 +1,8 @@
 import { CameraConstants } from '../../../constants/camera';
-import { LocalEvent } from '../../../models/enums/events/local-event.enum';
-import { RemoteEvent } from '../../../models/enums/events/remote-event.enum';
-import { RemoteResponse } from '../../../models/enums/events/remote-response.enum';
-import { CharacterCreatorModel } from '../../../models/view-models/characters/character-creator.model';
+import { LocalEvent } from '../../../models/enums/events/local-event';
+import { RemoteEvent } from '../../../models/enums/events/remote-event';
+import { RemoteResponse } from '../../../models/enums/events/remote-response';
+import { CharacterCreatorModel } from '../../../models/view-models/characters/character-creator';
 
 class CharacterCreator {
   private readonly camera: CameraMp;

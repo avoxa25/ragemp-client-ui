@@ -1,6 +1,6 @@
-import { LocalEvent } from '../../models/enums/events/local-event.enum';
-import { ErrorMessage } from '../../models/enums/error-message.enum';
-import { AuthenticationErrorType } from '../../models/enums/authentication-error-type.enum';
+import { LocalEvent } from '../../models/enums/events/local-event';
+import { ErrorMessage } from '../../models/enums/error-message';
+import { AuthenticationErrorType } from '../../models/enums/authentication-error-type';
 
 class AuthenticationUi {
   public constructor() {

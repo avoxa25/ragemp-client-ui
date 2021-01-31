@@ -1,8 +1,8 @@
-import { RemoteEvent } from '../../models/enums/events/remote-event.enum';
-import { LocalEvent } from '../../models/enums/events/local-event.enum';
-import { RemoteResponse } from '../../models/enums/events/remote-response.enum';
+import { RemoteEvent } from '../../models/enums/events/remote-event';
+import { LocalEvent } from '../../models/enums/events/local-event';
+import { RemoteResponse } from '../../models/enums/events/remote-response';
 import { CameraConstants } from '../../constants/camera';
-import { AuthenticationErrorType } from '../../models/enums/authentication-error-type.enum';
+import { AuthenticationErrorType } from '../../models/enums/authentication-error-type';
 
 class Authentication {
   private readonly browser: BrowserMp;

@@ -1,6 +1,6 @@
-import { LocalEvent } from '../../../models/enums/events/local-event.enum';
-import { RemoteEvent } from '../../../models/enums/events/remote-event.enum';
-import { RemoteResponse } from '../../../models/enums/events/remote-response.enum';
+import { LocalEvent } from '../../../models/enums/events/local-event';
+import { RemoteEvent } from '../../../models/enums/events/remote-event';
+import { RemoteResponse } from '../../../models/enums/events/remote-response';
 
 class CharacterSelect {
   private browser: BrowserMp;

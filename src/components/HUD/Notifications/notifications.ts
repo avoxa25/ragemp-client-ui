@@ -1,4 +1,4 @@
-import { NotificationType } from '../../../models/enums/notification-type.enum';
+import { NotificationType } from '../../../models/enums/notification-type';
 
 class NotificationsUi {
   private readonly container: HTMLElement;

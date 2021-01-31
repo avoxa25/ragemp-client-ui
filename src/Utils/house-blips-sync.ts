@@ -1,8 +1,8 @@
-import { Character } from '../models/view-models/characters/character.model';
+import { Character } from '../models/view-models/characters/character';
 import { HouseService } from '../services/houses/house-service';
 import { CharacterService } from '../services/characters/character-service';
 import { BlipConstants } from '../constants/blip';
-import { RemoteResponse } from '../models/enums/events/remote-response.enum';
+import { RemoteResponse } from '../models/enums/events/remote-response';
 
 class HouseBlipsSync {
   private readonly blips: { [id: number]: BlipMp };

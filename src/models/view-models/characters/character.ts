@@ -1,4 +1,4 @@
-import { BankCardType } from '../banks/bank-card-type.enum';
+import { BankCardType } from '../banks/bank-card-type';
 
 export class Character {
   public id: number;
