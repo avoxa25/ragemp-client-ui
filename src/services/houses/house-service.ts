@@ -6,7 +6,7 @@ export abstract class HouseService {
   private static houses: House[];
 
   public static Start(): void {
-    HouseService.houses = HouseProvider.getAllFromBlips();
+    HouseService.houses = HouseProvider.GetAllFromBlips();
 
     setInterval(() => HouseService.Update(), 1000);
   }
@@ -20,8 +20,9 @@ export abstract class HouseService {
   }
 
   private static Update(): void {
-    HouseService.houses.forEach(h => HouseProvider.updateFromBlip(h));
-    HouseService.houses.forEach(h => HouseProvider.updateFromMarkers(h));
+    HouseService.houses.forEach(h => HouseProvider.UpdateFromBlip(h));
+    HouseService.houses.forEach(h => HouseProvider.UpdateFromMarkers(h));
+    HouseService.houses.forEach(h => HouseProvider.UpdateFromColShape(h));
   }
 }
 

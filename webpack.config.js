@@ -10,7 +10,7 @@ const htmlComponents = [
 
   'Chat',
 
-  'Menus/House',
+  'Menu/House',
   
   'HUD/AlphaTest',
   'HUD/CashAmmo',

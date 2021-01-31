@@ -24,6 +24,6 @@ export enum LocalEvent {
   HouseSetLockState = 'Local:House:SetLockState',
   HouseSetOnSellState = 'Local:House:SetOnSellState',
   
-  MenusHouseClose = 'Local:MenusHouse:Close',
-  MenusHouseCursorVisible = 'Local:MenusHouse:Visible'
+  HouseMenuClose = 'Local:HouseMenu:Close',
+  HouseMenuCursorVisible = 'Local:HouseMenu:Visible'
 }

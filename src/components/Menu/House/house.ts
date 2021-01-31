@@ -1,14 +1,15 @@
-import { LocalEvents } from "../../Constants/local-events";
-import { HouseModel } from "./house-model";
+import { House } from '../../../models/houses/house';
+import { LocalEvent } from '../../../constants/events/local-event';
+import { HouseType } from '../../../models/houses/house-type';
 
 class HouseMenuUi {
-  private readonly cashFormat = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 });
+  private readonly cashFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 });
 
   private readonly noOwnerContainer: HTMLElement;
   private readonly haveOwnerContainer: HTMLElement;
   private readonly manageHouse: HTMLElement;
 
-  private houseModel: HouseModel;
+  private house: House | undefined;
   private isMenuOpened: boolean;
   private haveOwner: boolean;
   private isOwner: boolean;
@@ -18,11 +19,9 @@ class HouseMenuUi {
     this.haveOwnerContainer = document.querySelector('#homeInformationHaveOwner') as HTMLElement;
     this.manageHouse = document.querySelector('#homeInformationIsOwner') as HTMLElement;
 
-    this.houseModel = new HouseModel();
     this.haveOwner = false;
     this.isOwner = false;
     this.isMenuOpened = false;
-
     document.body.addEventListener('keydown', (e) => this.OnDocumentBodyKeydown(e));
   }
 
@@ -32,10 +31,10 @@ class HouseMenuUi {
     this.haveOwner = haveOwner;
     this.isOwner = isOwner;
 
-    mp.events.call(LocalEvents.MenusHouseCursorVisible, true, true);
+    this.house = JSON.parse(houseModelJson);
+    mp.events.call(LocalEvent.HouseMenuCursorVisible, true, true);
 
-    this.houseModel = JSON.parse(houseModelJson);
-    this.ApplyInformation();
+    this.UpdateHouseInfo();
 
     if (this.haveOwner) this.haveOwnerContainer.classList.remove('hide');
     else this.noOwnerContainer.classList.remove('hide');
@@ -62,11 +61,11 @@ class HouseMenuUi {
       event.preventDefault();
       this.isMenuOpened = false;
 
-      mp.events.call(LocalEvents.MenusHouseClose);
-      mp.events.call(LocalEvents.MenusHouseCursorVisible, false, false);
+      mp.events.call(LocalEvent.HouseMenuClose);
+      mp.events.call(LocalEvent.HouseMenuCursorVisible, false, false);
     }
   }
-  private ApplyInformation() {
+  private UpdateHouseInfo() {
     const housePrice = document.querySelectorAll('#homePrice') as NodeListOf<HTMLElement>;
     const houseClass = document.querySelectorAll('#homeClass') as NodeListOf<HTMLElement>;
     const houseGarageMaxValue = document.querySelectorAll('#homeGarageMaxValue') as NodeListOf<HTMLElement>;
@@ -78,36 +77,76 @@ class HouseMenuUi {
     const houseLock = document.querySelectorAll('#homeLock') as NodeListOf<HTMLButtonElement>;
     const houseSell = document.querySelectorAll('#homeSell') as NodeListOf<HTMLButtonElement>;
 
-    housePrice.forEach((hp) => hp.innerText = this.cashFormat.format(this.houseModel.originalPrice));
-    houseClass.forEach((hc) => hc.innerText = this.houseModel.type);
-    // TODO: Create a tax for houses
-    // TODO: Create a garage current capacity for houses
-    houseGarageMaxValue.forEach((hgmv) => hgmv.innerText = this.houseModel.garageCapacity.toString());
-    houseStatus.forEach((hs) => hs.innerText = this.houseModel.status);
-    // TODO: Create house keys
-    houseLocation.forEach((hl) => hl.innerText = this.houseModel.name);
-    // TODO: Create tax paid for houses
+    housePrice.forEach((hp) => hp.innerText = this.cashFormat.format((this.house as House).originalPrice as number));
+
+    let houseTypeText: string;
+    switch (this.house?.type) {
+      case HouseType.Economy:
+        houseTypeText = 'Эконом';
+        break;
+      case HouseType.EconomyPlus:
+        houseTypeText = 'Эконом+';
+        break;
+      case HouseType.Budget:
+        houseTypeText = 'Бюджет';
+        break;
+      case HouseType.BudgetPlus:
+        houseTypeText = 'Бюджет+';
+        break;
+      case HouseType.Comfort:
+        houseTypeText = 'Комфорт';
+        break;
+      case HouseType.ComfortPlus:
+        houseTypeText = 'Комфорт+';
+        break;
+      case HouseType.Business:
+        houseTypeText = 'Бизнес';
+        break;
+      case HouseType.BusinessPlus:
+        houseTypeText = 'Бизнес+';
+        break;
+      default:
+        houseTypeText = 'Неизвестно';
+        break;
+    }
+    houseClass.forEach((hc) => hc.innerText = houseTypeText);
+
+    houseGarageMaxValue.forEach((hgmv) => hgmv.innerText = (this.house as House).garageCapacity?.toString() as string);
+
+    let statusText: string;
+    if (this.house?.onSale) statusText = 'На продаже';
+    if (!this.house?.onSale && this.house?.locked) statusText = 'Закрыт';
+    if (!this.house?.onSale && !this.house?.locked) statusText = 'Открыт';
+    houseStatus.forEach((hs) => hs.innerText = statusText);
+
+    houseLocation.forEach((hl) => hl.innerText = (this.house as House).name as string);
+
     manageButtons.forEach((mb) => mb.addEventListener('click', () => this.ChangeTabMenu()));
     houseBuy.forEach((hb) => hb.addEventListener('click', () => this.BuyHouse()));
     houseEnter.forEach((he) => he.addEventListener('click', () => this.EnterHouse()));
     houseLock.forEach((hl) => hl.addEventListener('click', () => this.LockHouse()));
     houseSell.forEach((hs) => hs.addEventListener('click', () => this.SellHouse()));
+
+    // TODO: Create a tax for houses
+    // TODO: Create a garage current capacity for houses
+    // TODO: Create tax paid for houses
+    // TODO: Create house keys
   }
 
   private BuyHouse(): void {
-    mp.events.call(LocalEvents.HouseBuy);
+    mp.events.call(LocalEvent.HouseBuy);
   }
 
   private EnterHouse(): void {
-    mp.events.call(LocalEvents.HouseEnterExit);
+    mp.events.call(LocalEvent.HouseEnterExit);
   }
 
   private LockHouse(): void {
-    mp.events.call(LocalEvents.HouseSetLockState, !this.houseModel.locked);
+    mp.events.call(LocalEvent.HouseSetLockState, !(this.house as House).locked);
   }
 
   private SellHouse(): void {
-    mp.events.call(LocalEvents.HouseSetOnSellState, !this.houseModel.onSale, this.houseModel.originalPrice);
+    mp.events.call(LocalEvent.HouseSetOnSellState, !(this.house as House).onSale, (this.house as House).originalPrice);
   }
 }
 
