@@ -33,7 +33,7 @@ class GasStationUi {
     const buttonFillFull = document.querySelector('#fillFullFuelTank') as HTMLButtonElement;
     buttonFillFull.addEventListener('click', () => this.FillFull());
     const buttonOperation = document.querySelectorAll('.refill-count>button') as NodeListOf<HTMLButtonElement>;
-    buttonOperation.forEach((button) => button.addEventListener('click', () => this.doOperation(button)));
+    buttonOperation.forEach((button) => button.addEventListener('click', () => this.doArithmeticOperation(button)));
     this.inputProductAmount.addEventListener('input', () => this.CalculateTotalCost());
   }
 
@@ -82,7 +82,7 @@ class GasStationUi {
     this.CalculateTotalCost();
   }
 
-  private doOperation(button: HTMLButtonElement): void {
+  private doArithmeticOperation(button: HTMLButtonElement): void {
     let currentProductAmount = Number.parseInt(this.inputProductAmount.value);
     button.getAttribute('data-operation') === 'plus' ? currentProductAmount += 5 : currentProductAmount -= 5;
     this.inputProductAmount.value = currentProductAmount.toString();
