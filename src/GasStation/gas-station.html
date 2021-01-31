@@ -4,8 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="gas-station.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=PT+Sans" />
   <link rel="stylesheet" type="text/css" href="gas-station.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link
@@ -19,73 +17,75 @@
       <img src="assets/canister.svg" width="40.3px" height="45.1px">
       <p>
         <span>SWEET</span>
-        FUEL</p>
+        FUEL
+      </p>
     </header>
     <main>
       <ul class="items">
         <li>
-          <button class="fuel">
+          <button id="product" class="oil" data-product="oil">
             <p>
               БЕНЗИН<br>
-              <span>$ 1.50</span>
+              <span id="oilPrice">$0</span>
             </p>
           </button>
         </li>
         <li>
-          <button class="repair-kit">
-            <p>
-              РЕМ КОМПЛЕКТ<br>
-              <span>$ 25.00</span>
-            </p>
-          </button>
-        </li>
-        <li>
-          <button class="canister">
-            <p>
-              КАНИСТРА<br>
-              <span>$ 25.00</span>
-            </p>
-          </button>
-        </li>
-        <li>
-          <button class="power">
+          <button id="product" class="power" data-product="power">
             <p>
               ЭЛЕКТРИЧЕСТВО<br>
-              <span>$ 1.50</span>
+              <span id="powerPrice">$0</span>
+            </p>
+          </button>
+        </li>
+        <li>
+          <button id="product" class="canister" data-product="canister">
+            <p>
+              КАНИСТРА<br>
+              <span id="canisterPrice">$0</span>
+            </p>
+          </button>
+        </li>
+        <li>
+          <button id="product" class="repair-kit" data-product="repair-kit">
+            <p>
+              РЕМ КОМПЛЕКТ<br>
+              <span id="repairKitPrice">$0</span>
             </p>
           </button>
         </li>
       </ul>
-      <div class="refill-count">
-        <form>
-          <button>&#8722</button>
-          <input type="number" value="5" min="1" max="999">
-          <button>+</button>
-        </form>
-        <p>
-          В баке:<br>
-          <span>50</span>
-          <span class="capacity">/ 70</span>
+      <form action="javascript:void(0);">
+        <div class="refill-container">
+        <div class="refill-count">
+          <button data-operation="minus">&#8722</button>
+          <input id="inputProductAmount" type="number" value="0" min="1" max="999">
+          <button data-operation="plus">+</button>
+        </div>
+        <button class="full-capacity" type="button" id="fillFullFuelTank">Полный бак</button>
+          <p class="fuel-tank">
+            В баке:<br>
+            <span id="currentFuelValue">0</span>
+            /
+            <span class="capacity" id="maxFuelValue">0</span>
+          </p>
+        </div>
+        <p class="cost">
+          Итого к оплате:<br>
+          <span id="totalCost">$ 0</span>
         </p>
-      </div>
-      <p class="cost">
-        Итого к оплате:<br>
-        <span>$ 35.00</span>
-      </p>
-      <ul class="payment">
-        <li>
-          <button class="cash">Наличными</button>
-        </li>
-        <li>
-          <button class="card">Картой</button>
-        </li>
-        <li>
-          <button class="full-capacity">Полный бак</button>
-        </li>
-      </ul>
+        <ul class="payment">
+          <li>
+            <button class="cash" type="submit" data-method="cash">Наличными</button>
+          </li>
+          <li>
+            <button class="card" type="submit" data-method="bank">Картой</button>
+          </li>
+        </ul>
+      </form>
     </main>
   </section>
-
+  <script src="gas-station.js"></script>
 </body>
 
 </html>
