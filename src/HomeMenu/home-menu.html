@@ -33,14 +33,14 @@
         <li>
           <p class="home-class">
             Класс:<br>
-            <span>Комфорт</span>
+            <span id="homeClass">Комфорт</span>
           </p>
         </li>
         <li>
           <p class="home-tax">
             Налог в сутки:<br>
             <span>
-              $&nbsp;<span>350.00</span>
+              $&nbsp;<span id="homeTax">350.00</span>
             </span>
           </p>
         </li>
@@ -49,29 +49,25 @@
         <li>
           <p class="home-garage">
             Гараж:<br>
-            <span id="homeGarageCurrentValue">0</span>
-            /
             <span id="homeGarageMaxValue">10</span>
           </p>
         </li>
         <li>
           <p class="home-status">
             Статус:<br>
-            <span>В продаже</span>
+            <span id="homeStatus">В продаже</span>
           </p>
         </li>
         <li>
           <p class="home-keys">
             Ключей:<br>
-            <span id="homeKeysCurrentValue">0</span>
-            /
             <span id="homeKeysMaxValue">8</span>
           </p>
         </li>
       </ul>
       <div class="interaction">
-        <button class="green">Купить</button>
-        <button>Войти</button>
+        <button class="green" id="homeBuy">Купить</button>
+        <button id="homeEnter">Войти</button>
         <p>
           Местоположение<br>
           <span class="home-location" id="homeLocation">Бульвар-Дель-Перо</span>
@@ -101,14 +97,14 @@
         <li>
           <p class="home-class">
             Класс:<br>
-            <span>Комфорт</span>
+            <span id="homeClass">Комфорт</span>
           </p>
         </li>
         <li>
           <p class="home-tax">
             Налог в сутки:<br>
             <span>
-              $&nbsp;<span>350.00</span>
+              $&nbsp;<span id="homeTax">350.00</span>
             </span>
           </p>
         </li>
@@ -139,7 +135,7 @@
       </ul>
       <div class="interaction">
         <div>
-          <button class="green">Войти</button>
+          <button class="green" id="homeEnter">Войти</button>
           <button class="lock"></button>
         </div>
         <button class="manage">Управление</button>
@@ -147,7 +143,7 @@
     </main>
   </section>
 
-  <section class="container hide" id="homeInformationOwner">
+  <section class="container hide" id="homeInformationIsOwner">
     <header class="owner">
       <img src="assets/home.svg" width="52px" height="47.8">
       <p>
@@ -265,7 +261,7 @@
     </main>
   </section>
 
-  <section class="container " id="homeSaleToPlayerConfirm">
+  <section class="container hide" id="homeSaleToPlayerConfirm">
     <header>
       <img src="assets/home.svg" width="52px" height="47.8">
       <p>
@@ -277,7 +273,7 @@
       <p class="information">
         Вы cобираетесь продать недвижимость гражданину<br>
         <input type="text" id="homeBuyerName">
-        за         
+        за
         <span class="green">$</span>
         <input type="number" id="saleToCityCost" max="1">.
         <br>
