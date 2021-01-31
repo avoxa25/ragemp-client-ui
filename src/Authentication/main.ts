@@ -27,7 +27,7 @@ class Authentication {
     this.camera.setActive(true);
     mp.game.cam.renderScriptCams(true, false, 0, true, false);
 
-    mp.events.add(RemoteResponse.RegistrationSuccess, () => this.Close());
+    mp.events.add(RemoteResponse.RegistrationSuccess, () => this.browser.reload(false));
     mp.events.add(RemoteResponse.LoginSuccess, () => this.Close());
 
     mp.events.add(RemoteResponse.LoginFailed, (m: string) => this.ErrorMessage(AuthenticationErrorType.Login, m));

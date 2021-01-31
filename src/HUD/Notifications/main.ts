@@ -10,7 +10,6 @@ class Notifications {
   }
 
   private Display(type: NotificationType, text: string): void {
-    mp.console.logInfo(type);
     this.browser.execute(`window.notificationsUi.Push('${type}', '${text}');`);
   }
 };

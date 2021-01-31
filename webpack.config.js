@@ -9,7 +9,7 @@ const htmlComponents = [
   'Character/SpawnSelect',
 
   'Chat',
-  'Menus/Home',
+  'Menus/House',
   
   'HUD/AlphaTest',
   'HUD/CashAmmo',

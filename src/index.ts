@@ -14,7 +14,7 @@ import './HUD/Notifications/main';
 import './HUD/Online/main';
 import './HUD/main';
 
-import './Menus/Home/main'
+import './Menus/House/main'
 
 import './Speedometer/main';
 

@@ -42,6 +42,7 @@ class CharacterSpawnSelect {
     this.camera.destroy();
 
     mp.game.ui.displayRadar(true);
+    mp.game.ui.displayHud(true);
   }
 }
 

@@ -78,6 +78,7 @@ class CharacterCreator {
     mp.game.cam.renderScriptCams(false, false, 0, true, false);
 
     mp.game.ui.displayRadar(true);
+    mp.game.ui.displayHud(true);
   }
 
   private UpdateCharacterJson(characterJson: string): void {

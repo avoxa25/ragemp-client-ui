@@ -63,7 +63,6 @@ class HouseMarkersSync {
           m.position,
           MarkerConstants.HouseScale,
           {
-            bobUpAndDown: false,
             direction: MarkerConstants.HouseDirection,
             rotation: MarkerConstants.HouseRotation,
             color: color,

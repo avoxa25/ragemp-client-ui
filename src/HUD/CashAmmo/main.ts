@@ -20,10 +20,6 @@ class CashAmmo {
     const clip = mp.players.local.getAmmoInClip(weaponHash);
     const total = (mp.players.local as any).getWeaponAmmo(weaponHash) as number;
 
-    mp.console.logInfo(`weaponHash: ${weaponHash}`);
-    mp.console.logInfo(`clip: ${clip}`);
-    mp.console.logInfo(`total: ${total}`);
-
     // TODO: Check if weapon is not melee
     if (clip === 0 && total === 0) {
       this.browser.execute('window.cashAmmo.HideAmmo();');

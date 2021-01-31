@@ -17,5 +17,13 @@ export enum LocalEvents {
   CharacterCreatorUpdateMain = 'Local:CharacterCreator:UpdateMain',
   CharacterCreatorUpdateClothes = 'Local:CharacterCreator:UpdateClothes',
   CharacterCreatorUpdateFace = 'Local:CharacterCreator:UpdateFace',
-  CharacterCreatorUpdateHair = 'Local:CharacterCreator:UpdateHair'
+  CharacterCreatorUpdateHair = 'Local:CharacterCreator:UpdateHair',
+
+  HouseBuy = 'Local:House:Buy',
+  HouseEnterExit = 'Local:House:EnterExit',
+  HouseSetLockState = 'Local:House:SetLockState',
+  HouseSetOnSellState = 'Local:House:SetOnSellState',
+  
+  MenusHouseClose = 'Local:MenusHouse:Close',
+  MenusHouseCursorVisible = 'Local:MenusHouse:Visible'
 }
