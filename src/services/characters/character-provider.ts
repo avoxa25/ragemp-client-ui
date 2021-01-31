@@ -1,5 +1,5 @@
-import { BankCardType } from '../../models/view-models/banks/bank-card-type';
-import { Character } from '../../models/view-models/characters/character';
+import { BankCardType } from '../../models/banks/bank-card-type';
+import { Character } from '../../models/characters/character';
 
 export abstract class CharacterProvider {
   public static Parse(player: PlayerMp) {

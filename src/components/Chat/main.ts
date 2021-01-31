@@ -1,5 +1,5 @@
-import { LocalEvent } from '../../models/enums/events/local-event';
-import { RemoteResponse } from '../../models/enums/events/remote-response';
+import { LocalEvent } from '../../constants/events/local-event';
+import { RemoteResponse } from '../../constants/events/remote-response';
 
 class Chat {
   constructor() {

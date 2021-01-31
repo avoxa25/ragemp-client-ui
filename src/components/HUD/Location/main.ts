@@ -1,5 +1,5 @@
-import { RemoteResponse } from '../../../models/enums/events/remote-response';
-import { ZoneData } from '../../../models/static/zone-data';
+import { RemoteResponse } from '../../../constants/events/remote-response';
+import { ZoneData } from '../../../models/zone-data';
 
 class HudLocation {
   private readonly browser: BrowserMp;

@@ -1,5 +1,5 @@
-import { RemoteResponse } from '../../Constants/remote-response';
-import { PlayerEvents } from '../../Constants/player-events';
+import { RemoteResponse } from '../../../constants/remote-response';
+import { PlayerEvents } from '../../../constants/player-events';
 import { NotificationType } from '../../Constants/notification-type';
 import { HouseModel } from './house-model';
 import { HouseType } from './house-type';

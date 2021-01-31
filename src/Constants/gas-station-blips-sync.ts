@@ -1,5 +1,5 @@
-import { BlipConstants } from '../constants/blip';
-import { RemoteResponse } from '../constants/events/remote-response';
+import { BlipConstants } from './blip';
+import { RemoteResponse } from './events/remote-response';
 
 class GasStationBlipsSync {
   private readonly characterId: number;

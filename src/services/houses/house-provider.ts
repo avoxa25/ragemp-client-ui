@@ -1,4 +1,4 @@
-import { House } from '../../models/view-models/houses/house';
+import { House } from '../../models/houses/house';
 
 export abstract class HouseProvider {
   public static getAllFromBlips(): House[] {
@@ -41,5 +41,14 @@ export abstract class HouseProvider {
 
     const entrancePosition = blip.getCoords();
     house.entrancePosition = entrancePosition;
+  }
+
+  public static updateFromMarkers(house: House): void {
+    const markers = mp.markers
+      .toArray()
+      .filter(m => m.dimension !== 0)
+      .filter(m => (m as any).hasVariable('DummyEntity') && m.getVariable('DummyEntity') === 'House')
+      .filter(m => m.getVariable('Id') === house.id)
+      .forEach(m => house.exitPosition = m.position);
   }
 }
