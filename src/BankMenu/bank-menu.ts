@@ -1,5 +1,6 @@
-abstract class BankMenuUi {
-  public static Start(): void {
+class BankMenuUi {
+
+  public constructor() {
     const buttonsTabLink = document.querySelectorAll('button.tablink') as NodeListOf<HTMLElement>;
     buttonsTabLink.forEach((b) => b.addEventListener('click', () => BankMenuUi.ChangeTab(b)));
   }
@@ -34,4 +35,4 @@ abstract class BankMenuUi {
   }
 };
 
-BankMenuUi.Start();
+(window as any).bankMenuUi = new BankMenuUi();
