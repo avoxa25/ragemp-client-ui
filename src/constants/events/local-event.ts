@@ -19,6 +19,10 @@ export enum LocalEvent {
   CharacterCreatorUpdateFace = 'Local:CharacterCreator:UpdateFace',
   CharacterCreatorUpdateHair = 'Local:CharacterCreator:UpdateHair',
 
+  SpeedometerShow = 'Local:Speedometer:Show',
+  SpeedometerHide = 'Local:Speedometer:Hide',
+  SpeedometerUpdate = 'Local:Speedometer:Update',
+
   HouseBuy = 'Local:House:Buy',
   HouseEnterExit = 'Local:House:EnterExit',
   HouseSetLockState = 'Local:House:SetLockState',
