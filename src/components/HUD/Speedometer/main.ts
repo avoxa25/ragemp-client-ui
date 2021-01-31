@@ -1,5 +1,5 @@
-import { KeyboardKeys } from '../../../models/enums/keyboard-keys';
-import { RemoteResponse } from '../../../models/enums/events/remote-response';
+import { KeyboardKeys } from '../../../constants/enums/keyboard-keys';
+import { RemoteResponse } from '../../../constants/events/remote-response';
 
 class Speedometer {
   private readonly browser: BrowserMp;
