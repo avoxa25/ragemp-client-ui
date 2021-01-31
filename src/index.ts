@@ -15,6 +15,6 @@ import './components/HUD/Online/main';
 import './components/HUD/main';
 import './components/HUD/Speedometer/main';
 
-import './utils/discord';
-import './utils/gas-station-blips-sync';
-import './utils/house-blips-sync';
+import './broken/discord';
+import './broken/gas-station-blips-sync';
+import './broken/house-blips-sync';
