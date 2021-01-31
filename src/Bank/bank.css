@@ -9,6 +9,11 @@
   user-select: none;
 }
 
+@keeyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   display: none;
@@ -76,6 +81,10 @@ INPUT {
 
 INPUT:focus {
   color: #930000;
+}
+
+SECTION {  
+  animation: fadeIn .25s ease-in-out;
 }
 
 section.hide {

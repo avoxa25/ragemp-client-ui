@@ -27,8 +27,8 @@
           Вам требуется оформить карту!
         </p>
         <div>
-          <button class="red">Оформить</button>
-          <button>Отмена</button>
+          <button class="red" id="accept">Оформить</button>
+          <button id="decline">Отмена</button>
         </div>
       </section>
 
@@ -37,15 +37,15 @@
           Выберите карту для оформления
         </p>
         <div class="selector">
-          <button class="arrow-left" id="cardPrevious"></button>
-          <div class="card platinum" id="cardType">
+          <button class="arrow-left" id="cardChange" data-orientation="previous"></button>
+          <div class="card" id="cardType" data-type="">
             <p>world debit</p>
             <p class="card-type" id="cardTypeText">ПЛАТИНОВАЯ</p>
             <p class="card-number" id="cardNumber">
               1234&nbsp;0000&nbsp;5678&nbsp;0000&nbsp;9999
             </p>
           </div>
-          <button class="arrow-right" id="cardNext"></button>
+          <button class="arrow-right" id="cardChange" data-orientation="next"></button>
         </div>
         <p class="card-cost">
           Стоимость:
@@ -64,7 +64,7 @@
     </main>
   </section>
 
-  <section class="container large">
+  <section class="container large hide" id="cardMenu">
     <header>
       <img src="assets/maze-bank.png" width="45px" height="59px">
       <p>
@@ -116,7 +116,7 @@
             Введите сумму, которую хотите снять<br>
             Ваш тариф имеет ограничение в
             <span class="red">$</span>
-            <span id="maxValue">50,000.00</span>
+            <span id="cardMaxСonsumption">50,000.00</span>
           </p>
           <input type="number" placeholder="Введите сумму">
           <button class="red">Продолжить</button>
@@ -126,7 +126,7 @@
             Введите сумму, которую хотите перевести<br>
             Ваш тариф имеет ограничение в
             <span class="red">$</span>
-            <span id="maxValue">50,000.00</span>
+            <span id="cardMaxСonsumption">50,000.00</span>
           </p>
           <input type="number" placeholder="Введите сумму (комиссия 5%)">
           <input type="number" placeholder="Введите карту получателя">
@@ -166,7 +166,7 @@
             Введите сумму, которую хотите перевести<br>
             Ваш тариф имеет ограничение в
             <span class="red">$</span>
-            <span id="maxValue">50,000.00</span>
+            <span id="cardMaxСonsumption">50,000.00</span>
           </p>
           <input type="number" placeholder="Введите сумму">
           <input type="number" placeholder="Введите номер получателя">
