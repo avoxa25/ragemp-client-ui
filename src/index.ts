@@ -3,6 +3,7 @@ import './Character/Creator/main';
 import './Chat/main';
 
 import './HUD/main';
+import './HUD/AlphaTest/main';
 import './HUD/Location/main';
 
 import './Speedometer/main';
