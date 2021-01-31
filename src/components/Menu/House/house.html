@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="house.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <section class="container hide" id="homeInformationNoOwner">
+    <header>
+      <img src="assets/home.svg" width="52px" height="47.8">
+      <p>
+        <span>SWEET</span>
+        HOUSE
+      </p>
+    </header>
+    <main>
+      <ul>
+        <li>
+          <p class="home-price">
+            Сумма покупки:<br>
+            <span>
+              <span id="homePrice">0</span>
+            </span>
+          </p>
+        </li>
+        <li>
+          <p class="home-class">
+            Класс:<br>
+            <span id="homeClass">Комфорт</span>
+          </p>
+        </li>
+        <li>
+          <p class="home-tax">
+            Налог в сутки:<br>
+            <span>
+              $&nbsp;<span id="homeTax">350.00</span>
+            </span>
+          </p>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <p class="home-garage">
+            Гараж:<br>
+            <span id="homeGarageMaxValue">10</span>
+          </p>
+        </li>
+        <li>
+          <p class="home-status">
+            Статус:<br>
+            <span id="homeStatus">В продаже</span>
+          </p>
+        </li>
+        <li>
+          <p class="home-keys">
+            Ключей:<br>
+            <span id="homeKeysMaxValue">8</span>
+          </p>
+        </li>
+      </ul>
+      <div class="interaction">
+        <button class="green" id="homeBuy">Купить</button>
+        <button id="homeEnter">Войти</button>
+        <p>
+          Местоположение<br>
+          <span class="home-location" id="homeLocation">Бульвар-Дель-Перо</span>
+        </p>
+      </div>
+    </main>
+  </section>
+
+  <section class="container hide" id="homeInformationHaveOwner">
+    <header>
+      <img src="assets/home.svg" width="52px" height="47.8">
+      <p>
+        <span>SWEET</span>
+        HOUSE
+      </p>
+    </header>
+    <main>
+      <ul>
+        <li>
+          <p class="home-price">
+            Сумма покупки:<br>
+            <span>
+              $&nbsp;<span id="homePrice">350,000.00</span>
+            </span>
+          </p>
+        </li>
+        <li>
+          <p class="home-class">
+            Класс:<br>
+            <span id="homeClass">Комфорт</span>
+          </p>
+        </li>
+        <li>
+          <p class="home-tax">
+            Налог в сутки:<br>
+            <span>
+              $&nbsp;<span id="homeTax">350.00</span>
+            </span>
+          </p>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <p class="home-garage">
+            Гараж:<br>
+            <span id="homeGarageCurrentValue">0</span>
+            /
+            <span id="homeGarageMaxValue">10</span>
+          </p>
+        </li>
+        <li>
+          <p class="home-status">
+            Статус:<br>
+            <span id="homeStatus">В продаже</span>
+          </p>
+        </li>
+        <li>
+          <p class="home-keys">
+            Ключей:<br>
+            <span id="homeKeysCurrentValue">0</span>
+            /
+            <span id="homeKeysMaxValue">8</span>
+          </p>
+        </li>
+      </ul>
+      <div class="interaction">
+        <div>
+          <button class="green" id="homeEnter">Войти</button>
+          <button class="lock" id="homeLock"></button>
+        </div>
+        <button class="manage">Управление</button>
+      </div>
+    </main>
+  </section>
+
+  <section class="container hide" id="homeInformationIsOwner">
+    <header class="owner">
+      <img src="assets/home.svg" width="52px" height="47.8">
+      <p>
+        <span>SWEET</span>
+        HOUSE
+      </p>
+      <p class="tax-info">
+        Налог оплачен до:<br>
+        <span id="homeTaxPaidBefore">
+          15.01.2021
+        </span>
+      </p>
+    </header>
+    <main>
+      <ul>
+        <li>
+          <p class="home-status">
+            Статус:<br>
+            <span id="homeStatus">В продаже</span>
+          </p>
+        </li>
+        <li>
+          <p class="home-keys">
+            Ключей:<br>
+            <span id="homeKeysCurrentValue">0</span>
+            /
+            <span id="homeKeysMaxValue">8</span>
+          </p>
+        </li>
+        <li>
+          <p class="home-tax">
+            Налог в сутки:<br>
+            <span>
+              $&nbsp;<span>350.00</span>
+            </span>
+          </p>
+        </li>
+      </ul>
+      <ul class="buttons owner">
+        <li>
+          <button class="green" id="homeSell">Продать</button>
+        </li>
+        <li>
+          <button class="green">Продлить</button>
+        </li>
+        <li>
+          <button class="green">Посмотреть</button>
+        </li>
+
+      </ul>
+
+      <div class="interaction owner">
+        <button class="manage">Управление</button>
+      </div>
+    </main>
+  </section>
+
+  <section class="container hide" id="homeConfirmDeal">
+    <header>
+      <img src="assets/home.svg" width="52px" height="47.8">
+      <p>
+        <span>SWEET</span>
+        HOUSE
+      </p>
+    </header>
+    <main class="information">
+      <p class="information">
+        Вы точно хотите приобрести недвижимость?
+      </p>
+      <div>
+        <button class="green">Наличными</button>
+        <button>Картой</button>
+      </div>
+    </main>
+  </section>
+
+  <section class="container hide" id="homeSale">
+    <header>
+      <img src="assets/home.svg" width="52px" height="47.8">
+      <p>
+        <span>SWEET</span>
+        HOUSE
+      </p>
+    </header>
+    <main class="information">
+      <p class="information">
+        Кто выступает покупателем Вашей недвижимости?
+      </p>
+      <div>
+        <button class="green">Государство</button>
+        <button>Физлицо</button>
+      </div>
+    </main>
+  </section>
+
+  <section class="container hide" id="homeSaleToCityConfirm">
+    <header>
+      <img src="assets/home.svg" width="52px" height="47.8">
+      <p>
+        <span>SWEET</span>
+        HOUSE
+      </p>
+    </header>
+    <main class="information">
+      <p class="information">
+        Вы точно хотите продать недвижимость государству?<br>
+        Вы получите
+        <span class="green">$</span>
+        <span id="saleToCityCost">75,000.00</span>
+      </p>
+      <div>
+        <button class="green">Продать</button>
+        <button>Отмена</button>
+      </div>
+    </main>
+  </section>
+
+  <section class="container hide" id="homeSaleToPlayerConfirm">
+    <header>
+      <img src="assets/home.svg" width="52px" height="47.8">
+      <p>
+        <span>SWEET</span>
+        HOUSE
+      </p>
+    </header>
+    <main class="information">
+      <p class="information">
+        Вы cобираетесь продать недвижимость гражданину<br>
+        <input type="text" id="homeBuyerName">
+        за
+        <span class="green">$</span>
+        <input type="number" id="saleToCityCost" max="1">.
+        <br>
+        Вы уверены?
+      </p>
+      <div>
+        <button class="green">Продать</button>
+        <button>Отмена</button>
+      </div>
+    </main>
+  </section>
+
+  <section class="container hide" id="homeSaleSucces">
+    <header>
+      <img src="assets/home.svg" width="52px" height="47.8">
+      <p>
+        <span>SWEET</span>
+        HOUSE
+      </p>
+    </header>
+    <main class="information">
+      <p class="information">
+        Вы успешно продали недвижимость!
+      </p>
+      <div>
+        <button class="green">Продолжить</button>
+      </div>
+    </main>
+  </section>
+
+
+  <script src="house.js"></script>
+</body>
+
+</html>

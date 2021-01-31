@@ -1,7 +1,7 @@
 import { CameraConstants } from '../../../constants/camera';
-import { LocalEvent } from '../../../models/enums/events/local-event';
-import { RemoteEvent } from '../../../models/enums/events/remote-event';
-import { RemoteResponse } from '../../../models/enums/events/remote-response';
+import { LocalEvent } from '../../../constants/events/local-event';
+import { RemoteEvent } from '../../../constants/events/remote-event';
+import { RemoteResponse } from '../../../constants/events/remote-response';
 import { SpawnLocation } from './spawn-location';
 
 class CharacterSpawnSelect {
@@ -42,6 +42,7 @@ class CharacterSpawnSelect {
     this.camera.destroy();
 
     mp.game.ui.displayRadar(true);
+    mp.game.ui.displayHud(true);
   }
 }
 

@@ -1,4 +1,4 @@
-import { RemoteResponse } from '../../../models/enums/events/remote-response';
+import { RemoteResponse } from '../../../constants/events/remote-response';
 
 class Online {
   private readonly browser: BrowserMp;

@@ -1,6 +1,6 @@
-import { LocalEvent } from '../../../models/enums/events/local-event';
-import { CharacterCreatorModel } from '../../../models/view-models/characters/character-creator';
-import { CharacterCreatorData } from '../../../models/static/character-creator-data';
+import { LocalEvent } from '../../../constants/events/local-event';
+import { CharacterCreatorModel } from '../../../models/characters/character-creator';
+import { CharacterCreatorData } from '../../../models/characters/character-creator-data';
 
 class CharacterCreatorUi {
   private character: CharacterCreatorModel;
