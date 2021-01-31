@@ -9,7 +9,7 @@ const htmlComponents = [
   'Character/SpawnSelect',
   
   'Chat',
-  'HomeMenu',
+  'Menus/Home',
   
   'HUD/DateTimeMicrophone',
   'HUD/Location',

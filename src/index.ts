@@ -10,13 +10,11 @@ import './HUD/DateTimeMicrophone/main'
 import './HUD/Location/main';
 import './HUD/main';
 
-import './Chat/main';
-
-import './HUD/main';
-import './HUD/Location/main';
+import './Menus/Home/main'
 
 import './Speedometer/main';
 
 import './Utils/discord';
 import './Utils/gas-station-blips-sync';
 import './Utils/house-blips-sync';
+import './Utils/house-markers-sync';
