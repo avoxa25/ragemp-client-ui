@@ -29,9 +29,9 @@ export class CharacterCreatorModel {
 
   public eyesColor: number;
 
-  public beard: number;
-  public beardColor: number;
-  public beardSecondaryColor: number;
+  public facialHair: number;
+  public facialHairColor: number;
+  public facialHairSecondaryColor: number;
 
   public eyeBrows: number;
   public eyeBrowsColor: number;
@@ -63,9 +63,9 @@ export class CharacterCreatorModel {
     this.hairColor = 0;
     this.hairHighLight = 0;
     this.eyesColor = 0;
-    this.beard = 0;
-    this.beardColor = 0;
-    this.beardSecondaryColor = 0;
+    this.facialHair = 0;
+    this.facialHairColor = 0;
+    this.facialHairSecondaryColor = 0;
     this.eyeBrows = 0;
     this.eyeBrowsColor = 0;
     this.eyeBrowsSecondaryColor = 0;

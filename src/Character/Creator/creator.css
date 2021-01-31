@@ -81,7 +81,7 @@ button.tabLinks.active::after {
 
     margin-left: -3px;
 
-    background-image: url("./active.png");
+    background-image: url("assets/active.png");
     background-position: 50% 50%;
     background-repeat: no-repeat;
 }
@@ -115,7 +115,7 @@ UL {
     display: none;
     padding: 20px 20px 25px 20px;
 
-    background: url("./h-line.svg");
+    background: url("assets/h-line.svg");
     background-position: 50% 0%;
     background-repeat: no-repeat;
     background-color: rgba(0, 0, 0, .6);
@@ -216,7 +216,7 @@ UL {
     top: 0px;
     left: -28px;
 
-    background: url("./list-round.svg");
+    background: url("assets/list-round.svg");
     background-position: 0% 50%;
     background-repeat: no-repeat;
 }
@@ -274,13 +274,13 @@ ul.face li {
     width: 20px;
 
     background-color: rgba(0, 0, 0, 0);
-    background-image: url("./arrow-left.svg");
+    background-image: url("assets/arrow-left.svg");
     background-position: 50% 50%;
     background-repeat: no-repeat;
 }
 
 .body ul li button:nth-last-child(1) {
-    background-image: url("./arrow-right.svg");
+    background-image: url("assets/arrow-right.svg");
 }
 
 .body ul li input.slider {
@@ -350,19 +350,19 @@ ul.navigation>li button {
 }
 
 button.face {
-    background-image: url("./face.svg");
+    background-image: url("assets/face.svg");
 }
 
 button.hair {
-    background-image: url("./hair.svg");
+    background-image: url("assets/hair.svg");
 }
 
 button.main {
-    background-image: url("./main.svg");
+    background-image: url("assets/main.svg");
 }
 
 button.clothes {
-    background-image: url("./clothes.svg");
+    background-image: url("assets/clothes.svg");
 }
 
 ul.navigation>li button:hover {
@@ -515,7 +515,7 @@ button.tabLinks.active::after {
 
     margin-left: -3px;
 
-    background-image: url("./active.png");
+    background-image: url("assets/active.png");
     background-position: 50% 50%;
     background-repeat: no-repeat;
 }
@@ -549,7 +549,7 @@ UL {
     display: none;
     padding: 20px 20px 25px 20px;
 
-    background: url("./h-line.svg");
+    background: url("assets/h-line.svg");
     background-position: 50% 0%;
     background-repeat: no-repeat;
     background-color: rgba(0, 0, 0, .6);
@@ -650,7 +650,7 @@ UL {
     top: 0px;
     left: -28px;
 
-    background: url("./list-round.svg");
+    background: url("assets/list-round.svg");
     background-position: 0% 50%;
     background-repeat: no-repeat;
 }
@@ -708,13 +708,13 @@ ul.face li {
     width: 20px;
 
     background-color: rgba(0, 0, 0, 0);
-    background-image: url("./arrow-left.svg");
+    background-image: url("assets/arrow-left.svg");
     background-position: 50% 50%;
     background-repeat: no-repeat;
 }
 
 .body ul li button:nth-last-child(1) {
-    background-image: url("./arrow-right.svg");
+    background-image: url("assets/arrow-right.svg");
 }
 
 .body ul li input.slider {
@@ -784,19 +784,19 @@ ul.navigation>li button {
 }
 
 button.face {
-    background-image: url("./face.svg");
+    background-image: url("assets/face.svg");
 }
 
 button.hair {
-    background-image: url("./hair.svg");
+    background-image: url("assets/hair.svg");
 }
 
 button.main {
-    background-image: url("./main.svg");
+    background-image: url("assets/main.svg");
 }
 
 button.clothes {
-    background-image: url("./clothes.svg");
+    background-image: url("assets/clothes.svg");
 }
 
 ul.navigation>li button:hover {
@@ -866,4 +866,24 @@ ul.face-navigation>li>button:hover,
 ul.face-navigation>li>button:focus,
 ul.face-navigation>li>button.active {
     background: linear-gradient(to left, #ee0b89, #fd6f67 75%) !important;
+}
+
+.subTab ul > li .slider {
+    width: 150px !important;
+}
+
+.subTab ul > li > P > span {
+    width: 120px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.body .buttons {
+    margin-top: 10px;
+} 
+.errorMessage{
+    color: red;
+    text-align: center;
+    font-weight: bold;
 }

@@ -2,10 +2,21 @@ const path = require('path');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const htmlComponents = [
+  'Authentication',
+
   'Character/Creator',
+  'Character/Select',
+  'Character/SpawnSelect',
+
   'Chat',
+  
+  'HUD/AlphaTest',
   'HUD/CashAmmo',
+  'HUD/DateTimeMicrophone',
   'HUD/Location',
+  'HUD/Notifications',
+  'HUD/Online',
+
   'Speedometer'
 ];
 
