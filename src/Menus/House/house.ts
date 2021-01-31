@@ -107,6 +107,7 @@ class HouseMenuUi {
   private LockHouse(): void {
     mp.events.call(LocalEvents.HouseSetLockState, !this.houseModel.locked);
   }
+
   private SellHouse(): void {
     mp.events.call(LocalEvents.HouseSetOnSellState, !this.houseModel.onSale, this.houseModel.originalPrice);
   }

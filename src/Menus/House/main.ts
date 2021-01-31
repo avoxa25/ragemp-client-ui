@@ -64,7 +64,7 @@ class HouseMenu {
     this.browser.execute(`window.houseMenuUi.HideHouseMenu();`);
   }
 
-  private ReloadHouseMenu(): void{
+  private ReloadHouseMenu(): void {
     this.browser.reload(false);
   }
 
