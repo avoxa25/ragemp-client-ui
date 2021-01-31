@@ -3,6 +3,7 @@ export enum RemoteEvents {
   Registration = 'Remote:Authentication:Registration',
 
   CharacterSelect = 'Remote:Character:Select',
+  CharacterDelete = "Remote:Character:Delete",
   CharacterSpawnSelect = 'Remote:Character:SpawnSelect',
   CharacterEstablishContact = 'Remote:Character:EstablishContact',
   
