@@ -76,8 +76,7 @@ class HouseMarkersSync {
   private GetServerMarkers(): MarkerMp[] {
     return mp.markers
       .toArray()
-      .filter(m => (m as any).hasVariable('Exists') && m.getVariable('Exists') === false)
-      .filter(m => (m as any).hasVariable('Type') && m.getVariable('Type') === 'House');
+      .filter(m => (m as any).hasVariable('DummyEntity') && m.getVariable('DummyEntity') === 'House');
   }
 }
 

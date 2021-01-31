@@ -57,7 +57,7 @@ class HouseMenuUi {
   }
 
   private OnDocumentBodyKeydown(event: KeyboardEvent): void {
-    const isMenuCloseKey = event.which === 81;
+    const isMenuCloseKey = event.which === 81; // Q on keyboard
     if (this.isMenuOpened && isMenuCloseKey) {
       event.preventDefault();
       this.isMenuOpened = false;
@@ -78,14 +78,12 @@ class HouseMenuUi {
     const houseLock = document.querySelectorAll('#homeLock') as NodeListOf<HTMLButtonElement>;
     const houseSell = document.querySelectorAll('#homeSell') as NodeListOf<HTMLButtonElement>;
 
-    const lockedStatus = this.houseModel.locked ? 'Закрыт' : 'Открыт';
-
     housePrice.forEach((hp) => hp.innerText = this.cashFormat.format(this.houseModel.originalPrice));
     houseClass.forEach((hc) => hc.innerText = this.houseModel.type);
     // TODO: Create a tax for houses
     // TODO: Create a garage current capacity for houses
     houseGarageMaxValue.forEach((hgmv) => hgmv.innerText = this.houseModel.garageCapacity.toString());
-    houseStatus.forEach((hs) => hs.innerText = this.houseModel.onSale ? 'На продаже' : lockedStatus);
+    houseStatus.forEach((hs) => hs.innerText = this.houseModel.status);
     // TODO: Create house keys
     houseLocation.forEach((hl) => hl.innerText = this.houseModel.name);
     // TODO: Create tax paid for houses

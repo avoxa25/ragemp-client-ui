@@ -12,6 +12,8 @@ export class HouseModel {
   public locked: boolean;
   public onSale: boolean;
 
+  public status: string;
+
   public originalPrice: number;
   public onSalePrice: number;
 
@@ -24,6 +26,7 @@ export class HouseModel {
     this.garageCapacity = 0;
     this.locked = false;
     this.onSale = false;
+    this.status = '';
     this.originalPrice = 0;
     this.onSalePrice = 0;
   }

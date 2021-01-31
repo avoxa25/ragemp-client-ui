@@ -20,8 +20,8 @@ class HouseMenu {
     mp.events.add(RemoteResponse.MenusHouseClose, () => this.HideHouseMenu());
     mp.events.add(RemoteResponse.MenusHouseReload, () => this.ReloadHouseMenu());
 
-    mp.events.add(PlayerEvents.EnteredColShape, (colShape) => this.PlayerEnterColShape(colShape));
-    mp.events.add(PlayerEvents.ExitedColShape, (colShape) => this.PlayerExitColShape(colShape));
+    mp.events.add(PlayerEvents.EnteredColShape, (c: ColshapeMp) => this.PlayerEnterColShape(c));
+    mp.events.add(PlayerEvents.ExitedColShape, () => this.PlayerExitColShape());
 
     mp.events.add(LocalEvents.HouseBuy, () => this.HouseBuy());
     mp.events.add(LocalEvents.HouseEnterExit, () => this.HouseEnterExit());
@@ -33,13 +33,13 @@ class HouseMenu {
   }
 
   private PlayerEnterColShape(colShape: ColshapeMp): void {
-    if (colShape.getVariable('Type') === 'House') mp.console.logInfo('Дома');
-    mp.events.call(RemoteResponse.NotificationSent, NotificationType.Info, 'Нажмите Е для открытия меню Дома');
-    mp.keys.bind(KeyboardKeys.KeyE, true, () => this.ShowHouseMenu(colShape));
+    if (colShape.getVariable('DummyEntity') === 'House') {
+      mp.events.call(RemoteResponse.NotificationSent, NotificationType.Info, 'Нажмите Е для открытия меню Дома');
+      mp.keys.bind(KeyboardKeys.KeyE, true, () => this.ShowHouseMenu(colShape));
+    }
   }
 
-  private PlayerExitColShape(colShape: ColshapeMp): void {
-    mp.console.logInfo(colShape.id.toString());
+  private PlayerExitColShape(): void {
     mp.keys.unbind(KeyboardKeys.KeyE, true);
   }
 
@@ -49,6 +49,10 @@ class HouseMenu {
     const onSale = colShape.getVariable('OnSale') as boolean;
     const isOwner = ownerId === this.characterId;
     const haveOwner = ownerId !== null;
+
+    if (onSale) this.houseModel.status = 'На продаже';
+    if (!onSale && locked) this.houseModel.status = 'Закрыт';
+    if (!onSale && !locked) this.houseModel.status = 'Открыт';
 
     if (isOwner || isOwner && locked || onSale || !locked) {
       this.ColShapeToHouseModel(colShape);
@@ -66,6 +70,7 @@ class HouseMenu {
 
   private ReloadHouseMenu(): void {
     this.browser.reload(false);
+    this.MenuCursorVisible(false, false);
   }
 
   private ColShapeToHouseModel(colShape: ColshapeMp): void {
@@ -96,14 +101,6 @@ class HouseMenu {
         this.houseModel.type = 'Бизнес+';
         break;
     }
-
-    if ((colShape as any).hasVariable('FirstName') || (colShape as any).hasVariable('LastName')) {
-      const ownerFirstName = colShape.getVariable('FirstName') as string | null;
-      const ownerLastName = colShape.getVariable('LastName') as string | null;
-      this.houseModel.ownerName = ownerFirstName !== null ? `${ownerFirstName} ${ownerLastName}` : null;
-    }
-
-
     this.houseModel.id = colShape.getVariable('Id') as number;
     this.houseModel.ownerId = colShape.getVariable('OwnerId') as number | null;
     this.houseModel.name = colShape.getVariable('Name') as string;
