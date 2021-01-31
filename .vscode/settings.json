@@ -8,6 +8,7 @@
     "Colshapes",
     "Millis",
     "QEMU",
+    "datetime",
     "fadein",
     "pwsh",
     "ragemp",
