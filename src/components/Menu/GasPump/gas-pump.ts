@@ -5,17 +5,20 @@ class GasPumpUi {
   private readonly powerPriceTag: HTMLElement;
   private readonly canisterPriceTag: HTMLElement;
   private readonly repairKitPriceTag: HTMLElement;
-  private readonly currentFuelValueTag: HTMLElement;
-  private readonly maxFuelValueTag: HTMLElement;
+
   private readonly inputProductAmount: HTMLInputElement;
+
+  private readonly fuelValueTag: HTMLElement;
+  private readonly maxFuelValueTag: HTMLElement;  
 
   private oilPrice: number;
   private powerPrice: number;
   private canisterPrice: number;
   private repairKitPrice: number;
-  private currentFuelValue: number;
-  private maxFuelValue: number;
-  private differenceFuelValue: number;
+
+  private fuel: number;
+  private maxFuel: number;
+  private fuelDifference: number;
 
   constructor() {
     this.cashFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 });
@@ -24,17 +27,20 @@ class GasPumpUi {
     this.powerPriceTag = document.querySelector('#powerPrice') as HTMLElement;
     this.canisterPriceTag = document.querySelector('#canisterPrice') as HTMLElement;
     this.repairKitPriceTag = document.querySelector('#repairKitPrice') as HTMLElement;
-    this.currentFuelValueTag = document.querySelector('#currentFuelValue') as HTMLElement;
-    this.maxFuelValueTag = document.querySelector('#maxFuelValue') as HTMLElement;
+    
     this.inputProductAmount = document.querySelector('#inputProductAmount') as HTMLInputElement;
+
+    this.fuelValueTag = document.querySelector('#currentFuelValue') as HTMLElement;
+    this.maxFuelValueTag = document.querySelector('#maxFuelValue') as HTMLElement;
 
     this.oilPrice = 0;
     this.powerPrice = 0;
     this.canisterPrice = 0;
     this.repairKitPrice = 0;
-    this.currentFuelValue = 0;
-    this.maxFuelValue = 0;
-    this.differenceFuelValue = 0;
+
+    this.fuel = 0;
+    this.maxFuel = 0;
+    this.fuelDifference = 0;
 
     const buttonsProduct = document.querySelectorAll('#product') as NodeListOf<HTMLButtonElement>;
     buttonsProduct.forEach((button) => button.addEventListener('click', () => this.ChangeProduct(button, buttonsProduct)));
@@ -45,6 +51,14 @@ class GasPumpUi {
     const buttonOperation = document.querySelectorAll('.refill-count>button') as NodeListOf<HTMLButtonElement>;
     buttonOperation.forEach((button) => button.addEventListener('click', () => this.doArithmeticOperation(button)));
     this.inputProductAmount.addEventListener('input', () => this.CalculateTotalCost());
+  }
+
+  public Show(): void {
+    window.document.body.hidden = false;
+  }
+
+  public Hide(): void {
+    window.document.body.hidden = true;
   }
 
   public UpdatePrices(oilPrice: number, powerPrice: number, canisterPrice: number, repairKitPrice: number): void {
@@ -59,13 +73,13 @@ class GasPumpUi {
     this.repairKitPriceTag.innerText = this.cashFormat.format(this.repairKitPrice);
   }
 
-  public UpdateFuelTankInformation(currentFuelValue: number, maxFuelValue: number): void {
-    this.currentFuelValueTag.innerText = currentFuelValue.toString();
-    this.maxFuelValueTag.innerText = maxFuelValue.toString();
+  public UpdateFuelTank(fuel: number, maxFuel: number): void {
+    this.fuel = fuel;
+    this.maxFuel = maxFuel;
+    this.fuelDifference = this.maxFuel - this.fuel;
 
-    this.currentFuelValue = currentFuelValue;
-    this.maxFuelValue = maxFuelValue;
-    this.differenceFuelValue = this.maxFuelValue - this.currentFuelValue;
+    this.fuelValueTag.innerText = fuel.toString();
+    this.maxFuelValueTag.innerText = maxFuel.toString();
   }
 
   private ChangeProduct(button: HTMLElement, buttons: NodeListOf<HTMLElement>): void {
@@ -88,7 +102,7 @@ class GasPumpUi {
   }
 
   private FillFull(): void {
-    this.inputProductAmount.value = this.differenceFuelValue.toString();
+    this.inputProductAmount.value = this.fuelDifference.toString();
 
     this.CalculateTotalCost();
   }
@@ -110,9 +124,9 @@ class GasPumpUi {
       this.inputProductAmount.value = '0';
     }
 
-    if (productAmount > this.differenceFuelValue) {
-      productAmount = this.differenceFuelValue;
-      this.inputProductAmount.value = this.differenceFuelValue.toString();
+    if (productAmount > this.fuelDifference) {
+      productAmount = this.fuelDifference;
+      this.inputProductAmount.value = this.fuelDifference.toString();
     }
 
     let productPrice: number;

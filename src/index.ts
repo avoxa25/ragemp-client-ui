@@ -16,6 +16,7 @@ import './components/HUD/Speedometer/main';
 import './components/HUD/main';
 
 import './components/Menu/House/main';
+import './components/Menu/GasPump/main';
 
 import './utils/discord';
 import './utils/gas-station-blips-sync';
