@@ -163,8 +163,8 @@ export abstract class CharacterCreatorData {
     CharacterCreatorData.fatherTexts = ['Benjamin', 'Daniel', 'Joshua', 'Noah', 'Andrew', 'Juan', 'Alex', 'Isaac', 'Evan', 'Ethan', 'Vincent', 'Angel', 'Diego', 'Adrian', 'Gabriel', 'Michael', 'Santiago', 'Kevin', 'Louis', 'Samuel', 'Anthony', 'Claude', 'Niko', 'John'];
     CharacterCreatorData.motherTexts = ['Hannah', 'Aubrey', 'Jasmine', 'Gisele', 'Amelia', 'Isabella', 'Zoe', 'Ava', 'Camila', 'Violet', 'Sophia', 'Evelyn', 'Nicole', 'Ashley', 'Gracie', 'Brianna', 'Natalie', 'Olivia', 'Elizabeth', 'Charlotte', 'Emma', 'Misty'];
 
-    CharacterCreatorData.tops = [['49', '45', '26'], ['146', '111', '241']];
-    CharacterCreatorData.topTexts = [['Футболка', 'Кофта', 'Блузка'], ['Футболка', 'Водолазка', 'Рубашка Поло']];
+    CharacterCreatorData.tops = [['49', '45', '14'], ['146', '111', '241']];
+    CharacterCreatorData.topTexts = [['Футболка', 'Кофта', 'Рубашка Поло'], ['Футболка', 'Водолазка', 'Рубашка Поло']];
 
     CharacterCreatorData.legs = [['4', '8', '25'], ['1', '9', '6']];
     CharacterCreatorData.legTexts = [['Джинсы', 'Юбка', 'Шорты'], ['Джинсы', 'Джоггеры', 'Шорты']];
