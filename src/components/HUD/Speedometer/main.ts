@@ -49,18 +49,18 @@ class Speedometer {
 
     this.updaterIntervalId = setInterval(() => this.UpdateSpeedometer(), 100);
 
-    mp.keys.bind(KeyboardKeys.LeftArrow, true, this.LeftTurn);
-    mp.keys.bind(KeyboardKeys.RightArrow, true, this.RightTurn);
-    mp.keys.bind(KeyboardKeys.UpArrow, true, this.EmergencySignal);
+    mp.keys.bind(KeyboardKeys.LeftArrow, true, () => this.LeftTurn());
+    mp.keys.bind(KeyboardKeys.RightArrow, true, () => this.RightTurn());
+    mp.keys.bind(KeyboardKeys.UpArrow, true, () => this.EmergencySignal());
 
     this.browser.execute(`window.speedometerUi.Show();`);
   }
 
   private OnPlayerExitVehicle(): void {
     clearInterval(this.updaterIntervalId);
-    mp.keys.unbind(KeyboardKeys.LeftArrow, true, this.LeftTurn);
-    mp.keys.unbind(KeyboardKeys.RightArrow, true, this.RightTurn);
-    mp.keys.unbind(KeyboardKeys.UpArrow, true, this.EmergencySignal);
+    mp.keys.unbind(KeyboardKeys.LeftArrow, true);
+    mp.keys.unbind(KeyboardKeys.RightArrow, true);
+    mp.keys.unbind(KeyboardKeys.UpArrow, true);
 
     if (this.isBlinking) this.StopBlinking();
 
