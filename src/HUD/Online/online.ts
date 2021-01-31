@@ -1,11 +1,19 @@
-class OnlineUi{
+class OnlineUi {
   private currentOnlineElement: HTMLElement;
 
-  public constructor(){
+  public constructor() {
+    lottie.loadAnimation({
+      container: document.getElementById('animationLogo'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'assets/animlogo.json'
+    });
+
     this.currentOnlineElement = document.querySelector('#currentOnline') as HTMLElement;
   }
 
-  private SetCurrentOnline(currentOnline: string){
+  private SetCurrentOnline(currentOnline: string) {
     this.currentOnlineElement.innerText = currentOnline;
   }
 }
