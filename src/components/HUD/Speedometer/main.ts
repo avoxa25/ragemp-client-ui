@@ -200,7 +200,7 @@ class Speedometer {
 
     this.mileage += trip;
 
-    this.fuel -= (this.fuelConsumption * trip) // 10);
+    this.fuel -= (this.fuelConsumption * trip / 10);
     if (this.fuel <= 0) {
       this.fuel = 0;
       this.vehicle.setEngineOn(false, false, false);
