@@ -12,7 +12,7 @@ class SpeedometerUi {
     leftTurn: boolean,
     lowBeam: boolean,
     highBeam: boolean,
-    locked: number,
+    locked: boolean,
     rightTurn: boolean,
     fuel: number,
     fuelTank: number) {
@@ -47,10 +47,9 @@ class SpeedometerUi {
 
   }
 
-  private UpdateLocked(locked: number): void {
+  private UpdateLocked(locked: boolean): void {
     const lockedElement = document.querySelector('#lock') as HTMLElement;
-    if (locked == 1) lockedElement.classList.remove('nonActive');
-    else lockedElement.classList.add('nonActive');
+    locked ? lockedElement.setAttribute('src', './assets/lock-active.svg') : lockedElement.setAttribute('src', './assets/lock.svg');
   }
 
   private UpdateFuel(fuel: number, fuelTank: number): void {

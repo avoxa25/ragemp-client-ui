@@ -1,17 +1,26 @@
+import { NotificationType } from '../../../constants/enums/notification-type';
+import { CharacterService } from '../../../services/characters/character-service';
 import { KeyboardKeys } from '../../../constants/enums/keyboard-keys';
 import { RemoteResponse } from '../../../constants/events/remote-response';
 
 class Speedometer {
   private readonly browser: BrowserMp;
 
+  private characterId: number;
+
+  private isDriver: boolean;
+  private isOwner: boolean;
+
   private isBlinking: boolean;
   private leftTurn: boolean;
   private rightTurn: boolean;
 
+  private engine: boolean;
   private fuel: number;
   private fuelTank: number;
   private fuelConsumption: number;
   private locked: boolean;
+  private seatBelt: boolean;
   private mileage: number;
 
   private vehicle: VehicleMp | undefined;
@@ -21,15 +30,23 @@ class Speedometer {
   constructor() {
     this.browser = mp.browsers.new('package://components/HUD/Speedometer/speedometer.html');
 
+    this.characterId = CharacterService.GetCharacterId();
+
+    this.isDriver = false;
+    this.isOwner = false;
+
     this.isBlinking = false;
     this.leftTurn = false;
     this.rightTurn = false;
 
+    this.engine = false;
     this.fuel = 0;
     this.fuelTank = 0;
     this.fuelConsumption = 0;
     this.locked = false;
+    this.seatBelt = true;
     this.mileage = 0;
+
 
     mp.events.add(RageEnums.EventKey.PLAYER_ENTER_VEHICLE, (v: VehicleMp, s: number) => this.OnPlayerEnterVehicle(v, s));
     mp.events.add(RageEnums.EventKey.PLAYER_LEAVE_VEHICLE, () => this.OnPlayerExitVehicle());
@@ -37,21 +54,37 @@ class Speedometer {
 
   private OnPlayerEnterVehicle(vehicle: VehicleMp, seat: number): void {
     this.vehicle = vehicle;
-    this.locked = this.vehicle.getVariable('Locked') as boolean;
-    // WIKI: https://wiki.rage.mp/index.php?title=Vehicle::setDoorsLocked
-    this.locked ? this.vehicle.setDoorsLocked(2) : this.vehicle.setDoorsLocked(1);
-    const isDriver = seat === -1;
-    if (!isDriver) return;
+    mp.players.local.setConfigFlag(184, true);
+
+    this.isOwner = this.vehicle.getVariable('OwnerId') === this.characterId;
+    this.isDriver = seat === -1;
+    if (!this.isDriver) return;
+
+    this.vehicle.setLights(0);
+
+    mp.game.vehicle.defaultEngineBehaviour = false;
+    // wiki: https://wiki.rage.mp/index.php?title=Player_Config_Flags
+    mp.players.local.setConfigFlag(429, true);
+
+    const engine = vehicle.getIsEngineRunning() === 1;
+    this.engine = engine;
 
     this.fuel = this.vehicle.getVariable('Fuel') as number;
+    this.fuelConsumption = this.vehicle.getVariable('FuelConsumption') as number;
     this.fuelTank = this.vehicle.getVariable('TankSize') as number;
     this.mileage = this.vehicle.getVariable('Mileage') as number;
+
+    const engineMultiplier = this.vehicle.getVariable('EngineMultiplier') as number;
+    this.vehicle.setEnginePowerMultiplier(engineMultiplier);
 
     this.updaterIntervalId = setInterval(() => this.UpdateSpeedometer(), 100);
 
     mp.keys.bind(KeyboardKeys.LeftArrow, true, () => this.LeftTurn());
     mp.keys.bind(KeyboardKeys.RightArrow, true, () => this.RightTurn());
     mp.keys.bind(KeyboardKeys.UpArrow, true, () => this.EmergencySignal());
+    mp.keys.bind(KeyboardKeys.KeyB, true, () => this.SetEngineStatus(!this.engine));
+    mp.keys.bind(KeyboardKeys.KeyL, true, () => this.SetLockDoor(!this.locked));
+    mp.keys.bind(KeyboardKeys.Quote, true, () => this.SetSeatBelt(!this.seatBelt));
 
     this.browser.execute(`window.speedometerUi.Show();`);
   }
@@ -61,10 +94,48 @@ class Speedometer {
     mp.keys.unbind(KeyboardKeys.LeftArrow, true);
     mp.keys.unbind(KeyboardKeys.RightArrow, true);
     mp.keys.unbind(KeyboardKeys.UpArrow, true);
+    mp.keys.unbind(KeyboardKeys.KeyB, true);
+    mp.keys.unbind(KeyboardKeys.KeyL, true);
+    mp.keys.unbind(KeyboardKeys.Quote, true);
 
     if (this.isBlinking) this.StopBlinking();
 
     this.browser.execute(`window.speedometerUi.Hide();`);
+  }
+
+  private SetEngineStatus(enabled: boolean): void {
+    if (mp.gui.cursor.visible) return;
+    if (!this.vehicle) return;
+    if (this.fuel === 0) return mp.events.call(RemoteResponse.NotificationSent, NotificationType.Error, 'Бак пуст');
+
+    this.engine = enabled;
+    this.vehicle.setEngineOn(enabled, false, true);
+
+    const notification = this.engine ? 'Двигатель запущен' : 'Двигатель остановлен';
+    mp.events.call(RemoteResponse.NotificationSent, NotificationType.Info, notification);
+  }
+
+  private SetSeatBelt(enabled: boolean): void {
+    // wiki: https://wiki.rage.mp/index.php?title=Player_Config_Flags
+    mp.players.local.setConfigFlag(32, enabled);
+    this.seatBelt = enabled;
+
+    const notification = this.seatBelt ? 'Ремень безопасности снят' : 'Ремень безопасности надет';
+    mp.events.call(RemoteResponse.NotificationSent, NotificationType.Info, notification);
+  }
+
+  // TODO: Create setting lock door outside car
+
+  private SetLockDoor(locked: boolean): void {
+    if (!this.vehicle) return;
+    if (mp.gui.cursor.visible) return;
+    if (!this.isOwner && !this.isDriver) return mp.events.call(RemoteResponse.NotificationSent, NotificationType.Error, 'У вас нет ключей от данного транспорта');
+
+    this.locked = locked;
+    this.locked ? this.vehicle.setDoorsLocked(6) : this.vehicle.setDoorsLocked(1);
+
+    const notification = this.locked ? 'Транспортное средство закрыто' : 'Транспортное средство открыто';
+    mp.events.call(RemoteResponse.NotificationSent, NotificationType.Info, notification);
   }
 
   private StopBlinking(): void {
@@ -77,24 +148,31 @@ class Speedometer {
   }
 
   private EmergencySignal(): void {
+    if (mp.gui.cursor.visible) return;
     if (this.isBlinking) return this.StopBlinking();
     this.isBlinking = true;
     this.blinkIntervalId = setInterval(() => this.Blinking(true, true), 500);
   }
 
   private LeftTurn(): void {
+    if (mp.gui.cursor.visible) return;
+
     if (this.isBlinking) return this.StopBlinking();
     this.isBlinking = true;
     this.blinkIntervalId = setInterval(() => this.Blinking(true, false), 500);
   }
 
   private RightTurn(): void {
+    if (mp.gui.cursor.visible) return;
+
     if (this.isBlinking) return this.StopBlinking();
     this.isBlinking = true;
     this.blinkIntervalId = setInterval(() => this.Blinking(false, true), 500);
   }
 
   private Blinking(IsLeft: boolean, IsRight: boolean): void {
+    if (mp.gui.cursor.visible) return;
+
     if (IsLeft && IsRight) {
       this.leftTurn = !this.leftTurn;
       this.rightTurn = !this.rightTurn;
@@ -116,14 +194,13 @@ class Speedometer {
 
     const speed = this.vehicle.getSpeed();
     const trip = speed / 1000;
-
     const lights = (this.vehicle as any).getLightsState(1, 1);
     const lowBeam: boolean = lights.lightsOn;
-    const highBeam: boolean = lights.highBeamsOn;
+    const highBeam: boolean = lights.highbeamsOn;
 
     this.mileage += trip;
 
-    this.fuel -= this.fuelConsumption * trip;
+    this.fuel -= (this.fuelConsumption * trip) // 10);
     if (this.fuel <= 0) {
       this.fuel = 0;
       this.vehicle.setEngineOn(false, false, false);

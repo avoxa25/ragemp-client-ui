@@ -51,6 +51,11 @@ export enum KeyboardKeys {
   KeyZ = 0x5A,
   Space = 0x20,
 
+  OpenBracket = 0xDE,
+  BackSlash = 0xDC,
+  CloseBracket = 0xDE,
+  Quote = 0xDE,
+
   Escape = 0x1B,
   Tab = 0x09,
   CapsLock = 0x14,
