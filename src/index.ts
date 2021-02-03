@@ -17,6 +17,7 @@ import './components/HUD/main';
 
 import './components/Menu/House/main';
 
+import './utils/cursor';
 import './utils/discord';
 import './utils/gas-station-blips-sync';
 import './utils/house-blips-sync';

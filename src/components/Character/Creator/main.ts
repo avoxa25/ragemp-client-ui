@@ -18,7 +18,7 @@ class CharacterCreator {
 
     this.character = new CharacterCreatorModel();
 
-    mp.gui.cursor.show(true, true);
+    mp.events.call(LocalEvent.CursorVisible, true, true);
     mp.players.local.freezePosition(true);
 
     mp.game.ui.displayRadar(false);
@@ -72,7 +72,7 @@ class CharacterCreator {
     this.camera.setActive(false);
     this.camera.destroy();
 
-    mp.gui.cursor.show(false, false);
+    mp.events.call(LocalEvent.CursorVisible, false, false);
     mp.players.local.freezePosition(false);
 
     mp.game.cam.renderScriptCams(false, false, 0, true, false);

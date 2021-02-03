@@ -14,7 +14,7 @@ class CharacterSpawnSelect {
     mp.game.ui.displayRadar(false);
     mp.game.ui.displayHud(false);
 
-    mp.gui.cursor.show(true, true);
+    mp.events.call(LocalEvent.CursorVisible, true, true);
 
     this.camera = mp.cameras.new('default', CameraConstants.StandardCameraPosition, CameraConstants.StandardCameraRotation, CameraConstants.StandardCameraFOV);
 
@@ -34,7 +34,7 @@ class CharacterSpawnSelect {
     this.browser.destroy();
     mp.players.local.freezePosition(false);
 
-    mp.gui.cursor.show(false, false);
+    mp.events.call(LocalEvent.CursorVisible, false, false);
 
     mp.game.cam.renderScriptCams(false, false, 0, true, false);
 

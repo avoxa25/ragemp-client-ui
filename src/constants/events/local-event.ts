@@ -1,5 +1,6 @@
 export enum LocalEvent {
-  ChatCursorToggle = 'Local:Chat:CursorToggle',
+  CursorVisible = 'Local:Cursor:Visible',
+  CursorSprite = 'Local:Cursor:Sprite',
 
   Login = 'Local:AuthenticationUi:Login',
   Registration = 'Local:AuthenticationUi:Registration',
@@ -29,5 +30,4 @@ export enum LocalEvent {
   HouseSetOnSellState = 'Local:House:SetOnSellState',
   
   HouseMenuClose = 'Local:HouseMenu:Close',
-  HouseMenuCursorVisible = 'Local:HouseMenu:Visible'
 }
