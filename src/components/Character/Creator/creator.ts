@@ -40,47 +40,37 @@ class CharacterCreatorUi {
     const tabs = document.getElementsByClassName('parameters') as HTMLCollectionOf<HTMLElement>;
     for (let i = 0; i < tabs.length; i++) {
       const isSelectedTab = tabs[i].id === selectedTabId;
-      if (isSelectedTab) {
-        tabs[i].classList.add('active')
-      } else {
-        tabs[i].classList.remove('active');
-      };
+      isSelectedTab ? tabs[i].classList.add('active') : tabs[i].classList.remove('active');
     }
+
+    if (selectedTabId === 'tabHair') this.ShowMaleLinks();
 
     const tabLinks = document.getElementsByClassName('tabLinks') as HTMLCollectionOf<HTMLElement>;
     for (let i = 0; i < tabLinks.length; i++) {
       const isSelectedTabLink = tabLinks[i].id === selectedTabLinkId;
-      if (isSelectedTabLink) {
-        tabLinks[i].classList.add('active');
-      } else {
-        tabLinks[i].classList.remove('active');
-      }
+      isSelectedTabLink ? tabLinks[i].classList.add('active') : tabLinks[i].classList.remove('active');
     }
 
-    const characterJson = JSON.stringify(this.character);
-    if (selectedTabId === 'tabHair') mp.events.call(LocalEvent.CharacterCreatorTabHair, true, characterJson);
-    else mp.events.call(LocalEvent.CharacterCreatorTabHair, false, characterJson);
+    selectedTabId === 'tabHair' ? mp.events.call(LocalEvent.CharacterCreatorTabHair, true) : mp.events.call(LocalEvent.CharacterCreatorTabHair, false);
+    selectedTabId === 'tabFace' ? mp.events.call(LocalEvent.CharacterCreatorTabFace, true) : mp.events.call(LocalEvent.CharacterCreatorTabFace, false);
+  }
+
+  private ShowMaleLinks(): void {
+    const maleLinks = document.querySelectorAll('li.maleLinks') as NodeListOf<HTMLElement>;
+    maleLinks.forEach((link) => this.character.gender ? link.style.display = 'flex' : link.style.display = 'none');
   }
 
   private OpenSubTab(selectedTabId: string, selectedTabLinkId: string): void {
     const subTabs = document.getElementsByClassName('subTab') as HTMLCollectionOf<HTMLElement>;
     for (let i = 0; i < subTabs.length; i++) {
       const isSelectedTab = subTabs[i].id === selectedTabId;
-      if (isSelectedTab) {
-        subTabs[i].classList.add('active')
-      } else {
-        subTabs[i].classList.remove('active');
-      };
+      isSelectedTab ? subTabs[i].classList.add('active') : subTabs[i].classList.remove('active');
     }
 
     const subTabLinks = document.getElementsByClassName('subTabLinks') as HTMLCollectionOf<HTMLElement>;
     for (let i = 0; i < subTabLinks.length; i++) {
       const isSelectedTabLink = subTabLinks[i].id === selectedTabLinkId;
-      if (isSelectedTabLink) {
-        subTabLinks[i].classList.add('active');
-      } else {
-        subTabLinks[i].classList.remove('active');
-      }
+      isSelectedTabLink ? subTabLinks[i].classList.add('active') : subTabLinks[i].classList.remove('active');
     }
   }
 
@@ -184,7 +174,19 @@ class CharacterCreatorUi {
 
     const currentValueIndex = values.indexOf(input.value);
     let nextValueIndex = currentValueIndex + inputValueCycle;
-    if (form.id === 'formHair' && inputName !== 'hair' || form.id === 'formFace' && inputName !== 'eyesColor') {
+    if (form.id === 'formHair'
+      && inputName !== 'hair'
+      && inputName !== 'hairColor'
+      && inputName !== 'hairHighLight'
+      && inputName !== 'eyeBrowsColor'
+      && inputName !== 'eyeBrowsSecondaryColor'
+      && inputName !== 'beardColor'
+      && inputName !== 'beardSecondaryColor'
+      && inputName !== 'chestHairColor'
+      && inputName !== 'chestHairSecondaryColor'
+
+      || form.id === 'formFace'
+      && inputName !== 'eyesColor') {
       nextValueIndex = nextValueIndex <= -2 ? values.length - 1 : nextValueIndex;
       nextValueIndex = nextValueIndex === values.length + 1 ? 0 : nextValueIndex;
       nextValueIndex = nextValueIndex === values.length ? -1 : nextValueIndex;
@@ -266,6 +268,24 @@ class CharacterCreatorUi {
 
     const rawShoes = formData.get('shoes') as string;
     this.character.shoes = Number.parseInt(rawShoes);
+
+    switch (this.character.top) {
+      case 49:
+      case 14:
+      case 146:
+      case 241:
+        this.character.torso = 0;
+        break;
+      case 45:
+        this.character.torso = 7;
+        break;
+      case 111:
+        this.character.torso = 4;
+        break;
+      default:
+        this.character.torso = 15;
+        break;
+    }
 
     const characterJson = JSON.stringify(this.character);
     mp.events.call(LocalEvent.CharacterCreatorUpdateClothes, characterJson);

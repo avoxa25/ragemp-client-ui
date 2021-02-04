@@ -1,3 +1,4 @@
+import { KeyboardKeys } from '../../../constants/enums/keyboard-keys';
 import { CameraConstants } from '../../../constants/camera';
 import { LocalEvent } from '../../../constants/events/local-event';
 import { RemoteEvent } from '../../../constants/events/remote-event';
@@ -5,15 +6,21 @@ import { RemoteResponse } from '../../../constants/events/remote-response';
 import { CharacterCreatorModel } from '../../../models/characters/character-creator';
 
 class CharacterCreator {
-  private readonly camera: CameraMp;
   private readonly browser: BrowserMp;
+  private readonly camera: CameraMp;
+  private readonly headCamera: CameraMp;
 
   private character: CharacterCreatorModel;
 
   constructor() {
+    this.SetDefaultClothes();
+
     this.browser = mp.browsers.new('package://components/Character/Creator/creator.html');
 
-    this.camera = mp.cameras.new('default', CameraConstants.CreatorCameraPosition, CameraConstants.CreatorCameraRotation, CameraConstants.StandardCameraFOV);
+    this.headCamera = mp.cameras.new('default', CameraConstants.CreatorCameraHeadPosition, CameraConstants.CreatorCameraStandardRotation, CameraConstants.StandardCameraFOV);
+    this.headCamera.setActive(false);
+
+    this.camera = mp.cameras.new('default', CameraConstants.CreatorCameraStandardPosition, CameraConstants.CreatorCameraStandardRotation, CameraConstants.StandardCameraFOV);
     this.camera.setActive(true);
 
     this.character = new CharacterCreatorModel();
@@ -30,10 +37,8 @@ class CharacterCreator {
     mp.events.add(RemoteResponse.CharacterCreatorGenderChangeCompleted, () => this.ChangeGenderComplete());
     mp.events.add(RemoteResponse.CharacterCreatorFailed, (m: string) => this.ErrorMessage(m));
 
-    mp.events.add(LocalEvent.CharacterCreatorTabHair, (is: boolean, c: string) => {
-      this.UpdateCharacterJson(c);
-      this.TabHair(is);
-    });
+    mp.events.add(LocalEvent.CharacterCreatorTabHair, (s: boolean) => this.TabHair(s));
+    mp.events.add(LocalEvent.CharacterCreatorTabFace, (s: boolean) => this.TabFace(s));
 
     mp.events.add(LocalEvent.CharacterCreatorCreate, (c: string) => {
       this.UpdateCharacterJson(c);
@@ -85,14 +90,26 @@ class CharacterCreator {
     this.character = JSON.parse(characterJson);
   }
 
-  private TabHair(isSelected: boolean): void {
-    if (isSelected) {
+  private TabHair(selected: boolean): void {
+    if (selected) {
       mp.players.local.setComponentVariation(3, 15, 0, 2);
       mp.players.local.setComponentVariation(11, 15, 0, 2);
     }
     else {
-      mp.players.local.setComponentVariation(11, this.character.top, 0, 2);
       mp.players.local.setComponentVariation(3, this.character.torso, 0, 2);
+      mp.players.local.setComponentVariation(11, this.character.top, 0, 2);
+    }
+  }
+
+  private TabFace(selected: boolean): void {
+    if (selected && this.camera.isActive()) {
+      this.headCamera.setActiveWithInterp(this.camera.handle, 500, 0, 0);
+      this.camera.setActive(false);
+    }
+
+    if (!selected && this.headCamera.isActive()) {
+      this.camera.setActiveWithInterp(this.headCamera.handle, 500, 0, 0);
+      this.headCamera.setActive(false);
     }
   }
 
@@ -100,11 +117,19 @@ class CharacterCreator {
     mp.events.callRemote(RemoteEvent.CharacterCreatorChangeGender, this.character.gender);
   }
 
-  private ChangeGenderComplete() {
+  private ChangeGenderComplete(): void {
     this.UpdateClothes();
     this.UpdateMain();
     this.UpdateFace();
     this.UpdateHair();
+  }
+
+  private SetDefaultClothes(): void {
+    mp.players.local.setComponentVariation(3, 0, 0, 2);
+    mp.players.local.setComponentVariation(4, 1, 0, 2);
+    mp.players.local.setComponentVariation(8, 15, 0, 2);
+    mp.players.local.setComponentVariation(6, 1, 0, 2);
+    mp.players.local.setComponentVariation(11, 146, 0, 2);
   }
 
   private Create(): void {
@@ -132,10 +157,6 @@ class CharacterCreator {
 
   private UpdateClothes(): void {
     switch (this.character.top) {
-      case 111:
-        this.character.torso = 4;
-        mp.players.local.setComponentVariation(3, this.character.torso, 0, 2);
-        break;
       case 49:
       case 14:
       case 146:
@@ -145,6 +166,10 @@ class CharacterCreator {
         break;
       case 45:
         this.character.torso = 7;
+        mp.players.local.setComponentVariation(3, this.character.torso, 0, 2);
+        break;
+      case 111:
+        this.character.torso = 4;
         mp.players.local.setComponentVariation(3, this.character.torso, 0, 2);
         break;
       default:
