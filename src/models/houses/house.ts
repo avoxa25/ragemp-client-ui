@@ -1,23 +1,18 @@
 import { HouseType } from './house-type';
 
-export class House {
-  public id: number;
-  public ownerId: number | null | undefined;
+export interface House {
+  id: number;
+  ownerId: number | null;
 
-  public name: string | undefined;
-  public type: HouseType | undefined;
-  public garageCapacity: number | undefined;
-  public locked: boolean | undefined;
+  name: string;
+  type: HouseType;
+  garageCapacity: number;
+  locked: boolean;
 
-  public onSale: boolean | undefined;
-  public originalPrice: number | undefined;
-  public onSalePrice: number | undefined;
+  onSale: boolean;
+  originalPrice: number;
+  onSalePrice: number;
 
-  public entrancePosition: Vector3Mp | undefined;
-  public exitPosition: Vector3Mp | undefined;
-
-  constructor(id: number) {
-    this.id = id;
-    this.ownerId = null;
-  }
+  entrancePosition: Vector3Mp;
+  exitPosition: Vector3Mp;
 }

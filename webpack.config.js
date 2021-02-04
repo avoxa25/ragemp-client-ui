@@ -40,7 +40,7 @@ module.exports = (env, argv) => {
       filename: '[name].js'
     },
     resolve: {
-      extensions: ['.ts']
+      extensions: ['.ts', '.tsx', '.js']
     },
     module: {
       rules: [

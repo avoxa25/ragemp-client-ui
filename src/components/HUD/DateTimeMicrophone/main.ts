@@ -4,19 +4,17 @@ import { DateTimeService } from '../../../services/datetime-service';
 
 class DateTimeMicrophone {
   private readonly browser: BrowserMp;
-  private readonly inGameDateTime: Date;
+  private readonly dateTimeService: DateTimeService;
 
   public constructor() {
     this.browser = mp.browsers.new('package://components/HUD/DateTimeMicrophone/date-time-microphone.html');
+    this.dateTimeService = new DateTimeService();
 
     mp.keys.bind(KeyboardKeys.KeyN, true, () => this.EnableMicrophone());
     mp.keys.bind(KeyboardKeys.KeyN, false, () => this.DisableMicrophone());
 
-    this.inGameDateTime = DateTimeService.GetInGameDateTime();
-
-    const multiplier = DateTimeService.GetMultiplier();
-    const updateIntervalInMillis = (1 / multiplier) * 60 * 1000;
-    setInterval(() => this.UpdateDateTime(), updateIntervalInMillis);
+    this.dateTimeService.GetInGame()
+      .subscribe(d => this.UpdateDateTime(d));
   }
 
   private EnableMicrophone(): void {
@@ -29,8 +27,8 @@ class DateTimeMicrophone {
     this.browser.execute(`window.dateTimeMicrophoneUi.ToggleMicrophone(${false});`);
   }
 
-  private UpdateDateTime(): void {
-    const rawDateTime = this.inGameDateTime.toISOString();
+  private UpdateDateTime(dateTime: Date): void {
+    const rawDateTime = dateTime.toISOString();
     this.browser.execute(`window.dateTimeMicrophoneUi.SetDateTime('${rawDateTime}');`);
   }
 }

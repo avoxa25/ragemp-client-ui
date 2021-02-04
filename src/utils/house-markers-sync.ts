@@ -1,47 +1,64 @@
+import { interval } from 'rxjs';
+import { map, mergeMap, switchMap } from 'rxjs/operators';
+import { HouseProvider } from '../services/providers/house-provider';
+import { CharacterProvider } from '../services/providers/character-provider';
 import { MarkerConstants } from '../constants/marker';
-import { Character } from '../models/characters/character';
-import { CharacterService } from '../services/characters/character-service';
-import { HouseService } from '../services/houses/house-service';
-import { House } from '../models/houses/house';
 import { RemoteResponse } from '../constants/events/remote-response';
+import { Character } from '../models/characters/character';
+import { House } from '../models/houses/house';
 
 class HouseMarkersSync {
+  private readonly houseProvider: HouseProvider;
+  private readonly characterProvider: CharacterProvider;
+
+  private character: Character;
   private readonly entranceMarkers: { [id: number]: { marker: MarkerMp, ownerId: number | null, onSale: boolean, locked: boolean } };
   private readonly exitMarkers: { [id: number]: { marker: MarkerMp, ownerId: number | null, onSale: boolean, locked: boolean } };
 
-  private readonly character: Character;
-
   constructor() {
-    this.entranceMarkers = {};
-    this.exitMarkers = {};
+    this.houseProvider = new HouseProvider();
+    this.characterProvider = new CharacterProvider();
 
-    this.character = CharacterService.Get();
+    this.character = undefined!;
+    this.entranceMarkers = [];
+    this.exitMarkers = [];
+
+    this.characterProvider.Get().subscribe(c => this.character = c);
 
     this.CreateClientMarkers();
-    setInterval(() => this.Sync(), 1000);
+    this.StartSync();
   }
 
   private CreateClientMarkers(): void {
-    HouseService.GetAll()
-      .filter(h => h.ownerId !== undefined)
-      .filter(h => h.onSale !== undefined)
-      .filter(h => h.locked !== undefined)
-      .filter(h => h.entrancePosition !== undefined)
-      .filter(h => h.exitPosition !== undefined)
-      .forEach(h => this.CreateHouseMarkers(h));
+    this.houseProvider.GetAll()
+      .pipe(
+        mergeMap(h => h),
+        map(h => ({ house: h, markers: this.CreateHouseMarkers(h) })))
+      .subscribe(t => {
+        this.entranceMarkers[t.house.id] = {
+          marker: t.markers.entrance,
+          ownerId: t.house.ownerId,
+          onSale: t.house.onSale,
+          locked: t.house.locked
+        };
+        this.exitMarkers[t.house.id] = {
+          marker: t.markers.exit,
+          ownerId: t.house.ownerId,
+          onSale: t.house.onSale,
+          locked: t.house.locked
+        };
+      });
   }
 
-  private Sync(): void {
-    HouseService.GetAll()
-      .filter(h => h.ownerId !== undefined)
-      .filter(h => h.onSale !== undefined)
-      .filter(h => h.locked !== undefined)
-      .filter(h => h.entrancePosition !== undefined)
-      .filter(h => h.exitPosition !== undefined)
-      .forEach(h => this.SyncHouseMarkers(h));
+  private StartSync(): void {
+    interval(1000)
+      .pipe(
+        switchMap(() => this.houseProvider.GetAll()),
+        mergeMap(h => h))
+      .subscribe(h => this.SyncHouseMarkers(h));
   }
 
-  private CreateHouseMarkers(house: House): void {
+  private CreateHouseMarkers(house: House): { entrance: MarkerMp, exit: MarkerMp } {
     let color = this.GetColor(house.ownerId as number | null, house.onSale as boolean);
 
     const entrancePosition = new mp.Vector3(house.entrancePosition?.x, house.entrancePosition?.y, house.entrancePosition?.z);
@@ -60,13 +77,6 @@ class HouseMarkersSync {
         dimension: 0
       });
 
-    this.entranceMarkers[house.id] = {
-      marker: entranceMarker,
-      ownerId: house.ownerId as number | null,
-      onSale: house.onSale as boolean,
-      locked: house.locked as boolean
-    };
-
     const exitPosition = new mp.Vector3(house.entrancePosition?.x, house.entrancePosition?.y, house.entrancePosition?.z);
     exitPosition.z -= 1.5;
 
@@ -83,12 +93,7 @@ class HouseMarkersSync {
         dimension: house.id
       });
 
-    this.exitMarkers[house.id] = {
-      marker: exitMarker,
-      ownerId: house.ownerId as number | null,
-      onSale: house.onSale as boolean,
-      locked: house.locked as boolean
-    };
+    return { entrance: entranceMarker, exit: exitMarker };
   }
 
   private SyncHouseMarkers(house: House): void {

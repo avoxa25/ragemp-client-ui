@@ -1,63 +1,43 @@
-import { RemoteResponse } from '../constants/events/remote-response';
+import { Observable, interval } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { DummyEntityConstants } from '../constants/dummy-entity';
 
-export abstract class DateTimeService {
-  private static worldTimeDummyEntity: DummyEntityMp;
+export class DateTimeService {
+  private readonly worldTimeDummyEntity: DummyEntityMp;
+  private readonly multiplier: number;
+  private readonly serverBaseUtcOffsetInMinutes: number;
 
-  private static multiplier: number;
-  private static serverBaseUtcOffsetInMinutes: number;
-
-  private static inGameDateTime: Date;
-  private static serverDateTime: Date;
-
-  public static Start(): void {
-    DateTimeService.worldTimeDummyEntity = mp.dummies.toArray().find(d => d.id === DummyEntityConstants.WorldTimeId) as DummyEntityMp;
-
-    const multiplier = DateTimeService.worldTimeDummyEntity.getVariable('Multiplier') as number;
-    DateTimeService.multiplier = multiplier;
-
-    DateTimeService.inGameDateTime = new Date();
-    DateTimeService.serverDateTime = new Date();
-
-    const updateInGameDateTimeIntervalInMillis = (1 / DateTimeService.multiplier) * 60 * 1000;
-    setInterval(() => this.UpdateInGameDateTime(), updateInGameDateTimeIntervalInMillis);
-
-    const serverBaseUtcOffsetInMinutes = DateTimeService.worldTimeDummyEntity.getVariable('BaseUtcOffset') as number;
-    DateTimeService.serverBaseUtcOffsetInMinutes = serverBaseUtcOffsetInMinutes;
-
-    setTimeout(() => this.UpdateServerDateTime(), 60 * 1000);
+  constructor() {
+    this.worldTimeDummyEntity = mp.dummies.toArray().find(d => d.id === DummyEntityConstants.WorldTimeId) as DummyEntityMp;
+    this.multiplier = this.worldTimeDummyEntity.getVariable('Multiplier') as number;
+    this.serverBaseUtcOffsetInMinutes = this.worldTimeDummyEntity.getVariable('BaseUtcOffset') as number;
   }
 
-  public static GetMultiplier(): number {
-    return DateTimeService.multiplier;
+  public GetMultiplier(): number {
+    return this.multiplier;
   }
 
-  public static GetInGameDateTime(): Date {
-    return DateTimeService.inGameDateTime;
+  public GetInGame(): Observable<Date> {
+    const oneInGameMinuteInMillis = (1 / this.multiplier) * 60 * 1000;
+    return interval(oneInGameMinuteInMillis)
+      .pipe(
+        map(() => this.worldTimeDummyEntity.getVariable('DateTime') as string),
+        map(s => new Date(s)));
   }
 
-  public static GetServerDateTime(): Date {
-    return DateTimeService.serverDateTime;
-  }
+  public GetServer(): Observable<Date> {
+    const oneMinuteInMillis = 60 * 1000;
+    return interval(oneMinuteInMillis)
+      .pipe(
+        map(() => {
+          const clientDateTime = new Date();
+          const clientUnixTime = clientDateTime.getTime();
+          const utcOffsetInMinutes = clientDateTime.getTimezoneOffset();
+          const serverOffsetInMinutes = this.serverBaseUtcOffsetInMinutes - utcOffsetInMinutes;
+          const utcUnixTime = clientUnixTime - serverOffsetInMinutes * 60 * 1000;
+          clientDateTime.setTime(utcUnixTime);
 
-  private static UpdateInGameDateTime(): void {
-    const rawInGameDateTime = DateTimeService.worldTimeDummyEntity.getVariable('DateTime') as string;
-    const inGameDateTime = new Date(rawInGameDateTime);
-    const inGameUnixTime = inGameDateTime.getTime();
-
-    DateTimeService.inGameDateTime.setTime(inGameUnixTime);
-  }
-
-  private static UpdateServerDateTime(): void {
-    const clientDateTime = new Date();
-    const clientUnixTime = clientDateTime.getTime();
-
-    const utcOffsetInMinutes = clientDateTime.getTimezoneOffset();
-    const utcUnixTime = clientUnixTime - utcOffsetInMinutes * 60 * 1000;
-
-    const serverUnixTime = utcUnixTime + DateTimeService.serverBaseUtcOffsetInMinutes * 60 * 1000;
-    DateTimeService.serverDateTime.setTime(serverUnixTime);
+          return clientDateTime;
+        }));
   }
 }
-
-mp.events.add(RemoteResponse.LoginAllowed, () => DateTimeService.Start());

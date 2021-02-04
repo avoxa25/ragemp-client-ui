@@ -5,18 +5,26 @@ import { NotificationType } from '../../../constants/enums/notification-type';
 import { KeyboardKeys } from '../../../constants/enums/keyboard-keys';
 import { House } from '../../../models/houses/house';
 import { Character } from '../../../models/characters/character';
-import { CharacterService } from '../../../services/characters/character-service';
-import { HouseService } from '../../../services/houses/house-service';
+import { CharacterProvider, } from '../../../services/providers/character-provider';
+import { HouseProvider } from '../../../services/providers/house-provider';
 
 class HouseMenu {
   private readonly browser: BrowserMp;
-  private readonly character: Character;
+  private readonly houseProvider: HouseProvider;
+  private readonly characterProvider: CharacterProvider;
 
-  private house: House | undefined;
+  private character: Character;
+  private house: House;
 
   public constructor() {
     this.browser = mp.browsers.new('package://components/Menu/House/house.html');
-    this.character = CharacterService.Get();
+    this.houseProvider = new HouseProvider();
+    this.characterProvider = new CharacterProvider();
+
+    this.character = undefined!;
+    this.house = undefined!;
+
+    this.characterProvider.Get().subscribe(c => this.character = c);
 
     mp.events.add(RemoteResponse.MenusHouseClose, () => this.HideHouseMenu());
     mp.events.add(RemoteResponse.MenusHouseReload, () => this.ReloadHouseMenu());
@@ -38,10 +46,12 @@ class HouseMenu {
     if (!houseColShape) return;
 
     const houseId = colShape.getVariable('Id') as number;
-    this.house = HouseService.GetById(houseId);
-
-    mp.events.call(RemoteResponse.NotificationSent, NotificationType.Info, 'Нажмите Е для открытия меню дома');
-    mp.keys.bind(KeyboardKeys.KeyE, true, () => this.ShowHouseMenu());
+    this.houseProvider.Get(houseId)
+      .subscribe(h => {
+        this.house = h;
+        mp.events.call(RemoteResponse.NotificationSent, NotificationType.Info, 'Нажмите Е для открытия меню дома');
+        mp.keys.bind(KeyboardKeys.KeyE, true, () => this.ShowHouseMenu());
+      });
   }
 
   private PlayerExitColShape(): void {

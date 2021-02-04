@@ -1,21 +1,22 @@
-import { Character } from '../../../models/characters/character';
-import { CharacterService } from '../../../services/characters/character-service';
+import { CharacterProvider } from '../../../services/providers/character-provider';
 import { RemoteResponse } from '../../../constants/events/remote-response';
 
 class CashAmmo {
   private readonly browser: BrowserMp;
-  private readonly character: Character;
+  private readonly characterProvider: CharacterProvider;
 
   constructor() {
     this.browser = mp.browsers.new('package://components/HUD/CashAmmo/cash-ammo.html');
-    this.character = CharacterService.Get();
+    this.characterProvider = new CharacterProvider();
 
-    setInterval(() => this.UpdateCash(), 5000);
+    this.characterProvider.Get()
+      .subscribe(c => this.UpdateCash(c.cash));
+
     setInterval(() => this.UpdateAmmo(), 100);
   }
 
-  private UpdateCash(): void {
-    this.browser.execute(`window.cashAmmoUi.UpdateCash(${this.character.cash});`);
+  private UpdateCash(cash: number): void {
+    this.browser.execute(`window.cashAmmoUi.UpdateCash(${cash});`);
   }
 
   private UpdateAmmo(): void {
