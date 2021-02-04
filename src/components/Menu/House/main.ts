@@ -6,7 +6,7 @@ import { KeyboardKeys } from '../../../constants/enums/keyboard-keys';
 import { House } from '../../../models/houses/house';
 import { Character } from '../../../models/characters/character';
 import { CharacterService } from '../../../services/characters/character-service';
-import { HouseService } from '../../../services/houses/house-service';
+import { HouseService } from '../../../services/houses//house-service';
 
 class HouseMenu {
   private readonly browser: BrowserMp;
@@ -30,7 +30,6 @@ class HouseMenu {
     mp.events.add(LocalEvent.HouseSetOnSellState, (os: boolean, p: number) => this.HouseSetOnSellState(os, p));
 
     mp.events.add(LocalEvent.HouseMenuClose, () => this.HideHouseMenu());
-    mp.events.add(LocalEvent.HouseMenuCursorVisible, (fc: boolean, v: boolean) => this.MenuCursorVisible(fc, v));
   }
 
   private PlayerEnterColShape(colShape: ColshapeMp): void {
@@ -58,15 +57,15 @@ class HouseMenu {
 
   private HideHouseMenu(): void {
     this.ReloadHouseMenu();
-    this.MenuCursorVisible(false, false);
 
+    if (mp.gui.cursor.visible) mp.events.call(LocalEvent.CursorVisible, false, false);
     this.browser.execute(`window.houseMenuUi.HideHouseMenu();`);
   }
 
   private ReloadHouseMenu(): void {
     this.browser.reload(false);
 
-    this.MenuCursorVisible(false, false);
+    if (mp.gui.cursor.visible) mp.events.call(LocalEvent.CursorVisible, false, false);
   }
 
   private HouseBuy(): void {
@@ -83,10 +82,6 @@ class HouseMenu {
 
   private HouseSetOnSellState(onSale: boolean, price: number): void {
     mp.events.callRemote(RemoteEvent.HouseSetOnSellState, (this.house as House).id, onSale, price);
-  }
-
-  private MenuCursorVisible(freezeControls: boolean, visible: boolean): void {
-    mp.gui.cursor.show(freezeControls, visible);
   }
 }
 

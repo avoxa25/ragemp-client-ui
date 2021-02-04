@@ -11,7 +11,6 @@ class AuthenticationUi {
     this.StartRegistrationTab();
     this.StartRecoveryTab();
   }
-
   public ShowErrorMessage(type: AuthenticationErrorType, message: string): void {
     let errorMessage;
     switch (type) {

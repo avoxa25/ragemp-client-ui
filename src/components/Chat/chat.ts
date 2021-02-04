@@ -56,10 +56,10 @@ class ChatUi {
 
     if (visible) {
       this.newMessageInput.focus();
-      this.cursorSetIntervalId = setInterval(() => mp.events.call(LocalEvent.ChatCursorToggle, visible, visible), 250);
+      this.cursorSetIntervalId = setInterval(() => mp.events.call(LocalEvent.CursorVisible, visible, visible), 250);
     } else {
       clearInterval(this.cursorSetIntervalId);
-      mp.events.call(LocalEvent.ChatCursorToggle, visible, visible);
+      mp.events.call(LocalEvent.CursorVisible, visible, visible);
     }
   }
 

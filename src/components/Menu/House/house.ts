@@ -32,7 +32,7 @@ class HouseMenuUi {
     this.isOwner = isOwner;
 
     this.house = JSON.parse(houseModelJson);
-    mp.events.call(LocalEvent.HouseMenuCursorVisible, true, true);
+    mp.events.call(LocalEvent.CursorVisible, true, true);
 
     this.UpdateHouseInfo();
 
@@ -62,7 +62,7 @@ class HouseMenuUi {
       this.isMenuOpened = false;
 
       mp.events.call(LocalEvent.HouseMenuClose);
-      mp.events.call(LocalEvent.HouseMenuCursorVisible, false, false);
+      mp.events.call(LocalEvent.CursorVisible, true, true);
     }
   }
   private UpdateHouseInfo() {

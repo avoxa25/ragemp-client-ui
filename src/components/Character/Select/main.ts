@@ -9,21 +9,19 @@ class CharacterSelect {
     this.browser = mp.browsers.new('package://components/Character/Select/select.html');
     mp.players.local.freezePosition(true);
 
-    mp.gui.cursor.show(true, true);
+    mp.events.call(LocalEvent.CursorVisible, true, true);
 
     this.ShowCharacters(csm);
 
     mp.events.add(RemoteResponse.CharacterSelected, () => this.Close());
-    mp.events.add(RemoteResponse.CharacterDeleted, (csm: string) => 
-    {
+    mp.events.add(RemoteResponse.CharacterDeleted, (csm: string) => {
       this.browser.reload(false);
       this.ShowCharacters(csm);
     });
 
     mp.events.add(LocalEvent.CharacterSelect, (id: number) => this.CharacterSelect(id));
     mp.events.add(LocalEvent.CharacterDelete, (id: number) => this.DeleteCharacter(id));
-    mp.events.add(LocalEvent.CharacterSelectCreate, () => 
-    {
+    mp.events.add(LocalEvent.CharacterSelectCreate, () => {
       this.Close();
       this.CharacterSelectCreate();
     });
