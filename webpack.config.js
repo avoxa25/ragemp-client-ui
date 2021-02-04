@@ -2,19 +2,33 @@ const path = require('path');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const htmlComponents = [
+  'Authentication',
+
   'Character/Creator',
+  'Character/Select',
+  'Character/SpawnSelect',
+
   'Chat',
   'Interactions/CarInside',
   'Interactions/CarOutside',
   'Interactions/NearPlayer',
+
+  'Menu/House',
+  
+  'HUD/AlphaTest',
+  'HUD/CashAmmo',
+  'HUD/DateTimeMicrophone',
   'HUD/Location',
-  'Speedometer'
+  'HUD/Notifications',
+  'HUD/Online',
+  'HUD/Speedometer'
 ];
 
 const entryPoints = {};
 entryPoints['index'] = path.resolve(__dirname, 'src', 'index.ts');
 
 htmlComponents
+  .map((c) => `components/${c}`)
   .map((c) => ({ folder: c, file: c.replace(/^[\w\d\/]*\//g, '') }))
   .map((ep) => ({ folder: ep.folder, file: ep.file.replace(/([A-Z]{1})/g, '-$1').toLocaleLowerCase().slice(1) }))
   .map((ep) => ({ module: `${ep.folder}/${ep.file}`, filename: path.resolve(__dirname, 'src', ep.folder, `${ep.file}.ts`) }))

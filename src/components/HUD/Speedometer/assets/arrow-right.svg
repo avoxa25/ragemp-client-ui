@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="23" viewBox="0 0 20 23">
+	<defs>
+		<style>
+			.arrow-right {
+			fill: url(#turnedOn_gradient);
+			fill-rule: evenodd;
+			filter: url(#filter_arrowRight);
+			}
+			
+			.nonActive {
+			fill: white;
+			}
+		</style>
+		<filter id="filter_arrowRight" x="1856" y="975" width="20" height="23" filterUnits="userSpaceOnUse">
+			<feOffset result="offset" in="SourceAlpha" />
+			<feGaussianBlur result="blur" stdDeviation="1.732" />
+			<feFlood result="flood" flood-opacity="0.4" />
+			<feComposite result="composite" operator="in" in2="blur" />
+			<feBlend result="blend" in="SourceGraphic" />
+		</filter>
+	</defs>
+	<path id="arrowRight" data-name="arrowRight" class="arrow-right nonActive" d="M1860.31,978.039a1.468,1.468,0,0,1,.79.232l10.26,6.41a1.6,1.6,0,0,1,0,2.683l-10.26,6.411a1.475,1.475,0,0,1-.79.231,1.556,1.556,0,0,1-1.53-1.573V979.612a1.575,1.575,0,0,1,.47-1.13,1.515,1.515,0,0,1,1.06-.443h0Zm0,15.879a1.467,1.467,0,0,1-1.44-1.485V979.612a1.466,1.466,0,0,1,1.44-1.484,1.405,1.405,0,0,1,.75.218l10.25,6.411a1.506,1.506,0,0,1,0,2.532l-10.25,6.41a1.406,1.406,0,0,1-.75.219m0,0.176a1.583,1.583,0,0,0,.84-0.244l10.25-6.41a1.686,1.686,0,0,0,0-2.834l-10.25-6.411a1.592,1.592,0,0,0-.84-0.244,1.641,1.641,0,0,0-1.62,1.661v12.821a1.641,1.641,0,0,0,1.62,1.661h0Z" transform="translate(-1856 -975)" />
+</svg>
