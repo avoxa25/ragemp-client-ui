@@ -1,6 +1,6 @@
-import { LocalEvents } from '../../Constants/local-events';
-import { KeyboardKeys } from '../../Constants/keyboard-keys';
-import { RemoteResponse } from '../../Constants/remote-response';
+import { KeyboardKeys } from '../../../constants/enums/keyboard-keys';
+import { LocalEvent } from '../../../constants/events/local-event';
+import { RemoteResponse } from '../../../constants/events/remote-response';
 
 class InteractionCarOutside {
   private readonly range: number;
@@ -18,8 +18,8 @@ class InteractionCarOutside {
     mp.keys.bind(KeyboardKeys.KeyE, true, () => this.ToggleMenu(true));
     mp.keys.bind(KeyboardKeys.KeyE, false, () => this.ToggleMenu(false));
 
-    mp.events.add(LocalEvents.InteractionCarOutsideToggleLock, () => this.ToggleLock());
-    mp.events.add(LocalEvents.InteractionCarOutsideToggleDoor, (d: number) => this.ToggleDoor(d));
+    mp.events.add(LocalEvent.InteractionCarOutsideToggleLock, () => this.ToggleLock());
+    mp.events.add(LocalEvent.InteractionCarOutsideToggleDoor, (d: number) => this.ToggleDoor(d));
   }
 
   private ToggleMenu(isActive: boolean): void {

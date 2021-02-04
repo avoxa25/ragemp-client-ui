@@ -15,9 +15,9 @@ import './components/HUD/Online/main';
 import './components/HUD/Speedometer/main';
 import './components/HUD/main';
 
-import './Interactions/CarInside/main';
-import './Interactions/CarOutside/main';
-import './Interactions/NearPlayer/main';
+import './components/Interactions/CarInside/main';
+import './components/Interactions/CarOutside/main';
+import './components/Interactions/NearPlayer/main';
 import './components/Menu/House/main';
 
 import './utils/discord';

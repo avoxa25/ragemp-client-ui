@@ -1,4 +1,4 @@
-import { LocalEvents } from "../../Constants/local-events";
+import { LocalEvent } from "../../../constants/events/local-event";
 
 class InteractionCarOutsideUi {
   constructor() {
@@ -80,11 +80,11 @@ class InteractionCarOutsideUi {
   }
 
   private CarLock(): void {
-    mp.events.call(LocalEvents.InteractionCarOutsideToggleLock);
+    mp.events.call(LocalEvent.InteractionCarOutsideToggleLock);
   }
 
   private DoorToggle(door: number): void {
-    mp.events.call(LocalEvents.InteractionCarOutsideToggleDoor, door);
+    mp.events.call(LocalEvent.InteractionCarOutsideToggleDoor, door);
   }
 };
 

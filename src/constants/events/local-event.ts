@@ -29,5 +29,10 @@ export enum LocalEvent {
   HouseSetOnSellState = 'Local:House:SetOnSellState',
   
   HouseMenuClose = 'Local:HouseMenu:Close',
-  HouseMenuCursorVisible = 'Local:HouseMenu:Visible'
+  HouseMenuCursorVisible = 'Local:HouseMenu:Visible',
+
+  InteractionCarOutsideToggleLock = 'Local:Interaction:CarOutside:ToggleLock',
+  InteractionCarOutsideToggleThunk = 'Local:Interaction:CarOutside:ToggleThunk',
+  InteractionCarOutsideToggleHood = 'Local:Interaction:CarOutside:ToggleHood',
+  InteractionCarOutsideToggleDoor = 'Local:Interaction:CarOutside:ToggleDoor'
 }

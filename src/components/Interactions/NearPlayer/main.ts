@@ -1,5 +1,5 @@
-import { KeyboardKeys } from '../../Constants/keyboard-keys';
-import { RemoteResponse } from '../../Constants/remote-response';
+import { KeyboardKeys } from '../../../constants/enums/keyboard-keys';
+import { RemoteResponse } from '../../../constants/events/remote-response';
 
 class InteractionNearPlayer {
   private readonly range: number;

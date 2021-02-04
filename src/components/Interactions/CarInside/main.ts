@@ -1,5 +1,5 @@
-import { KeyboardKeys } from '../../Constants/keyboard-keys';
-import { RemoteResponse } from '../../Constants/remote-response';
+import { KeyboardKeys } from '../../../constants/enums/keyboard-keys';
+import { RemoteResponse } from '../../../constants/events/remote-response';
 
 class InteractionCarInside {
   private static vehicle: VehicleMp;
