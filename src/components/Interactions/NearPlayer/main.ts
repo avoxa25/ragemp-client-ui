@@ -12,7 +12,7 @@ class InteractionNearPlayer {
     this.range = 5.0;
     this.resolution = mp.game.graphics.getScreenActiveResolution(1, 1);
     this.vectorScreenWorld = new mp.Vector3(this.resolution.x / 2, this.resolution.y / 2, (2 | 4 | 8));
-    this.browser = mp.browsers.new('package://Interactions/NearPlayer/near-player.html');
+    this.browser = mp.browsers.new('package://components/Interactions/NearPlayer/near-player.html');
 
     mp.keys.bind(KeyboardKeys.KeyE, true, () => this.ToggleMenu(true));
     mp.keys.bind(KeyboardKeys.KeyE, false, () => this.ToggleMenu(false));

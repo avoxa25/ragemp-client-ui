@@ -70,13 +70,16 @@ class InteractionCarOutsideUi {
   }
 
   private Show(): void {
-    const InCarSection = document.querySelector('#menuCarInside') as HTMLElement;
-    InCarSection.classList.add('active');
+    const OutsideCarSection = document.querySelector('#menuCarOutside') as HTMLElement;
+    OutsideCarSection.classList.add('active');
   }
 
   private Hide(): void {
-    const InCarSection = document.querySelector('#menuCarInside') as HTMLElement;
-    InCarSection.classList.remove('active');
+    const OutsideCarSection = document.querySelector('#menuCarOutside') as HTMLElement;
+    OutsideCarSection.classList.remove('active');
+
+    const CarDoorsSection = document.querySelector('#menuCarDoors') as HTMLElement;
+    CarDoorsSection.classList.remove('active');
   }
 
   private CarLock(): void {

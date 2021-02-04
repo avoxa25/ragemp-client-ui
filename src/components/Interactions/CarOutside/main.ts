@@ -6,29 +6,38 @@ class InteractionCarOutside {
   private readonly range: number;
   private readonly resolution: { x: number, y: number };
   private vectorScreenWorld: Vector3Mp;
-  private static vehicle: any;
+  private vehicle: any;
   private browser: BrowserMp;
 
   constructor() {
+    this.vehicle = mp.players.local.vehicle;
     this.range = 5.0;
     this.resolution = mp.game.graphics.getScreenActiveResolution(1, 1);
     this.vectorScreenWorld = new mp.Vector3(this.resolution.x / 2, this.resolution.y / 2, (2 | 4 | 8));
-    this.browser = mp.browsers.new('package://Interactions/CarOutside/car-outside.html');
+    this.browser = mp.browsers.new('package://components/Interactions/CarOutside/car-outside.html');
 
     mp.keys.bind(KeyboardKeys.KeyE, true, () => this.ToggleMenu(true));
     mp.keys.bind(KeyboardKeys.KeyE, false, () => this.ToggleMenu(false));
 
     mp.events.add(LocalEvent.InteractionCarOutsideToggleLock, () => this.ToggleLock());
     mp.events.add(LocalEvent.InteractionCarOutsideToggleDoor, (d: number) => this.ToggleDoor(d));
+
+    setInterval(() => {
+      let target = this.getLocalTarget();
+      if (!target) return;
+      this.drawTarget3d(target.position);
+    }, 10)
   }
 
   private ToggleMenu(isActive: boolean): void {
     if (isActive && !mp.players.local.vehicle && !mp.gui.cursor.visible) {
       let target = this.getLocalTarget();
-      if(!target) return;
-      InteractionCarOutside.vehicle = target.entity;
+      if (!target) return;
+      this.vehicle = target.entity;
+      mp.gui.cursor.show(true, true);
       this.browser.execute(`window.interactionCarOutsideUi.Show();`);
     } else {
+      mp.gui.cursor.show(false, false);
       this.browser.execute(`window.interactionCarOutsideUi.Hide();`);
     }
   }
@@ -48,14 +57,19 @@ class InteractionCarOutside {
   }
 
   private ToggleDoor(door: number): void {
-    if(!InteractionCarOutside.vehicle) return;
+    if (!this.vehicle) return;
+    if (this.vehicle.isDoorFullyOpen(door)) {
+      this.vehicle.setDoorShut(door, false);
+    }
+    else {
+      this.vehicle.setDoorOpen(door, false, false);
+    }
+  }
 
-    if(InteractionCarOutside.vehicle.isDoorFullyOpen(door)){
-      InteractionCarOutside.vehicle.setDoorShut(door);
-    }
-    else{
-      InteractionCarOutside.vehicle.setDoorOpen(door);
-    }
+  private drawTarget3d(pos: Vector3Mp, textureDict = "mpmissmarkers256", textureName = "corona_shade", scaleX = 0.005, scaleY = 0.01): void {
+    const position = mp.game.graphics.world3dToScreen2d(pos.x, pos.y, pos.z);
+    if (!position) return;
+    mp.game.graphics.drawSprite(textureDict, textureName, position.x, position.y, scaleX, scaleY, 0, 0, 0, 0, 200);
   }
 };
 

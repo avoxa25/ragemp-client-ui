@@ -6,7 +6,7 @@ class InteractionCarInside {
   private browser: BrowserMp;
 
   constructor() {
-    this.browser = mp.browsers.new('package://Interactions/CarInside/car-inside.html');
+    this.browser = mp.browsers.new('package://components/Interactions/CarInside/car-inside.html');
 
     mp.events.add(RageEnums.EventKey.PLAYER_ENTER_VEHICLE, (v, s) => {
       const isDriver = s === -1;
@@ -35,8 +35,10 @@ class InteractionCarInside {
   private ToggleMenu(isActive: boolean): void {
     // TODO add sending passengers
     if (isActive) {
+      mp.gui.cursor.show(true, true);
       this.browser.execute(`window.interactionCarInsideUi.Show();`);
     } else {
+      mp.gui.cursor.show(false, false);
       this.browser.execute(`window.interactionCarInsideUi.Hide();`);
     }
   }
