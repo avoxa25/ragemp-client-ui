@@ -47,13 +47,13 @@ class Speedometer {
     this.seatBelt = true;
     this.mileage = 0;
 
-
     mp.events.add(RageEnums.EventKey.PLAYER_ENTER_VEHICLE, (v: VehicleMp, s: number) => this.OnPlayerEnterVehicle(v, s));
     mp.events.add(RageEnums.EventKey.PLAYER_LEAVE_VEHICLE, () => this.OnPlayerExitVehicle());
   }
 
   private OnPlayerEnterVehicle(vehicle: VehicleMp, seat: number): void {
     this.vehicle = vehicle;
+    // wiki: https://wiki.rage.mp/index.php?title=Player_Config_Flags
     mp.players.local.setConfigFlag(184, true);
 
     this.isOwner = this.vehicle.getVariable('OwnerId') === this.characterId;
@@ -116,6 +116,7 @@ class Speedometer {
   }
 
   private SetSeatBelt(enabled: boolean): void {
+    if (mp.gui.cursor.visible) return;
     // wiki: https://wiki.rage.mp/index.php?title=Player_Config_Flags
     mp.players.local.setConfigFlag(32, enabled);
     this.seatBelt = enabled;
@@ -149,6 +150,7 @@ class Speedometer {
 
   private EmergencySignal(): void {
     if (mp.gui.cursor.visible) return;
+
     if (this.isBlinking) return this.StopBlinking();
     this.isBlinking = true;
     this.blinkIntervalId = setInterval(() => this.Blinking(true, true), 500);
@@ -171,8 +173,6 @@ class Speedometer {
   }
 
   private Blinking(IsLeft: boolean, IsRight: boolean): void {
-    if (mp.gui.cursor.visible) return;
-
     if (IsLeft && IsRight) {
       this.leftTurn = !this.leftTurn;
       this.rightTurn = !this.rightTurn;
@@ -205,7 +205,6 @@ class Speedometer {
       this.fuel = 0;
       this.vehicle.setEngineOn(false, false, false);
     }
-
 
     this.browser.execute(`window.speedometerUi.Update(${speed}, ${this.leftTurn}, ${lowBeam}, ${highBeam}, ${this.locked}, ${this.rightTurn}, ${this.fuel}, ${this.fuelTank});`);
   }
