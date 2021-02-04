@@ -16,6 +16,7 @@ export enum RemoteEvent {
   BankSend = 'Remote:Bank:Send',
 
   GasStationFillVehicle = 'Remote:GasStation:FillVehicle',
+  VehicleToggleLocked = 'Remote:Vehicle:ToggleLocked',
 
   HouseBuy = 'Remote:House:Buy',
   HouseSetOnSellState = 'Remote:House:SetOnSaleState',

@@ -2,6 +2,7 @@ import { NotificationType } from '../../../constants/enums/notification-type';
 import { CharacterService } from '../../../services/characters/character-service';
 import { KeyboardKeys } from '../../../constants/enums/keyboard-keys';
 import { RemoteResponse } from '../../../constants/events/remote-response';
+import { RemoteEvent } from '../../../constants/events/remote-event';
 
 class Speedometer {
   private readonly browser: BrowserMp;
@@ -24,6 +25,7 @@ class Speedometer {
   private mileage: number;
 
   private vehicle: VehicleMp | undefined;
+  private entity: EntityMp | undefined;
   private updaterIntervalId: number | undefined;
   private blinkIntervalId: number | undefined;
 
@@ -133,7 +135,8 @@ class Speedometer {
     if (!this.isOwner && !this.isDriver) return mp.events.call(RemoteResponse.NotificationSent, NotificationType.Error, 'У вас нет ключей от данного транспорта');
 
     this.locked = locked;
-    this.locked ? this.vehicle.setDoorsLocked(6) : this.vehicle.setDoorsLocked(1);
+    //this.locked ? this.vehicle.setDoorsLocked(6) : this.vehicle.setDoorsLocked(1);
+    mp.events.callRemote(RemoteEvent.VehicleToggleLocked, this.vehicle.getVariable('Id'), locked);
 
     const notification = this.locked ? 'Транспортное средство закрыто' : 'Транспортное средство открыто';
     mp.events.call(RemoteResponse.NotificationSent, NotificationType.Info, notification);
