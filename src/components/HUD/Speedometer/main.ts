@@ -25,7 +25,6 @@ class Speedometer {
   private mileage: number;
 
   private vehicle: VehicleMp | undefined;
-  private entity: EntityMp | undefined;
   private updaterIntervalId: number | undefined;
   private blinkIntervalId: number | undefined;
 
@@ -190,6 +189,8 @@ class Speedometer {
       mp.players.local.vehicle.setIndicatorLights(0, this.rightTurn);
     }
   }
+
+  // TODO: Realize all functions on Closed Beta Test
 
   private UpdateSpeedometer(): void {
     if (!this.vehicle) return;
