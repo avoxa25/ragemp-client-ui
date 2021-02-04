@@ -12,6 +12,7 @@ export enum LocalEvent {
 
   CharacterCreatorOpen = 'Local:CharacterCreator:Open',
   CharacterCreatorTabHair = 'Local:CharacterCreator:TabHair',
+  CharacterCreatorTabFace = 'Local:CharacterCreator:TabFace',
   CharacterCreatorCreate = 'Local:CharacterCreator:Create',
   CharacterCreatorChangeGender = 'Local:CharacterCreator:ChangeGender',
   CharacterCreatorUpdateMain = 'Local:CharacterCreator:UpdateMain',
