@@ -133,10 +133,9 @@ class Speedometer {
     if (!this.vehicle) return;
     if (mp.gui.cursor.visible) return;
     if (!this.isOwner && !this.isDriver) return mp.events.call(RemoteResponse.NotificationSent, NotificationType.Error, 'У вас нет ключей от данного транспорта');
-
     this.locked = locked;
-    //this.locked ? this.vehicle.setDoorsLocked(6) : this.vehicle.setDoorsLocked(1);
-    mp.events.callRemote(RemoteEvent.VehicleToggleLocked, this.vehicle.getVariable('Id'), locked);
+    
+    mp.events.callRemote(RemoteEvent.VehicleToggleLocked, this.vehicle.getVariable('Id'), this.locked);
 
     const notification = this.locked ? 'Транспортное средство закрыто' : 'Транспортное средство открыто';
     mp.events.call(RemoteResponse.NotificationSent, NotificationType.Info, notification);
