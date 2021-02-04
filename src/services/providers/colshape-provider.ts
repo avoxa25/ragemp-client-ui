@@ -1,7 +1,7 @@
 import { Observable, of } from 'rxjs';
 import { filter, mergeMap, toArray } from 'rxjs/operators';
 
-export class ColShapeProvider {
+class ColShapeProvider {
   public GetAll(): Observable<ColshapeMp[]> {
     return of(mp.colshapes.toArray());
   }
@@ -44,3 +44,6 @@ export class ColShapeProvider {
         toArray());
   }
 }
+
+export let GlobalColShapeProvider: ColShapeProvider;
+mp.events.add(RageEnums.EventKey.PLAYER_READY, () => GlobalColShapeProvider = GlobalColShapeProvider ? GlobalColShapeProvider : new ColShapeProvider());

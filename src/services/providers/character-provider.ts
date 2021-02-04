@@ -1,9 +1,10 @@
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, iif, Observable, of, throwError } from 'rxjs';
+import { concatMap, delay, map, retryWhen, tap } from 'rxjs/operators';
 import { BankCardType } from '../../models/banks/bank-card-type';
 import { RemoteResponse } from '../../constants/events/remote-response';
 import { Character } from '../../models/characters/character';
 
-export class CharacterProvider {
+class CharacterProvider {
   private readonly characterSubject: BehaviorSubject<Character>;
 
   constructor() {
@@ -14,7 +15,7 @@ export class CharacterProvider {
     this.characterSubject = new BehaviorSubject<Character>(undefined!);
   }
 
-  public Get(): Observable<Character> {
+  public GetCurrent(): Observable<Character> {
     return this.characterSubject;
   }
 
@@ -23,7 +24,7 @@ export class CharacterProvider {
     this.characterSubject.next(character);
   }
 
-  private GetDirectly() {
+  private GetDirectly(): Character {
     const player = mp.players.local;
 
     const id = player.getVariable('Id') as number;
@@ -62,3 +63,6 @@ export class CharacterProvider {
     return character;
   }
 }
+
+export let GlobalCharacterProvider: CharacterProvider;
+mp.events.add(RageEnums.EventKey.PLAYER_READY, () => GlobalCharacterProvider = GlobalCharacterProvider ? GlobalCharacterProvider : new CharacterProvider());

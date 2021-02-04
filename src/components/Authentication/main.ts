@@ -10,7 +10,6 @@ class Authentication {
 
   public constructor() {
     this.camera = mp.cameras.new('default', CameraConstants.StandardCameraPosition, CameraConstants.StandardCameraRotation, CameraConstants.StandardCameraFOV);
-
     this.browser = mp.browsers.new('package://components/Authentication/authentication.html');
 
     mp.players.local.freezePosition(true);
@@ -22,6 +21,7 @@ class Authentication {
     mp.gui.chat.show(false);
 
     mp.gui.cursor.show(true, true);
+    mp.events.add(RemoteResponse.LoginAllowed, () => mp.gui.cursor.show(true, true));
 
     this.camera.pointAtCoord(CameraConstants.StandardCameraPoint.x, CameraConstants.StandardCameraPoint.y, CameraConstants.StandardCameraPoint.z);
     this.camera.setActive(true);
@@ -55,4 +55,4 @@ class Authentication {
 }
 
 let authentication: Authentication | undefined;
-mp.events.add(RemoteResponse.LoginAllowed, () => authentication = authentication ? authentication : new Authentication());
+mp.events.add(RageEnums.EventKey.PLAYER_READY, () => authentication = authentication ? authentication : new Authentication());

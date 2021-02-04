@@ -1,19 +1,17 @@
-import { KeyboardKeys } from '../../../constants/enums/keyboard-keys';
 import { RemoteResponse } from '../../../constants/events/remote-response';
-import { DateTimeService } from '../../../services/datetime-service';
+import { KeyboardKeys } from '../../../constants/enums/keyboard-keys';
+import { GlobalDateTimeService } from '../../../services/datetime-service';
 
 class DateTimeMicrophone {
   private readonly browser: BrowserMp;
-  private readonly dateTimeService: DateTimeService;
 
   public constructor() {
     this.browser = mp.browsers.new('package://components/HUD/DateTimeMicrophone/date-time-microphone.html');
-    this.dateTimeService = new DateTimeService();
 
     mp.keys.bind(KeyboardKeys.KeyN, true, () => this.EnableMicrophone());
     mp.keys.bind(KeyboardKeys.KeyN, false, () => this.DisableMicrophone());
 
-    this.dateTimeService.GetInGame()
+    GlobalDateTimeService.GetInGame()
       .subscribe(d => this.UpdateDateTime(d));
   }
 

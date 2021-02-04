@@ -1,7 +1,7 @@
 import { Observable, of } from 'rxjs';
 import { filter, mergeMap, toArray } from 'rxjs/operators';
 
-export class BlipProvider {
+class BlipProvider {
   public GetAll(): Observable<BlipMp[]> {
     return of(mp.blips.toArray());
   }
@@ -30,3 +30,6 @@ export class BlipProvider {
         toArray());
   }
 }
+
+export let GlobalBlipProvider: BlipProvider;
+mp.events.add(RageEnums.EventKey.PLAYER_READY, () => GlobalBlipProvider = GlobalBlipProvider ? GlobalBlipProvider : new BlipProvider());

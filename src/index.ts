@@ -18,6 +18,6 @@ import './components/HUD/main';
 import './components/Menu/House/main';
 
 import './utils/discord';
-import './utils/gas-station-blips-sync';
+// import './utils/gas-station-blips-sync';
 import './utils/house-blips-sync';
 import './utils/house-markers-sync';

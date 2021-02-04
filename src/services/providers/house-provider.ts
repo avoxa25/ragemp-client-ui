@@ -2,26 +2,16 @@ import { Observable, zip } from 'rxjs';
 import { filter, map, mergeMap, tap, toArray } from 'rxjs/operators';
 import { HouseType } from '../../models/houses/house-type';
 import { House } from '../../models/houses/house';
-import { BlipProvider } from './blip-provider';
-import { ColShapeProvider } from './colshape-provider';
-import { MarkerProvider } from './marker-provider';
+import { GlobalBlipProvider } from './blip-provider';
+import { GlobalColShapeProvider } from './colshape-provider';
+import { GlobalMarkerProvider } from './marker-provider';
 
 export class HouseProvider {
-  private readonly blipProvider: BlipProvider;
-  private readonly colShapeProvider: ColShapeProvider;
-  private readonly markerProvider: MarkerProvider;
-
-  constructor() {
-    this.blipProvider = new BlipProvider();
-    this.colShapeProvider = new ColShapeProvider();
-    this.markerProvider = new MarkerProvider();
-  }
-
   public GetAll(): Observable<House[]> {
     return zip(
-      this.blipProvider.GetServerHouses(),
-      this.colShapeProvider.GetServerHouses(),
-      this.markerProvider.GetServerHouses())
+      GlobalBlipProvider.GetServerHouses(),
+      GlobalColShapeProvider.GetServerHouses(),
+      GlobalMarkerProvider.GetServerHouses())
       .pipe(
         map(z => ({ blips: z[0], colShapes: z[1], markers: z[2] })),
         map(z => this.CreateHouseTuples(z)),
@@ -39,9 +29,9 @@ export class HouseProvider {
 
   public Get(id: number): Observable<House> {
     return zip(
-      this.blipProvider.GetServerHouse(id),
-      this.colShapeProvider.GetServerHouse(id),
-      this.markerProvider.GetServerHouse(id))
+      GlobalBlipProvider.GetServerHouse(id),
+      GlobalColShapeProvider.GetServerHouse(id),
+      GlobalMarkerProvider.GetServerHouse(id))
       .pipe(
         map(z => ({ blip: z[0], colShape: z[1], marker: z[2], house: this.CreateEmpty() })),
         tap(t => {
@@ -117,3 +107,6 @@ export class HouseProvider {
     house.exitPosition = marker.position;
   }
 }
+
+export let GlobalHouseProvider: HouseProvider;
+mp.events.add(RageEnums.EventKey.PLAYER_READY, () => GlobalHouseProvider = GlobalHouseProvider ? GlobalHouseProvider : new HouseProvider());

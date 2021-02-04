@@ -1,17 +1,11 @@
-import { merge, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, mergeMap, toArray } from 'rxjs/operators';
-import { GasStation } from 'src/models/gas-station';
-import { ColShapeProvider } from './colshape-provider';
+import { GasStation } from '../../models/gas-station';
+import { GlobalColShapeProvider } from './colshape-provider';
 
-export class GasStationProvider {
-  private readonly colShapeProvider: ColShapeProvider;
-
-  constructor() {
-    this.colShapeProvider = new ColShapeProvider();
-  }
-
+class GasStationProvider {
   public GetAll(): Observable<GasStation[]> {
-    return this.colShapeProvider.GetServerGasStations()
+    return GlobalColShapeProvider.GetAll()
       .pipe(
         mergeMap(cs => cs),
         map(cs => this.ParseFromColShape(cs)),
@@ -19,7 +13,7 @@ export class GasStationProvider {
   }
 
   public Get(id: number): Observable<GasStation> {
-    return this.colShapeProvider.GetServerGasStation(id)
+    return GlobalColShapeProvider.GetServerGasStation(id)
       .pipe(map(cs => this.ParseFromColShape(cs)));
   }
 
@@ -62,3 +56,6 @@ export class GasStationProvider {
     };
   }
 }
+
+export let GlobalGasStationProvider: GasStationProvider;
+mp.events.add(RageEnums.EventKey.PLAYER_READY, () => GlobalGasStationProvider = GlobalGasStationProvider ? GlobalGasStationProvider : new GasStationProvider());

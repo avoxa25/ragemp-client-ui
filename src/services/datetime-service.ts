@@ -2,7 +2,7 @@ import { Observable, interval } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DummyEntityConstants } from '../constants/dummy-entity';
 
-export class DateTimeService {
+class DateTimeService {
   private readonly worldTimeDummyEntity: DummyEntityMp;
   private readonly multiplier: number;
   private readonly serverBaseUtcOffsetInMinutes: number;
@@ -41,3 +41,6 @@ export class DateTimeService {
         }));
   }
 }
+
+export let GlobalDateTimeService: DateTimeService;
+mp.events.add(RageEnums.EventKey.PLAYER_READY, () => GlobalDateTimeService = GlobalDateTimeService ? GlobalDateTimeService : new DateTimeService());

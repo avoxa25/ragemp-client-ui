@@ -1,80 +1,39 @@
 import { interval } from 'rxjs';
-import { map, mergeMap, switchMap } from 'rxjs/operators';
-import { BlipProvider } from '../services/providers/blip-provider';
-import { HouseProvider } from '../services/providers/house-provider';
-import { CharacterProvider } from '../services/providers/character-provider';
+import { mergeMap, switchMap } from 'rxjs/operators';
+import { GlobalBlipProvider } from '../services/providers/blip-provider';
+import { GlobalHouseProvider } from '../services/providers/house-provider';
+import { GlobalCharacterProvider } from '../services/providers/character-provider';
 import { BlipConstants } from '../constants/blip';
 import { RemoteResponse } from '../constants/events/remote-response';
 import { Character } from '../models/characters/character';
+import { House } from '../models/houses/house';
 
 class HouseBlipsSync {
-  private readonly blipProvider: BlipProvider;
-  private readonly houseProvider: HouseProvider;
-  private readonly characterProvider: CharacterProvider;
-
   private character: Character;
-  private readonly blips: { [id: number]: BlipMp };  
+  private readonly blips: { [id: number]: BlipMp };
 
   constructor() {
-    this.blipProvider = new BlipProvider();
-    this.houseProvider = new HouseProvider();
-    this.characterProvider = new CharacterProvider();
-
     this.character = undefined!;
-    this.blips = [];    
+    this.blips = [];
 
-    this.characterProvider.Get().subscribe(c => this.character = c);
+    GlobalCharacterProvider.GetCurrent().subscribe(c => this.character = c);
 
     this.HideServerBlips();
-    this.CreateClientBlips();
     this.StartSync();
   }
 
   private HideServerBlips(): void {
-    this.blipProvider.GetServerHouses()
+    GlobalBlipProvider.GetServerHouses()
       .pipe(mergeMap(b => b))
       .subscribe(b => b.setDisplay(0));
-  }
-
-  private CreateClientBlips(): void {
-    this.houseProvider.GetAll()
-      .pipe(
-        mergeMap(h => h),
-        map(h => {
-          const color = this.GetColor(h.ownerId, h.onSale);
-          const name = this.GetName(h.ownerId, h.onSale);
-
-          const blip = mp.blips.new(
-            BlipConstants.HouseSprite,
-            h.entrancePosition as Vector3Mp,
-            {
-              alpha: BlipConstants.HouseAlpha,
-              color: color,
-              dimension: BlipConstants.HouseDimension,
-              drawDistance: BlipConstants.HouseDrawDistance,
-              name: name,
-              rotation: BlipConstants.HouseRotation,
-              scale: BlipConstants.HouseScale,
-              shortRange: BlipConstants.HouseShortRange
-            });
-
-          return ({ house: h, blip: blip });
-        }))
-      .subscribe(t => this.blips[t.house.id] = t.blip);
   }
 
   private StartSync(): void {
     interval(1000)
       .pipe(
-        switchMap(() => this.houseProvider.GetAll()),
+        switchMap(() => GlobalHouseProvider.GetAll()),
         mergeMap(h => h))
-      .subscribe(h => {
-        const color = this.GetColor(h.ownerId as number | null, h.onSale as boolean);
-        if (this.blips[h.id].getColour() !== color) this.blips[h.id].setColour(color);
-
-        const name = this.GetName(h.ownerId as number | null, h.onSale as boolean);
-        if ((this.blips[h.id] as any).name !== name) (this.blips[h.id] as any).name = name;
-      })
+      .subscribe(h => this.Sync(h));
   }
 
   private GetColor(ownerId: number | null, onSale: boolean): number {
@@ -91,6 +50,35 @@ class HouseBlipsSync {
     name = this.character.id === ownerId ? BlipConstants.HouseOwnedName : name;
 
     return name;
+  }
+
+  private Create(house: House, color: number, name: string): BlipMp {
+    return mp.blips.new(
+      BlipConstants.HouseSprite,
+      house.entrancePosition as Vector3Mp,
+      {
+        alpha: BlipConstants.HouseAlpha,
+        color: color,
+        dimension: BlipConstants.HouseDimension,
+        drawDistance: BlipConstants.HouseDrawDistance,
+        name: name,
+        rotation: BlipConstants.HouseRotation,
+        scale: BlipConstants.HouseScale,
+        shortRange: BlipConstants.HouseShortRange
+      });
+  }
+
+  private Sync(house: House): void {
+    const color = this.GetColor(house.ownerId as number | null, house.onSale as boolean);
+    const name = this.GetName(house.ownerId as number | null, house.onSale as boolean);
+
+    if (this.blips[house.id] === undefined) {
+      const blip = this.Create(house, color, name);
+      this.blips[house.id] = blip;
+    } else {
+      if (this.blips[house.id].getColour() !== color) this.blips[house.id].setColour(color);
+      if ((this.blips[house.id] as any).name !== name) (this.blips[house.id] as any).name = name;
+    }
   }
 }
 

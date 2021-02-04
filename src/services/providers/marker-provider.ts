@@ -38,3 +38,6 @@ export class MarkerProvider {
         toArray());
   }
 }
+
+export let GlobalMarkerProvider: MarkerProvider;
+mp.events.add(RageEnums.EventKey.PLAYER_READY, () => GlobalMarkerProvider = GlobalMarkerProvider ? GlobalMarkerProvider : new MarkerProvider());

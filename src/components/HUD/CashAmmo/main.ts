@@ -1,15 +1,13 @@
-import { CharacterProvider } from '../../../services/providers/character-provider';
+import { GlobalCharacterProvider } from '../../../services/providers/character-provider';
 import { RemoteResponse } from '../../../constants/events/remote-response';
 
 class CashAmmo {
   private readonly browser: BrowserMp;
-  private readonly characterProvider: CharacterProvider;
 
   constructor() {
     this.browser = mp.browsers.new('package://components/HUD/CashAmmo/cash-ammo.html');
-    this.characterProvider = new CharacterProvider();
 
-    this.characterProvider.Get()
+    GlobalCharacterProvider.GetCurrent()
       .subscribe(c => this.UpdateCash(c.cash));
 
     setInterval(() => this.UpdateAmmo(), 100);
