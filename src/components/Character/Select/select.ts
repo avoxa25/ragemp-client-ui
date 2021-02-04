@@ -25,7 +25,7 @@ class CharacterSelectUi {
   private CreateSection(type: SectionType, characterModel?: CharacterSelectModel): void {
     switch (type) {
       case SectionType.Character:
-      
+
         if (!characterModel) return;
 
         const characterLi = document.createElement('li') as HTMLElement;
