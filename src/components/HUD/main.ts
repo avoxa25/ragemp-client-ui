@@ -6,3 +6,6 @@ mp.game.ui.hideHudComponentThisFrame(7);
 mp.game.ui.hideHudComponentThisFrame(8);
 mp.game.ui.hideHudComponentThisFrame(9);
 mp.game.ui.hideHudComponentThisFrame(13);
+
+// wiki: https://wiki.rage.mp/index.php?title=GXT::set
+mp.game.gxt.set('PM_PAUSE_HDR', 'SweetLifeRP');

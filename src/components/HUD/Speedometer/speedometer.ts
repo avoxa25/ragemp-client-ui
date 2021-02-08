@@ -7,12 +7,30 @@ class SpeedometerUi {
     document.body.hidden = true;
   }
 
+  public ShowSpeedPassenger(): void {
+    document.body.hidden = false;
+    const ul = document.querySelector('ul') as HTMLElement;
+    ul.style.display = 'none';
+  }
+
+  public HideSpeedPassenger(): void {
+    document.body.hidden = true;
+    const ul = document.querySelector('ul') as HTMLElement;
+    ul.style.display = 'flex';
+  }
+
+  public UpdateSpeed(speedInMpS: number): void {
+    const speedInKmH = Math.ceil(speedInMpS * 3.6);
+    const speedometer = document.querySelector('#currentSpeed') as HTMLElement;
+    speedometer.innerText = speedInKmH.toString();
+  }
+
   public Update(
     speed: number,
     leftTurn: boolean,
     lowBeam: boolean,
     highBeam: boolean,
-    locked: number,
+    locked: boolean,
     rightTurn: boolean,
     fuel: number,
     fuelTank: number) {
@@ -20,12 +38,6 @@ class SpeedometerUi {
     this.UpdateLights(lowBeam, highBeam, leftTurn, rightTurn);
     this.UpdateLocked(locked);
     this.UpdateFuel(fuel, fuelTank);
-  }
-
-  private UpdateSpeed(speedInMpS: number): void {
-    const speedInKmH = Math.ceil(speedInMpS * 3.6);
-    const speedometer = document.querySelector('#currentSpeed') as HTMLElement;
-    speedometer.innerText = speedInKmH.toString();
   }
 
   private UpdateLights(lowBeam: boolean, highBeam: boolean, leftTurn: boolean, rightTurn: boolean): void {
@@ -47,10 +59,9 @@ class SpeedometerUi {
 
   }
 
-  private UpdateLocked(locked: number): void {
+  private UpdateLocked(locked: boolean): void {
     const lockedElement = document.querySelector('#lock') as HTMLElement;
-    if (locked == 1) lockedElement.classList.remove('nonActive');
-    else lockedElement.classList.add('nonActive');
+    locked ? lockedElement.setAttribute('src', './assets/lock-active.svg') : lockedElement.setAttribute('src', './assets/lock.svg');
   }
 
   private UpdateFuel(fuel: number, fuelTank: number): void {

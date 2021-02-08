@@ -16,6 +16,10 @@ export abstract class CharacterService {
     return CharacterService.player;
   }
 
+  public static GetCharacterId(): number {
+    return CharacterService.player.id;
+  }
+
   private static UpdateMoney(): void {
     const cash = mp.players.local.getVariable('Cash') as number;
     CharacterService.player.cash = cash;
