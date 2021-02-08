@@ -57,19 +57,20 @@ class Speedometer {
     // wiki: https://wiki.rage.mp/index.php?title=Player_Config_Flags
     mp.players.local.setConfigFlag(184, true);
 
+    mp.keys.bind(KeyboardKeys.Quote, true, () => this.SetSeatBelt(!this.seatBelt));
+
     this.isOwner = this.vehicle.getVariable('OwnerId') === this.characterId;
     this.isDriver = seat === -1;
-    if (!this.isDriver) return;
-
-    this.vehicle.setLights(0);
+    if (!this.isDriver) {
+      this.updaterIntervalId = setInterval(() => this.NonDriver(), 100);
+      return;
+    }
 
     mp.game.vehicle.defaultEngineBehaviour = false;
     // wiki: https://wiki.rage.mp/index.php?title=Player_Config_Flags
     mp.players.local.setConfigFlag(429, true);
-
-    const engine = vehicle.getIsEngineRunning() === 1;
-    this.engine = engine;
-
+    this.vehicle.setEngineOn(false, false, true);
+    
     this.fuel = this.vehicle.getVariable('Fuel') as number;
     this.fuelConsumption = this.vehicle.getVariable('FuelConsumption') as number;
     this.fuelTank = this.vehicle.getVariable('TankSize') as number;
@@ -83,9 +84,8 @@ class Speedometer {
     mp.keys.bind(KeyboardKeys.LeftArrow, true, () => this.LeftTurn());
     mp.keys.bind(KeyboardKeys.RightArrow, true, () => this.RightTurn());
     mp.keys.bind(KeyboardKeys.UpArrow, true, () => this.EmergencySignal());
-    mp.keys.bind(KeyboardKeys.KeyB, true, () => this.SetEngineStatus(!this.engine));
-    mp.keys.bind(KeyboardKeys.KeyL, true, () => this.SetLockDoor(!this.locked));
-    mp.keys.bind(KeyboardKeys.Quote, true, () => this.SetSeatBelt(!this.seatBelt));
+    mp.keys.bind(KeyboardKeys.KeyB, true, () => this.SetEngineStatus());
+    mp.keys.bind(KeyboardKeys.KeyL, true, () => this.SetLockDoor());
 
     this.browser.execute(`window.speedometerUi.Show();`);
   }
@@ -99,18 +99,28 @@ class Speedometer {
     mp.keys.unbind(KeyboardKeys.KeyL, true);
     mp.keys.unbind(KeyboardKeys.Quote, true);
 
+    mp.players.local.setConfigFlag(32, true);
+
     if (this.isBlinking) this.StopBlinking();
+    if (this.isDriver) mp.events.callRemote(RemoteEvent.VehicleSave, this.vehicle, this.fuel)
 
     this.browser.execute(`window.speedometerUi.Hide();`);
   }
 
-  private SetEngineStatus(enabled: boolean): void {
+  private NonDriver() {
+    if (!this.vehicle) return;
+
+    const speed = this.vehicle.getSpeed();
+    this.browser.execute(`window.speedometerUi.UpdateSpeed(${speed});`);
+  }
+
+  private SetEngineStatus(): void {
     if (mp.gui.cursor.visible) return;
     if (!this.vehicle) return;
     if (this.fuel === 0) return mp.events.call(RemoteResponse.NotificationSent, NotificationType.Error, 'Бак пуст');
 
-    this.engine = enabled;
-    this.vehicle.setEngineOn(enabled, false, true);
+    this.engine = this.vehicle.getIsEngineRunning() === 0 ? true : false;
+    mp.events.callRemote(RemoteEvent.VehicleToggleEngine, this.vehicle);
 
     const notification = this.engine ? 'Двигатель запущен' : 'Двигатель остановлен';
     mp.events.call(RemoteResponse.NotificationSent, NotificationType.Info, notification);
@@ -128,13 +138,13 @@ class Speedometer {
 
   // TODO: Create setting lock door outside car
 
-  private SetLockDoor(locked: boolean): void {
+  private SetLockDoor(): void {
     if (!this.vehicle) return;
     if (mp.gui.cursor.visible) return;
     if (!this.isOwner && !this.isDriver) return mp.events.call(RemoteResponse.NotificationSent, NotificationType.Error, 'У вас нет ключей от данного транспорта');
-    this.locked = locked;
-    
-    mp.events.callRemote(RemoteEvent.VehicleToggleLocked, this.vehicle.getVariable('Id'), this.locked);
+    this.locked = this.vehicle.getDoorLockStatus() !== 2 ? true : false;
+
+    mp.events.callRemote(RemoteEvent.VehicleToggleLocked, this.vehicle, this.locked);
 
     const notification = this.locked ? 'Транспортное средство закрыто' : 'Транспортное средство открыто';
     mp.events.call(RemoteResponse.NotificationSent, NotificationType.Info, notification);
@@ -206,7 +216,7 @@ class Speedometer {
     this.fuel -= (this.fuelConsumption * trip / 10);
     if (this.fuel <= 0) {
       this.fuel = 0;
-      this.vehicle.setEngineOn(false, false, false);
+      this.vehicle.setEngineOn(false, false, true);
     }
 
     this.browser.execute(`window.speedometerUi.Update(${speed}, ${this.leftTurn}, ${lowBeam}, ${highBeam}, ${this.locked}, ${this.rightTurn}, ${this.fuel}, ${this.fuelTank});`);
