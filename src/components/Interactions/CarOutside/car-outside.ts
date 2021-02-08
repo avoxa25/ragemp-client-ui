@@ -1,3 +1,4 @@
+import { VehicleDoors } from "../../../constants/enums/vehicle-doors";
 import { LocalEvent } from "../../../constants/events/local-event";
 
 class InteractionCarOutsideUi {
@@ -15,12 +16,25 @@ class InteractionCarOutsideUi {
     const actionCarThunk = document.querySelector('#actionCarThunk') as HTMLElement;
     const actionCarHood = document.querySelector('#actionCarHood') as HTMLElement;
 
-    frontLeftDoor.addEventListener('click', () => this.DoorToggle(0));
-    frontRightDoor.addEventListener('click', () => this.DoorToggle(1));
-    backLeftDoor.addEventListener('click', () => this.DoorToggle(2));
-    backRightDoor.addEventListener('click', () => this.DoorToggle(3));
-    actionCarHood.addEventListener('click', () => this.DoorToggle(4));
-    actionCarThunk.addEventListener('click', () => this.DoorToggle(5));
+    frontLeftDoor.addEventListener('click', () => this.DoorToggle(VehicleDoors.FrontLeftDoor));
+    frontRightDoor.addEventListener('click', () => this.DoorToggle(VehicleDoors.FrontRightDoor));
+    backLeftDoor.addEventListener('click', () => this.DoorToggle(VehicleDoors.RearLeftDoor));
+    backRightDoor.addEventListener('click', () => this.DoorToggle(VehicleDoors.RearRightDoor));
+    actionCarHood.addEventListener('click', () => this.DoorToggle(VehicleDoors.Hood));
+    actionCarThunk.addEventListener('click', () => this.DoorToggle(VehicleDoors.Trunk));
+  }
+
+  public Show(): void {
+    const OutsideCarSection = document.querySelector('#menuCarOutside') as HTMLElement;
+    OutsideCarSection.classList.add('active');
+  }
+
+  public Hide(): void {
+    const OutsideCarSection = document.querySelector('#menuCarOutside') as HTMLElement;
+    OutsideCarSection.classList.remove('active');
+
+    const CarDoorsSection = document.querySelector('#menuCarDoors') as HTMLElement;
+    CarDoorsSection.classList.remove('active');
   }
 
   private MouseOverHandler(): void {
@@ -69,24 +83,11 @@ class InteractionCarOutsideUi {
 
   }
 
-  private Show(): void {
-    const OutsideCarSection = document.querySelector('#menuCarOutside') as HTMLElement;
-    OutsideCarSection.classList.add('active');
-  }
-
-  private Hide(): void {
-    const OutsideCarSection = document.querySelector('#menuCarOutside') as HTMLElement;
-    OutsideCarSection.classList.remove('active');
-
-    const CarDoorsSection = document.querySelector('#menuCarDoors') as HTMLElement;
-    CarDoorsSection.classList.remove('active');
-  }
-
   private CarLock(): void {
     mp.events.call(LocalEvent.InteractionCarOutsideToggleLock);
   }
 
-  private DoorToggle(door: number): void {
+  private DoorToggle(door: VehicleDoors): void {
     mp.events.call(LocalEvent.InteractionCarOutsideToggleDoor, door);
   }
 };

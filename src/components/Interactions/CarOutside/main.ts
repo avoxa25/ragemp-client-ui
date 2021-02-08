@@ -1,3 +1,4 @@
+import { VehicleDoors } from '../../../constants/enums/vehicle-doors';
 import { KeyboardKeys } from '../../../constants/enums/keyboard-keys';
 import { LocalEvent } from '../../../constants/events/local-event';
 import { RemoteResponse } from '../../../constants/events/remote-response';
@@ -11,7 +12,7 @@ class InteractionCarOutside {
 
   constructor() {
     this.vehicle = mp.players.local.vehicle;
-    this.range = 5.0;
+    this.range = 3.0;
     this.resolution = mp.game.graphics.getScreenActiveResolution(1, 1);
     this.vectorScreenWorld = new mp.Vector3(this.resolution.x / 2, this.resolution.y / 2, (2 | 4 | 8));
     this.browser = mp.browsers.new('package://components/Interactions/CarOutside/car-outside.html');
@@ -20,9 +21,10 @@ class InteractionCarOutside {
     mp.keys.bind(KeyboardKeys.KeyE, false, () => this.ToggleMenu(false));
 
     mp.events.add(LocalEvent.InteractionCarOutsideToggleLock, () => this.ToggleLock());
-    mp.events.add(LocalEvent.InteractionCarOutsideToggleDoor, (d: number) => this.ToggleDoor(d));
+    mp.events.add(LocalEvent.InteractionCarOutsideToggleDoor, (d: VehicleDoors) => this.ToggleDoor(d));
 
     setInterval(() => {
+      //if(mp.players.local.vehicle && mp.gui.cursor.visible) return;
       let target = this.getLocalTarget();
       if (!target) return;
       this.drawTarget3d(target.position);
@@ -33,7 +35,7 @@ class InteractionCarOutside {
     if (isActive && !mp.players.local.vehicle && !mp.gui.cursor.visible) {
       let target = this.getLocalTarget();
       if (!target) return;
-      this.vehicle = target.entity;
+      (this.vehicle as any) = target.entity;
       mp.gui.cursor.show(true, true);
       this.browser.execute(`window.interactionCarOutsideUi.Show();`);
     } else {
@@ -48,16 +50,33 @@ class InteractionCarOutside {
     if (!secondPoint) return;
 
     startPosition.z -= 0.3;
-    const target = mp.raycasting.testPointToPoint(startPosition, secondPoint, mp.players.local.handle, (2 | 4 | 8 | 16));
-    if (target && target.entity.type == 'vehicle' && mp.game.gameplay.getDistanceBetweenCoords(target.entity.position.x, target.entity.position.y, target.entity.position.z, mp.players.local.position.x, mp.players.local.position.y, mp.players.local.position.z, false) < this.range) return target;
+    const target = mp.raycasting.testPointToPoint(
+      startPosition,
+      secondPoint,
+      mp.players.local.handle,
+      (2 | 4 | 8 | 16));
+    if (
+      target
+      && target.entity.type === 'vehicle'
+      && mp.game.gameplay.getDistanceBetweenCoords(
+        target.entity.position.x,
+        target.entity.position.y,
+        target.entity.position.z,
+
+        mp.players.local.position.x,
+        mp.players.local.position.y,
+        mp.players.local.position.z,
+        false) < this.range) return target;
+    return;
   }
 
   private ToggleLock(): void {
-    // TODO toggle car lock
+    // TODO: toggle car lock
   }
 
-  private ToggleDoor(door: number): void {
+  private ToggleDoor(door: VehicleDoors): void {
     if (!this.vehicle) return;
+    mp.console.logInfo(this.vehicle.doors);
     if (this.vehicle.isDoorFullyOpen(door)) {
       this.vehicle.setDoorShut(door, false);
     }
@@ -73,5 +92,5 @@ class InteractionCarOutside {
   }
 };
 
-let interactionCarOutside: InteractionCarOutside;
+let interactionCarOutside: InteractionCarOutside | undefined;
 mp.events.add(RemoteResponse.CharacterSelected, () => interactionCarOutside = interactionCarOutside ? interactionCarOutside : new InteractionCarOutside());
