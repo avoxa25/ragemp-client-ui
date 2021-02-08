@@ -20,7 +20,9 @@ import './components/Interactions/CarOutside/main';
 import './components/Interactions/NearPlayer/main';
 import './components/Menu/House/main';
 
+import './utils/cursor';
 import './utils/discord';
 import './utils/gas-station-blips-sync';
 import './utils/house-blips-sync';
 import './utils/house-markers-sync';
+import './utils/noclip';

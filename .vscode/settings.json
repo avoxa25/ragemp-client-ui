@@ -6,6 +6,7 @@
     "Buildx",
     "Colshape",
     "Colshapes",
+    "Coord",
     "Millis",
     "QEMU",
     "datetime",

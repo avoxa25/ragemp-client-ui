@@ -56,10 +56,10 @@ class ChatUi {
 
     if (visible) {
       this.newMessageInput.focus();
-      this.cursorSetIntervalId = setInterval(() => mp.events.call(LocalEvent.ChatCursorToggle, visible, visible), 250);
+      this.cursorSetIntervalId = setInterval(() => mp.events.call(LocalEvent.CursorVisible, visible, visible), 250);
     } else {
       clearInterval(this.cursorSetIntervalId);
-      mp.events.call(LocalEvent.ChatCursorToggle, visible, visible);
+      mp.events.call(LocalEvent.CursorVisible, visible, visible);
     }
   }
 
@@ -86,9 +86,16 @@ class ChatUi {
   private OnDocumentBodyKeydown(event: KeyboardEvent): void {
     const isChatClosed = this.messageForm.hidden;
     const isChatOpenKey = event.which === 84;
+    const isChatCloseKey = event.which === 27;
     if (isChatClosed && isChatOpenKey) {
       event.preventDefault();
       this.ToggleMessageInput(true);
+    }
+
+    if(!isChatClosed && isChatCloseKey)
+    {
+      event.preventDefault();
+      this.ToggleMessageInput(false);
     }
   }
 
