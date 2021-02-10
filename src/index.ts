@@ -6,7 +6,7 @@ import './components/Character/SpawnSelect/main';
 
 import './components/Chat/main';
 
-import './components/HUD/AlphaTest/main';
+// import './components/HUD/AlphaTest/main';
 import './components/HUD/CashAmmo/main'
 import './components/HUD/DateTimeMicrophone/main'
 import './components/HUD/Location/main';

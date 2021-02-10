@@ -3,6 +3,7 @@ import { LocalEvent } from '../../constants/events/local-event';
 import { RemoteResponse } from '../../constants/events/remote-response';
 import { CameraConstants } from '../../constants/camera';
 import { AuthenticationErrorType } from '../../constants/enums/authentication-error-type';
+import { RemoteProc } from '../../constants/events/remote-proc';
 
 class Authentication {
   private readonly browser: BrowserMp;
@@ -28,9 +29,7 @@ class Authentication {
     mp.game.cam.renderScriptCams(true, false, 0, true, false);
 
     mp.events.add(RemoteResponse.RegistrationSuccess, () => this.browser.reload(false));
-    mp.events.add(RemoteResponse.LoginSuccess, () => this.Close());
 
-    mp.events.add(RemoteResponse.LoginFailed, (m: string) => this.ErrorMessage(AuthenticationErrorType.Login, m));
     mp.events.add(RemoteResponse.RegistrationFailed, (m: string) => this.ErrorMessage(AuthenticationErrorType.Registration, m));
 
     mp.events.add(LocalEvent.Login, (u: string, p: string) => this.Login(u, p));
@@ -45,8 +44,11 @@ class Authentication {
     this.browser.execute(`window.authenticationUi.ShowErrorMessage(${type}, '${message}');`);
   }
 
-  private Login(username: string, password: string): void {
-    mp.events.callRemote(RemoteEvent.Login, username, password);
+  private async Login(username: string, password: string): Promise<void> {
+    const response = await mp.events.callRemoteProc(RemoteProc.Login, username, password);
+    if(response === 'LoginSuccess') return this.Close();
+
+    this.ErrorMessage(AuthenticationErrorType.Login, response);
   }
 
   private Registration(username: string, email: string, password: string): void {
