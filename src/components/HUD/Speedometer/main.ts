@@ -219,7 +219,11 @@ class Speedometer {
     this.fuel -= (this.fuelConsumption * trip / 10);
     if (this.fuel <= 0) {
       this.fuel = 0;
-      this.vehicle.setEngineOn(false, false, true);
+      this.vehicle.setEngineOn(false, false, false);
+    }
+    if (this.vehicle.getHealth() <= 0) {
+      this.vehicle.setEngineOn(false, false, false);
+      mp.events.call(RemoteResponse.NotificationSent, NotificationType.Error, 'Данное ТС уничтожено');
     }
 
     this.browser.execute(`window.speedometerUi.Update(${speed}, ${this.leftTurn}, ${lowBeam}, ${highBeam}, ${this.locked}, ${this.rightTurn}, ${this.fuel}, ${this.fuelTank});`);
