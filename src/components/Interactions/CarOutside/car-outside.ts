@@ -24,9 +24,12 @@ class InteractionCarOutsideUi {
     actionCarThunk.addEventListener('click', () => this.DoorToggle(VehicleDoors.Trunk));
   }
 
-  public Show(): void {
-    const OutsideCarSection = document.querySelector('#menuCarOutside') as HTMLElement;
-    OutsideCarSection.classList.add('active');
+  public Show(locked: string): void {
+    const outsideCarSection = document.querySelector('#menuCarOutside') as HTMLElement;
+    outsideCarSection.classList.add('active');
+
+    const actionCarLock = document.querySelector('#actionCarLock') as HTMLElement;
+    locked === 'true' ? actionCarLock.setAttribute('data-prompt', 'Открыть ТС') : actionCarLock.setAttribute('data-prompt', 'Закрыть ТС');
   }
 
   public Hide(): void {

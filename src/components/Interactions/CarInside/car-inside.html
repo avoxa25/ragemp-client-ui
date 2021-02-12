@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/interaction-menu-main.css">
+  <link rel="stylesheet" href="./interaction-menu-main.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -37,21 +37,6 @@
     </clipPath>
   </svg>
 
-
-  <section id="menuCarOutside">
-    <div class="text-disc">
-      <p id="carOutsideActionPrompt"></p>
-    </div>
-    <div class="menu-item up car-lock" id="actionCarLock" data-id="carOutsideActionPrompt"
-      data-prompt="Открыть/закрыть ТС"></div>
-    <div class="menu-item right car-baggage" id="actionCarBaggage" data-id="carOutsideActionPrompt"
-      data-prompt="Открыть/закрыть багажник"></div>
-    <div class="menu-item down car-capote" id="actionCarCapote" data-id="carOutsideActionPrompt"
-      data-prompt="Открыть/закрыть капот"></div>
-    <div class="menu-item left car-doors menuLink" id="actionCarDoors" data-id="carOutsideActionPrompt"
-      data-prompt="Управление дверьми" data-menu="menuCarDoors"></div>
-  </section>
-
   <section id="menuCarInside">
     <div class="text-disc">
       <p id="carInsideActionPrompt"></p>
@@ -64,60 +49,32 @@
       data-prompt="Высадить пассажира" data-menu="menuCatapultPlayerList"></div>
   </section>
 
-  <section id="menuCarDoors">
-    <div class="text-disc menuLink pointer" data-menu="menuCarOutside">
-      <p id="carDoorsActionPrompt">Вернуться назад</p>
-    </div>
-    <div class="menu-item up car-door" id="actionCarOpenFirstDoor" data-id="carDoorsActionPrompt"
-      data-prompt="Открыть водительскую дверь"></div>
-    <div class="menu-item right car-door" id="actionCarOpenSecondDoor" data-id="carDoorsActionPrompt"
-      data-prompt="Открыть пассажирскую дверь"></div>
-    <div class="menu-item down car-door" id="actionCarOpenThirdDoor" data-id="carDoorsActionPrompt"
-      data-prompt="Открыть заднюю левую дверь"></div>
-    <div class="menu-item left car-door" id="actionCarOpenFourthDoor" data-id="carDoorsActionPrompt"
-      data-prompt="Открыть заднюю правую дверь"></div>
-  </section>
-
   <section id="menuCatapultPlayerList">
     <div class="text-disc menuLink pointer" data-menu="menuCarInside"> 
       <p id="catapultPlayerListActionPrompt">
         Вернуться назад
       </p>
     </div>
-    <div class="menu-item up" id="selectFirstPlayer">
+    <div class="menu-item up hidden" id="select1Player">
       <p id="firstPlayer">Незнакомец<br>
         <span id="firstPlayerId">ID999</span>
       </p>
     </div>
-    <div class="menu-item right" id="selectSecondPlayer">
+    <div class="menu-item right hidden" id="selectSecondPlayer">
       <p id="secondPlayer">Витя Пупкович<br>
         <span id="secondtPlayerId">ID777</span>
       </p>
     </div>
-    <div class="menu-item down" id="selectThirdPlayer">
+    <div class="menu-item down hidden" id="selectThirdPlayer">
       <p id="thirdPlayer">Витя Пупкович<br>
         <span id="secondtPlayerId">ID777</span>
       </p>
     </div>
-    <div class="menu-item left" id="selectFourthPlayer">
+    <div class="menu-item left hidden" id="selectFourthPlayer">
       <p id="FourthPlayer">Витя Пупкович<br>
         <span id="secondtPlayerId">ID777</span>
       </p>
     </div>
-  </section>
-
-  <section id="menuPlayer">
-    <div class="text-disc">
-      <p id="playerActionPrompt"></p>
-    </div>
-    <div class="menu-item up player-meet" id="actionPlayerMeet" data-id="playerActionPrompt"
-      data-prompt="Познакомиться"></div>
-    <div class="menu-item down player-show-document" id="actionPlayerShowDocument" data-id="playerActionPrompt"
-      data-prompt="Показать документы"></div>
-    <div class="menu-item left player-invite-home" id="actionPlayerInviteHome" data-id="playerActionPrompt"
-      data-prompt="Имущество"></div>
-    <div class="menu-item right player-trade" id="actionPlayerTrade" data-id="playerActionPrompt"
-      data-prompt="Передать деньги"></div>
   </section>
 
   <script src="car-inside.js"></script>
