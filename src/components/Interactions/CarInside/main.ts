@@ -90,7 +90,7 @@ class InteractionCarInside {
     const notification = this.locked ? 'Транспортное средство закрыто' : 'Транспортное средство открыто';
     mp.events.call(RemoteResponse.NotificationSent, NotificationType.Info, notification);
   }
- 
+
 
   private SetEngineStatus(): void {
     if (!InteractionCarInside.vehicle) return;

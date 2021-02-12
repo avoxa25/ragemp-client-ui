@@ -18,7 +18,7 @@ class InteractionCarInsideUi {
   }
 
   public ShowPassengers(): void {
-
+    // TODO: Add function
   }
 
   private MouseOverHandler(): void {
@@ -46,7 +46,7 @@ class InteractionCarInsideUi {
     }
   }
 
-  private EventListeners(): void{
+  private EventListeners(): void {
     const engineButton = document.querySelector('#actionCarTurnOn') as HTMLElement;
     const lockButton = document.querySelector('#actionCarLock') as HTMLElement;
 

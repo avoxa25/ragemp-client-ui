@@ -102,7 +102,7 @@ class Speedometer {
     mp.keys.unbind(KeyboardKeys.Quote, true);
 
     mp.players.local.setConfigFlag(32, true);
-    if(this.vehicle != null) this.vehicle.setEngineOn(this.engine, true, false);
+    if (this.vehicle != null) this.vehicle.setEngineOn(this.engine, true, false);
 
     if (this.isBlinking) this.StopBlinking();
     if (this.isDriver) mp.events.callRemote(RemoteEvent.VehicleSave, this.vehicle, this.fuel)
@@ -122,8 +122,7 @@ class Speedometer {
     if (!this.vehicle) return;
     if (!this.isOwner) return mp.events.call(RemoteResponse.NotificationSent, NotificationType.Error, 'У вас нет ключей от данного транспорта');
     if (this.vehicle.getHealth() <= 0) return mp.events.call(RemoteResponse.NotificationSent, NotificationType.Error, 'Данное ТС уничтожено');
-    if (this.fuel === 0) 
-    {
+    if (this.fuel === 0) {
       mp.events.callRemote(RemoteEvent.VehicleSave, this.vehicle, this.fuel);
       mp.events.call(RemoteResponse.NotificationSent, NotificationType.Error, 'Бак пуст');
       return;
