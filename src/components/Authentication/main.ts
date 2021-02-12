@@ -45,7 +45,7 @@ class Authentication {
     this.browser.execute(`window.authenticationUi.ShowErrorMessage(${type}, '${message}');`);
   }
 
-  private Login(username: string, password: string): void {
+  private async Login(username: string, password: string): Promise<void> {
     mp.events.callRemote(RemoteEvent.Login, username, password);
   }
 

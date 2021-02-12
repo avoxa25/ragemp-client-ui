@@ -74,7 +74,7 @@ class AuthenticationUi {
   }
 
   private OnRegistrationFormSubmit(form: HTMLFormElement): void {
-  
+    const pattern = new RegExp(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$/);
     const formData = new FormData(form);
     const username = formData.get('username') as string;
     const email = formData.get('email') as string;
@@ -82,6 +82,7 @@ class AuthenticationUi {
     const passwordConfirm = formData.get('passwordConfirm') as string;
 
     if (username === '' || email === '' || password === '' || passwordConfirm === '') return this.ShowErrorMessage(AuthenticationErrorType.Registration, ErrorMessage.FillEmptyFields);
+    if (!pattern.test(String(email).toLowerCase())) return this.ShowErrorMessage(AuthenticationErrorType.Registration, ErrorMessage.NotValidEmail);
     if (username.length < 5) return this.ShowErrorMessage(AuthenticationErrorType.Registration, ErrorMessage.LoginTooShort);
     if (username.length > 15) return this.ShowErrorMessage(AuthenticationErrorType.Registration, ErrorMessage.LoginTooLong);
     if (password.length < 7) return this.ShowErrorMessage(AuthenticationErrorType.Registration, ErrorMessage.PasswordTooShort);

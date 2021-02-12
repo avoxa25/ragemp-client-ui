@@ -5,5 +5,6 @@ export enum ErrorMessage {
   PasswordTooLong = 'Пароль должен быть не более 30 символов',
   IncorrectLogin = 'Проверьте правильность ввода Логина',
   LoginTooShort = 'Логин должен быть не менее 5 символов',
-  LoginTooLong = 'Логин должен быть не более 15 символов'
+  LoginTooLong = 'Логин должен быть не более 15 символов',
+  NotValidEmail = 'Введите корректный E-mail'
 }
