@@ -34,7 +34,7 @@ class CharacterCreator {
     mp.game.cam.renderScriptCams(true, false, 0, true, false);
 
     mp.events.add(RemoteResponse.CharacterCreatorCreated, () => this.Close());
-    mp.events.add(RemoteResponse.CharacterCreatorGenderChangeCompleted, () => this.ChangeGenderComplete());
+    mp.events.add(RemoteResponse.CharacterCreatorGenderChangeCompleted, () => this.UpdateCharacter());
     mp.events.add(RemoteResponse.CharacterCreatorFailed, (m: string) => this.ErrorMessage(m));
 
     mp.events.add(LocalEvent.CharacterCreatorTabHair, (s: boolean) => this.TabHair(s));
@@ -117,7 +117,7 @@ class CharacterCreator {
     mp.events.callRemote(RemoteEvent.CharacterCreatorChangeGender, this.character.gender);
   }
 
-  private ChangeGenderComplete(): void {
+  private UpdateCharacter(): void {
     this.UpdateClothes();
     this.UpdateMain();
     this.UpdateFace();
@@ -133,6 +133,7 @@ class CharacterCreator {
   }
 
   private Create(): void {
+    this.UpdateCharacter();
     const characterJson = JSON.stringify(this.character);
     mp.events.callRemote(RemoteEvent.CharacterCreatorCreate, characterJson);
   }
