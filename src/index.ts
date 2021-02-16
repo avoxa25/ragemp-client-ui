@@ -23,3 +23,4 @@ import './utils/gas-station-blips-sync';
 import './utils/house-blips-sync';
 import './utils/house-markers-sync';
 import './utils/noclip';
+import './utils/voice-chat';
