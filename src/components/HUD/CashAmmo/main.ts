@@ -10,7 +10,7 @@ class CashAmmo {
     this.browser = mp.browsers.new('package://components/HUD/CashAmmo/cash-ammo.html');
     this.character = CharacterService.Get();
 
-    setInterval(() => this.UpdateCash(), 5000);
+    setInterval(() => this.UpdateCash(), 1000);
     setInterval(() => this.UpdateAmmo(), 100);
   }
 

@@ -101,9 +101,10 @@ class Speedometer {
     mp.keys.unbind(KeyboardKeys.Quote, true);
 
     mp.players.local.setConfigFlag(32, true);
+    this.seatBelt = true;
 
     if (this.isBlinking) this.StopBlinking();
-    if (this.isDriver) mp.events.callRemote(RemoteEvent.VehicleSave, this.vehicle, this.fuel)
+    if (this.isDriver) mp.events.callRemote(RemoteEvent.VehicleSave, this.vehicle, this.fuel, this.mileage);
 
     this.browser.execute(`window.speedometerUi.Hide();`);
   }
