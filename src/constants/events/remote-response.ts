@@ -18,5 +18,10 @@ export enum RemoteResponse {
   MenusHouseClose = "RemoteResponse:MenusHouse:Close",
   MenusHouseReload = "RemoteResponse:MenusHouse:Reload",
 
-  NotificationSent = "RemoteResponse:Notification:Sent"
+  NotificationSent = "RemoteResponse:Notification:Sent",
+
+  VoiceReloaded = "RemoteResponse:Voice:Reloaded",
+  VoiceChangeMicrophoneKey = "RemoteResponse:Voice:ChangeMicrophoneKey",
+  VoiceRadioConnected = "RemoteResponse:Voice:RadioConnected",
+  VoiceRadioDisconnected = "RemoteResponse:Voice:RadioDisconnected"
 }
