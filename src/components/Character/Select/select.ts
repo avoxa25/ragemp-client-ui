@@ -4,9 +4,11 @@ import { CharacterSelectModel } from '../../../models/characters/character-selec
 
 class CharacterSelectUi {
   private readonly ul: HTMLElement;
+  private readonly cashFormat: Intl.NumberFormat;
 
   public constructor() {
     this.ul = document.querySelector('section.container ul') as HTMLElement;
+    this.cashFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 });
   }
 
   public ShowCharacters(characterSelectModelsJson: string): void {
@@ -56,13 +58,15 @@ class CharacterSelectUi {
         const cashText = document.createElement('p') as HTMLElement;
         cashText.innerText = 'Наличные:';
         const cashSpan = document.createElement('span') as HTMLElement;
-        cashSpan.innerText = characterModel.cash.toString();
+        const formattedCash = this.cashFormat.format(characterModel.cash);
+        cashSpan.innerText = formattedCash.toString();
 
         const bankCashLi = document.createElement('li') as HTMLElement;
         const bankCashText = document.createElement('p') as HTMLElement;
         bankCashText.innerText = 'Банк:';
         const bankCashSpan = document.createElement('span') as HTMLElement;
-        bankCashSpan.innerText = characterModel.bankMoney.toString();
+        const formattedBankCash = this.cashFormat.format(characterModel.bankMoney);
+        bankCashSpan.innerText = formattedBankCash.toString();
 
         const buttonSelect = document.createElement('button') as HTMLButtonElement;
         buttonSelect.innerText = 'ВЫБРАТЬ';

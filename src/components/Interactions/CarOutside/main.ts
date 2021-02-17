@@ -6,12 +6,10 @@ import { RemoteEvent } from '../../../constants/events/remote-event';
 import { NotificationType } from '../../../constants/enums/notification-type';
 import { InteractionHelper } from '../../../helpers/interaction-helper';
 
-// TODO: Refactor this after realise
+// TODO: Refactor this after realise of rage 1.1
 
 class InteractionCarOutside {
   private readonly range: number;
-  private readonly resolution: { x: number, y: number };
-  private vectorScreenWorld: Vector3Mp;
   private vehicle: VehicleMp;
   private locked: boolean;
   private browser: BrowserMp;
@@ -23,8 +21,6 @@ class InteractionCarOutside {
     this.doors = [false, false, false, false, false, false];
 
     this.range = 3.0;
-    this.resolution = mp.game.graphics.getScreenActiveResolution(1, 1);
-    this.vectorScreenWorld = new mp.Vector3(this.resolution.x / 2, this.resolution.y / 2, (2 | 4 | 8));
     this.browser = mp.browsers.new('package://components/Interactions/CarOutside/car-outside.html');
 
     mp.keys.bind(KeyboardKeys.KeyE, true, () => this.ToggleMenu(true));
@@ -36,12 +32,13 @@ class InteractionCarOutside {
     mp.events.add(LocalEvent.InteractionCarOutsideToggleLock, () => this.ToggleLock());
     mp.events.add(LocalEvent.InteractionCarOutsideToggleDoor, (d: VehicleDoors) => this.ToggleDoor(d));
 
-    setInterval(() => {
-      if (mp.players.local.vehicle && mp.gui.cursor.visible) return;
+    mp.events.add(RageEnums.EventKey.RENDER, () => {
+      if (mp.players.local.vehicle || mp.gui.cursor.visible) return;
       const target = this.GetLookingAtEntity();
       if (!target) return;
-      this.drawTarget3d(target.entity.position);
-    }, 10)
+      this.DrawVehicleText(target.entity.position);
+
+    });
   }
 
   private OnPlayerEnterVehicle(vehicle: VehicleMp, seatId: number): void {
@@ -60,11 +57,11 @@ class InteractionCarOutside {
     if (isActive && !mp.players.local.vehicle && !mp.gui.cursor.visible) {
       const target = this.GetLookingAtEntity();
       if (!target) return;
-      (this.vehicle as any) = target.entity;
+      this.vehicle = target.entity as VehicleMp;
+      if (!this.vehicle) return;
       if (this.vehicle.getHealth() <= 0) return;
 
       this.doors = this.vehicle.getVariable('DoorState') as boolean[];
-      this.locked = this.vehicle.getDoorLockStatus() !== 2 ? true : false;
 
       mp.events.call(LocalEvent.CursorVisible, true, true);
       this.browser.execute(`window.interactionCarOutsideUi.Show('${this.locked}');`);
@@ -98,6 +95,8 @@ class InteractionCarOutside {
     if (!this.vehicle) return;
     if (!mp.gui.cursor.visible) return;
 
+    this.locked = this.vehicle.getDoorLockStatus() !== 2 ? true : false;
+
     mp.events.callRemote(RemoteEvent.VehicleToggleLocked, this.vehicle, this.locked);
 
     const notification = this.locked ? 'Транспортное средство закрыто' : 'Транспортное средство открыто';
@@ -115,9 +114,7 @@ class InteractionCarOutside {
     mp.events.callRemote(RemoteEvent.VehicleSyncDoors, this.vehicle, doorStateJson);
   }
 
-  private drawTarget3d(pos: Vector3Mp): void {
-    const position = mp.game.graphics.world3dToScreen2d(pos.x, pos.y, pos.z);
-    if (!position) return;
+  private DrawVehicleText(pos: Vector3Mp): void {
     mp.game.graphics.drawText("E", [pos.x, pos.y, pos.z], {
       font: 0,
       centre: true,

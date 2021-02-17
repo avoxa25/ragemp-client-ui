@@ -15,17 +15,16 @@ class DateTimeMicrophone {
     this.inGameDateTime = DateTimeService.GetInGameDateTime();
 
     const multiplier = DateTimeService.GetMultiplier();
+    this.UpdateDateTime();
     const updateIntervalInMillis = (1 / multiplier) * 60 * 1000;
     setInterval(() => this.UpdateDateTime(), updateIntervalInMillis);
   }
 
   private EnableMicrophone(): void {
-    // TODO: Implement voice chat
     this.browser.execute(`window.dateTimeMicrophoneUi.ToggleMicrophone(${true});`);
   }
 
   private DisableMicrophone(): void {
-    // TODO: Implement voice chat
     this.browser.execute(`window.dateTimeMicrophoneUi.ToggleMicrophone(${false});`);
   }
 
