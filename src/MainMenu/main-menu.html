@@ -296,6 +296,70 @@
           </form>
         </div>
       </section>
+      <section class="tab" id="tabSupport">
+        <aside>
+          <ul>
+            <li>
+              <button class="tab-content-link info active" id="linkContentSupportMain"
+                data-tab="tabContentSupportMain">ОТПРАВИТЬ РЕПОРТ</button>
+            </li>
+            <li>
+              <button class="tab-content-link request" id="linkContentRequests" data-tab="tabContentRequests">
+                ВАШИ ЗАПРОСЫ
+                (
+                <span id="requestCount">2</span>
+                )
+              </button>
+            </li>
+          </ul>
+        </aside>
+        <div class="v-line"></div>
+        <div class="tab-content active" id="tabContentSupportMain">
+          <div class="chat-container">
+            <div class="chat-window" id="chatWindow">
+              <div class="chat-message output">
+                <p class="text" id="chatMessageText">
+                  Output message text
+                  <span class="author" id="chatMessageAuthor">Author</span>
+                </p>
+              </div>
+              <div class="chat-message input">
+                <p class="text" id="chatMessageText">
+                  Input message text
+                  <span class="author" id="chatMessageAuthor">Author</span>
+                </p>
+              </div>
+            </div>
+            <input class="chat-input" type="text" placeholder="Введите сообщение...">
+          </div>
+        </div>
+        <div class="tab-content" id="tabContentRequests">
+          <ul class="requests-list">
+            <li>
+              <button class="requests-item">
+                <p>
+                  <span>
+                    Статус:
+                    <span class="closed">Закрыто</span>
+                  </span>
+                  <span>Почему у меня вылетает игра?</span>
+                </p>
+              </button>
+            </li>
+            <li>
+              <button class="requests-item">
+                <p>
+                  <span>
+                    Статус:
+                    <span class="open">Открыто</span>
+                  </span>
+                  <span>Читер ID123455</span>
+                </p>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </section>
     </main>
   </div>
 
