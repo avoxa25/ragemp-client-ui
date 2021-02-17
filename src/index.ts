@@ -19,6 +19,8 @@ import './components/Interactions/CarOutside/main';
 import './components/Interactions/NearPlayer/main';
 import './components/Menu/House/main';
 
+import './helpers/interaction-helper';
+
 import './utils/cursor';
 import './utils/discord';
 import './utils/gas-station-blips-sync';

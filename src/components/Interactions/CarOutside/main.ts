@@ -4,6 +4,7 @@ import { LocalEvent } from '../../../constants/events/local-event';
 import { RemoteResponse } from '../../../constants/events/remote-response';
 import { RemoteEvent } from '../../../constants/events/remote-event';
 import { NotificationType } from '../../../constants/enums/notification-type';
+import { InteractionHelper } from '../../../helpers/interaction-helper';
 
 // TODO: Refactor this after realise
 
@@ -37,9 +38,9 @@ class InteractionCarOutside {
 
     setInterval(() => {
       if (mp.players.local.vehicle && mp.gui.cursor.visible) return;
-      const target = this.getLocalTarget();
+      const target = this.GetLookingAtEntity();
       if (!target) return;
-      this.drawTarget3d(target.position);
+      this.drawTarget3d(target.entity.position);
     }, 10)
   }
 
@@ -57,7 +58,7 @@ class InteractionCarOutside {
 
   private ToggleMenu(isActive: boolean): void {
     if (isActive && !mp.players.local.vehicle && !mp.gui.cursor.visible) {
-      const target = this.getLocalTarget();
+      const target = this.GetLookingAtEntity();
       if (!target) return;
       (this.vehicle as any) = target.entity;
       if (this.vehicle.getHealth() <= 0) return;
@@ -73,30 +74,24 @@ class InteractionCarOutside {
     }
   }
 
-  private getLocalTarget(): RaycastResult | undefined {
-    let startPosition = mp.players.local.getBoneCoords(12844, 0.5, 0, 0);
-    const secondPoint = mp.game.graphics.screen2dToWorld3d(this.vectorScreenWorld);
-    if (!secondPoint) return;
 
-    startPosition.z -= 0.3;
-    const target = mp.raycasting.testPointToPoint(
-      startPosition,
-      secondPoint,
-      mp.players.local.handle,
-      (2 | 4 | 8 | 16));
-    if (
-      target
-      && target.entity.type === 'vehicle'
-      && mp.game.gameplay.getDistanceBetweenCoords(
-        target.entity.position.x,
-        target.entity.position.y,
-        target.entity.position.z,
+  private GetLookingAtEntity(): RaycastResult | undefined {
+    let headPosition = mp.players.local.getBoneCoords(12844, 0.5, 0, 0);
+    const resolution = mp.game.graphics.getScreenActiveResolution(1, 1);
+    const resolutionVector = new mp.Vector3(resolution.x / 2, resolution.y / 2, (2 | 4 | 8));
+    const pointOfView = mp.game.graphics.screen2dToWorld3d(resolutionVector);
+    if (!pointOfView) return;
 
-        mp.players.local.position.x,
-        mp.players.local.position.y,
-        mp.players.local.position.z,
-        false) < this.range) return target;
-    return;
+    const result = mp.raycasting.testPointToPoint(headPosition, pointOfView, mp.players.local.handle, (2 | 4 | 8 | 16));
+
+    if (result === undefined) return undefined;
+    if (result.entity.type === undefined) return undefined;
+
+    const entityPosition = result.entity.position;
+    const playerPosition = mp.players.local.position;
+    if (InteractionHelper.GetDistanceBetweenVectors(entityPosition, playerPosition, true) > this.range) return undefined;
+
+    return result;
   }
 
   private ToggleLock(): void {
@@ -120,10 +115,16 @@ class InteractionCarOutside {
     mp.events.callRemote(RemoteEvent.VehicleSyncDoors, this.vehicle, doorStateJson);
   }
 
-  private drawTarget3d(pos: Vector3Mp, textureDict = "mpmissmarkers256", textureName = "corona_shade", scaleX = 0.005, scaleY = 0.01): void {
+  private drawTarget3d(pos: Vector3Mp): void {
     const position = mp.game.graphics.world3dToScreen2d(pos.x, pos.y, pos.z);
     if (!position) return;
-    mp.game.graphics.drawSprite(textureDict, textureName, position.x, position.y, scaleX, scaleY, 0, 0, 0, 0, 200);
+    mp.game.graphics.drawText("E", [pos.x, pos.y, pos.z], {
+      font: 0,
+      centre: true,
+      color: [255, 255, 255, 185],
+      scale: [0.4, 0.4],
+      outline: true
+    });
   }
 };
 

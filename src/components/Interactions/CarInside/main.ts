@@ -49,7 +49,7 @@ class InteractionCarInside {
   }
 
   private ToggleBinds(isActive: boolean): void {
-    if (isActive) {
+    if (isActive && mp.players.local.vehicle) {
       mp.keys.bind(KeyboardKeys.KeyY, true, () => this.ToggleMenu(true));
       mp.keys.bind(KeyboardKeys.KeyY, false, () => this.ToggleMenu(false));
     } else {
@@ -60,7 +60,7 @@ class InteractionCarInside {
 
   private ToggleMenu(isActive: boolean): void {
     // TODO add sending passengers
-    if (isActive) {
+    if (isActive && mp.players.local.vehicle) {
       mp.gui.cursor.show(true, true);
       this.browser.execute(`window.interactionCarInsideUi.Show();`);
     } else {
