@@ -13,7 +13,7 @@ const htmlComponents = [
   'Menu/House',
   
   'HUD/AlphaTest',
-  'HUD/CashAmmo',
+  'HUD/CashAmmoGz',
   'HUD/DateTimeMicrophone',
   'HUD/Location',
   'HUD/Notifications',
