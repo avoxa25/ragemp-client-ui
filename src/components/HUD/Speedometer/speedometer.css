@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+
+    font-family: 'PT Sans', sans-serif;
+
+    user-select: none;
+}
+
+P {
+    width: 100%;
+
+    margin : 0 0 10px 0;
+    padding: 0;
+
+    color      : rgba(255, 255, 255, .5);
+    font-size  : 20px;
+    text-align : right;
+    text-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
+}
+
+section {
+    width: 230px;
+
+    position: absolute;
+    right   : 35px;
+    bottom  : 35px;
+}
+
+.current-speed {
+    color    : rgba(255, 255, 255, 1);
+    font-size: 36px;
+}
+
+ul {
+    width: 230px;
+
+    display        : flex;
+    flex-wrap      : wrap;
+    align-items    : center;
+    justify-content: space-between;
+
+    margin : 0;
+    padding: 0;
+
+    list-style-type: none;
+}
+
+ul>li {
+    height: 25px;
+
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+}
+
+.fuel-value {
+    width : 230px;
+    height: 10px;
+
+    position: relative;
+
+    margin-top: 5px;
+
+    background         : url("assets/fuel_value.png");
+    background-position: 0% 50%;
+    background-repeat  : no-repeat;
+
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
+}
+
+.fuel-value::before {
+    content: "";
+
+    width : 25px;
+    height: 25px;
+
+    position: absolute;
+    left    : -30px;
+    top     : -7px;
+
+    background         : url("assets/fuel_bank.svg");
+    background-position: 50% 50%;
+    background-repeat  : no-repeat;
+
+}
+
+path.nonActive {
+    fill: white;
+}

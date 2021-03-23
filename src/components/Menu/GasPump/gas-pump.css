@@ -1,0 +1,316 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  user-select: none;
+}
+
+P {
+  margin: 0px;
+  padding: 0px;
+}
+
+UL {
+  margin: 0;
+  padding: 0;
+
+  list-style-type: none;
+}
+
+BUTTON {
+  border: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+  margin: 0;
+}
+
+section.container {
+  width: 650px;
+  height: 450px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  margin: -225px 0 0 -325px;
+
+  background-color: rgba(0, 0, 0, .33);
+
+  border-top: 3px solid palevioletred;
+  border-radius: 5px 0 25px 0;
+}
+
+header {
+  width: 100%;
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding: 10px;
+
+  border-radius: 5px 0 0 0;
+
+  background-color: rgba(0, 0, 0, .33);
+
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+
+}
+
+header>p>span {
+  color: #BB1A1A;
+}
+
+header>img {
+  margin-right: 10px;
+}
+
+main {
+  padding: 20px;
+}
+
+.items {
+  display: flex;
+  justify-content: space-between;
+}
+
+.items>li,
+.items>li>button {
+  width: 130px;
+  height: 155px;
+
+  border-radius: 10px;
+}
+
+.items>li {
+  background: linear-gradient(to top, #A3A3A3, #C4C4C4);
+}
+
+.items>li>button {
+  position: relative;
+
+  padding: 10px;
+
+  background-color: rgba(0, 0, 0, 0);
+  background-repeat: no-repeat;
+
+  color: white;
+}
+
+.items>li>button>p {
+  width: 120px;
+  height: 135px;
+
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  text-align: left;
+}
+
+.items>li>button>p>span {
+  font-size: 14px;
+}
+
+.items>li>button {
+  transition: background-size .2s ease-in-out, background-position .2s linear;
+}
+
+.oil {
+  background-image: url("assets/oil-bg.svg");
+  background-position: 50% 50%;
+  background-size: 40%;
+
+  font-size: 24px;
+  line-height: 75%;
+}
+
+button.repair-kit>p,
+button.canister>p {
+  top: 8px !important;
+}
+
+button.power>p {
+  top: 7px !important;
+}
+
+.repair-kit {
+  background-image: url("assets/repair-bg.svg");
+  background-position: 50% 50% !important;
+  background-size: 50%;
+
+  font-size: 16px;
+  line-height: 100%;
+}
+
+.canister {
+  background-image: url("assets/canister-bg.svg");
+  background-position: 40% 50% !important;
+  background-size: 50%;
+
+  font-size: 20px;
+  line-height: 90%;
+}
+
+.power {
+  background-image: url("assets/power-bg.svg");
+  background-position: 50% 50%;
+  background-size: 50%;
+
+  font-size: 13px;
+  line-height: 115%;
+}
+
+.oil:hover,
+.oil:focus,
+.oil.active {
+  background-image: url("assets/oil-bg.svg"), linear-gradient(to bottom, #930000, #BB2828);
+  background-size: 100%;
+  background-position: 50% 50%;
+}
+
+.repair-kit:hover,
+.repair-kit:focus,
+.repair-kit.active {
+  background-image: url("assets/repair-bg.svg"), linear-gradient(to bottom, #930000, #BB2828);
+  background-size: 200%;
+  background-position: 50% 50%;
+}
+
+.canister:hover,
+.canister:focus,
+.canister.active {
+  background-image: url("assets/canister-bg.svg"), linear-gradient(to bottom, #930000, #BB2828);
+  background-size: 100%;
+  background-position: 50% 50% !important;
+}
+
+.power:hover,
+.power:focus,
+.power.active {
+  background-image: url("assets/power-bg.svg"), linear-gradient(to bottom, #930000, #BB2828);
+  background-size: 110%;
+  background-position: 50% 50% !important;
+}
+
+.refill-container {
+  display: flex;
+  align-items: center;
+
+  padding-top: 20px;
+}
+
+.fuel-tank {
+  margin-left: 30px;
+}
+
+.refill-count {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.refill-count>button {
+  width: 35px;
+  height: 35px;
+
+  background-color: rgba(0, 0, 0, .33);
+
+  border-radius: 5px;
+
+  color: white !important;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.refill-count>button:hover,
+.payment>li>button:hover,
+button.full-capacity:hover {
+  background: linear-gradient(to left, #BB2828, #930000);
+
+  box-shadow: 0px 0px 4px 0px rgba(188, 26, 26, 1);
+}
+
+.full-capacity {
+  margin-left: 30px;
+}
+
+.refill-count>input {
+  width: 60px;
+
+  background-color: rgba(0, 0, 0, 0);
+
+  border: 0;
+
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+
+  outline: none;
+}
+
+.fuel-tank {
+  margin-left: 30px;
+
+  color: rgba(255, 255, 255, .5);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.fuel-tank>span:first-of-type {
+  color: white !important;
+  font-weight: 700;
+}
+
+.capacity {
+  color: rgba(255, 255, 255, .5);
+  font-size: 14px;
+}
+
+.cost {
+  margin-top: 10px;
+
+  color: rgba(255, 255, 255, .5);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.cost>span {
+  color: white;
+}
+
+.payment {
+  display: flex;
+
+  margin-top: 20px;
+}
+
+.payment>li {
+  margin-right: 30px;
+}
+
+.payment>li:last-of-type {
+  margin-right: 0;
+}
+
+.payment>li>button,
+button.full-capacity {
+  width: 130px;
+  height: 38px;
+
+  background-color: rgba(0, 0, 0, .33);
+
+  border-radius: 44px;
+
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+}

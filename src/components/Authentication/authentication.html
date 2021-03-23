@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="authentication.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <section class="container">
+    <header></header>
+    <main>
+      <ul>
+        <li>
+          <button class="tabLink active" id="loginLink" data-tab="loginTab">Авторизация</button>
+        </li>
+        <li> | </li>
+        <li>
+          <button class="tabLink" id="registrationLink" data-tab="registrationTab">Регистрация</button>
+        </li>
+      </ul>
+
+      <section class="tab active-flex" id="loginTab">
+        <form action="javascript:void(0);" id="loginForm">
+          <label>
+            Логин:<br>
+            <input type="text" name="username" maxlength="15" placeholder="Введите логин">
+          </label>
+          <label>
+            Пароль:<br>
+            <input type="password" name="password" maxlength="30" placeholder="Введите пароль">
+          </label>
+          <button type="submit">Войти</button>
+          <p class="denied login-tab" hidden>
+            Проверьте правильность введённых данных
+          </p>
+        </form>
+        <a href="#" class="tabLink" id="recoveryLink" data-tab="recoveryTab">Забыли пароль?</a>
+      </section>
+
+      <section class="tab" id="registrationTab">
+        <form action="javascript:void(0);" id="registrationForm">
+          <label>
+            Логин:
+            <input type="text" name="username" maxlength="15" placeholder="Введите логин">
+          </label>
+          <label>
+            E-mail:
+            <input type="text" name="email" maxlength="256" placeholder="Введите почту">
+          </label>
+          <label>
+            Пароль:
+            <input type="password" name="password" maxlength="30" placeholder="Введите пароль">
+          </label>
+          <label>
+            Подтверждение пароля:
+            <input type="password" name="passwordConfirm" maxlength="30" placeholder="Повторите пароль">
+          </label>
+          <button type="submit">Подтвердить</button>
+          <p class="denied registration-tab" hidden>
+            Проверьте правильность введённых данных
+          </p>
+        </form>
+      </section>
+
+      <section class="tab" id="recoveryTab">
+        <form action="javascript:void(0);">
+          <label>
+            Логин / E-mail:
+            <input type="text" name="recovery" maxlength="256" placeholder="Введите логин или почту">
+          </label>
+          <button type="submit">Выслать код</button>
+          <p class="success" hidden>
+            Проверьте Вашу почту
+          </p>
+        </form>
+      </section>
+    </main>
+  </section>
+
+  <script src="authentication.js"></script>
+</body>
+
+</html>

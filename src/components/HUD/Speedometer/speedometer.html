@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="speedometer.css">
+</head>
+
+<body hidden>
+  <main>
+    <section>
+      <p>
+        <span class="current-speed" id="currentSpeed">0</span> КМ/Ч
+      </p>
+      <ul>
+        <li>
+          <img id="arrowLeft" src="assets/arrow-left.svg">
+        </li>
+        <li>
+          <img id="lowBeam" src="assets/lights.svg">
+        </li>
+        <li>
+          <img id="lock" src="assets/lock.svg">
+        </li>
+        <li>
+          <img id="highBeam" src="assets/high-beam.svg">
+        </li>
+        <li>
+          <img id="arrowRight" src="assets/arrow-right.svg">
+        </li>
+        <li class="fuel-value" id="fuelValue"></li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="speedometer.js"></script>
+</body>
+
+</html>

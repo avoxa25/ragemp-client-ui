@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="gas-pump.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <section class="container">
+    <header>
+      <img src="assets/canister.svg" width="40.3px" height="45.1px">
+      <p>
+        <span>SWEET</span>
+        FUEL
+      </p>
+    </header>
+    <main>
+      <ul class="items">
+        <li>
+          <button id="product" class="oil" data-product="oil">
+            <p>
+              БЕНЗИН<br>
+              <span id="oilPrice">$0</span>
+            </p>
+          </button>
+        </li>
+        <li>
+          <button id="product" class="power" data-product="power">
+            <p>
+              ЭЛЕКТРИЧЕСТВО<br>
+              <span id="powerPrice">$0</span>
+            </p>
+          </button>
+        </li>
+        <li>
+          <button id="product" class="canister" data-product="canister">
+            <p>
+              КАНИСТРА<br>
+              <span id="canisterPrice">$0</span>
+            </p>
+          </button>
+        </li>
+        <li>
+          <button id="product" class="repair-kit" data-product="repair-kit">
+            <p>
+              РЕМ КОМПЛЕКТ<br>
+              <span id="repairKitPrice">$0</span>
+            </p>
+          </button>
+        </li>
+      </ul>
+      <form action="javascript:void(0);">
+        <div class="refill-container">
+        <div class="refill-count">
+          <button data-operation="minus">&#8722</button>
+          <input id="inputProductAmount" type="number" value="0" min="1" max="999">
+          <button data-operation="plus">+</button>
+        </div>
+        <button class="full-capacity" type="button" id="fillFullFuelTank">Полный бак</button>
+          <p class="fuel-tank">
+            В баке:<br>
+            <span id="currentFuelValue">0</span>
+            /
+            <span class="capacity" id="maxFuelValue">0</span>
+          </p>
+        </div>
+        <p class="cost">
+          Итого к оплате:<br>
+          <span id="totalCost">$ 0</span>
+        </p>
+        <ul class="payment">
+          <li>
+            <button class="cash" type="submit" data-method="cash">Наличными</button>
+          </li>
+          <li>
+            <button class="card" type="submit" data-method="bank">Картой</button>
+          </li>
+        </ul>
+      </form>
+    </main>
+  </section>
+  <script src="gas-pump.js"></script>
+</body>
+
+</html>
