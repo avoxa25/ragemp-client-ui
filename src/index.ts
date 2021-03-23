@@ -15,6 +15,7 @@ import './components/HUD/Online/main';
 import './components/HUD/Speedometer/main';
 
 import './components/Menu/House/main';
+import './components/Menu/GasPump/main';
 
 import './utils/cursor';
 import './utils/discord';
