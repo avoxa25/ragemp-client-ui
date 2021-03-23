@@ -1,6 +1,7 @@
 import { House } from '../../../models/houses/house';
 import { LocalEvent } from '../../../constants/events/local-event';
 import { HouseType } from '../../../models/houses/house-type';
+import { KeyboardAsciiKeys } from '../../../constants/enums/keyboard-ascii-keys';
 
 class HouseMenuUi {
   private readonly cashFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 });
@@ -56,13 +57,13 @@ class HouseMenuUi {
   }
 
   private OnDocumentBodyKeydown(event: KeyboardEvent): void {
-    const isMenuCloseKey = event.which === 81; // Q on keyboard
+    const isMenuCloseKey = event.which === KeyboardAsciiKeys.Esc;
     if (this.isMenuOpened && isMenuCloseKey) {
       event.preventDefault();
       this.isMenuOpened = false;
 
       mp.events.call(LocalEvent.HouseMenuClose);
-      mp.events.call(LocalEvent.CursorVisible, true, true);
+      mp.events.call(LocalEvent.CursorVisible, false, false);
     }
   }
   private UpdateHouseInfo() {
