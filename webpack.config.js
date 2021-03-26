@@ -16,6 +16,7 @@ const htmlComponents = [
   'HUD/AlphaTest',
   'HUD/CashAmmo',
   'HUD/DateTimeMicrophone',
+  'HUD/KeysBindingHints',
   'HUD/Location',
   'HUD/Notifications',
   'HUD/Online',
