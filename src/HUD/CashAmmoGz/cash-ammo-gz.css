@@ -1,0 +1,96 @@
+* {
+  box-sizing: border-box;
+
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+
+  user-select: none;
+}
+
+BODY {
+  background: black;
+}
+
+P {
+  margin: 0;
+  padding: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.feature-list {
+  position: absolute;
+  top: 110px;
+  right: 35px;
+
+  list-style-type: none;
+}
+
+.feature-list>li{
+  margin-bottom: 15px;
+}
+
+.cash {
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  padding-right: 13px;
+
+  background-image: url("assets/location_line.svg");
+  background-position: 100% 50%;
+  background-repeat: no-repeat;
+
+  color: white;
+  font-size: 18px;
+}
+
+.cash p {
+  margin-left: 5px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.ammo {
+  height: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  color: #bbbbbb;
+  font-size: 16px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.ammo p {
+  margin-left: 5px;
+}
+
+.ammo-magazine {
+  color: white;
+  font-size: 20px;
+}
+
+.green-zone {
+  display: flex;
+
+  color: white;
+  font-size: 18px;
+}
+
+.green-zone img {
+  margin-right: 5px;
+}
+
+.green-zone p {
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.green-zone span {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+}
