@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="interaction-menu-main.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <svg width="218" height="128" viewBox="0 0 218 128" fill="none" xmlns="http://www.w3.org/2000/svg"
+    class="visually-hidden">
+    <clipPath id="mask-top">
+      <path
+        d="M107 118.5C101 118.5 92.4999 120.5 83.4999 127.5C76.6999 116.3 24.9999 67.1665 -6.10352e-05 43.9999C36 7.49987 81.5 0.208887 107 0.208984C139 0.209106 180 8 217.5 43.9999C191 70.4999 134.5 127.5 134.5 127.5C123 118.5 113 118.5 107 118.5H107Z"
+        fill="#C4C4C4" />
+    </clipPath>
+    <clipPath id="mask-bottom">
+      <path
+        d="M110.5 9.20899C116.5 9.20899 125 7.20899 134 0.208992C140.8 11.409 192.5 60.5425 217.5 83.7091C181.5 120.209 136 127.5 110.5 127.5C78.4999 127.5 37.4999 119.709 -5.18995e-05 83.7091C26.4999 57.2091 82.9999 0.208996 82.9999 0.208996C94.4999 9.209 104.5 9.20899 110.5 9.20899Z"
+        fill="#C4C4C4" />
+    </clipPath>
+  </svg>
+  <svg width="128" height="218" viewBox="0 0 128 218" fill="none" xmlns="http://www.w3.org/2000/svg"
+    class="visually-hidden">
+    <clipPath id="mask-right">
+      <path
+        d="M9.209 107.5C9.209 101.5 7.209 93 0.208995 84C11.409 77.2 60.5425 25.5 83.7091 0.500006C120.209 36.5001 127.5 82.0001 127.5 107.5C127.5 139.5 119.709 180.5 83.7091 218C57.2091 191.5 0.209002 135 0.209002 135C9.209 123.5 9.209 113.5 9.209 107.5Z"
+        fill="#C4C4C4" />
+    </clipPath>
+    <clipPath id="mask-left">
+      <path
+        d="M118.791 110.5C118.791 116.5 120.791 125 127.791 134C116.591 140.8 67.4575 192.5 44.2909 217.5C7.79088 181.5 0.499899 136 0.499995 110.5C0.500116 78.4999 8.29101 37.4999 44.2909 -4.99853e-05C70.7909 26.4999 127.791 82.9999 127.791 82.9999C118.791 94.4999 118.791 104.5 118.791 110.5Z"
+        fill="#C4C4C4" />
+    </clipPath>
+  </svg>
+
+
+  <section id="menuCarOutside">
+    <div class="text-disc">
+      <p id="carOutsideActionPrompt"></p>
+    </div>
+    <div class="menu-item up car-lock" id="actionCarLock" data-id="carOutsideActionPrompt"
+      data-prompt="Открыть/закрыть ТС"></div>
+    <div class="menu-item right car-baggage" id="actionCarThunk" data-id="carOutsideActionPrompt"
+      data-prompt="Открыть/закрыть багажник"></div>
+    <div class="menu-item down car-capote" id="actionCarHood" data-id="carOutsideActionPrompt"
+      data-prompt="Открыть/закрыть капот"></div>
+    <div class="menu-item left car-doors menuLink" id="actionCarDoors" data-id="carOutsideActionPrompt"
+      data-prompt="Управление дверьми" data-menu="menuCarDoors"></div>
+  </section>
+
+  <section id="menuCarDoors">
+    <div class="text-disc menuLink pointer" data-menu="menuCarOutside">
+      <p id="carDoorsActionPrompt">Вернуться назад</p>
+    </div>
+    <div class="menu-item up car-door" id="actionCarOpenFirstDoor" data-id="carDoorsActionPrompt"
+      data-prompt="Открыть водительскую дверь"></div>
+    <div class="menu-item right car-door" id="actionCarOpenSecondDoor" data-id="carDoorsActionPrompt"
+      data-prompt="Открыть пассажирскую дверь"></div>
+    <div class="menu-item down car-door" id="actionCarOpenThirdDoor" data-id="carDoorsActionPrompt"
+      data-prompt="Открыть заднюю левую дверь"></div>
+    <div class="menu-item left car-door" id="actionCarOpenFourthDoor" data-id="carDoorsActionPrompt"
+      data-prompt="Открыть заднюю правую дверь"></div>
+  </section>
+
+  <script src="car-outside.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,215 @@
+* {
+  box-sizing: border-box;
+
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+
+  user-select: none;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, .33);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 6px;
+  border-radius: 3px;
+  background: linear-gradient(to top, #ee0b89, #fd6f67 75%);
+}
+
+section {
+  width: 315px;
+  height: 315px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: none;
+
+  margin-top: -157px;
+  margin-left: -157px;
+
+  background-color: rgba(0, 0, 0, .33);
+
+  border-radius: 157px;
+}
+
+section.active {
+  display: block;
+
+  animation: scale .25s ease-in-out;
+}
+
+@keyframes scale {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+
+.text-disc {
+  width: 80px;
+  height: 80px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: -40px;
+  margin-left: -40px;
+  padding: 5px;
+
+  background-color: rgba(0, 0, 0, .33);
+
+  border: 2px solid palevioletred;
+  border-radius: 40px;
+
+  color: white;
+  font-size: 10px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.text-disc>p {
+  word-wrap: break-word !important;
+}
+
+.menu-item {
+  width: 218px;
+  height: 127px;
+
+  position: absolute;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: -109px;
+  padding: 15px;
+
+
+  background-color: rgba(0, 0, 0, 0);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+
+  cursor: pointer;
+  transition: background-color .12s ease-in;
+}
+
+.menu-item>p {
+  color: white;
+  font-weight: 600;
+  text-align: center;
+}
+
+.menu-item:hover {
+  background-color: rgba(0, 0, 0, .33);
+}
+
+.menu-item.up {
+  top: 0;
+  left: 50%;
+
+  clip-path: url("#mask-top");
+}
+
+.menu-item.down {
+  bottom: 0;
+  left: 50%;
+
+  clip-path: url("#mask-bottom");
+}
+
+.menu-item.left {
+  width: 128px;
+  height: 218px;
+  top: 48px;
+  left: 0;
+
+  margin-left: 0;
+
+  clip-path: url("#mask-left");
+}
+
+.menu-item.right {
+  width: 128px;
+  height: 218px;
+
+  top: 50%;
+  right: 0 !important;
+
+  margin: -109px 0 0 0 !important;
+
+  clip-path: url("#mask-right");
+}
+
+.car-lock {
+  background-image: url("./carlock.svg");
+}
+
+.car-baggage {
+  background-image: url("./baggage.svg");
+}
+
+.car-capote {
+  background-image: url("./capote.svg");
+}
+
+.car-doors {
+  background-image: url("./doors.svg");
+}
+
+.car-door {
+  background-image: url("./door.svg");
+}
+
+.car-turn-on {
+  background-image: url("./turnon.svg");
+}
+
+.car-catapult {
+  background-image: url("./catapult.svg");
+}
+
+.player-meet {
+  background-image: url("./handshake.svg");
+}
+
+.player-show-document {
+  background-image: url("./id-card.svg");
+}
+
+.player-invite-home {
+  background-image: url("./property.png");
+}
+
+.player-trade {
+  background-image: url("./money.svg");
+}
+
+.pointer {
+  cursor: pointer;
+}

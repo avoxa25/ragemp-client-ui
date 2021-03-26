@@ -14,8 +14,13 @@ import './components/HUD/Notifications/main';
 import './components/HUD/Online/main';
 import './components/HUD/Speedometer/main';
 
+import './components/Interactions/CarInside/main';
+import './components/Interactions/CarOutside/main';
+import './components/Interactions/NearPlayer/main';
 import './components/Menu/House/main';
 import './components/Menu/GasPump/main';
+
+import './helpers/interaction-helper';
 
 import './utils/cursor';
 import './utils/discord';

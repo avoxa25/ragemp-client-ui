@@ -10,6 +10,9 @@ const htmlComponents = [
   'Character/SpawnSelect',
 
   'Chat',
+  'Interactions/CarInside',
+  'Interactions/CarOutside',
+  'Interactions/NearPlayer',
 
   'Menu/House',
   
